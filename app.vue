@@ -1,13 +1,21 @@
 <script setup>
+const appConfig = useRuntimeConfig()
+const apiToken = appConfig.public.apiToken;
+const baseURL = 'https://api-test.georoc.eu/api/v1';
 
 const { data } = await useFetch(
-  () => `https://api.gs.sub.uni-goettingen.de/v1/monasteries/list?limit=30&offset=0`
+  () => `${baseURL}/queries/citations`,
+  {
+    headers: {
+      'DIGIS-API-ACCESSKEY': apiToken
+    }
+  }
 )
 
 </script>
 
 <template>
-  <div v-for="item in data.list">
-    {{item.name}}
+  <div v-for="item in data.Data">
+    {{item.Title}}
   </div>
 </template>
