@@ -1,43 +1,46 @@
-#stages:
-#  - build
-#  - deploy
-#
-##cache:
-##  paths:
-#
-#variables:
-#  DOCKER_DRIVER: overlay2
-#  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-#
-#before_script:
-#  - 'which ssh-agent || ( apk add --update openssh-client )'
-#  - mkdir -p ~/.ssh
-#  - eval $(ssh-agent -s)
-#  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-#  - echo "$DEV_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-#
-#.kaniko_template: &kaniko
-#  stage: build
-#  image:
-#    name: gcr.io/kaniko-project/executor:debug
-#    entrypoint: [""]
-#  before_script:
-#    # add docker credentials
-#    - mkdir -p /kaniko/.docker
-#    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$(echo -n ${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD} | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
-#  script:
-#    - /kaniko/executor
-#      --context .
-#      --dockerfile ./Dockerfile
-#      --build-arg build_date=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-#      --build-arg vcs_ref=${CI_COMMIT_SHORT_SHA}
-#      --destination ${IMAGE_TAG}
-#
-#build_image:
-#  <<: *kaniko
-#  rules:
-#    - if: $CI_COMMIT_BRANCH == "main"
-#
+include:
+- project: 'subugoe/argo-cd-workflow'
+  file: 
+    # trigger downstream cross-project pipeline to update the helm chart; triggered on pushing a new tag
+    - 'ci-templates/trigger-downstream-pipeline.yml'
+
+variables:
+  imageTag: "${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}"
+  harborPath: "sub-fe/digis"
+  dest: "harbor.gwdg.de/${harborPath}/${CI_PROJECT_NAME}:${imageTag}"
+
+# Override variables and rules for included trigger job
+trigger-downstream-pipeline:
+  variables:
+    IMAGE_TAG: ${imageTag}
+    REPOSITORY_PATH: fe/digis/websearch_helm
+  rules:
+  - if: $CI_COMMIT_BRANCH == "develop"
+
+
+.kaniko_template: &kaniko
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    # add docker credentials
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"harbor.gwdg.de\":{\"auth\":\"$(printf "%s:%s" "robot\$sub-fe+sub-fe-digis" "${DIGIS_HARBOR_ROBOT_TOKEN}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+ script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}" 
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --build-arg build_date=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+      --build-arg vcs_ref=${CI_COMMIT_SHORT_SHA}
+      --destination ${dest}
+
+build_image_dev:
+  <<: *kaniko
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# TODO: Find workflow for prod 
 #build_liveimage:
 #  <<: *kaniko
 #  # we just add the “live” tag here…
@@ -52,26 +55,3 @@
 #  rules:
 #    - if: $CI_COMMIT_TAG
 #
-#
-#deploy_dev:
-#  stage: deploy
-#  image: docker.io/alpine
-#  environment:
-#    name: dev
-#  rules:
-#    - if: $CI_PIPELINE_SOURCE == "pipeline"
-#    - if: $CI_COMMIT_BRANCH == "develop"
-##  script:
-##    - scp -r ./solr/* $DEV_SSH_LOGIN:$DEV_SOLR_FILES_PATH
-##    - ssh -o StrictHostKeyChecking=no $DEV_SSH_LOGIN "$DEV_START_SCRIPT"
-#
-#deploy_live:
-#  stage: deploy
-#  image: docker.io/alpine
-#  environment:
-#    name: live
-#  only:
-#    - tags
-##  script:
-##    - scp -r ./solr/* $LIVE_SSH_LOGIN:$LIVE_SOLR_FILES_PATH
-##    - ssh -o StrictHostKeyChecking=no $LIVE_SSH_LOGIN "$LIVE_START_SCRIPT"
