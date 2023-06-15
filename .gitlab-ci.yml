@@ -44,6 +44,7 @@ build_image_dev:
 pages:
   image: node:lts-alpine3.10
   script:
+    - node -v
     - npm ci
     - echo NUXT_APP_BASE_URL =/georoc-frontend/
     - npm run generate
