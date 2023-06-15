@@ -1,6 +1,6 @@
 include:
 - project: 'subugoe/argo-cd-workflow'
-  file: 
+  file:
     # trigger downstream cross-project pipeline to update the helm chart; triggered on pushing a new tag
     - 'ci-templates/trigger-downstream-pipeline.yml'
 
@@ -40,7 +40,26 @@ build_image_dev:
   rules:
     - if: $CI_COMMIT_BRANCH == "develop"
 
-# TODO: Find workflow for prod 
+# this stage creates a new environment for the current branch.
+pages:
+  image: node:lts-alpine3.10
+  stage: pages
+  script:
+    - echo NUXT_APP_BASE_URL =/georoc-frontend/
+    - npm run generate
+    - mkdir --parents public/${CI_COMMIT_REF_SLUG}
+    - cp --recursive .output/public/* public/${CI_COMMIT_REF_SLUG}/
+
+  environment:
+    name: ${CI_COMMIT_REF_SLUG}
+    url: https://subugoe.pages.gwdg.de/ahiqar/website/${CI_COMMIT_REF_SLUG}/
+  artifacts:
+    name: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - public
+
+
+# TODO: Find workflow for prod
 #build_liveimage:
 #  <<: *kaniko
 #  # we just add the “live” tag here…
