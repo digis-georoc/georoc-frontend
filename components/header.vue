@@ -18,17 +18,14 @@ const navigation = [
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center w-full">
           <div class="flex-shrink-0 flex">
-            <a
-                href="/"
-                class="flex items-center text-stone-800 text-sm font-medium"
-            >
+            <NuxtLink to="/" class="flex items-center text-stone-800 text-sm font-medium">
               <img
                   class="h-8 mr-2"
                   src="~/assets/images/GEOROC_Logo_clean2.png"
                   alt="Your Company"
               />
               GEOROC Database
-            </a>
+            </NuxtLink>
           </div>
           <div class="hidden lg:flex ml-auto">
             <div class="flex items-center space-x-4">
