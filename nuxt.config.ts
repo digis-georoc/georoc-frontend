@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // @ts-ignore
 export default defineNuxtConfig({
+    app: {
+        baseURL: process.env.NUXT_APP_BASE_URL,
+    },
     modules: [
         '@nuxtjs/tailwindcss',
         'nuxt-headlessui',
