@@ -46,7 +46,7 @@ pages:
   script:
     - node -v
     - npm ci
-    - echo 'NUXT_APP_BASE_URL=/georoc-frontend/' >> .env
+    - echo 'NUXT_APP_BASE_URL=/georoc-frontend/${CI_COMMIT_REF_SLUG}/' >> .env
     - npm run generate
     - mkdir --parents public/${CI_COMMIT_REF_SLUG}
     - cp --recursive .output/public/* public/${CI_COMMIT_REF_SLUG}/
