@@ -53,7 +53,7 @@ pages:
 
   environment:
     name: ${CI_COMMIT_REF_SLUG}
-    url: https://subugoe.pages.gwdg.de/ahiqar/website/${CI_COMMIT_REF_SLUG}/
+    url: https://subugoe.pages.gwdg.de/georoc-frontend/${CI_COMMIT_REF_SLUG}/
   artifacts:
     name: "$CI_COMMIT_REF_SLUG"
     paths:
