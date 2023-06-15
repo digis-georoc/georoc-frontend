@@ -42,7 +42,7 @@ build_image_dev:
 
 # this stage creates a new environment for the current branch.
 pages:
-  image: node:16-alpine3.10
+  image: node:16-alpine3.17
   script:
     - node -v
     - npm ci
