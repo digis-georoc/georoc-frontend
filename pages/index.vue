@@ -4,7 +4,7 @@
       <div class="absolute top-0 h-full inset-x-0 -z-10 overflow-hidden" aria-hidden="true">
         <img src="/images/4_GEOROC.png" alt="Hot Volcano" class="h-full w-full object-cover">
       </div>
-      <div class="container mx-auto h-full flex items-center">
+      <BaseContainer class="h-full flex items-center">
         <div class="mt-24">
           <h1 class="text-4xl font-bold tracking-tight text-gray-100 sm:text-6xl">The GEOROC Database</h1>
           <p class="mt-6 text-lg leading-8 text-gray-200">Geochemistry of Rocks of the Oceans and Continents</p>
@@ -15,38 +15,38 @@
             <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a>
           </div>
         </div>
-      </div>
+      </BaseContainer>
     </section>
     <section class="py-5">
-      <div class="container mx-auto">
-        <div class="flex w-full text-stone-700">
-          <div class="border-l border-r border-stone-300 flex flex-col flex-1 text-center p-4">
+      <BaseContainer>
+        <div class="flex w-full text-stone-700 dark:text-zinc-400">
+          <div class="border-l border-r border-stone-300 dark:border-zinc-700 flex flex-col flex-1 text-center p-4">
             <span class="text-2xl">21,370</span>
             <span>papers</span>
           </div>
-          <div class="border-r border-stone-300 flex flex-col flex-1 text-center p-4">
+          <div class="border-r border-stone-300 dark:border-zinc-700 flex flex-col flex-1 text-center p-4">
             <span class="text-2xl">640,100</span>
             <span>samples</span>
           </div>
-          <div class="border-r border-stone-300 flex flex-col flex-1 text-center p-4">
+          <div class="border-r border-stone-300 dark:border-zinc-700 flex flex-col flex-1 text-center p-4">
             <span class="text-2xl">62,402,280</span>
             <span>analyzes</span>
           </div>
-          <div class="border-r border-stone-300 flex flex-col flex-1 text-center p-4">
+          <div class="border-r border-stone-300 dark:border-zinc-700 flex flex-col flex-1 text-center p-4">
             <span class="text-2xl">35,166,090</span>
             <span>single data values</span>
           </div>
         </div>
-      </div>
+      </BaseContainer>
     </section>
-    <section class="bg-white mb-6">
-      <div class="container mx-auto py-24 sm:py-32">
+    <section class="bg-white dark:bg-zinc-900 mb-6">
+      <BaseContainer class="py-24 sm:py-32">
         <div class="mx-auto max-w-7xl">
           <div class="mx-auto max-w-3xl lg:text-center">
-            <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <h3 class="mt-2 text-3xl font-bold tracking-tight text-stone-900 dark:text-zinc-300 sm:text-4xl">
               Compiled from published, peer-reviewed literature
-            </p>
-            <p class="mt-6 text-lg leading-8 text-gray-600">
+            </h3>
+            <p class="mt-6 text-lg leading-8 text-stone-600 dark:text-zinc-400">
               A comprehensive collection of published analyses of igneous and metamorphic rocks and minerals.
               It contains major and trace element concentrations, radiogenic and nonradiogenic isotope ratios as well as
               analytical ages for whole rocks, glasses, minerals and inclusions.
@@ -55,19 +55,19 @@
           <div class="mx-auto mt-16 max-w-4xl sm:mt-20 lg:mt-24 lg:max-w-6xl">
             <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
               <div v-for="feature in features" :key="feature.name" class="relative pl-16">
-                <dt class="text-base font-semibold leading-7 text-gray-900">
+                <dt class="text-base font-semibold leading-7 text-gray-900 dark:text-zinc-400">
                   <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
                     <Icon :name="feature.icon" class="h-6 w-6 text-white" aria-hidden="true" />
                   </div>
                   {{ feature.name }}
                 </dt>
-                <dd class="mt-2 text-base leading-7 text-gray-600">{{ feature.description }}</dd>
+                <dd class="mt-2 text-base leading-7 text-gray-600 dark:text-zinc-400">{{ feature.description }}</dd>
                 <NuxtLink><BaseButton display="link" text="Try it out"/></NuxtLink>
               </div>
             </dl>
           </div>
         </div>
-      </div>
+      </BaseContainer>
     </section>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <PageContainer>
-    <PageHead headline="Precompiled Files"/>
+    <PageHead headline="Legal Notice"/>
   </PageContainer>
 </template>
 <script setup lang="ts">

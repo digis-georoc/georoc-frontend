@@ -25,7 +25,7 @@ onMounted(() => {
 </script>
 <template>
   <div class="flex h-full w-full">
-    <div class="flex w-1/4 bg-white border-r">
+    <div class="flex w-1/4 bg-white dark:bg-zinc-900 border-r dark:border-zinc-500">
 
     </div>
     <div class="flex w-3/4 h-full">

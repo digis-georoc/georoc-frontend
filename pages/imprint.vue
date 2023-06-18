@@ -1,5 +1,5 @@
 <template>
   <PageContainer>
-    <PageHead headline="Expert Datasets"/>
+    <PageHead headline="Imprint"/>
   </PageContainer>
 </template>
