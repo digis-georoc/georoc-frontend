@@ -7,7 +7,7 @@ include:
 variables:
   imageTag: "${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}"
   harborPath: "sub-fe/digis"
-  dest: "harbor.gwdg.de/${harborPath}/${CI_PROJECT_NAME}:${imageTag}"
+  dest: "harbor.gwdg.de/${harborPath}/${CI_PROJECT_NAME}"
 
 # Override variables and rules for included trigger job
 trigger-downstream-pipeline:
@@ -37,6 +37,14 @@ trigger-downstream-pipeline:
 
 build_image_dev:
   <<: *kaniko
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}" 
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --build-arg build_date=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+      --build-arg vcs_ref=${CI_COMMIT_SHORT_SHA}
+      --destination ${dest}:${imageTag}
+      --destination ${dest}:latest
   rules:
     - if: $CI_COMMIT_BRANCH == "develop"
 
