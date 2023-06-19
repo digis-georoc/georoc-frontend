@@ -1,7 +1,7 @@
 <template>
   <div>
-    <section class="relative lg:h-screen">
-      <div class="absolute top-0 h-full inset-x-0 -z-10 overflow-hidden" aria-hidden="true">
+    <section class="relative h-[80vh]">
+      <div class="absolute top-0 h-[80vh] inset-x-0 -z-10 overflow-hidden" aria-hidden="true">
         <img src="/images/4_GEOROC.png" alt="Hot Volcano" class="h-full w-full object-cover">
       </div>
       <BaseContainer class="h-full flex items-center">
@@ -9,10 +9,10 @@
           <h1 class="text-4xl font-bold tracking-tight text-gray-100 sm:text-6xl">The GEOROC Database</h1>
           <p class="mt-6 text-lg leading-8 text-gray-200">Geochemistry of Rocks of the Oceans and Continents</p>
           <div class="mt-10 flex items-center gap-x-6">
-            <a href="#" class="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm
+            <a href="#" class="rounded-md bg-primary px-4 py-2.5 text-base font-semibold text-white shadow-sm
             hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-            focus-visible:outline-indigo-600">Query by</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a>
+            focus-visible:outline-indigo-600">Start Exploring</a>
+            <a href="#" class="text-sm font-semibold leading-6 text-zinc-300">Learn more <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </BaseContainer>
@@ -39,7 +39,7 @@
         </div>
       </BaseContainer>
     </section>
-    <section class="bg-white dark:bg-zinc-900 mb-6">
+    <section class="bg-white dark:bg-zinc-800 mb-6">
       <BaseContainer class="py-24 sm:py-32">
         <div class="mx-auto max-w-7xl">
           <div class="mx-auto max-w-3xl lg:text-center">

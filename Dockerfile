@@ -1,19 +1,22 @@
 # Dockerfile
 FROM node:18-alpine
 
+# update and install dependency
+RUN apk update && apk upgrade
+
 # create destination directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-# update and install dependency
-RUN apk update && apk upgrade
+COPY . .
 
-RUN npm install
+RUN npm ci
 
-# generates all app files and saves them under .output
-# Nuxt creates .output/public and .output/server directories
-RUN npm run generate
+RUN npm run build
 
-COPY .output/public /usr/src/app/
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
 
-EXPOSE 80
+EXPOSE 3000
+
+ENTRYPOINT ["node", ".output/server/index.mjs"]

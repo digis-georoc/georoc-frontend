@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-zinc-900">
+  <div class="bg-white dark:bg-zinc-800">
     <BaseContainer :style="{'min-height': minHeight + 'px'}">
       <slot/>
     </BaseContainer>
