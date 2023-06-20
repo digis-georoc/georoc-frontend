@@ -19,20 +19,20 @@
     </section>
     <section class="py-5">
       <BaseContainer>
-        <div class="flex w-full text-stone-700 dark:text-zinc-400">
-          <div class="border-l border-r border-stone-300 dark:border-zinc-700 flex flex-col flex-1 text-center p-4">
+        <div class="flex flex-wrap md:flex-nowrap w-full text-stone-700 dark:text-zinc-400">
+          <div class="border-r border-stone-300 dark:border-zinc-700 flex flex-col w-1/2 md:w-1/4 text-center p-4">
             <span class="text-2xl">21,370</span>
             <span>papers</span>
           </div>
-          <div class="border-r border-stone-300 dark:border-zinc-700 flex flex-col flex-1 text-center p-4">
+          <div class="md:border-r border-stone-300 dark:border-zinc-700 flex flex-col w-1/2 md:w-1/4 text-center p-4">
             <span class="text-2xl">640,100</span>
             <span>samples</span>
           </div>
-          <div class="border-r border-stone-300 dark:border-zinc-700 flex flex-col flex-1 text-center p-4">
+          <div class="border-r md:border-l md:border-l-0 border-stone-300 dark:border-zinc-700 flex flex-col w-1/2 md:w-1/4 text-center p-4">
             <span class="text-2xl">62,402,280</span>
             <span>analyzes</span>
           </div>
-          <div class="border-r border-stone-300 dark:border-zinc-700 flex flex-col flex-1 text-center p-4">
+          <div class="border-stone-300 dark:border-zinc-700 flex flex-col w-1/2 md:w-1/4 text-center p-4">
             <span class="text-2xl">35,166,090</span>
             <span>single data values</span>
           </div>

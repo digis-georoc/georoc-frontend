@@ -55,7 +55,7 @@ const navigation = [
         <!--            </div>-->
         <!--          </div>-->
         <div class="-mr-2 flex flex-shrink-0 lg:hidden items-center space-x-4">
-          <NuxtLink to="/get-started">
+          <NuxtLink to="/get-started" class="hidden sm:flex">
             <BaseButton text="Get Started"/>
           </NuxtLink>
           <DarkModeSwitch/>
