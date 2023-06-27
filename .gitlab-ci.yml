@@ -9,14 +9,15 @@ variables:
   harborPath: "sub-fe/digis"
   dest: "harbor.gwdg.de/${harborPath}/${CI_PROJECT_NAME}"
 
-# Override variables and rules for included trigger job
-trigger-downstream-pipeline:
-  variables:
-    IMAGE_TAG: ${imageTag}
-    REPOSITORY_PATH: fe/digis/websearch_helm
+.dev-rules:
   rules:
-  - if: $CI_COMMIT_BRANCH == "develop"
+    - if: $CI_COMMIT_BRANCH == "develop"
+    - if: $CI_COMMIT_TAG
+      when: never
 
+.staging-rules:
+  rules:
+    - if: $CI_COMMIT_TAG == "staging"
 
 .kaniko_template: &kaniko
   stage: build
@@ -46,7 +47,41 @@ build_image_dev:
       --destination ${dest}:${imageTag}
       --destination ${dest}:latest
   rules:
-    - if: $CI_COMMIT_BRANCH == "develop"
+    - !reference [.dev-rules, rules]
+
+# Override variables and rules for included trigger job
+trigger-downstream-pipeline-dev:
+  extends: trigger-downstream-pipeline
+  variables:
+    IMAGE_TAG: ${imageTag}
+    FILE_PATH: envs/values-dev.yaml
+    UPDATE_KEY: .image.tag
+    REPOSITORY_PATH: fe/digis/websearch_helm
+  rules:
+    - !reference [.dev-rules, rules]
+
+build_image_staging:
+  <<: *kaniko
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}" 
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --build-arg build_date=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+      --build-arg vcs_ref=${CI_COMMIT_SHORT_SHA}
+      --destination ${dest}:${imageTag}-staging
+  rules:
+    - !reference [.staging-rules, rules]
+
+# Override variables and rules for included trigger job
+trigger-downstream-pipeline-staging:
+  extends: trigger-downstream-pipeline
+  variables:
+    IMAGE_TAG: ${imageTag}-staging
+    FILE_PATH: envs/values-staging.yaml
+    UPDATE_KEY: .image.tag
+    REPOSITORY_PATH: fe/digis/websearch_helm
+  rules:
+    - !reference [.staging-rules, rules]
 
 # this stage creates a new environment for the current branch.
 pages:
