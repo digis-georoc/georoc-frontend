@@ -4,6 +4,12 @@ include:
     # trigger downstream cross-project pipeline to update the helm chart; triggered on pushing a new tag
     - 'ci-templates/trigger-downstream-pipeline.yml'
 
+
+# prevent included job from running unconfigured
+trigger-downstream-pipeline:
+  rules:
+    - when: never
+
 variables:
   imageTag: "${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}"
   harborPath: "sub-fe/digis"
@@ -76,7 +82,7 @@ build_image_staging:
 trigger-downstream-pipeline-staging:
   extends: trigger-downstream-pipeline
   variables:
-    IMAGE_TAG: ${imageTag}-staging
+    IMAGE_TAG: "${imageTag}-staging"
     FILE_PATH: envs/values-staging.yaml
     UPDATE_KEY: .image.tag
     REPOSITORY_PATH: fe/digis/websearch_helm
