@@ -59,7 +59,7 @@ build_image_dev:
 trigger-downstream-pipeline-dev:
   extends: trigger-downstream-pipeline
   variables:
-    IMAGE_TAG: ${imageTag}
+    IMAGE_TAG: "${imageTag}"
     FILE_PATH: envs/values-dev.yaml
     UPDATE_KEY: .image.tag
     REPOSITORY_PATH: fe/digis/websearch_helm
