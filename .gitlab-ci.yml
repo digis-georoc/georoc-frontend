@@ -59,6 +59,9 @@ build_image_dev:
 # Override variables and rules for included trigger job
 trigger-downstream-pipeline-dev:
   extends: trigger-downstream-pipeline
+  inherit:
+    variables:
+      - imageTag
   variables:
     REFERENCED_IMAGE: ${imageTag}
     FILE_PATH: envs/values-dev.yaml
