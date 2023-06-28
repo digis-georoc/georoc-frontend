@@ -23,7 +23,7 @@ variables:
 
 .staging-rules:
   rules:
-    - if: $CI_COMMIT_TAG == "staging"
+    - if: $CI_COMMIT_TAG
 
 .kaniko_template: &kaniko
   stage: build
@@ -50,6 +50,7 @@ build_image_dev:
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --build-arg build_date=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       --build-arg vcs_ref=${CI_COMMIT_SHORT_SHA}
+      --reproducible
       --destination ${dest}:${imageTag}
       --destination ${dest}:latest
   rules:
@@ -59,7 +60,7 @@ build_image_dev:
 trigger-downstream-pipeline-dev:
   extends: trigger-downstream-pipeline
   variables:
-    IMAGE_TAG: "${imageTag}"
+    REFERENCED_IMAGE: ${imageTag}
     FILE_PATH: envs/values-dev.yaml
     UPDATE_KEY: .image.tag
     REPOSITORY_PATH: fe/digis/websearch_helm
@@ -74,7 +75,8 @@ build_image_staging:
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --build-arg build_date=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       --build-arg vcs_ref=${CI_COMMIT_SHORT_SHA}
-      --destination ${dest}:${imageTag}-staging
+      -- reproducible
+      --destination ${dest}:${CI_COMMIT_TAG}
   rules:
     - !reference [.staging-rules, rules]
 
@@ -82,7 +84,7 @@ build_image_staging:
 trigger-downstream-pipeline-staging:
   extends: trigger-downstream-pipeline
   variables:
-    IMAGE_TAG: "${imageTag}-staging"
+    REFERENCED_IMAGE: ${CI_COMMIT_TAG}
     FILE_PATH: envs/values-staging.yaml
     UPDATE_KEY: .image.tag
     REPOSITORY_PATH: fe/digis/websearch_helm
