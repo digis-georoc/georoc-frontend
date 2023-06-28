@@ -11,9 +11,7 @@ trigger-downstream-pipeline:
     - when: never
 
 variables:
-  refName: ${CI_COMMIT_REF_NAME}
-  shortSha: ${CI_COMMIT_SHORT_SHA}
-  imageTag: ${refName}-${shortSha} # rename predefined variables here to avoid re-evaluation in downstream pipeline
+  imageTag: ${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA} # set this value also for trigger-downstream-pipeline-dev - using the variable in the trigger job results in re-evaluation of the predefined variables in the downstream project leading to different tags
   harborPath: "sub-fe/digis"
   dest: "harbor.gwdg.de/${harborPath}/${CI_PROJECT_NAME}"
 
@@ -61,11 +59,8 @@ build_image_dev:
 # Override variables and rules for included trigger job
 trigger-downstream-pipeline-dev:
   extends: trigger-downstream-pipeline
-  inherit:
-    variables:
-      - imageTag
   variables:
-    REFERENCED_IMAGE: ${imageTag}
+    REFERENCED_IMAGE: ${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA} # explicit interpolation of predefined variables here is necessary as using the global var wont work as expected
     FILE_PATH: envs/values-dev.yaml
     UPDATE_KEY: .image.tag
     REPOSITORY_PATH: fe/digis/websearch_helm
