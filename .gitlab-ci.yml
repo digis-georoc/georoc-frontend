@@ -11,7 +11,9 @@ trigger-downstream-pipeline:
     - when: never
 
 variables:
-  imageTag: ${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}
+  refName: ${CI_COMMIT_REF_NAME}
+  shortSha: ${CI_COMMIT_SHORT_SHA}
+  imageTag: ${refName}-${shortSha} # rename predefined variables here to avoid re-evaluation in downstream pipeline
   harborPath: "sub-fe/digis"
   dest: "harbor.gwdg.de/${harborPath}/${CI_PROJECT_NAME}"
 
@@ -23,7 +25,7 @@ variables:
 
 .staging-rules:
   rules:
-    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_TAG${CI_COMMIT_SHORT_SHA}
 
 .kaniko_template: &kaniko
   stage: build
