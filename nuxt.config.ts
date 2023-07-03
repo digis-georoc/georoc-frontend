@@ -20,5 +20,8 @@ export default defineNuxtConfig({
         '/': { prerender: true },
         // Admin dashboard renders only on client-side
         '/query': { ssr: false },
+    },
+    tailwindcss: {
+        exposeConfig: true
     }
 })
