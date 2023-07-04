@@ -53,8 +53,11 @@ const unsubscribe = queryStore.$onAction(
     ({ name }) => {
       if (name === 'startDrawingOnMap') {
         freeDraw.mode(FreeDraw.CREATE);
+      } if (name === 'stopDrawingOnMap') {
+        freeDraw.mode(FreeDraw.NONE);
       } else if (name === 'resetPolygonOnMap') {
         polygon.remove();
+        freeDraw.mode(FreeDraw.NONE);
       }
     }
 )

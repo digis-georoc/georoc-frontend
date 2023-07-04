@@ -21,6 +21,10 @@ function startDrawingOnMap() {
 function resetPolygonOnMap() {
   queryStore.resetPolygonOnMap();
 }
+
+function stopDrawingOnMap() {
+  queryStore.stopDrawingOnMap()
+}
 </script>
 <template>
   <div class="flex flex-col p-4">
@@ -28,7 +32,11 @@ function resetPolygonOnMap() {
       <QueryFilterMaterial v-model="selectedMaterialId" />
     </QueryFilterContainer>
     <QueryFilterContainer title="Filter by Area">
-      <QueryFilterArea @start="startDrawingOnMap" @reset="resetPolygonOnMap" />
+      <QueryFilterArea
+        @start="startDrawingOnMap"
+        @reset="resetPolygonOnMap"
+        @stop="stopDrawingOnMap"
+      />
     </QueryFilterContainer>
   </div>
 </template>

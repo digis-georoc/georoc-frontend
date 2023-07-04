@@ -5,8 +5,30 @@
   </div>
 </template>
 <script setup lang="ts">
-const emit = defineEmits(['start', 'reset'])
+const emit = defineEmits(['start', 'reset', 'stop'])
 const queryStore = useQueryStore()
+
+enum States {
+  Idle,
+  Drawing,
+  Finished
+}
+
+const state = ref(States.Idle)
+
+watch(() => state.value, (value) => {
+  if (value === States.Idle) {
+    buttonText.value = 'Draw shape'
+    message.value = messageStartText
+  } else if (value === States.Drawing) {
+    emit('start')
+    buttonText.value = 'Cancel drawing'
+    message.value = 'Drawing mode active.'
+  } else if (value === States.Finished) {
+    buttonText.value = 'Reset area'
+    message.value = 'Area selected!'
+  }
+})
 
 const messageStartText = 'Click to start drawing a polygon on the map';
 
@@ -19,11 +41,7 @@ const hasPolygon = computed(() => {
 
 watch(() => hasPolygon.value, (value) => {
   if (value) {
-    buttonText.value = 'Reset area'
-    message.value = 'Area selected!'
-  } else {
-    buttonText.value = 'Draw area'
-    message.value = messageStartText
+    state.value = States.Finished
   }
 })
 
@@ -35,11 +53,14 @@ queryStore.$onAction(({ name }) => {
 
 
 function handleButton() {
-  if (hasPolygon.value) emit('reset')
-  else {
-    emit('start')
-    buttonText.value = 'Cancel drawing'
-    message.value = 'Drawing mode active.'
+  if (state.value === States.Idle) {
+    state.value = States.Drawing
+  } else if (state.value === States.Drawing) {
+    emit('stop')
+    state.value = States.Idle
+  } else if (state.value === States.Finished) {
+    emit('reset')
+    state.value = States.Idle
   }
 }
 </script>
