@@ -17,7 +17,7 @@ const hasPolygon = computed(() => {
   return queryStore.activeFilters.findIndex(filter => filter.name === 'draw') !== -1
 })
 
-watch( () => hasPolygon.value, (value) => {
+watch(() => hasPolygon.value, (value) => {
   if (value) {
     buttonText.value = 'Reset area'
     message.value = 'Area selected!'

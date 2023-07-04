@@ -21,6 +21,7 @@
     "@pinia/nuxt": "^0.4.11",
     "leaflet": "^1.9.4",
     "leaflet-freedraw": "^2.13.3",
+    "nuxt-storage": "^1.2.2",
     "pinia": "^2.1.4"
   },
   "overrides": {
