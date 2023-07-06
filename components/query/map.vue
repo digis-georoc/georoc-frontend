@@ -22,11 +22,11 @@ onMounted(() => {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map)
 
-  freeDraw = new FreeDraw({ mode: FreeDraw.NONE,strokeWidth:2,leaveModeAfterCreate:true });
+  freeDraw = new FreeDraw({ mode: FreeDraw.NONE, strokeWidth:2 })
   map.addLayer(freeDraw)
 
   freeDraw.on("markers",(event: any) => {
-    if(event.eventType == 'create'){
+    if(event.eventType == 'create') {
       var latLngs: { lat: number, lng: number }[] = event.latLngs[0]
 
       queryStore.activeFilters.push({ name: 'draw', value: latLngs})
@@ -34,8 +34,8 @@ onMounted(() => {
       freeDraw.clear()
 
       polygon = L.polygon(latLngs.map((latLng) => {
-        return [latLng.lat,latLng.lng];
-      }), {color: theme.colors.primary}).addTo(map);
+        return [latLng.lat,latLng.lng]
+      }), {color: theme.colors.primary}).addTo(map)
 
       queryStore.stopDrawingOnMap();
     }
@@ -52,12 +52,12 @@ onMounted(() => {
 const unsubscribe = queryStore.$onAction(
     ({ name }) => {
       if (name === 'startDrawingOnMap') {
-        freeDraw.mode(FreeDraw.CREATE);
+        freeDraw.mode(FreeDraw.CREATE)
       } if (name === 'stopDrawingOnMap') {
-        freeDraw.mode(FreeDraw.NONE);
+        freeDraw.mode(FreeDraw.NONE)
       } else if (name === 'resetPolygonOnMap') {
-        polygon.remove();
-        freeDraw.mode(FreeDraw.NONE);
+        polygon.remove()
+        freeDraw.mode(FreeDraw.NONE)
       }
     }
 )
