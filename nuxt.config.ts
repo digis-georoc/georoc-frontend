@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             apiToken: process.env.API_TOKEN,
+            apiBaseUrl: process.env.API_BASE_URL
         }
     },
     routeRules: {

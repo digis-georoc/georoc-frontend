@@ -1,6 +1,6 @@
 const appConfig = useRuntimeConfig()
 const apiToken = appConfig.public.apiToken
-const baseURL = 'https://api-dev.georoc.eu/api/v1'
+const baseURL = appConfig.public.apiBaseUrl
 
 async function getSamples(filters: Filter[] = []): Promise<MapSampleQueryResponse | null> {
 
