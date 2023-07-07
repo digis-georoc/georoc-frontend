@@ -15,24 +15,23 @@ const emit = defineEmits<{
 
 const materials = [
   {
-    id: 'rock',
+    id: 'WR',
     label: 'Whole Rock',
     icon: 'noto:rock'
   },
   {
-    id: 'inc',
+    id: 'INC',
     label: 'Inclusion',
     icon: 'noto:bubbles'
   },
   {
-    id: 'min',
+    id: 'MIN',
     label: 'Mineral',
     icon: 'emojione-v1:diamond-with-a-dot'
   },
 ]
 
 let selectedMaterial = ref(materials[0])
-
 
 watch(() => props.modelValue, (value) => {
   const index = materials.findIndex(({ id }) => id === value)

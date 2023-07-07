@@ -1,16 +1,13 @@
-import {defineStore} from "pinia";
-
-interface Filter {
-    name: string,
-    value: string | number | Array<any>
-}
+import { defineStore } from "pinia";
 
 interface QueryState {
-    activeFilters: Filter[]
+  activeFilters: Filter[],
+  result: MapSample[]
 }
 export const useQueryStore = defineStore('query', {
   state: (): QueryState => ({
-    activeFilters: []
+    activeFilters: [],
+    result: []
   }),
   actions: {
     startDrawingOnMap() {
@@ -22,10 +19,15 @@ export const useQueryStore = defineStore('query', {
       if (index === -1) return
       this.activeFilters.splice(index, 1)
     },
-    setFilter(filter: Filter) {
+    async setFilter(filter: Filter) {
       const index  = this.activeFilters.findIndex(({ name }) => name === filter.name)
-       if (index === -1) this.activeFilters.push(filter)
+      if (index === -1) this.activeFilters.push(filter)
       else this.activeFilters[index] = filter
+
+      await this.execute()
+    },
+    async execute() {
+      this.result = await getSamples(this.activeFilters)
     }
   },
   getters: {

@@ -18,8 +18,15 @@ let polygon: Polygon
 
 const markersGroup = L.markerClusterGroup()
 
-const mapSamples = await getSamples()
-if (mapSamples) mapSamples.Data.forEach(({ Latitude, Longitude }) => markersGroup.addLayer(L.marker([Latitude, Longitude])))
+const mapSamples = computed(() => queryStore.result)
+
+watch(() => mapSamples.value, (value: SamplesResponse[]) => {
+  if (!value) return
+  markersGroup.clearLayers()
+  value.Data.forEach(
+    ({ Latitude, Longitude }) => markersGroup.addLayer(L.marker([Latitude, Longitude]))
+  )
+})
 
 onMounted(() => {
   map = L.map('map', {
@@ -53,12 +60,9 @@ onMounted(() => {
     }
   })
 
-  // L.DomEvent.on(map.getContainer(), 'wheel', (e)=>{
-  //   var zoomBefore = map.getZoom();
-  //   setTimeout(()=>{
-  //     console.log('Zoom delta', zoomBefore - map.getZoom())
-  //   }, 200);
-  // });
+  queryStore.execute()
+
+
 })
 
 const unsubscribe = queryStore.$onAction(
