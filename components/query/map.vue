@@ -14,13 +14,37 @@ const queryStore = useQueryStore()
 let map: any = null
 let freeDraw: FreeDraw
 
+const layers = [
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }),
+  L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: 'Map data: &copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>-Participants, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map display: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+  }),
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 19,
+    attribution: 'Map data: &copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>-Participants, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map display: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+  }),
+]
+
+function addControlLayer() {
+  if (!map) return
+  L.control.layers({
+    'Streets': layers[0],
+    'Topographic': layers[1],
+    'Satellite': layers[2]
+  }).addTo(map);
+}
+
 let polygon: Polygon
 
 const markersGroup = L.markerClusterGroup()
 
 const mapSamples = computed(() => queryStore.result)
 
-watch(() => mapSamples.value, (value: SamplesResponse[]) => {
+watch(() => mapSamples.value, (value: MapSampleQueryResponse[]) => {
   if (!value) return
   markersGroup.clearLayers()
   value.Data.forEach(
@@ -31,13 +55,12 @@ watch(() => mapSamples.value, (value: SamplesResponse[]) => {
 onMounted(() => {
   map = L.map('map', {
     wheelDebounceTime: 100,
-    zoomSnap: 0.5
+    zoomSnap: 0.5,
+    layers
   }).setView([19.74, -155.05], 2.5)
 
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(map)
+  addControlLayer()
+
 
   freeDraw = new FreeDraw({ mode: FreeDraw.NONE, strokeWidth:2 })
   map.addLayer(freeDraw)
@@ -61,7 +84,6 @@ onMounted(() => {
   })
 
   queryStore.execute()
-
 
 })
 
