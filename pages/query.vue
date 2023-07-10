@@ -7,8 +7,9 @@ definePageMeta({
 const queryStore = useQueryStore()
 const isMaterialDialogOpen = ref(window.localStorage.getItem('hide-material-dialog') === null)
 const storedMaterialFilter = window.localStorage.getItem('material-filter')
+const initialMaterialId = storedMaterialFilter !== null ? storedMaterialFilter : 'WR'
 
-const selectedMaterialId = ref(isMaterialDialogOpen ? storedMaterialFilter : null)
+const selectedMaterialId = ref(isMaterialDialogOpen ? initialMaterialId : null)
 const dontShowMaterialDialogAgain = ref(false)
 
 function setMaterialFilter() {
