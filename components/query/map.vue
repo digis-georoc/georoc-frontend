@@ -38,17 +38,29 @@ function addControlLayer() {
   }).addTo(map);
 }
 
+function createMarker(latitude: number, longitude: number) {
+  return L.marker(
+    [latitude, longitude],
+    { icon: L.divIcon(
+        { className: 'marker-icon bg-primary border-2 border-primary-300 rounded-full' }
+      )
+    }
+  )
+}
+
 let polygon: Polygon
 
 const markersGroup = L.markerClusterGroup()
 
 const mapSamples = computed(() => queryStore.result)
 
+
 watch(() => mapSamples.value, (value: MapSampleQueryResponse) => {
   if (!value) return
   markersGroup.clearLayers()
+
   value.Data.forEach(
-    ({ Latitude, Longitude }) => markersGroup.addLayer(L.marker([Latitude, Longitude]))
+    ({ Latitude, Longitude }) => markersGroup.addLayer(createMarker(Latitude, Longitude))
   )
 })
 
@@ -60,7 +72,6 @@ onMounted(() => {
   }).setView([19.74, -155.05], 2.5)
 
   addControlLayer()
-
 
   freeDraw = new FreeDraw({ mode: FreeDraw.NONE, strokeWidth:2 })
   map.addLayer(freeDraw)
@@ -82,9 +93,6 @@ onMounted(() => {
       queryStore.stopDrawingOnMap()
     }
   })
-
-  // queryStore.execute()
-
 })
 
 const unsubscribe = queryStore.$onAction(
@@ -106,5 +114,10 @@ const unsubscribe = queryStore.$onAction(
 <style>
 .mode-create {
   cursor: crosshair;
+}
+
+.marker-icon {
+  width: 16px;
+  height: 16px;
 }
 </style>
