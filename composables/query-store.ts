@@ -2,12 +2,12 @@ import { defineStore } from "pinia";
 
 interface QueryState {
   activeFilters: Filter[],
-  result: MapSample[]
+  result: MapSampleQueryResponse | null
 }
 export const useQueryStore = defineStore('query', {
   state: (): QueryState => ({
     activeFilters: [],
-    result: []
+    result: null
   }),
   actions: {
     startDrawingOnMap() {
@@ -23,6 +23,8 @@ export const useQueryStore = defineStore('query', {
       const index  = this.activeFilters.findIndex(({ name }) => name === filter.name)
       if (index === -1) this.activeFilters.push(filter)
       else this.activeFilters[index] = filter
+
+      window.localStorage.setItem(filter.name + '-filter', filter.value)
 
       await this.execute()
     },

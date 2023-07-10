@@ -31,18 +31,20 @@ const materials = [
   },
 ]
 
-let selectedMaterial = ref(materials[0])
+let selectedMaterial = ref<{ id: string }>({ id: ''})
 
 watch(() => props.modelValue, (value) => {
   const index = materials.findIndex(({ id }) => id === value)
-  selectedMaterial.value = materials[(index === -1) ? 0 : index]
+  if (index === -1) return
+  selectedMaterial.value = materials[index]
 }, { immediate: true })
 
 </script>
 <template>
   <RadioGroup
-      :model-value="selectedMaterial"
-      @update:modelValue="value => emit('update:modelValue', value.id)"
+    :model-value="selectedMaterial"
+    @update:modelValue="value => emit('update:modelValue', value.id)"
+    by="id"
   >
     <RadioGroupLabel class="sr-only">Server size</RadioGroupLabel>
     <div class="flex space-x-2">

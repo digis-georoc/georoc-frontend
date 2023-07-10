@@ -1,14 +1,16 @@
 <script setup lang="ts">
 const queryStore = useQueryStore()
-const selectedMaterialId = ref('WR')
-const storedMaterialFilter = computed(() => queryStore.getFilter('material'))
 
+const activeMaterialFilter = computed(() => queryStore.getFilter('material'))
+const selectedMaterialId = ref<string | null>(null)
 
-watch(() => storedMaterialFilter.value, (value) => {
-  selectedMaterialId.value = value ? <string>value.value : 'WR'
+watch(() => activeMaterialFilter.value, (value) => {
+  if (value === null) return
+  selectedMaterialId.value = <string>value.value
 })
 
 watch(() => selectedMaterialId.value, (value) => {
+  if (value === null) return
   queryStore.setFilter({
     name: 'material',
     value

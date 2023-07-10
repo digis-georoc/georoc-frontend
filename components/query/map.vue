@@ -44,7 +44,7 @@ const markersGroup = L.markerClusterGroup()
 
 const mapSamples = computed(() => queryStore.result)
 
-watch(() => mapSamples.value, (value: MapSampleQueryResponse[]) => {
+watch(() => mapSamples.value, (value: MapSampleQueryResponse) => {
   if (!value) return
   markersGroup.clearLayers()
   value.Data.forEach(
@@ -83,7 +83,7 @@ onMounted(() => {
     }
   })
 
-  queryStore.execute()
+  // queryStore.execute()
 
 })
 

@@ -6,7 +6,9 @@ definePageMeta({
 
 const queryStore = useQueryStore()
 const isMaterialDialogOpen = ref(window.localStorage.getItem('hide-material-dialog') === null)
-const selectedMaterialId = ref('rock')
+const storedMaterialFilter = window.localStorage.getItem('material-filter')
+
+const selectedMaterialId = ref(isMaterialDialogOpen ? storedMaterialFilter : null)
 const dontShowMaterialDialogAgain = ref(false)
 
 function setMaterialFilter() {
@@ -14,10 +16,19 @@ function setMaterialFilter() {
     name: 'material',
     value: selectedMaterialId.value
   })
-
-  isMaterialDialogOpen.value = false
-  if (dontShowMaterialDialogAgain) window.localStorage.setItem('hide-material-dialog', '')
 }
+
+function handleDialogContinue() {
+  isMaterialDialogOpen.value = false
+  if (dontShowMaterialDialogAgain.value) window.localStorage.setItem('hide-material-dialog', '')
+  else window.localStorage.removeItem('hide-material-dialog')
+
+  setMaterialFilter()
+}
+
+onMounted(() => {
+  if (!isMaterialDialogOpen.value) setMaterialFilter()
+})
 
 </script>
 <template>
@@ -33,7 +44,7 @@ function setMaterialFilter() {
     <QueryFilterMaterial v-model="selectedMaterialId" />
     <div class="flex justify-between items-center mt-4">
       <BaseCheckbox label="Don't show again" v-model="dontShowMaterialDialogAgain" />
-      <BaseButton text="Continue" @click="setMaterialFilter" />
+      <BaseButton text="Continue" @click="handleDialogContinue" />
     </div>
   </BaseDialog>
 </template>
