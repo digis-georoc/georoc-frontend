@@ -9,6 +9,7 @@ import L, { Polygon } from "leaflet"
 import FreeDraw from "leaflet-freedraw"
 
 import 'leaflet.markercluster/dist/leaflet.markercluster-src'
+import { QueryLocationsResponse } from "~/types";
 
 const queryStore = useQueryStore()
 let map: any = null
@@ -35,7 +36,7 @@ function addControlLayer() {
     'Streets': layers[0],
     'Topographic': layers[1],
     'Satellite': layers[2]
-  }).addTo(map);
+  }, {}, {position: 'topleft'}).addTo(map);
 }
 
 function createMarker(latitude: number, longitude: number) {
@@ -54,8 +55,7 @@ const markersGroup = L.markerClusterGroup()
 
 const mapSamples = computed(() => queryStore.result)
 
-
-watch(() => mapSamples.value, (value: MapSampleQueryResponse) => {
+watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
   if (!value) return
   markersGroup.clearLayers()
 
@@ -119,5 +119,9 @@ const unsubscribe = queryStore.$onAction(
 .marker-icon {
   width: 16px;
   height: 16px;
+}
+
+.leaflet-top {
+  top: 16px;
 }
 </style>

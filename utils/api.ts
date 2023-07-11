@@ -2,7 +2,7 @@ const appConfig = useRuntimeConfig()
 const apiToken = appConfig.public.apiToken
 const baseURL = appConfig.public.apiBaseUrl
 
-async function getSamples(filters: Filter[] = []): Promise<MapSampleQueryResponse | null> {
+async function getSamples(filters: QueryFilter[] = []): Promise<MapSampleQueryResponse | null> {
 
   const filterObj: any = {}
   filters.forEach(({ name, value }) => {

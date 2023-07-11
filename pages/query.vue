@@ -37,8 +37,11 @@ onMounted(() => {
     <div class="flex w-[420px] bg-white dark:bg-zinc-800 border-r dark:border-zinc-500">
       <QueryFilters/>
     </div>
-    <div class="flex flex-1 h-full">
+    <div class="flex flex-1 h-full relative">
       <QueryMap/>
+      <div class="absolute z-[1000] h-full w-[420px] top-0 right-0">
+        <QueryList/>
+      </div>
     </div>
   </div>
   <BaseDialog title="Please select a material type" v-model="isMaterialDialogOpen">
