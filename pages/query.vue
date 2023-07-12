@@ -12,6 +12,8 @@ const initialMaterialId = storedMaterialFilter !== null ? storedMaterialFilter :
 const selectedMaterialId = ref(isMaterialDialogOpen ? initialMaterialId : null)
 const dontShowMaterialDialogAgain = ref(false)
 
+const isListOpen = ref(false)
+
 function setMaterialFilter() {
   queryStore.setFilter({
     name: 'material',
@@ -39,7 +41,15 @@ onMounted(() => {
     </div>
     <div class="flex flex-1 h-full relative">
       <QueryMap/>
-      <div class="absolute z-[1000] h-full w-[420px] top-0 right-0">
+      <div class="absolute z-[1000] h-full w-[420px] top-0 flex transition-transform"
+           :class="{'right-0': isListOpen, '-right-[420px]': !isListOpen }">
+        <BaseButton
+            text="List View"
+            icon="ic:round-menu"
+            display="mono"
+            class="absolute top-6 left-0 -translate-x-[120%]"
+            @click="isListOpen = !isListOpen"
+        />
         <QueryList/>
       </div>
     </div>

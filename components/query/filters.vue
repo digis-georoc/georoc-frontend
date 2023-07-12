@@ -9,13 +9,13 @@ watch(() => activeMaterialFilter.value, (value) => {
   selectedMaterialId.value = <string>value.value
 })
 
-watch(() => selectedMaterialId.value, (value) => {
-  if (value === null) return
+function handleFilterSelection(value: string) {
   queryStore.setFilter({
     name: 'material',
     value
   })
-})
+}
+
 function startDrawingOnMap() {
   queryStore.startDrawingOnMap();
 }
@@ -31,7 +31,9 @@ function stopDrawingOnMap() {
 <template>
   <div class="flex flex-col p-4">
     <QueryFilterContainer>
-      <QueryFilterMaterial v-model="selectedMaterialId" />
+      <QueryFilterMaterial
+          model-value="selectedMaterialId"
+          @update:model-value="handleFilterSelection"/>
     </QueryFilterContainer>
     <QueryFilterContainer title="Filter by Area">
       <QueryFilterArea

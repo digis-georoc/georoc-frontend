@@ -6,7 +6,7 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 import { theme } from '#tailwind-config'
 
 import L, { Polygon } from "leaflet"
-import FreeDraw from "leaflet-freedraw"
+import FreeDraw, { MarkerEvent } from "leaflet-freedraw"
 
 import 'leaflet.markercluster/dist/leaflet.markercluster-src'
 import { QueryLocationsResponse } from "~/types";
@@ -14,6 +14,15 @@ import { QueryLocationsResponse } from "~/types";
 const queryStore = useQueryStore()
 let map: any = null
 let freeDraw: FreeDraw
+
+interface FreeDrawLatLng {
+  lat: number,
+  lng: number
+}
+interface LeafletEvent {
+  eventType: string,
+  latLngs: Array<FreeDrawLatLng[]>
+}
 
 const layers = [
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -78,16 +87,15 @@ onMounted(() => {
 
   map.addLayer(markersGroup)
 
-  freeDraw.on("markers",(event: any) => {
+  freeDraw.on("markers",(event: MarkerEvent) => {
     if(event.eventType == 'create') {
-      var latLngs: { lat: number, lng: number }[] = event.latLngs[0]
-
-      queryStore.activeFilters.push({ name: 'draw', value: latLngs})
-
+      var latLngs: [number, number][] = event.latLngs[0].map(({lat, lng}) => [lng, lat])
+      queryStore.setFilter({ name: 'polygon', value: latLngs})
       freeDraw.clear()
 
-      polygon = L.polygon(latLngs.map((latLng) => {
-        return [latLng.lat,latLng.lng]
+      polygon = L.polygon(latLngs.map(latLng => {
+        const [lng, lat] = latLng
+        return [lat, lng]
       }), {color: theme.colors.primary}).addTo(map)
 
       queryStore.stopDrawingOnMap()
