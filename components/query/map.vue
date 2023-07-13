@@ -15,15 +15,6 @@ const queryStore = useQueryStore()
 let map: any = null
 let freeDraw: FreeDraw
 
-interface FreeDrawLatLng {
-  lat: number,
-  lng: number
-}
-interface LeafletEvent {
-  eventType: string,
-  latLngs: Array<FreeDrawLatLng[]>
-}
-
 const layers = [
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -67,6 +58,8 @@ const mapSamples = computed(() => queryStore.result)
 watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
   if (!value) return
   markersGroup.clearLayers()
+
+  if (!value.data) return
 
   value.data.forEach(
     ({ latitude, longitude }) => markersGroup.addLayer(createMarker(latitude, longitude))
