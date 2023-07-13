@@ -36,12 +36,12 @@ onMounted(() => {
 </script>
 <template>
   <div class="flex h-full w-full">
-    <div class="flex w-[420px] bg-white dark:bg-zinc-800 border-r dark:border-zinc-500">
+    <div class="flex w-[420px] bg-white dark:bg-zinc-800 border-r dark:border-zinc-600">
       <QueryFilters/>
     </div>
     <div class="flex flex-1 h-full relative">
       <QueryMap/>
-      <div class="absolute z-[1000] h-full w-[420px] top-0 flex transition-transform"
+      <div class="absolute z-[1000] h-full w-[420px] top-0 flex transition-transform border-l dark:border-zinc-600"
            :class="{'right-0': isListOpen, '-right-[420px]': !isListOpen }">
         <BaseButton
             text="List View"

@@ -34,7 +34,8 @@
     _icon = 'heroicons:arrow-right-20-solid'
   } else if (props.display === 'mono') {
     classes += 'bg-white text-dark border-2 border-zinc-600 focus:ring-zinc-300 ' +
-        'focus:ring-opacity-50 hover:bg-zinc-100'
+      'focus:ring-opacity-50 hover:bg-zinc-100 ' +
+      'dark:bg-zinc-700'
   }
 
 </script>
