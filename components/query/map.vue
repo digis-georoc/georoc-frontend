@@ -68,8 +68,8 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
   if (!value) return
   markersGroup.clearLayers()
 
-  value.Data.forEach(
-    ({ Latitude, Longitude }) => markersGroup.addLayer(createMarker(Latitude, Longitude))
+  value.data.forEach(
+    ({ latitude, longitude }) => markersGroup.addLayer(createMarker(latitude, longitude))
   )
 })
 

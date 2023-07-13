@@ -4,24 +4,24 @@ interface QueryFilter {
 }
 
 interface MapSample {
-  SampleID: number,
-  Latitude: number,
-  Longitude: number
+  sampleID: number,
+  latitude: number,
+  longitude: number
 }
 
 interface SampleItem {
-  SampleID: number,
-  Latitude: number,
-  Longitude: number
+  sampleID: number,
+  latitude: number,
+  longitude: number
 }
 interface QueryLocationsResponse {
-  Data: MapSample[],
-  NumItems: number
+  data: MapSample[],
+  numItems: number
 }
 
 interface QueryListResponse {
-  Data: MapSample[],
-  NumItems: number
+  data: MapSample[],
+  numItems: number
 }
 interface ResponseRef<T> {
   data: T

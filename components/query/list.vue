@@ -10,7 +10,7 @@ const listResult = computed(() => queryStore.listResult)
       <span>No samples to show.</span>
     </template>
     <template v-else>
-      <QueryListItem v-for="item in listResult.Data" :item="item" class="mb-2" />
+      <QueryListItem v-for="item in listResult.data" :item="item" class="mb-2" />
     </template>
   </div>
 </template>
