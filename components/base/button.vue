@@ -33,9 +33,9 @@
     _iconPosition = 'right';
     _icon = 'heroicons:arrow-right-20-solid'
   } else if (props.display === 'mono') {
-    classes += 'bg-white text-dark border-2 border-zinc-600 focus:ring-zinc-300 ' +
+    classes += 'bg-white text-dark border-2 border-zinc-400 focus:ring-zinc-300 ' +
       'focus:ring-opacity-50 hover:bg-zinc-100 ' +
-      'dark:bg-zinc-700'
+      'dark:bg-zinc-800'
   }
 
 </script>

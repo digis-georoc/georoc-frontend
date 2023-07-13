@@ -125,4 +125,58 @@ const unsubscribe = queryStore.$onAction(
 .leaflet-top {
   top: 16px;
 }
+
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+  border-color: theme('colors.zinc.400');
+}
+
+.leaflet-control-layers label:not(:last-child) {
+  cursor: pointer;
+  margin-bottom: 0.25rem;
+}
+
+.leaflet-control-layers-selector {
+  appearance: none;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  border: 1px solid;
+  cursor: pointer;
+
+  &:checked {
+    border-color: theme('colors.primary');
+    &:before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 80%;
+      border-radius: 50%;
+      background: theme('colors.primary');
+    }
+  }
+}
+
+.dark {
+  .leaflet-bar a, .leaflet-control-layers {
+    background: theme('colors.zinc.800');
+    color: theme('colors.zinc.300');
+    border-color: theme('colors.zinc.300');
+  }
+
+  .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+    border-color: theme('colors.zinc.600');
+  }
+
+  .leaflet-control-layers-selector {
+    background: theme('colors.zinc.800');
+    border-color: theme('colors.zinc.600');
+    &:checked {
+      border-color: theme('colors.primary');
+    }
+
+  }
+}
 </style>
