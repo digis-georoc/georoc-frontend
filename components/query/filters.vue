@@ -32,7 +32,7 @@ function stopDrawingOnMap() {
   <div class="flex flex-col p-4">
     <QueryFilterContainer>
       <QueryFilterMaterial
-          model-value="selectedMaterialId"
+          :model-value="selectedMaterialId"
           @update:model-value="handleFilterSelection"/>
     </QueryFilterContainer>
     <QueryFilterContainer title="Filter by Area">
