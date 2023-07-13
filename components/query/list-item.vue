@@ -8,6 +8,6 @@ const props = defineProps<{
 </script>
 <template>
   <div class="flex p-4 border rounded-lg hover:ring-2 hover:ring-primary cursor-pointer">
-    {{ item.SampleID }}
+    {{ item.sampleID }}
   </div>
 </template>

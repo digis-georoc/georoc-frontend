@@ -1,5 +1,5 @@
 interface QueryFilter {
-  name: string,
+  name: 'material' | 'polygon',
   value: any
 }
 

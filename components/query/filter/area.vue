@@ -36,7 +36,7 @@ const buttonText = ref('Draw shape')
 const message = ref(messageStartText)
 
 const hasPolygon = computed(() => {
-  return queryStore.activeFilters.findIndex(filter => filter.name === 'draw') !== -1
+  return queryStore.activeFilters.findIndex(filter => filter.name === 'polygon') !== -1
 })
 
 watch(() => hasPolygon.value, (value) => {
