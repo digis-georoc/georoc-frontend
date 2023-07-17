@@ -1,12 +1,14 @@
 {
-  "name": "nuxt-app",
+  "name": "georoc-frontend",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "release": "standard-version"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.7.0",
@@ -17,7 +19,8 @@
     "nuxt": "^3.5.2",
     "nuxt-headlessui": "^1.1.4",
     "nuxt-icon": "^0.4.1",
-    "sass": "^1.63.6"
+    "sass": "^1.63.6",
+    "standard-version": "^9.5.0"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
