@@ -12,10 +12,11 @@ export const useQueryStore = defineStore('query', {
     },
     stopDrawingOnMap() {
     },
-    resetPolygonOnMap() {
-      const index = this.activeFilters.findIndex(({ name }) => name === 'draw')
+    async resetPolygonOnMap() {
+      const index = this.activeFilters.findIndex(({ name }) => name === 'polygon')
       if (index === -1) return
       this.activeFilters.splice(index, 1)
+      await this.execute()
     },
     async setFilter(filter: QueryFilter) {
       const index  = this.activeFilters.findIndex(({ name }) => name === filter.name)
