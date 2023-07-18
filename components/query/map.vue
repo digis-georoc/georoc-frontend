@@ -179,4 +179,8 @@ const unsubscribe = queryStore.$onAction(
 
   }
 }
+
+.marker-cluster span {
+  color: theme('colors.zinc.800');
+}
 </style>
