@@ -1,9 +1,9 @@
 <script lang="ts" setup>
   interface Props {
     text: string,
-    display?: string,
+    display?: 'filled' | 'link' | 'mono' | 'flat',
     icon?: string | null,
-    iconPosition?: string
+    iconPosition?: string | null
   }
 
   const props = withDefaults(defineProps<Props>(), {
@@ -16,13 +16,20 @@
 
   let _icon = props.icon
   let _iconPosition = props.iconPosition
+  let isIconOnly = false
 
-  let classes = 'rounded-lg py-2.5 focus:outline-none focus:ring-4 ' +
+  if (props.text === '' && _icon !== null) {
+    isIconOnly = true
+    _iconPosition = null
+  }
+
+  let classes = 'focus:outline-none focus:ring-4 ' +
       'text-sm font-medium flex items-center leading-2 '
 
-  if (_icon && _iconPosition === 'left') classes += 'ps-3 pe-5 '
-  else if (_icon && _iconPosition === 'right') classes += 'ps-5 pe-3 '
-  else classes += 'px-5 '
+  if (_icon && _iconPosition === 'left') classes += 'rounded-lg py-2.5 ps-3 pe-5 '
+  else if (_icon && _iconPosition === 'right') classes += 'rounded-lg py-2.5 ps-5 pe-3 '
+  else if (isIconOnly) classes += 'rounded-full p-2 '
+  else classes += 'rounded-lg py-2.5 px-5 '
 
   if (props.display === 'filled') {
     classes += 'focus:ring-green-300 bg-primary text-white hover:bg-emerald-700 ' +
@@ -36,6 +43,8 @@
     classes += 'bg-white text-dark border-2 border-zinc-400 focus:ring-zinc-300 ' +
       'focus:ring-opacity-50 hover:bg-zinc-100 ' +
       'dark:bg-zinc-800'
+  } else if (props.display === 'flat') {
+    classes += 'bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-600'
   }
 
 </script>
@@ -44,7 +53,9 @@
     <template v-if="_icon && _iconPosition === 'left'">
       <Icon :name="_icon" class="text-base me-1 mt-[1px]" />
     </template>
-    {{ text }}
+    <template v-if="isIconOnly"><Icon :name="_icon" class="text-xl mt-[1px]" />
+    </template>
+    <template v-else>{{ text }}</template>
     <template v-if="_icon && _iconPosition === 'right'">
       <Icon :name="_icon" class="text-base ms-1" />
     </template>

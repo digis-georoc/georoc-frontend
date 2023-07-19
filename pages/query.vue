@@ -12,7 +12,8 @@ const initialMaterialId = storedMaterialFilter !== null ? storedMaterialFilter :
 const selectedMaterialId = ref(isMaterialDialogOpen ? initialMaterialId : null)
 const dontShowMaterialDialogAgain = ref(false)
 
-const isListOpen = ref(false)
+const isFilterMobileOpen = ref(false)
+const isListMobileOpen = ref(false)
 
 function setMaterialFilter() {
   queryStore.setFilter({
@@ -35,24 +36,25 @@ onMounted(() => {
 
 </script>
 <template>
-  <div class="flex h-full w-full">
-    <div class="flex w-[420px] bg-white dark:bg-zinc-800 border-r dark:border-zinc-600">
-      <QueryFilters/>
-    </div>
-    <div class="flex flex-1 h-full relative">
+  <div class="flex flex-col xl:flex-row h-full w-full">
+    <template v-if="isMobile">
+      <QueryActiveFiltersMobile
+        @filter="isFilterMobileOpen = !isFilterMobileOpen"
+        @list="isListMobileOpen = !isListMobileOpen"
+      />
+      <QueryFiltersPanelMobile v-model="isFilterMobileOpen" />
       <QueryMap/>
-      <div class="absolute z-[1000] h-full w-[420px] top-0 flex transition-transform border-l dark:border-zinc-600"
-           :class="{'right-0': isListOpen, '-right-[420px]': !isListOpen }">
-        <BaseButton
-            text="List View"
-            icon="ic:round-menu"
-            display="mono"
-            class="absolute top-6 left-0 -translate-x-[120%]"
-            @click="isListOpen = !isListOpen"
-        />
-        <QueryList/>
+      <QueryListPanelMobile v-model="isListMobileOpen" />
+    </template>
+    <template v-else>
+      <div class="flex h-full w-full">
+        <QueryFiltersPanel />
+        <div class="flex flex-1 h-full relative">
+          <QueryMap/>
+          <QueryListPanel/>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
   <BaseDialog title="Please select a material type" v-model="isMaterialDialogOpen">
     <QueryFilterMaterial v-model="selectedMaterialId" />
