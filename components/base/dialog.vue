@@ -50,8 +50,15 @@ function open() {
             leave-to="opacity-0 scale-95"
           >
             <DialogPanel
-              class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white dark:bg-zinc-800 p-6 text-left align-middle shadow-xl transition-all"
+              class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white dark:bg-zinc-800 p-6
+              text-left align-middle shadow-xl transition-all"
             >
+              <BaseButton
+                  icon="ic:baseline-close"
+                  display="flat"
+                  class="absolute flex xl:hidden top-5 right-5"
+                  @click="emit('update:modelValue', !modelValue)"
+              />
               <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-400">{{ title }}</DialogTitle>
               <div class="mt-4">
                 <slot/>
