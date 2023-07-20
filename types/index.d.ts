@@ -33,12 +33,17 @@ interface QueryState {
   listResult: QueryListResponse | null
 }
 
+interface PolygonState {
+  activeState: number,
+}
+
 export {
   QueryFilter,
   QueryState,
   SampleItem,
   MapSample,
-  QueryLocationsResponse
+  QueryLocationsResponse,
+  PolygonState,
 }
 
 

@@ -3,11 +3,10 @@ const queryStore = useQueryStore()
 
 const activeMaterialFilter = computed(() => queryStore.getFilter('material'))
 const selectedMaterialId = ref<string | null>(null)
-
 watch(() => activeMaterialFilter.value, (value) => {
   if (value === null) return
   selectedMaterialId.value = <string>value.value
-})
+}, { immediate: true })
 
 function handleFilterSelection(value: string) {
   queryStore.setFilter({
@@ -36,7 +35,7 @@ function stopDrawingOnMap() {
           @update:model-value="handleFilterSelection"/>
     </QueryFilterContainer>
     <QueryFilterContainer title="Filter by Area">
-      <QueryFilterArea
+      <QueryFilterPolygon
         @start="startDrawingOnMap"
         @reset="resetPolygonOnMap"
         @stop="stopDrawingOnMap"
