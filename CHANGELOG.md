@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.3...v0.0.4) (2023-07-20)
+
+
+### Features
+
+* add mobile components for query page ([681de65](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/681de65ac92a2943c5ac419b18e8d6f3e94cc6ea))
+
 ### [0.0.3](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.1...v0.0.3) (2023-07-18)
 
 
