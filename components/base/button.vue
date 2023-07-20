@@ -32,10 +32,10 @@
   else classes += 'rounded-lg py-2.5 px-5 '
 
   if (props.display === 'filled') {
-    classes += 'focus:ring-green-300 bg-primary text-white hover:bg-emerald-700 ' +
+    classes += 'focus:ring-primary focus:ring-opacity-25 dark:focus:ring-primary-300 dark:focus:ring-opacity-50 bg-primary text-white hover:bg-emerald-700 ' +
         'dark:bg-primary dark:hover:bg-primary dark:focus:ring-green-800'
   } else if (props.display === 'link') {
-    classes += 'focus:ring-green-300 bg-none text-primary hover:underline ' +
+    classes += 'focus:ring-primary focus:ring-opacity-25 dark:focus:ring-primary-300 dark:focus:ring-opacity-50 bg-none text-primary hover:underline ' +
         'dark:focus:ring-green-800'
     _iconPosition = 'right';
     _icon = 'heroicons:arrow-right-20-solid'
@@ -44,7 +44,8 @@
       'focus:ring-opacity-50 hover:bg-zinc-100 ' +
       'dark:bg-zinc-800'
   } else if (props.display === 'flat') {
-    classes += 'bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-600'
+    classes += 'bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-600 ' +
+        'focus:ring-primary dark:focus:ring-primary-300 dark:focus:ring-opacity-50 focus:ring-opacity-25'
   }
 
 </script>
