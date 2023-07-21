@@ -6,6 +6,7 @@
 </template>
 <script setup lang="ts">
 const emit = defineEmits(['start', 'reset', 'stop'])
+const { t } = useI18n()
 const queryStore = useQueryStore()
 const polygonStore = usePolygonStore()
 
@@ -17,9 +18,9 @@ const enum PolygonDrawingStates {
 
 const state = computed(() => polygonStore.activeState)
 
-const messageStartText = 'Click to start drawing a polygon on the map';
+const messageStartText = t('start_drawing_polygon');
 
-const buttonText = ref('Draw shape')
+const buttonText = ref(t('draw_shape'))
 const message = ref(messageStartText)
 
 const hasPolygon = computed(() => {
@@ -28,15 +29,15 @@ const hasPolygon = computed(() => {
 
 watch(() => state.value, (value) => {
   if (value === PolygonDrawingStates.Idle) {
-    buttonText.value = 'Draw shape'
+    buttonText.value = t('draw_shape')
     message.value = messageStartText
   } else if (value === PolygonDrawingStates.Drawing) {
     emit('start')
-    buttonText.value = 'Cancel drawing'
-    message.value = 'Drawing mode active.'
+    buttonText.value = t('cancel_drawing')
+    message.value = t('drawing_mode_active')
   } else if (value === PolygonDrawingStates.Finished) {
-    buttonText.value = 'Reset area'
-    message.value = 'Area selected!'
+    buttonText.value = t('reset_shape')
+    message.value = t('shape_selected') + '!'
   }
 }, { immediate: true })
 
@@ -48,7 +49,7 @@ watch(() => hasPolygon.value, (value) => {
 
 queryStore.$onAction(({ name }) => {
   if (name === 'stopDrawingOnMap') {
-    buttonText.value = 'Draw shape'
+    buttonText.value = t('draw_shape')
   }
 })
 

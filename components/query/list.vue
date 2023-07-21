@@ -9,7 +9,7 @@ const listResult = computed(() => queryStore.listResult)
     class="flex flex-col flex-1 bg-white p-4 h-full overflow-y-auto dark:bg-zinc-800"
   >
     <template v-if="listResult === null">
-      <span>No samples to show.</span>
+      <span>{{ $t('no_samples') }}</span>
     </template>
     <template v-else>
       <QueryListItem v-for="item in listResult.data" :item="item" class="mb-2" />

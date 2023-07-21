@@ -5,6 +5,8 @@ import {
   RadioGroupOption,
 } from '@headlessui/vue'
 
+const { t } = useI18n()
+
 const props = defineProps<{
   modelValue: String
 }>()
@@ -16,17 +18,17 @@ const emit = defineEmits<{
 const materials = [
   {
     id: 'WR',
-    label: 'Whole Rock',
+    label: t('whole_rock'),
     icon: 'noto:rock'
   },
   {
     id: 'INC',
-    label: 'Inclusion',
+    label: t('inclusion'),
     icon: 'noto:bubbles'
   },
   {
     id: 'MIN',
-    label: 'Mineral',
+    label: t('mineral'),
     icon: 'emojione-v1:diamond-with-a-dot'
   },
 ]
@@ -46,29 +48,26 @@ watch(() => props.modelValue, (value) => {
     @update:modelValue="value => emit('update:modelValue', value.id)"
     by="id"
   >
-    <RadioGroupLabel class="sr-only">Server size</RadioGroupLabel>
+    <RadioGroupLabel class="sr-only">{{ $t('material_filter') }}</RadioGroupLabel>
     <div class="flex space-x-2">
       <RadioGroupOption
-          as="template"
-          v-for="material in materials"
-          :key="material.id"
-          :value="material"
-          v-slot="{ active, checked }"
+        as="template"
+        v-for="material in materials"
+        :key="material.id"
+        :value="material"
+        v-slot="{ active, checked }"
       >
         <div
-            :class="[
-                active
-                  ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-primary-300'
-                  : '',
-                checked ? 'bg-primary' : 'bg-gray-200 dark:bg-zinc-700 ',
-              ]"
-            class="relative flex cursor-pointer rounded-lg px-3 py-2 focus:outline-none"
+          :class="[
+            active
+              ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-primary-300'
+              : '',
+            checked ? 'bg-primary' : 'bg-gray-200 dark:bg-zinc-700 ',
+          ]"
+          class="relative flex cursor-pointer rounded-lg px-3 py-2 focus:outline-none"
         >
           <div class="flex w-full items-center justify-between space-x-2">
-            <RadioGroupLabel
-                as="p"
-                class="text-sm flex items-center"
-            >
+            <RadioGroupLabel as="p" class="text-sm flex items-center">
               <div class="relative flex items-center justify-center w-8 h-8
               rounded-full me-2 bg-white dark:bg-zinc-800"
               >

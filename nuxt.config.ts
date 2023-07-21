@@ -8,8 +8,19 @@ export default defineNuxtConfig({
         '@nuxtjs/tailwindcss',
         'nuxt-headlessui',
         'nuxt-icon',
-        '@pinia/nuxt'
+        '@pinia/nuxt',
+        '@nuxtjs/i18n'
     ],
+    i18n: {
+        locales: ['en-GB'],
+
+        // Used when active locale is not explicitly defined
+        defaultLocale: 'en-GB',
+
+        // Disabling automatic locale detection (see below)
+        detectBrowserLanguage: false,
+        vueI18n: './i18n.config.ts'
+    },
     runtimeConfig: {
         public: {
             apiToken: process.env.API_TOKEN,

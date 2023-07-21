@@ -34,7 +34,7 @@ function stopDrawingOnMap() {
           :model-value="selectedMaterialId"
           @update:model-value="handleFilterSelection"/>
     </QueryFilterContainer>
-    <QueryFilterContainer title="Filter by Area">
+    <QueryFilterContainer :title="$t('filter_by_area')">
       <QueryFilterPolygon
         @start="startDrawingOnMap"
         @reset="resetPolygonOnMap"
