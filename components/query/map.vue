@@ -10,6 +10,7 @@ import FreeDraw, { MarkerEvent } from "leaflet-freedraw"
 
 import 'leaflet.markercluster/dist/leaflet.markercluster-src'
 import { QueryLocationsResponseItem } from "~/types";
+import { Feature } from "geojson";
 
 const queryStore = useQueryStore()
 let map: any = null
@@ -17,6 +18,15 @@ let freeDraw: FreeDraw
 
 function latLngToLngLat(latlng: LatLng) {
   return [latlng.lng, latlng.lat];
+}
+
+function useAsset(path: string): string {
+  const assets = import.meta.glob('~/assets/**/*', {
+    eager: true,
+    import: 'default',
+  })
+  // @ts-expect-error: wrong type info
+  return assets['/assets/' + path]
 }
 
 const layers = [
@@ -43,14 +53,17 @@ function addControlLayer() {
   }, {}, {position: 'topleft'}).addTo(map);
 }
 
-function createMarker(latitude: number, longitude: number) {
-  return L.marker(
-    [latitude, longitude],
-    { icon: L.divIcon(
-        { className: 'marker-icon bg-primary border-2 border-primary-300 rounded-full' }
-      )
-    }
-  )
+function createMarker(feature: Feature, latlng: LatLng) {
+  let myIcon = L.icon({
+    iconUrl: useAsset('images/marker.png'),
+    shadowUrl: useAsset('images/marker-shadow.png'),
+    iconSize:     [25, 34], // width and height of the image in pixels
+    shadowSize:   [35, 20], // width, height of optional shadow image
+    iconAnchor:   [12, 34], // point of the icon which will correspond to marker's location
+    shadowAnchor: [12, 20],  // anchor point of the shadow. should be offset
+    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+  })
+  return L.marker(latlng, { icon: myIcon })
 }
 
 let polygon: Polygon
@@ -63,11 +76,16 @@ watch(() => mapSamples.value, (value: QueryLocationsResponseItem[] | null) => {
   if (!value) return
   markersGroup.clearLayers()
 
+  let layerOptions = {
+    pointToLayer: createMarker
+  }
+
   markersGroup.addLayer(
     L.geoJSON(
       value
         .filter(({ centroid }) => centroid.geometry.coordinates !== null)
-        .map(({ centroid }) => centroid)
+        .map(({ centroid }) => centroid),
+      layerOptions
     )
   )
 
