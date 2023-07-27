@@ -1,5 +1,7 @@
+import {Feature, Point} from "geojson";
+
 interface QueryFilter {
-  name: 'material' | 'polygon',
+  name: 'material' | 'polygon' | 'bbox',
   value: any
 }
 
@@ -19,6 +21,15 @@ interface QueryLocationsResponse {
   numItems: number
 }
 
+interface QueryLocationFeature {
+  coordinates: string[],
+  type: string
+}
+interface QueryLocationsResponseItem {
+  centroid: Feature<Point>,
+  convexHull: Feature
+}
+
 interface QueryListResponse {
   data: MapSample[],
   numItems: number
@@ -29,7 +40,7 @@ interface ResponseRef<T> {
 
 interface QueryState {
   activeFilters: QueryFilter[],
-  result: QueryLocationsResponse | null,
+  result: QueryLocationsResponseItem[] | null,
   listResult: QueryListResponse | null
 }
 
@@ -43,6 +54,7 @@ export {
   SampleItem,
   MapSample,
   QueryLocationsResponse,
+  QueryLocationsResponseItem,
   PolygonState,
 }
 

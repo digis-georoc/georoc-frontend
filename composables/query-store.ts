@@ -29,7 +29,7 @@ export const useQueryStore = defineStore('query', {
     },
     async execute() {
       this.result = await getSamples(this.activeFilters)
-      this.listResult = this.result
+      // this.listResult = this.result
     }
   },
   getters: {

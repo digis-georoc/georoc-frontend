@@ -1,20 +1,20 @@
-import {QueryFilter, QueryLocationsResponse} from "~/types";
+import {QueryFilter, QueryLocationsResponse, QueryLocationsResponseItem} from "~/types";
 
 const appConfig = useRuntimeConfig()
 const apiToken = appConfig.public.apiToken
 const baseURL = appConfig.public.apiBaseUrl
 
-async function getSamples(filters: QueryFilter[] = []): Promise<QueryLocationsResponse | null> {
+async function getSamples(filters: QueryFilter[] = []): Promise<QueryLocationsResponseItem[] | null> {
 
   const filterObj: any = {}
   filters.forEach(({ name, value }) => {
     filterObj[name] = Array.isArray(value) ? JSON.stringify(value) : value
   })
 
-  const { data} = await useFetch<QueryLocationsResponse>(
-    `${baseURL}/queries/samples`,
+  const { data} = await useFetch<QueryLocationsResponseItem[]>(
+    `${baseURL}/geodata/samplesclustered`,
     {
-      query: { limit: 1000, addcoordinates: true, ...filterObj },
+      query: { addcoordinates: true, ...filterObj },
       headers: {
         'DIGIS-API-ACCESSKEY': apiToken
       },

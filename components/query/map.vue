@@ -5,15 +5,19 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 
 import { theme } from '#tailwind-config'
 
-import L, { Polygon } from "leaflet"
+import L, {LatLng, Polygon} from "leaflet"
 import FreeDraw, { MarkerEvent } from "leaflet-freedraw"
 
 import 'leaflet.markercluster/dist/leaflet.markercluster-src'
-import { QueryLocationsResponse } from "~/types";
+import { QueryLocationsResponseItem } from "~/types";
 
 const queryStore = useQueryStore()
 let map: any = null
 let freeDraw: FreeDraw
+
+function latLngToLngLat(latlng: LatLng) {
+  return [latlng.lng, latlng.lat];
+}
 
 const layers = [
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -51,18 +55,28 @@ function createMarker(latitude: number, longitude: number) {
 
 let polygon: Polygon
 
-const markersGroup = L.markerClusterGroup()
+const markersGroup = L.featureGroup()
 
 const mapSamples = computed(() => queryStore.result)
 
-watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
+watch(() => mapSamples.value, (value: QueryLocationsResponseItem[] | null) => {
   if (!value) return
   markersGroup.clearLayers()
 
-  if (!value.data) return
+  markersGroup.addLayer(
+    L.geoJSON(
+      value
+        .filter(({ centroid }) => centroid.geometry.coordinates !== null)
+        .map(({ centroid }) => centroid)
+    )
+  )
 
-  value.data.forEach(
-    ({ latitude, longitude }) => markersGroup.addLayer(createMarker(latitude, longitude))
+  markersGroup.addLayer(
+    L.geoJSON(
+        value
+          .filter(({ centroid }) => centroid.geometry.coordinates !== null)
+          .map(({ convexHull }) => convexHull)
+    )
   )
 })
 
@@ -79,6 +93,19 @@ onMounted(() => {
   map.addLayer(freeDraw)
 
   map.addLayer(markersGroup)
+
+  map.on('moveend', () => {
+    const bounds = map.getBounds()
+    queryStore.setFilter({
+      name: 'bbox',
+      value: [
+        latLngToLngLat(bounds.getSouthWest()),
+        latLngToLngLat(bounds.getSouthEast()),
+        latLngToLngLat(bounds.getNorthEast()),
+        latLngToLngLat(bounds.getNorthWest()),
+      ]
+    })
+  });
 
   freeDraw.on("markers",(event: MarkerEvent) => {
     if(event.eventType == 'create') {
