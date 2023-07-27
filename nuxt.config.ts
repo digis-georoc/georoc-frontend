@@ -1,9 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // @ts-ignore
 export default defineNuxtConfig({
-    app: {
-        baseURL: process.env.NUXT_APP_BASE_URL,
-    },
     modules: [
         '@nuxtjs/tailwindcss',
         'nuxt-headlessui',
@@ -22,10 +19,8 @@ export default defineNuxtConfig({
         vueI18n: './i18n.config.ts'
     },
     runtimeConfig: {
-        public: {
-            apiToken: process.env.API_TOKEN,
-            apiBaseUrl: process.env.API_BASE_URL
-        }
+        apiToken: process.env.API_TOKEN,
+        apiBaseUrl: process.env.API_BASE_URL
     },
     routeRules: {
         // Homepage pre-rendered at build time
