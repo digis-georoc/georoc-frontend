@@ -5,19 +5,45 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 
 import { theme } from '#tailwind-config'
 
-import L, {LatLng, Polygon} from "leaflet"
+import L, {LatLng, LatLngBounds} from "leaflet"
 import FreeDraw, { MarkerEvent } from "leaflet-freedraw"
 
 import 'leaflet.markercluster/dist/leaflet.markercluster-src'
-import { QueryLocationsResponseItem } from "~/types";
-import { Feature } from "geojson";
+import { QueryLocationsResponse } from "~/types";
+import {Feature, MultiPoint, Polygon, Position} from "geojson";
 
 const queryStore = useQueryStore()
+const initialZoomLevel = 2
 let map: any = null
 let freeDraw: FreeDraw
+let cachedClustersBounds = ref<LatLngBounds | null>(null)
+let currentMapBounds = ref<LatLngBounds | null>(null)
+let outOfBoundsSW = ref(false)
+let outOfBoundsNE = ref(false)
+
+let cachedZoomLevel = initialZoomLevel
 
 function latLngToLngLat(latlng: LatLng) {
   return [latlng.lng, latlng.lat];
+}
+
+function lnglatToLatLng([lng, lat]: Position): LatLng {
+  return new LatLng(lat, lng)
+}
+
+function isOutOfBounds(srcBounds: LatLngBounds | null, targetBounds: LatLngBounds | null) {
+  if (!srcBounds || !targetBounds) return false
+
+  const srcSouthWest = srcBounds.getSouthWest()
+  const srcNorthEast = srcBounds.getNorthEast()
+  const targetSouthWest = targetBounds.getSouthWest()
+  const targetNorthEast = targetBounds.getNorthEast()
+
+  outOfBoundsSW.value = Math.abs(srcSouthWest.lat) > Math.abs(targetSouthWest.lat) || Math.abs(srcSouthWest.lng) > Math.abs(targetSouthWest.lng)
+  outOfBoundsNE.value = Math.abs(srcNorthEast.lat) > Math.abs(targetNorthEast.lat) || Math.abs(srcNorthEast.lng) > Math.abs(targetNorthEast.lng)
+
+  return outOfBoundsSW.value || outOfBoundsNE.value
+
 }
 
 function useAsset(path: string): string {
@@ -44,6 +70,16 @@ const layers = [
   }),
 ]
 
+function getLatLngBoundsFromBbox(bbox: Feature<MultiPoint>): LatLngBounds {
+  console.log(bbox)
+  if (!bbox.geometry.coordinates) {
+    return map.getBounds();
+  }
+  const [sw, se, ne, nw] = bbox.geometry.coordinates
+
+  return new L.LatLngBounds(lnglatToLatLng(sw), lnglatToLatLng(ne))
+}
+
 function addControlLayer() {
   if (!map) return
   L.control.layers({
@@ -54,16 +90,54 @@ function addControlLayer() {
 }
 
 function createMarker(feature: Feature, latlng: LatLng) {
-  let myIcon = L.icon({
-    iconUrl: useAsset('images/marker.png'),
-    shadowUrl: useAsset('images/marker-shadow.png'),
-    iconSize:     [25, 34], // width and height of the image in pixels
-    shadowSize:   [35, 20], // width, height of optional shadow image
-    iconAnchor:   [12, 34], // point of the icon which will correspond to marker's location
-    shadowAnchor: [12, 20],  // anchor point of the shadow. should be offset
-    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
-  })
-  return L.marker(latlng, { icon: myIcon })
+  // let icon = L.icon({
+  //   iconUrl: useAsset('images/marker.png'),
+  //   shadowUrl: useAsset('images/marker-shadow.png'),
+  //   iconSize:     [25, 34], // width and height of the image in pixels
+  //   shadowSize:   [35, 20], // width, height of optional shadow image
+  //   iconAnchor:   [12, 34], // point of the icon which will correspond to marker's location
+  //   shadowAnchor: [12, 20],  // anchor point of the shadow. should be offset
+  //   popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+  // })
+
+  const iconWidth = 50
+  const iconColor = theme.colors.stone['200']
+  const text = feature.properties?.clusterSize
+
+  const icon = L.divIcon({
+    html: `
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="${iconWidth}"
+        width="${iconWidth}"
+        viewBox="0 0 120 120"
+        fill="${iconColor}"
+        stroke="${theme.colors.stone['400']}
+      >
+        <g fill="${iconColor}">
+          <circle cx="60" cy="60" r="60" fill-opacity="0.20" />
+          <circle cx="60" cy="60" r="54" fill-opacity="0" />
+          <circle cx="60" cy="60" r="48" fill-opacity="0" />
+          <circle cx="60" cy="60" r="42"  fill-opacity="0" />
+          <circle cx="60" cy="60" r="54" />
+        </g>
+        <text
+          x="60" y="60"
+          text-anchor="middle"
+          alignment-baseline="central"
+          fill="black"
+          font-size="24"
+          >
+          ${text}
+        </text>
+      </svg>
+    `,
+
+    className: "",
+    iconSize: [iconWidth, iconWidth],
+    iconAnchor: [iconWidth/2, iconWidth/2],
+  });
+  return L.marker(latlng, { icon })
 }
 
 let polygon: Polygon
@@ -72,7 +146,7 @@ const markersGroup = L.featureGroup()
 
 const mapSamples = computed(() => queryStore.result)
 
-watch(() => mapSamples.value, (value: QueryLocationsResponseItem[] | null) => {
+watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
   if (!value) return
   markersGroup.clearLayers()
 
@@ -80,22 +154,26 @@ watch(() => mapSamples.value, (value: QueryLocationsResponseItem[] | null) => {
     pointToLayer: createMarker
   }
 
+  // Add cluster markers
   markersGroup.addLayer(
     L.geoJSON(
-      value
+      value.clusters
         .filter(({ centroid }) => centroid.geometry.coordinates !== null)
         .map(({ centroid }) => centroid),
       layerOptions
     )
   )
 
+  // Add bounds polygon per cluster
   markersGroup.addLayer(
     L.geoJSON(
-        value
+        value.clusters
           .filter(({ centroid }) => centroid.geometry.coordinates !== null)
           .map(({ convexHull }) => convexHull)
     )
   )
+
+  cachedClustersBounds.value = getLatLngBoundsFromBbox(value.bbox)
 })
 
 onMounted(() => {
@@ -103,7 +181,7 @@ onMounted(() => {
     wheelDebounceTime: 100,
     zoomSnap: 0.5,
     layers
-  }).setView([0, 0], 2)
+  }).setView([0, 0], initialZoomLevel)
 
   addControlLayer()
 
@@ -113,6 +191,13 @@ onMounted(() => {
   map.addLayer(markersGroup)
 
   map.on('moveend', () => {
+    currentMapBounds.value = map.getBounds()
+    const currentZoomLevel = map.getZoom()
+    const isPan = cachedZoomLevel === currentZoomLevel
+
+    console.log(isPan, isOutOfBounds(currentMapBounds.value, cachedClustersBounds.value))
+    if (isPan && !isOutOfBounds(currentMapBounds.value, cachedClustersBounds.value)) return
+
     const bounds = map.getBounds()
     queryStore.setFilter({
       name: 'bbox',
@@ -123,6 +208,7 @@ onMounted(() => {
         latLngToLngLat(bounds.getNorthWest()),
       ]
     })
+    cachedZoomLevel = currentZoomLevel
   });
 
   freeDraw.on("markers",(event: MarkerEvent) => {
@@ -156,6 +242,13 @@ const unsubscribe = queryStore.$onAction(
 </script>
 <template>
   <div id="map" class="h-full w-full"></div>
+  <div class="fixed z-[9999] top-[60px] right-0 bg-white p-2 text-sm">
+    <h2 class="mb-2 font-bold">Debug:</h2>
+    <div class="">Last Bbox from API: {{cachedClustersBounds}}</div>
+    <div class="">Current Bbox: {{currentMapBounds}}</div>
+    <div>Out of bounds SW: {{ outOfBoundsSW }}</div>
+    <div>Out of bounds NE: {{ outOfBoundsNE }}</div>
+  </div>
 </template>
 <style>
 .mode-create {

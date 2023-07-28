@@ -1,6 +1,6 @@
-import {QueryFilter, QueryLocationsResponseItem} from "~/types";
+import {QueryFilter, QueryLocationsResponse} from "~/types";
 
-async function getSamples(filters: QueryFilter[] = []): Promise<QueryLocationsResponseItem[] | null> {
+async function getSamples(filters: QueryFilter[] = []): Promise<QueryLocationsResponse | null> {
 
   const filterObj: any = {}
   filters.forEach(({ name, value }) => {
@@ -8,7 +8,7 @@ async function getSamples(filters: QueryFilter[] = []): Promise<QueryLocationsRe
   })
 
 
-  const { data} = await useFetch<QueryLocationsResponseItem[]>(
+  const { data} = await useFetch<QueryLocationsResponse>(
     '/api/query',
     {
       query: { addcoordinates: true, ...filterObj }

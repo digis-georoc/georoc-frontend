@@ -1,4 +1,4 @@
-import {Feature, Point} from "geojson";
+import {Feature, MultiPoint, Point, Polygon} from "geojson";
 
 interface QueryFilter {
   name: 'material' | 'polygon' | 'bbox',
@@ -16,16 +16,18 @@ interface SampleItem {
   latitude: number,
   longitude: number
 }
-interface QueryLocationsResponse {
-  data: MapSample[],
-  numItems: number
-}
 
 interface QueryLocationFeature {
   coordinates: string[],
   type: string
 }
-interface QueryLocationsResponseItem {
+
+interface QueryLocationsResponse {
+  bbox: Feature<MultiPoint>,
+  clusters: QueryLocationsCluster[]
+}
+
+interface QueryLocationsCluster {
   centroid: Feature<Point>,
   convexHull: Feature
 }
@@ -40,7 +42,7 @@ interface ResponseRef<T> {
 
 interface QueryState {
   activeFilters: QueryFilter[],
-  result: QueryLocationsResponseItem[] | null,
+  result: QueryLocationsResponse | null,
   listResult: QueryListResponse | null
 }
 

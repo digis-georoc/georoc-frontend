@@ -1,10 +1,11 @@
-import {QueryLocationsResponseItem} from "../../types";
+import {QueryLocationsResponse, QueryLocationsResponseItem} from "../../types";
 
 const { apiToken, apiBaseUrl } = useRuntimeConfig()
 
-import {createError, H3Event} from 'h3';
+import {createError, H3Error, H3Event} from 'h3';
+import {FetchResponse} from "ofetch";
 
-export default defineEventHandler<any>(async ({ node }: H3Event) => {
+export default defineEventHandler<QueryLocationsResponse | H3Error | undefined>(async ({ node }: H3Event) => {
   if (!apiBaseUrl) {
     throw new Error('Missing `runtimeConfig.apiBaseUrl` configuration.');
   }
@@ -12,7 +13,7 @@ export default defineEventHandler<any>(async ({ node }: H3Event) => {
   const params = new URLSearchParams(node.req.url?.split('?')[1])
 
   try {
-    const response = await $fetch.raw(apiBaseUrl + '/geodata/samplesclustered', {
+    const response: FetchResponse<QueryLocationsResponse> = await $fetch.raw(apiBaseUrl + '/geodata/samplesclustered', {
       query: Object.fromEntries(params.entries()),
       method: 'GET',
       headers: {
