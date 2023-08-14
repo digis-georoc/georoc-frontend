@@ -71,7 +71,6 @@ const layers = [
 ]
 
 function getLatLngBoundsFromBbox(bbox: Feature<MultiPoint>): LatLngBounds {
-  console.log(bbox)
   if (!bbox.geometry.coordinates) {
     return map.getBounds();
   }
@@ -140,6 +139,19 @@ function createMarker(feature: Feature, latlng: LatLng) {
   return L.marker(latlng, { icon })
 }
 
+function setBboxFilter() {
+  const bounds = map.getBounds()
+  queryStore.setFilter({
+    name: 'bbox',
+    value: [
+      latLngToLngLat(bounds.getSouthWest()),
+      latLngToLngLat(bounds.getSouthEast()),
+      latLngToLngLat(bounds.getNorthEast()),
+      latLngToLngLat(bounds.getNorthWest()),
+    ]
+  })
+}
+
 let polygon: Polygon
 
 const markersGroup = L.featureGroup()
@@ -190,24 +202,17 @@ onMounted(() => {
 
   map.addLayer(markersGroup)
 
+  setBboxFilter()
+
   map.on('moveend', () => {
     currentMapBounds.value = map.getBounds()
     const currentZoomLevel = map.getZoom()
     const isPan = cachedZoomLevel === currentZoomLevel
 
-    console.log(isPan, isOutOfBounds(currentMapBounds.value, cachedClustersBounds.value))
     if (isPan && !isOutOfBounds(currentMapBounds.value, cachedClustersBounds.value)) return
 
-    const bounds = map.getBounds()
-    queryStore.setFilter({
-      name: 'bbox',
-      value: [
-        latLngToLngLat(bounds.getSouthWest()),
-        latLngToLngLat(bounds.getSouthEast()),
-        latLngToLngLat(bounds.getNorthEast()),
-        latLngToLngLat(bounds.getNorthWest()),
-      ]
-    })
+    setBboxFilter()
+
     cachedZoomLevel = currentZoomLevel
   });
 
