@@ -1,6 +1,13 @@
 import { defineStore } from "pinia";
 import {QueryFilter, QueryState} from "~/types";
 
+let timer: NodeJS.Timeout;
+
+function debounce(func: Function, timeout = 100){
+  clearTimeout(timer)
+  timer = setTimeout(() => { func() }, timeout)
+}
+
 export const useQueryStore = defineStore('query', {
   state: (): QueryState => ({
     activeFilters: [],
@@ -16,16 +23,16 @@ export const useQueryStore = defineStore('query', {
       const index = this.activeFilters.findIndex(({ name }) => name === 'polygon')
       if (index === -1) return
       this.activeFilters.splice(index, 1)
-      await this.execute()
+      debounce(() => this.execute())
     },
-    async setFilter(filter: QueryFilter) {
+    async setFilter(filter: QueryFilter, shouldCache = false) {
       const index  = this.activeFilters.findIndex(({ name }) => name === filter.name)
       if (index === -1) this.activeFilters.push(filter)
       else this.activeFilters[index] = filter
 
-      window.localStorage.setItem(filter.name + '-filter', filter.value)
+      if (shouldCache) window.localStorage.setItem(filter.name + '-filter', filter.value)
 
-      await this.execute()
+      debounce(() => this.execute())
     },
     async execute() {
       // The query request requires a bounding box in order to return clusters, we need to check if it has been set.

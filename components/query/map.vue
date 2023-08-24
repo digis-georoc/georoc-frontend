@@ -43,7 +43,6 @@ function isOutOfBounds(srcBounds: LatLngBounds | null, targetBounds: LatLngBound
   outOfBoundsNE.value = Math.abs(srcNorthEast.lat) > Math.abs(targetNorthEast.lat) || Math.abs(srcNorthEast.lng) > Math.abs(targetNorthEast.lng)
 
   return outOfBoundsSW.value || outOfBoundsNE.value
-
 }
 
 function useAsset(path: string): string {

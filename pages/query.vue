@@ -19,7 +19,7 @@ function setMaterialFilter() {
   queryStore.setFilter({
     name: 'material',
     value: selectedMaterialId.value
-  })
+  }, true)
 }
 
 function handleDialogContinue() {
