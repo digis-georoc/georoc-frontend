@@ -23,7 +23,7 @@ interface QueryLocationFeature {
 }
 
 interface QueryLocationsResponse {
-  bbox: Feature<MultiPoint>,
+  bbox: Feature<Polygon>,
   clusters: QueryLocationsCluster[]
 }
 

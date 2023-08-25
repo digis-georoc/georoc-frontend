@@ -69,11 +69,11 @@ const layers = [
   }),
 ]
 
-function getLatLngBoundsFromBbox(bbox: Feature<MultiPoint>): LatLngBounds {
+function getLatLngBoundsFromBbox(bbox: Feature<Polygon>): LatLngBounds {
   if (!bbox.geometry.coordinates) {
     return map.getBounds();
   }
-  const [sw, se, ne, nw] = bbox.geometry.coordinates
+  const [sw, se, ne, nw] = bbox.geometry.coordinates[0]
 
   return new L.LatLngBounds(lnglatToLatLng(sw), lnglatToLatLng(ne))
 }
