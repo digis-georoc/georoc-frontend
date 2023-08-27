@@ -12,5 +12,8 @@ export default {
   no_samples: 'No samples to show',
   whole_rock: 'Whole Rock',
   inclusion: 'Inclusion',
-  mineral: 'Mineral'
+  mineral: 'Mineral',
+  rock_type: 'Rock Type',
+  please_enter: 'Please enter',
+  active_filters: 'Active filters'
 }

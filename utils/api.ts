@@ -1,4 +1,4 @@
-import {QueryFilter, QueryLocationsResponse} from "~/types";
+import {QueryFilter, QueryLocationsResponse, RocktypesResponse } from "~/types";
 
 async function getSamples(filters: QueryFilter[] = []): Promise<QueryLocationsResponse | null> {
 
@@ -17,7 +17,15 @@ async function getSamples(filters: QueryFilter[] = []): Promise<QueryLocationsRe
   return data.value
 }
 
+async function getRocktypes(): Promise<RocktypesResponse | null> {
+  const { data} = await useFetch<RocktypesResponse>(
+    '/api/rocktypes',
+  )
+  return data.value
+}
+
 export {
-  getSamples
+  getSamples,
+  getRocktypes
 }
 

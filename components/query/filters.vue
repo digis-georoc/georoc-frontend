@@ -41,5 +41,8 @@ function stopDrawingOnMap() {
         @stop="stopDrawingOnMap"
       />
     </QueryFilterContainer>
+    <QueryFilterContainer :title="$t('rock_type')">
+      <QueryFilterRockType />
+    </QueryFilterContainer>
   </div>
 </template>

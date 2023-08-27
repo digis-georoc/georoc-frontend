@@ -1,7 +1,7 @@
 import {Feature, MultiPoint, Point, Polygon} from "geojson";
 
 interface QueryFilter {
-  name: 'material' | 'polygon' | 'bbox',
+  name: 'material' | 'polygon' | 'bbox' | 'rocktype',
   value: any
 }
 
@@ -46,8 +46,23 @@ interface QueryState {
   listResult: QueryListResponse | null
 }
 
+interface RocktypesResponseItem {
+  Name: string
+}
+
+interface RocktypesResponse {
+  Data: RocktypesResponseItem[],
+  NumItems: number
+}
+
 interface PolygonState {
   activeState: number,
+}
+
+interface MultiselectOption {
+  value: string,
+  label: string,
+  active: boolean
 }
 
 export {
@@ -58,6 +73,9 @@ export {
   QueryLocationsResponse,
   QueryLocationsResponseItem,
   PolygonState,
+  MultiselectOption,
+  RocktypesResponse,
+  RocktypesResponseItem
 }
 
 

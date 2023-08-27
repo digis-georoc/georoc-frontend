@@ -208,6 +208,7 @@ onMounted(() => {
     const currentZoomLevel = map.getZoom()
     const isPan = cachedZoomLevel === currentZoomLevel
 
+    console.log(isPan, isOutOfBounds(currentMapBounds.value, cachedClustersBounds.value))
     if (isPan && !isOutOfBounds(currentMapBounds.value, cachedClustersBounds.value)) return
 
     setBboxFilter()

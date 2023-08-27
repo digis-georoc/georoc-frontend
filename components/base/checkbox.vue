@@ -1,8 +1,11 @@
 <script setup lang="ts">
-const props = defineProps<{
-  label: String,
-  modelValue: boolean
-}>()
+const props = withDefaults(defineProps<{
+  id: string,
+  label?: String,
+  modelValue?: boolean
+}>(), {
+  id: 'default-id',
+})
 
 const emit = defineEmits<{
   (event: 'update:modelValue', payload: boolean): void;
@@ -11,16 +14,15 @@ const emit = defineEmits<{
 <template>
   <div class="flex items-center">
     <input
-      :value="modelValue"
-      @input="value => emit('update:modelValue', value)"
-      id="default-checkbox"
+      :checked="modelValue"
+      @change="emit('update:modelValue', $event.target.checked)"
+      :id="id"
       type="checkbox"
-      value=""
-      class="appearance-none w-4 h-4
+      class="appearance-none w-[20px] h-[20px]
       text-white bg-gray-100 checked:bg-primary checked:dark:bg-primary border border-gray-300 rounded
       focus:ring-primary-300 dark:ring-offset-gray-800
       focus:ring-2 dark:bg-zinc-700 dark:border-zinc-600
-      relative
+      relative z-20
       checked:before:content-['\2713'] before:flex before:justify-center before:items-center before:absolute
       before:top-0 before:left-0
       before:w-full before:h-full before:leading-none before:text-[0.75rem]"
