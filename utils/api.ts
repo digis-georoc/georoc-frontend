@@ -11,7 +11,7 @@ async function getSamples(filters: QueryFilter[] = []): Promise<QueryLocationsRe
   const { data} = await useFetch<QueryLocationsResponse>(
     '/api/query',
     {
-      query: { addcoordinates: true, ...filterObj }
+      query: { ...filterObj }
     }
   )
   return data.value
