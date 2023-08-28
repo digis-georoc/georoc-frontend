@@ -36,16 +36,7 @@ function lnglatToLatLng([lng, lat]: Position): LatLng {
 
 function isOutOfBounds(srcBounds: LatLngBounds | null, targetBounds: LatLngBounds | null) {
   if (!srcBounds || !targetBounds) return false
-
-  const srcSouthWest = srcBounds.getSouthWest()
-  const srcNorthEast = srcBounds.getNorthEast()
-  const targetSouthWest = targetBounds.getSouthWest()
-  const targetNorthEast = targetBounds.getNorthEast()
-
-  outOfBoundsSW.value = Math.abs(srcSouthWest.lat) > Math.abs(targetSouthWest.lat) || Math.abs(srcSouthWest.lng) > Math.abs(targetSouthWest.lng)
-  outOfBoundsNE.value = Math.abs(srcNorthEast.lat) > Math.abs(targetNorthEast.lat) || Math.abs(srcNorthEast.lng) > Math.abs(targetNorthEast.lng)
-
-  return outOfBoundsSW.value || outOfBoundsNE.value
+  return !targetBounds.contains(srcBounds)
 }
 
 function useAsset(path: string): string {
