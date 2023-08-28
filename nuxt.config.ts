@@ -30,5 +30,6 @@ export default defineNuxtConfig({
     },
     tailwindcss: {
         exposeConfig: true
-    }
+    },
+    css: ['~/assets/css/index.css']
 })
