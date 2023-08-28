@@ -3,7 +3,7 @@ import {QueryFilter, QueryState} from "~/types";
 
 let timer: NodeJS.Timeout;
 
-function debounce(func: Function, timeout = 100){
+function debounce(func: Function, timeout = 500){
   clearTimeout(timer)
   timer = setTimeout(() => { func() }, timeout)
 }
