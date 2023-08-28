@@ -10,16 +10,19 @@ import FreeDraw, { MarkerEvent } from "leaflet-freedraw"
 
 import 'leaflet.markercluster/dist/leaflet.markercluster-src'
 import { QueryLocationsResponse } from "~/types";
-import {Feature, MultiPoint, Polygon, Position} from "geojson";
+import {Feature, Polygon, Position} from "geojson";
 
 const queryStore = useQueryStore()
 const initialZoomLevel = 2
 let map: any = null
 let freeDraw: FreeDraw
-let cachedClustersBounds = ref<LatLngBounds | null>(null)
-let currentMapBounds = ref<LatLngBounds | null>(null)
-let outOfBoundsSW = ref(false)
-let outOfBoundsNE = ref(false)
+const cachedClustersBounds = ref<LatLngBounds | null>(null)
+const currentMapBounds = ref<LatLngBounds | null>(null)
+const outOfBoundsSW = ref(false)
+const outOfBoundsNE = ref(false)
+
+const mouseLat = ref(0)
+const mouseLng = ref(0)
 
 let cachedZoomLevel = initialZoomLevel
 
@@ -179,7 +182,7 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
   markersGroup.addLayer(
     L.geoJSON(
         value.clusters
-          .filter(({ centroid }) => centroid.geometry.coordinates !== null)
+          .filter(({ centroid, convexHull }) => centroid.geometry.coordinates !== null && convexHull.geometry.type === 'Polygon')
           .map(({ convexHull }) => convexHull)
     )
   )
@@ -214,6 +217,11 @@ onMounted(() => {
 
     cachedZoomLevel = currentZoomLevel
   });
+
+  map.addEventListener('mousemove', (event) => {
+    mouseLat.value = Math.round(event.latlng.lat * 100000) / 100000;
+    mouseLng.value = Math.round(event.latlng.lng * 100000) / 100000;
+});
 
   freeDraw.on("markers",(event: MarkerEvent) => {
     if(event.eventType == 'create') {
@@ -252,6 +260,10 @@ const unsubscribe = queryStore.$onAction(
     <div class="">Current Bbox: {{currentMapBounds}}</div>
     <div>Out of bounds SW: {{ outOfBoundsSW }}</div>
     <div>Out of bounds NE: {{ outOfBoundsNE }}</div>
+  </div>
+  <div class="absolute z-[1000] bottom-0 left-0 bg-white p-1 text-xs">
+    <span>Latitude:</span><span>{{ mouseLat }}</span>&nbsp;
+    <span>Longitude:</span><span>{{ mouseLng }}</span>
   </div>
 </template>
 <style>
