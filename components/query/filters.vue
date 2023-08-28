@@ -12,7 +12,7 @@ function handleFilterSelection(value: string) {
   queryStore.setFilter({
     name: 'material',
     value
-  })
+  }, true)
 }
 
 function startDrawingOnMap() {
