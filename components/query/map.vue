@@ -26,6 +26,8 @@ const mouseLng = ref(0)
 
 let cachedZoomLevel = initialZoomLevel
 
+const isDebug = ref(window.location.href.includes('?debug'))
+
 function latLngToLngLat(latlng: LatLng) {
   return [latlng.lng, latlng.lat];
 }
@@ -245,7 +247,7 @@ const unsubscribe = queryStore.$onAction(
 </script>
 <template>
   <div id="map" class="h-full w-full"></div>
-  <div class="fixed z-[9999] top-[60px] right-0 bg-white p-2 text-sm">
+  <div v-if="isDebug" class="fixed z-[9999] top-[60px] right-0 bg-white p-2 text-sm">
     <h2 class="mb-2 font-bold">Debug:</h2>
     <div class="">Last Bbox from API: {{cachedClustersBounds}}</div>
     <div class="">Current Bbox: {{currentMapBounds}}</div>
