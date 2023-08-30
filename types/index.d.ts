@@ -47,12 +47,13 @@ interface QueryState {
 }
 
 interface RocktypesResponseItem {
-  Name: string
+  label: string,
+  value: string
 }
 
 interface RocktypesResponse {
-  Data: RocktypesResponseItem[],
-  NumItems: number
+  data: RocktypesResponseItem[],
+  numItems: number
 }
 
 interface PolygonState {

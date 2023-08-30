@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {MultiselectOption, RocktypesResponseItem} from "~/types";
+import {MultiselectOption} from "~/types";
 
 const rocktypes = await getRocktypes()
-const options = ref(rocktypes?.Data.map((rocktype: RocktypesResponseItem) => ({ value: rocktype.Name, label: rocktype.Name, active: false})) ?? [])
+const options = ref(rocktypes?.data.map(({ value, label }) => ({ value, label, active: false})) ?? [])
 const queryStore = useQueryStore()
 
 function onChange(selected: MultiselectOption[]) {
