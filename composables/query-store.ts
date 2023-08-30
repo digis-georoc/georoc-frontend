@@ -1,7 +1,9 @@
 import { defineStore } from "pinia";
 import {QueryFilter, QueryState} from "~/types";
 
-let timer: NodeJS.Timeout;
+let timer: NodeJS.Timeout
+
+let requestTimes: any = {}
 
 function debounce(func: Function, timeout = 500){
   clearTimeout(timer)
@@ -37,7 +39,18 @@ export const useQueryStore = defineStore('query', {
     async execute() {
       // The query request requires a bounding box in order to return clusters, we need to check if it has been set.
       const hasBbox = this.activeFilters.findIndex(({ name }) => name === 'bbox') > -1;
-      if (hasBbox) this.result = await getSamples(this.activeFilters)
+      const requestTime = new Date().getTime().toString()
+      console.log('send', requestTime)
+      requestTimes[requestTime] = null
+      if (hasBbox) {
+        const data = await getSamples(this.activeFilters)
+        console.log('done', requestTime)
+
+        delete requestTimes[requestTime]
+        if (Object.keys(requestTimes).length === 0) {
+          this.result = data
+        }
+      }
     }
   },
   getters: {

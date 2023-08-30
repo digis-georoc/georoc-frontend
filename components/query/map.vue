@@ -138,14 +138,17 @@ function createMarker(feature: Feature, latlng: LatLng) {
 function setBboxFilter() {
   isLoading.value = true
   const bounds = map.getBounds()
+
+  const bbox = [
+    latLngToLngLat(bounds.getSouthWest()),
+    latLngToLngLat(bounds.getSouthEast()),
+    latLngToLngLat(bounds.getNorthEast()),
+    latLngToLngLat(bounds.getNorthWest()),
+  ];
+
   queryStore.setFilter({
     name: 'bbox',
-    value: [
-      latLngToLngLat(bounds.getSouthWest()),
-      latLngToLngLat(bounds.getSouthEast()),
-      latLngToLngLat(bounds.getNorthEast()),
-      latLngToLngLat(bounds.getNorthWest()),
-    ]
+    value: bbox
   })
 }
 
@@ -157,6 +160,7 @@ const mapSamples = computed(() => queryStore.result)
 
 watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
   if (!value) return
+
   markersGroup.clearLayers()
 
   let layerOptions = {
@@ -342,5 +346,25 @@ const unsubscribe = queryStore.$onAction(
 
 .marker-cluster span {
   color: theme('colors.zinc.800');
+}
+
+.loader {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 3px solid #FFF;
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
