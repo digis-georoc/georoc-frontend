@@ -9,6 +9,12 @@ function debounce(func: Function, timeout = 500){
   timer = setTimeout(() => { func() }, timeout)
 }
 
+function toQuery({ name, value }: QueryFilter): QueryFilter {
+  if (name === 'material' && value === 'WR') value = 'IN:WR,GL'
+
+  return {name, value }
+}
+
 export const useQueryStore = defineStore('query', {
   state: (): QueryState => ({
     activeFilters: [],
@@ -42,11 +48,12 @@ export const useQueryStore = defineStore('query', {
       abortController = new AbortController()
       // The query request requires a bounding box in order to return clusters, we need to check if it has been set.
       const hasBbox = this.activeFilters.findIndex(({ name }) => name === 'bbox') > -1;
+      const hasMaterial = this.activeFilters.findIndex(({ name }) => name === 'material') > -1;
 
-      this.loadingQuery(true)
-      if (hasBbox) {
+      if (hasBbox && hasMaterial) {
+        this.loadingQuery(true)
         try {
-          this.result = await getSamples(this.activeFilters, abortController)
+          this.result = await getSamples(this.activeFilters.map(toQuery), abortController)
           this.loadingQuery(false)
         } catch (e) {
           if (e.message !== 'abort') this.loadingQuery(false)

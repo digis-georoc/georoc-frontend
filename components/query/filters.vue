@@ -1,15 +1,16 @@
 <script setup lang="ts">
 const queryStore = useQueryStore()
 
-const activeMaterialFilter = computed(() => queryStore.getFilter('material')?.value)
-const selectedMaterialId = ref<string | null>(null)
+const storedMaterial = window.localStorage.getItem('material-filter')
+const hideMaterialDialog = window.localStorage.getItem('hide-material-dialog')
 
-watch(() => activeMaterialFilter.value, (value) => {
+const selectedMaterialId = ref<string | null>(hideMaterialDialog !== null && storedMaterial ? storedMaterial : null)
+
+handleFilterSelection(selectedMaterialId.value)
+
+function handleFilterSelection(value: string | null) {
   if (value === null) return
-  selectedMaterialId.value = <string>value
-}, { immediate: true })
-
-function handleFilterSelection(value: string) {
+  selectedMaterialId.value = value
   queryStore.setFilter({
     name: 'material',
     value
@@ -17,11 +18,11 @@ function handleFilterSelection(value: string) {
 }
 
 function startDrawingOnMap() {
-  queryStore.startDrawingOnMap();
+  queryStore.startDrawingOnMap()
 }
 
 function resetPolygonOnMap() {
-  queryStore.resetPolygonOnMap();
+  queryStore.resetPolygonOnMap()
 }
 
 function stopDrawingOnMap() {
@@ -32,8 +33,9 @@ function stopDrawingOnMap() {
   <div class="flex flex-col p-4">
     <QueryFilterContainer>
       <QueryFilterMaterial
-          :model-value="selectedMaterialId"
-          @update:model-value="handleFilterSelection"/>
+        :model-value="selectedMaterialId"
+        @update:model-value="handleFilterSelection"
+      />
     </QueryFilterContainer>
     <QueryFilterContainer :title="$t('filter_by_area')">
       <QueryFilterPolygon
@@ -42,8 +44,9 @@ function stopDrawingOnMap() {
         @stop="stopDrawingOnMap"
       />
     </QueryFilterContainer>
-    <QueryFilterContainer v-if="activeMaterialFilter === 'WR'" :title="$t('rock_type')">
+    <QueryFilterContainer v-if="selectedMaterialId === 'WR'" :title="$t('rock_type')">
       <QueryFilterRockType />
     </QueryFilterContainer>
   </div>
+  <QueryFilterMaterialDialog @select="handleFilterSelection" />
 </template>
