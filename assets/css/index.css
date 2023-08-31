@@ -16,3 +16,11 @@
 ::-webkit-scrollbar-thumb:active{
     background: rgba(0,0,0,.8);
 }
+
+.dark ::-webkit-scrollbar-track {
+    background: rgb(63, 63, 70);
+}
+
+.dark ::-webkit-scrollbar-thumb{
+    background: rgb(82 82 91);
+}

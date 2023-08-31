@@ -9,11 +9,6 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits(['enter', 'input'])
 
-
-function onContainerClick() {
-
-}
-
 function updateSearch(value: string) {
   searchValue.value = value
   emit('input', searchValue.value)
@@ -27,7 +22,7 @@ function onEnter(event: Event) {
 </script>
 
 <template>
-  <div class="border border-gray-300 rounded p-2" ref="container" @click="onContainerClick">
+  <div class="border border-zinc-300 dark:border-zinc-600 rounded p-2" ref="container">
     <input
       autocapitalize="none"
       autocorrect="off"
@@ -35,7 +30,7 @@ function onEnter(event: Event) {
       spellcheck="false"
       aria-autocomplete="list"
       type="text"
-      class="outline-0"
+      class="outline-0 bg-transparent"
       :id="id"
       :value="searchValue"
       role="combobox"
