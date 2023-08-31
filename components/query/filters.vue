@@ -3,6 +3,7 @@ const queryStore = useQueryStore()
 
 const activeMaterialFilter = computed(() => queryStore.getFilter('material'))
 const selectedMaterialId = ref<string | null>(null)
+
 watch(() => activeMaterialFilter.value, (value) => {
   if (value === null) return
   selectedMaterialId.value = <string>value.value
@@ -41,7 +42,7 @@ function stopDrawingOnMap() {
         @stop="stopDrawingOnMap"
       />
     </QueryFilterContainer>
-    <QueryFilterContainer :title="$t('rock_type')">
+    <QueryFilterContainer v-if="activeMaterialFilter.value === 'WR'" :title="$t('rock_type')">
       <QueryFilterRockType />
     </QueryFilterContainer>
   </div>
