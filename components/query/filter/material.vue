@@ -18,7 +18,7 @@ const emit = defineEmits<{
 const materials = [
   {
     id: 'WR',
-    label: t('whole_rock'),
+    label: t('whole_rock_and_glass'),
     icon: 'noto:rock'
   },
   {
@@ -42,11 +42,13 @@ watch(() => props.modelValue, (value) => {
 }, { immediate: true })
 
 </script>
+
 <template>
   <RadioGroup
     :model-value="selectedMaterial"
     @update:modelValue="value => emit('update:modelValue', value.id)"
     by="id"
+    class="bg-zinc-200/60 dark:bg-zinc-700 p-1 rounded-xl w-full"
   >
     <RadioGroupLabel class="sr-only">{{ $t('material_filter') }}</RadioGroupLabel>
     <div class="flex space-x-2">
@@ -62,22 +64,15 @@ watch(() => props.modelValue, (value) => {
             active
               ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-primary-300'
               : '',
-            checked ? 'bg-primary' : 'bg-gray-200 dark:bg-zinc-700 ',
+            checked ? 'bg-primary' : 'hover:bg-zinc-200 dark:hover:bg-zinc-600',
           ]"
-          class="relative flex cursor-pointer rounded-lg px-3 py-2 focus:outline-none"
+          class="relative flex-shrink-0 flex-grow flex justify-center cursor-pointer rounded-lg px-3 py-2 focus:outline-none"
         >
-          <div class="flex w-full items-center justify-between space-x-2">
-            <RadioGroupLabel as="p" class="text-sm flex items-center">
-              <div class="relative flex items-center justify-center w-8 h-8
-              rounded-full me-2 bg-white dark:bg-zinc-800"
-              >
-                <Icon :name="material.icon" class="text-lg" />
-              </div>
-              <span :class="checked ? 'text-white' : 'text-zinc-600 dark:text-gray-300'">
-                {{ material.label }}
-              </span>
-            </RadioGroupLabel>
-          </div>
+        <RadioGroupLabel as="p" class="text-sm flex items-center">
+            <span :class="checked ? 'text-white' : 'text-zinc-600 dark:text-gray-300'">
+              {{ material.label }}
+            </span>
+          </RadioGroupLabel>
         </div>
       </RadioGroupOption>
     </div>

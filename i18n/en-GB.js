@@ -11,6 +11,7 @@ export default {
   filter_by_area: 'Filter by Area',
   no_samples: 'No samples to show',
   whole_rock: 'Whole Rock',
+  whole_rock_and_glass: 'Whole Rock & Glass',
   inclusion: 'Inclusion',
   mineral: 'Mineral',
   rock_type: 'Rock Type',
