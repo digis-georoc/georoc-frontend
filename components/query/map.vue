@@ -136,7 +136,6 @@ function createMarker(feature: Feature, latlng: LatLng) {
 }
 
 function setBboxFilter() {
-  isLoading.value = true
   const bounds = map.getBounds()
 
   const bbox = [
@@ -187,7 +186,6 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
   )
 
   cachedClustersBounds.value = getLatLngBoundsFromBbox(value.bbox)
-  isLoading.value = false
 })
 
 onMounted(() => {
@@ -240,7 +238,7 @@ onMounted(() => {
 })
 
 const unsubscribe = queryStore.$onAction(
-    ({ name }) => {
+    ({ name, args }) => {
       if (name === 'startDrawingOnMap') {
         freeDraw.mode(FreeDraw.CREATE)
       } if (name === 'stopDrawingOnMap') {
@@ -248,6 +246,8 @@ const unsubscribe = queryStore.$onAction(
       } else if (name === 'resetPolygonOnMap') {
         polygon.remove()
         freeDraw.mode(FreeDraw.NONE)
+      } else if (name === 'loadingQuery') {
+        isLoading.value = args[0]
       }
     }
 )

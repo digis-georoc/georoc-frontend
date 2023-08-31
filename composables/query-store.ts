@@ -17,6 +17,8 @@ export const useQueryStore = defineStore('query', {
     listResult: null,
   }),
   actions: {
+    loadingQuery(isLoading: boolean) {
+    },
     startDrawingOnMap() {
     },
     stopDrawingOnMap() {
@@ -40,16 +42,16 @@ export const useQueryStore = defineStore('query', {
       // The query request requires a bounding box in order to return clusters, we need to check if it has been set.
       const hasBbox = this.activeFilters.findIndex(({ name }) => name === 'bbox') > -1;
       const requestTime = new Date().getTime().toString()
-      console.log('send', requestTime)
+      this.loadingQuery(true)
       requestTimes[requestTime] = null
       if (hasBbox) {
         const data = await getSamples(this.activeFilters)
-        console.log('done', requestTime)
 
         delete requestTimes[requestTime]
         if (Object.keys(requestTimes).length === 0) {
           this.result = data
         }
+        this.loadingQuery(false)
       }
     }
   },
