@@ -1,20 +1,21 @@
 import {QueryFilter, QueryLocationsResponse, RocktypesResponse } from "~/types";
 
-async function getSamples(filters: QueryFilter[] = []): Promise<QueryLocationsResponse | null> {
+async function getSamples(filters: QueryFilter[] = [], { signal }: AbortController): Promise<QueryLocationsResponse | null> {
 
   const filterObj: any = {}
   filters.forEach(({ name, value }) => {
     filterObj[name] = Array.isArray(value) ? JSON.stringify(value) : value
   })
 
-
-  const { data} = await useFetch<QueryLocationsResponse>(
-    '/api/query',
-    {
-      query: { ...filterObj }
-    }
-  )
-  return data.value
+  try {
+    const res: Response = await fetch(
+      '/api/query?' + Object.keys(filterObj).map(key => key + '=' + filterObj[key]).join('&'),
+      { signal }
+    )
+    return await res.json()
+  } catch (err) {
+    if (err.name === 'AbortError') throw new Error('abort')
+  }
 }
 
 async function getRocktypes(): Promise<RocktypesResponse | null> {

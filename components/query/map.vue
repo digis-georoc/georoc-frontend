@@ -259,7 +259,7 @@ const unsubscribe = queryStore.$onAction(
     class="absolute z-[9999] w-[10vw] h-[10vh]
     bg-black bg-opacity-50 rounded-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
     flex flex-col items-center justify-center
-    text-white
+    text-white pointer-events-none
     ">
     <span class="loader mb-2"></span>
     {{ $t('Loading') }}...
