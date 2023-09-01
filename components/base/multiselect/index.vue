@@ -22,9 +22,11 @@ function addToSelected(option: MultiselectOption) {
 }
 
 function removeFromSelected(option: MultiselectOption) {
-  const index = selectedOptions.value.findIndex(({ value }) => value === option.value)
+  let index = selectedOptions.value.findIndex(({ value }) => value === option.value)
   if (index === -1) return
   selectedOptions.value.splice(index, 1)
+
+  index = _options.value.findIndex(({ value }) => value === option.value)
   _options.value[index].active = false
 
   emit('change', selectedOptions.value)
