@@ -1,4 +1,4 @@
-import {QueryFilter, QueryLocationsResponse, RocktypesResponse } from "~/types";
+import { QueryFilter, QueryListResponse, QueryLocationsResponse, RocktypesResponse } from "~/types";
 
 async function getSamples(filters: QueryFilter[] = [], { signal }: AbortController): Promise<QueryLocationsResponse | null> {
 
@@ -16,6 +16,8 @@ async function getSamples(filters: QueryFilter[] = [], { signal }: AbortControll
   } catch (err) {
     if (err.name === 'AbortError') throw new Error('abort')
   }
+
+  return null
 }
 
 async function getRocktypes(): Promise<RocktypesResponse | null> {
@@ -25,8 +27,27 @@ async function getRocktypes(): Promise<RocktypesResponse | null> {
   return data.value
 }
 
+async function getList(filters: QueryFilter[] = []): Promise<QueryListResponse | null> {
+  const filterObj: any = {}
+  filters.forEach(({ name, value }) => {
+    filterObj[name] = Array.isArray(value) ? JSON.stringify(value) : value
+  })
+  filterObj['limit'] = 30
+
+  try {
+    const res: Response = await fetch(
+      '/api/list?' + Object.keys(filterObj).map(key => key + '=' + filterObj[key]).join('&')
+    )
+    return await res.json()
+  } catch (err) {
+  }
+
+  return null
+}
+
 export {
   getSamples,
+  getList,
   getRocktypes
 }
 

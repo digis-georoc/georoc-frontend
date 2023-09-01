@@ -1,18 +1,23 @@
 import { defineStore } from "pinia";
 import {QueryFilter, QueryState} from "~/types";
 
-let timer: NodeJS.Timeout
+let mapTimer: NodeJS.Timeout
+let listTimer: NodeJS.Timeout
 let abortController: AbortController | null = null
 
-function debounce(func: Function, timeout = 500){
-  clearTimeout(timer)
-  timer = setTimeout(() => { func() }, timeout)
+function debounceMap(func: Function, timeout = 500){
+  clearTimeout(mapTimer)
+  mapTimer = setTimeout(() => { func() }, timeout)
+}
+
+function debounceList(func: Function, timeout = 500) {
+  clearTimeout(listTimer)
+  listTimer = setTimeout(() => { func() }, timeout)
 }
 
 function toQuery({ name, value }: QueryFilter): QueryFilter {
   if (name === 'material' && value === 'WR') value = 'IN:WR,GL'
-
-  return {name, value }
+  return { name, value }
 }
 
 export const useQueryStore = defineStore('query', {
@@ -32,18 +37,25 @@ export const useQueryStore = defineStore('query', {
       const index = this.activeFilters.findIndex(({ name }) => name === 'polygon')
       if (index === -1) return
       this.activeFilters.splice(index, 1)
-      debounce(() => this.execute())
+      debounceMap(() => this.executeMapQuery())
     },
-    async setFilter(filter: QueryFilter, shouldCache = false) {
+    async setBboxFilter(filter: QueryFilter) {
+      this.setFilter(filter)
+      debounceMap(() => this.executeMapQuery())
+    },
+    async setPanelFilter(filter: QueryFilter, shouldCache = false) {
+      this.setFilter(filter, shouldCache)
+      debounceMap(() => this.executeMapQuery(), mapTimer)
+      debounceList(() => this.executeListQuery(), listTimer)
+    },
+    setFilter(filter: QueryFilter, shouldCache = false) {
       const index  = this.activeFilters.findIndex(({ name }) => name === filter.name)
       if (index === -1) this.activeFilters.push(filter)
       else this.activeFilters[index] = filter
 
       if (shouldCache) window.localStorage.setItem(filter.name + '-filter', filter.value)
-
-      debounce(() => this.execute())
     },
-    async execute() {
+    async executeMapQuery() {
       if (abortController) abortController.abort()
       abortController = new AbortController()
       // The query request requires a bounding box in order to return clusters, we need to check if it has been set.
@@ -57,6 +69,16 @@ export const useQueryStore = defineStore('query', {
           this.loadingQuery(false)
         } catch (e) {
           if (e.message !== 'abort') this.loadingQuery(false)
+        }
+      }
+    },
+    async executeListQuery() {
+      const hasMaterial = this.activeFilters.findIndex(({ name }) => name === 'material') > -1;
+      if (hasMaterial) {
+        try {
+          this.listResult = await getList(this.activeFilters.map(toQuery))
+        } catch (e) {
+          console.log(e)
         }
       }
     }

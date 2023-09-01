@@ -145,7 +145,7 @@ function setBboxFilter() {
     latLngToLngLat(bounds.getNorthWest()),
   ];
 
-  queryStore.setFilter({
+  queryStore.setBboxFilter({
     name: 'bbox',
     value: bbox
   })
@@ -224,7 +224,7 @@ onMounted(() => {
   freeDraw.on("markers",(event: MarkerEvent) => {
     if(event.eventType == 'create') {
       var latLngs: [number, number][] = event.latLngs[0].map(({lat, lng}) => [lng, lat])
-      queryStore.setFilter({ name: 'polygon', value: latLngs})
+      queryStore.setPanelFilter({ name: 'polygon', value: latLngs})
       freeDraw.clear()
 
       polygon = L.polygon(latLngs.map(latLng => {

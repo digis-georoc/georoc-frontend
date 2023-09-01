@@ -5,13 +5,7 @@ interface QueryFilter {
   value: any
 }
 
-interface MapSample {
-  sampleID: number,
-  latitude: number,
-  longitude: number
-}
-
-interface SampleItem {
+interface QueryListItem {
   sampleID: number,
   latitude: number,
   longitude: number
@@ -33,7 +27,7 @@ interface QueryLocationsCluster {
 }
 
 interface QueryListResponse {
-  data: MapSample[],
+  data: QueryListItem[],
   numItems: number
 }
 interface ResponseRef<T> {
@@ -69,14 +63,14 @@ interface MultiselectOption {
 export {
   QueryFilter,
   QueryState,
-  SampleItem,
   MapSample,
   QueryLocationsResponse,
   QueryLocationsResponseItem,
   PolygonState,
   MultiselectOption,
   RocktypesResponse,
-  RocktypesResponseItem
+  RocktypesResponseItem,
+  QueryListResponse
 }
 
 

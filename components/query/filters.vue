@@ -11,7 +11,7 @@ handleFilterSelection(selectedMaterialId.value)
 function handleFilterSelection(value: string | null) {
   if (value === null) return
   selectedMaterialId.value = value
-  queryStore.setFilter({
+  queryStore.setPanelFilter({
     name: 'material',
     value
   }, true)

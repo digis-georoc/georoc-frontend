@@ -6,7 +6,7 @@ const options = ref(rocktypes?.data.map(({ value, label }) => ({ value, label, a
 const queryStore = useQueryStore()
 
 function onChange(selected: MultiselectOption[]) {
-  queryStore.setFilter({
+  queryStore.setPanelFilter({
     name: 'rocktype',
     value: 'IN:' + selected.map(({ value }) => value).join(',')
   })

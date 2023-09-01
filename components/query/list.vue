@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const queryStore = useQueryStore()
 
 const listResult = computed(() => queryStore.listResult)
