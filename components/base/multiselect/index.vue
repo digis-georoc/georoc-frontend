@@ -25,6 +25,8 @@ function removeFromSelected(option: MultiselectOption) {
   const index = selectedOptions.value.findIndex(({ value }) => value === option.value)
   if (index === -1) return
   selectedOptions.value.splice(index, 1)
+  _options.value[index].active = false
+
   emit('change', selectedOptions.value)
 }
 
