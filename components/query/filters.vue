@@ -47,6 +47,9 @@ function stopDrawingOnMap() {
     <QueryFilterContainer v-if="selectedMaterialId === 'WR'" :title="$t('rock_type')">
       <QueryFilterRockType />
     </QueryFilterContainer>
+    <QueryFilterContainer v-if="selectedMaterialId === 'INC'" :title="$t('inclusion_type')">
+      <QueryFilterInclusionType />
+    </QueryFilterContainer>
   </div>
   <QueryFilterMaterialDialog @select="handleFilterSelection" />
 </template>

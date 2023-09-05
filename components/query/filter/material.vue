@@ -33,7 +33,7 @@ const materials = [
   },
 ]
 
-let selectedMaterial = ref<{ id: string }>({ id: ''})
+const selectedMaterial = ref<{ id: string }>({ id: ''})
 
 watch(() => props.modelValue, (value) => {
   const index = materials.findIndex(({ id }) => id === value)

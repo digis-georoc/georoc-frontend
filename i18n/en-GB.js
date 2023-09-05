@@ -16,5 +16,8 @@ export default {
   mineral: 'Mineral',
   rock_type: 'Rock Type',
   please_enter: 'Please enter',
-  active_filters: 'Active filters'
+  active_filters: 'Active filters',
+  fluid: 'Fluid',
+  glass: 'Glass',
+  inclusion_type: 'Inclusion Type'
 }
