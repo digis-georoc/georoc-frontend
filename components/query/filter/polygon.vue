@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-start flex-wrap">
-    <BaseButton :text="buttonText" @click="handleButton"/>
-    <div class="text-gray-400 text-sm flex-1 mt-2">{{ message }}</div>
+    <BaseButton :text="buttonText" @click="handleButton" display="mono" icon="ic:twotone-edit"/>
+<!--    <div class="text-gray-400 text-sm flex-1 mt-2">{{ message }}</div>-->
   </div>
 </template>
 <script setup lang="ts">

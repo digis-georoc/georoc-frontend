@@ -7,9 +7,10 @@ import {
 
 const { t } = useI18n()
 
-const props = defineProps<{
-  modelValue: String
-}>()
+const props = withDefaults(defineProps<{
+  modelValue?: String,
+  size: 'small' | 'normal'
+}>(), { size: 'normal' })
 
 const emit = defineEmits<{
   (event: 'update:modelValue', payload: string): void;
@@ -48,7 +49,7 @@ watch(() => props.modelValue, (value) => {
     :model-value="selectedMaterial"
     @update:modelValue="value => emit('update:modelValue', value.id)"
     by="id"
-    class="bg-zinc-200/50 dark:bg-zinc-700 p-1 rounded-xl w-full"
+    class="bg-zinc-200/50 dark:bg-zinc-700 p-1 rounded-xl"
   >
     <RadioGroupLabel class="sr-only">{{ $t('material_filter') }}</RadioGroupLabel>
     <div class="flex space-x-2">
@@ -65,8 +66,10 @@ watch(() => props.modelValue, (value) => {
               ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-primary-300'
               : '',
             checked ? 'bg-primary' : 'hover:bg-zinc-200 dark:hover:bg-zinc-600',
+            size === 'small' ? 'px-3 py-1' : '',
+            size === 'normal' ? 'px-3 py-1.5' : '',
           ]"
-          class="relative flex-shrink-0 flex-grow flex justify-center cursor-pointer rounded-lg px-3 py-2 focus:outline-none"
+          class="relative flex-shrink-0 flex-grow flex justify-center cursor-pointer rounded-lg focus:outline-none"
         >
         <RadioGroupLabel as="p" class="text-sm font-semibold flex items-center">
             <span :class="checked ? 'text-white' : 'text-zinc-600 dark:text-gray-300'">

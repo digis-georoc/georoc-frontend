@@ -30,9 +30,9 @@ function handleListBtn() {
       <QueryListPanelMobile v-model="isListMobileOpen" />
     </template>
     <template v-else>
-      <div class="flex h-full w-full">
+      <div class="flex flex-col h-full w-full">
         <QueryFiltersPanel />
-        <div class="flex flex-1 h-full relative">
+        <div class="flex flex-1 relative">
           <QueryMap/>
           <QueryListPanel/>
         </div>

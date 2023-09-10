@@ -45,8 +45,8 @@ export const useQueryStore = defineStore('query', {
     },
     async setPanelFilter(filter: QueryFilter, shouldCache = false) {
       this.setFilter(filter, shouldCache)
-      debounceMap(() => this.executeMapQuery(), mapTimer)
-      debounceList(() => this.executeListQuery(), listTimer)
+      // debounceMap(() => this.executeMapQuery(), mapTimer)
+      // debounceList(() => this.executeListQuery(), listTimer)
     },
     setFilter(filter: QueryFilter, shouldCache = false) {
       const index  = this.activeFilters.findIndex(({ name }) => name === filter.name)
@@ -54,6 +54,10 @@ export const useQueryStore = defineStore('query', {
       else this.activeFilters[index] = filter
 
       if (shouldCache) window.localStorage.setItem(filter.name + '-filter', filter.value)
+    },
+    async execute() {
+      debounceMap(() => this.executeMapQuery(), mapTimer)
+      debounceList(() => this.executeListQuery(), listTimer)
     },
     async executeMapQuery() {
       if (abortController) abortController.abort()

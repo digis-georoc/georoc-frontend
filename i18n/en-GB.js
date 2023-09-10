@@ -1,4 +1,5 @@
 export default {
+  database_query: 'Database Query',
   filters: 'Filters',
   material_filter: 'Material filter',
   start_drawing_polygon: 'Click to start drawing a polygon on the map',
@@ -19,5 +20,21 @@ export default {
   active_filters: 'Active filters',
   fluid: 'Fluid',
   glass: 'Glass',
-  inclusion_type: 'Inclusion Type'
+  inclusion_type: 'Inclusion Type',
+  material: 'Material',
+  WR: '@:whole_rock_and_glass',
+  INC: '@:inclusion',
+  MIN: '@:mineral',
+  no_options_selected: 'No options selected',
+  chemistry: 'Chemistry',
+  tectonic_setting: 'Tectonic Setting',
+  location_type: 'Location Type',
+  age: 'Age',
+  please_select_rock_type: 'Please select a rock type',
+  please_select_inclusion_type: 'Please select an inclusion type',
+  material_inclusion: 'Material Inclusion',
+  please_select_material_inclusion: 'Please select a material inclusion',
+  host_material: 'Host Material',
+  inclusion_material: 'Inclusion Material'
+
 }

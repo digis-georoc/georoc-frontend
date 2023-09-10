@@ -1,5 +1,9 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 const queryStore = useQueryStore()
+
+const inclusionTypeFilterValue = computed(() => queryStore.getFilter('inclusiontype')?.value)
 
 const storedMaterial = window.localStorage.getItem('material-filter')
 const hideMaterialDialog = window.localStorage.getItem('hide-material-dialog')
@@ -17,6 +21,10 @@ function handleFilterSelection(value: string | null) {
   }, true)
 }
 
+function submit() {
+  queryStore.execute()
+}
+
 function startDrawingOnMap() {
   queryStore.startDrawingOnMap()
 }
@@ -30,26 +38,72 @@ function stopDrawingOnMap() {
 }
 </script>
 <template>
-  <div class="flex flex-col p-4">
-    <QueryFilterContainer>
-      <QueryFilterMaterial
-        :model-value="selectedMaterialId"
-        @update:model-value="handleFilterSelection"
-      />
-    </QueryFilterContainer>
-    <QueryFilterContainer :title="$t('filter_by_area')">
-      <QueryFilterPolygon
+  <div class="self-start flex justify-center items-center space-x-2 mb-4 w-full">
+    <QueryFilterMaterial class="flex-grow-0" :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
+  </div>
+  <div class="flex overflow-hidden">
+    <div class="flex-grow" v-if="selectedMaterialId === 'WR'">
+      <QueryFilterRockType />
+    </div>
+    <div class="flex-grow" v-if="selectedMaterialId === 'INC'">
+      <QueryFilterInclusionType />
+    </div>
+    <div v-if="inclusionTypeFilterValue === 'IMIN'" class="h-full mx-4 border-r dark:border-stone-700"></div>
+    <div v-if="inclusionTypeFilterValue === 'IMIN'" class="flex-grow flex">
+      <QueryFilterMaterialInclusion />
+    </div>
+    <div class="h-full mx-4 border-r dark:border-stone-700"></div>
+    <div class="flex-grow">
+      <QueryFilterBaseContainer :title="$t('chemistry')" @submit="submit">
+        <template v-slot:selected>
+          <QueryFilterBaseSelected />
+        </template>
+        <template v-slot:options>
+          <QueryFilterChemistry />
+        </template>
+      </QueryFilterBaseContainer>
+    </div>
+    <div class="h-full mx-4 border-r dark:border-stone-700"></div>
+    <div class="flex-grow">
+      <QueryFilterBaseContainer :title="$t('tectonic_setting')" @submit="submit">
+        <template v-slot:selected>
+          <QueryFilterBaseSelected />
+        </template>
+        <template v-slot:options>
+          <QueryFilterTectonic />
+        </template>
+      </QueryFilterBaseContainer>
+    </div>
+    <div class="h-full mx-4 border-r dark:border-stone-700"></div>
+    <div class="flex-grow">
+      <QueryFilterBaseContainer :title="$t('location_type')" @submit="submit">
+        <template v-slot:selected>
+          <QueryFilterBaseSelected />
+        </template>
+        <template v-slot:options>
+          <QueryFilterLocationType />
+        </template>
+      </QueryFilterBaseContainer>
+    </div>
+    <div class="h-full mx-4 border-r dark:border-stone-700"></div>
+    <div class="flex-grow">
+      <QueryFilterBaseContainer :title="$t('age')" @submit="submit">
+        <template v-slot:selected>
+          <QueryFilterBaseSelected />
+        </template>
+        <template v-slot:options>
+          <QueryFilterAge />
+        </template>
+      </QueryFilterBaseContainer>
+    </div>
+  </div>
+  <div class="absolute -bottom-[68px] z-[9999] left-1/2 -translate-x-1/2">
+    <QueryFilterPolygon
         @start="startDrawingOnMap"
         @reset="resetPolygonOnMap"
         @stop="stopDrawingOnMap"
-      />
-    </QueryFilterContainer>
-    <QueryFilterContainer v-if="selectedMaterialId === 'WR'" :title="$t('rock_type')">
-      <QueryFilterRockType />
-    </QueryFilterContainer>
-    <QueryFilterContainer v-if="selectedMaterialId === 'INC'" :title="$t('inclusion_type')">
-      <QueryFilterInclusionType />
-    </QueryFilterContainer>
+    />
   </div>
+
   <QueryFilterMaterialDialog @select="handleFilterSelection" />
 </template>
