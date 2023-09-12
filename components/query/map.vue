@@ -225,6 +225,7 @@ onMounted(() => {
     if(event.eventType == 'create') {
       var latLngs: [number, number][] = event.latLngs[0].map(({lat, lng}) => [lng, lat])
       queryStore.setPanelFilter({ name: 'polygon', value: latLngs})
+      queryStore.execute()
       freeDraw.clear()
 
       polygon = L.polygon(latLngs.map(latLng => {

@@ -24,7 +24,7 @@ function open() {
 }
 </script>
 <template>
-  <TransitionRoot appear :show="modelValue" as="template">
+  <TransitionRoot :show="modelValue" as="template">
     <Dialog as="div" @close="close" class="relative z-[9999]">
       <TransitionChild
         as="template"

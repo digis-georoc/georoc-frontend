@@ -53,9 +53,9 @@ function submit() {
     <template v-slot:options>
       <div class="w-full">
         <h3 class="font-semibold mb-2">{{ $t('host_material') }}:</h3>
-        <BaseMultiselect :options="optionsHost" id-prefix="rocktype" @change="selectedHostTemp = $event"/>
+        <BaseMultiselect :options="optionsHost" id-prefix="host_material" @change="selectedHostTemp = $event"/>
         <h3 class="font-semibold mt-4 mb-2">{{ $t('inclusion_material') }}:</h3>
-        <BaseMultiselect :options="optionsInclusion" id-prefix="rocktype" @change="selectedInclusionTemp = $event"/>
+        <BaseMultiselect :options="optionsInclusion" id-prefix="inclusion_material" @change="selectedInclusionTemp = $event"/>
       </div>
     </template>
   </QueryFilterBaseContainer>

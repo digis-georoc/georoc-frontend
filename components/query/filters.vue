@@ -26,34 +26,23 @@ function submit() {
   queryStore.execute()
 }
 
-function startDrawingOnMap() {
-  queryStore.startDrawingOnMap()
-}
-
-function resetPolygonOnMap() {
-  queryStore.resetPolygonOnMap()
-}
-
-function stopDrawingOnMap() {
-  queryStore.stopDrawingOnMap()
-}
 </script>
 <template>
-  <div class="self-start flex justify-center items-center space-x-2 mb-4 w-full">
-    <QueryFilterMaterial class="flex-grow-0" :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
+  <div class="self-start flex items-center mb-8 w-full px-4">
+    <QueryFilterMaterial :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
   </div>
-  <div class="flex overflow-hidden">
-    <div class="flex-grow" v-if="selectedMaterialId === 'WR'">
+  <div class="flex flex-1 flex-col px-4 overflow-auto">
+    <div class="flex-grow mb-6" v-if="selectedMaterialId === 'WR'">
       <QueryFilterRockType />
     </div>
     <div class="flex-grow" v-if="selectedMaterialId === 'INC'">
       <QueryFilterInclusionType />
     </div>
-    <div v-if="inclusionTypeFilterValue === 'IMIN'" class="h-full mx-4 border-r dark:border-stone-700"></div>
+    <div class="my-6 border-b dark:border-stone-700"></div>
     <div v-if="inclusionTypeFilterValue === 'IMIN'" class="flex-grow flex">
       <QueryFilterMaterialInclusion />
     </div>
-    <div class="h-full mx-4 border-r dark:border-stone-700"></div>
+    <div class="my-6 border-b dark:border-stone-700"></div>
     <div class="flex-grow">
       <QueryFilterBaseContainer :title="$t('chemistry')" @submit="submit">
         <template v-slot:selected>
@@ -64,7 +53,7 @@ function stopDrawingOnMap() {
         </template>
       </QueryFilterBaseContainer>
     </div>
-    <div class="h-full mx-4 border-r dark:border-stone-700"></div>
+    <div class="my-6 border-b dark:border-stone-700"></div>
     <div class="flex-grow">
       <QueryFilterBaseContainer :title="$t('tectonic_setting')" @submit="submit">
         <template v-slot:selected>
@@ -75,7 +64,7 @@ function stopDrawingOnMap() {
         </template>
       </QueryFilterBaseContainer>
     </div>
-    <div class="h-full mx-4 border-r dark:border-stone-700"></div>
+    <div class="my-6 border-b dark:border-stone-700"></div>
     <div class="flex-grow">
       <QueryFilterBaseContainer :title="$t('location_type')" @submit="submit">
         <template v-slot:selected>
@@ -86,7 +75,7 @@ function stopDrawingOnMap() {
         </template>
       </QueryFilterBaseContainer>
     </div>
-    <div class="h-full mx-4 border-r dark:border-stone-700"></div>
+    <div class="my-6 border-b dark:border-stone-700"></div>
     <div class="flex-grow">
       <QueryFilterBaseContainer :title="$t('age')" @submit="submit">
         <template v-slot:selected>
@@ -98,13 +87,5 @@ function stopDrawingOnMap() {
       </QueryFilterBaseContainer>
     </div>
   </div>
-  <div class="absolute -bottom-[68px] z-[9999] left-1/2 -translate-x-1/2">
-    <QueryFilterPolygon
-        @start="startDrawingOnMap"
-        @reset="resetPolygonOnMap"
-        @stop="stopDrawingOnMap"
-    />
-  </div>
-
   <QueryFilterMaterialDialog @select="handleFilterSelection" />
 </template>

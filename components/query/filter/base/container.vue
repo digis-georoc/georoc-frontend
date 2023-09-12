@@ -6,7 +6,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['submit'])
 
-const isOpen = ref(window.localStorage.getItem('hide-material-dialog') === null)
+const isOpen = ref(false)
 
 function onSubmit() {
   isOpen.value = false

@@ -5,7 +5,6 @@
   </div>
 </template>
 <script setup lang="ts">
-const emit = defineEmits(['start', 'reset', 'stop'])
 const { t } = useI18n()
 const queryStore = useQueryStore()
 const polygonStore = usePolygonStore()
@@ -32,7 +31,7 @@ watch(() => state.value, (value) => {
     buttonText.value = t('draw_shape')
     message.value = messageStartText
   } else if (value === PolygonDrawingStates.Drawing) {
-    emit('start')
+    start()
     buttonText.value = t('cancel_drawing')
     message.value = t('drawing_mode_active')
   } else if (value === PolygonDrawingStates.Finished) {
@@ -58,11 +57,23 @@ function handleButton() {
   if (state.value === PolygonDrawingStates.Idle) {
     polygonStore.activeState = PolygonDrawingStates.Drawing
   } else if (state.value === PolygonDrawingStates.Drawing) {
-    emit('stop')
+    stop()
     polygonStore.activeState = PolygonDrawingStates.Idle
   } else if (state.value === PolygonDrawingStates.Finished) {
-    emit('reset')
+    reset()
     polygonStore.activeState = PolygonDrawingStates.Idle
   }
+}
+
+function start() {
+  queryStore.startDrawingOnMap()
+}
+
+function reset() {
+  queryStore.resetPolygonOnMap()
+}
+
+function stop() {
+  queryStore.stopDrawingOnMap()
 }
 </script>
