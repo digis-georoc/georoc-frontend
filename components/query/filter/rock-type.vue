@@ -7,10 +7,14 @@ const emit = defineEmits<{
   change: [selected: MultiselectOption[]]
 }>()
 
-const rocktypes = await getRocktypes()
-const options = ref(rocktypes?.data.map(({ value, label }) => ({ value, label, active: false})) ?? [])
+const options = ref<MultiselectOption[]>([])
 const selected = ref<MultiselectOption[]>([])
 const selectedTemp = ref<MultiselectOption[]>([])
+
+onMounted(async () => {
+  const rocktypes = await getRocktypes()
+  options.value = rocktypes?.data.map(({ value, label }) => ({ value, label, active: false})) ?? []
+})
 function remove(index: number) {
   selected.value.splice(index, 1)
   queryStore.setPanelFilter({
