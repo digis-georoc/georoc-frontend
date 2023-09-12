@@ -11,11 +11,16 @@ const dontShowAgain = ref(false)
 
 function handleContinue() {
   isOpen.value = false
+}
+
+watch(() => isOpen.value, (value) => {
+  if (value === true) return
+
   if (dontShowAgain.value) window.localStorage.setItem('hide-material-dialog', '')
   else window.localStorage.removeItem('hide-material-dialog')
 
   emit('select', selected.value)
-}
+})
 
 </script>
 
