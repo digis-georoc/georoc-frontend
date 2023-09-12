@@ -32,13 +32,13 @@ function submit() {
     <QueryFilterMaterial :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
   </div>
   <div class="flex flex-1 flex-col px-4 overflow-auto">
-    <div class="flex-grow mb-6" v-if="selectedMaterialId === 'WR'">
+    <div class="flex-grow" v-if="selectedMaterialId === 'WR'">
       <QueryFilterRockType />
     </div>
     <div class="flex-grow" v-if="selectedMaterialId === 'INC'">
       <QueryFilterInclusionType />
     </div>
-    <div class="my-6 border-b dark:border-stone-700"></div>
+    <div v-if="inclusionTypeFilterValue === 'IMIN'" class="my-6 border-b dark:border-stone-700"></div>
     <div v-if="inclusionTypeFilterValue === 'IMIN'" class="flex-grow flex">
       <QueryFilterMaterialInclusion />
     </div>
