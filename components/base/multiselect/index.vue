@@ -35,7 +35,7 @@ function removeFromSelected(option: MultiselectOption) {
 function includes(search: string, str: string) {
   if (!search) search = 'undefined'
   const text = str.toString().toLowerCase()
-  return text.indexOf(search.trim()) !== -1
+  return text.indexOf(search.trim().toLowerCase()) !== -1
 }
 
 function filterOptions(search: string) {
