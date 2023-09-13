@@ -2,22 +2,48 @@
 import {MultiselectOption, RadioGroupOption} from "~/types";
 
 const props = defineProps<{
-  modelValue: MultiselectOption[] | RadioGroupOption[]
+  items: MultiselectOption[] | RadioGroupOption[]
 }>()
 
 const emit = defineEmits<{
   remove: [index: number]
-  'update:modelValue': [list: string[]]
 }>()
+
+const visibleItems = ref<MultiselectOption[] | RadioGroupOption[]>([])
+const hiddenItems = ref<MultiselectOption[] | RadioGroupOption[]>([])
+const maxVisibleAmount = 3
+
+watch(() => props.items, value => {
+  if (value.length > maxVisibleAmount) {
+    visibleItems.value = value.splice(maxVisibleAmount -2);
+    hiddenItems.value = value
+  } else {
+    visibleItems.value = value
+  }
+})
+
 
 </script>
 <template>
-  <div class="flex space-x-2">
-    <template v-if="modelValue && modelValue.length > 0">
-      <div class="bg-primary-100 py-1.5 px-2 text-primary font-bold rounded-lg flex items-center flex-shrink-0" v-for="(item, i) in modelValue">
+  <div class="flex flex-wrap gap-1.5">
+    <template v-if="items && items.length > 0">
+      <div class="bg-primary-100 py-1.5 px-2 text-primary font-bold rounded-lg flex items-center flex-shrink-0" v-for="(item, i) in visibleItems">
         <span class="text-sm leading-none">{{ $t(item.label) }}</span>
         <Icon name="ic:round-close" class="cursor-pointer hover:bg-primary hover:bg-opacity-25 rounded-full p-0.5 ms-2" @click="emit('remove', i)" />
       </div>
+      <BasePopover
+        button-styles="bg-primary-100 py-1.5 px-2 text-primary font-bold rounded-lg flex items-center flex-shrink-0 text-sm leading-none"
+        :button-title="'+' + hiddenItems.length"
+        v-if="hiddenItems.length > 0"
+      >
+        <h3 class="font-semibold text-sm mb-2">More:</h3>
+        <div class="min-w-[160px] flex flex-col items-start">
+          <div class="bg-primary-100 py-1.5 px-2 text-primary font-bold rounded-lg flex items-center" v-for="(item, i) in hiddenItems">
+            <span class="text-sm leading-none">{{ $t(item.label) }}</span>
+            <Icon name="ic:round-close" class="cursor-pointer hover:bg-primary hover:bg-opacity-25 rounded-full p-0.5 ms-2" @click="emit('remove', i)" />
+          </div>
+        </div>
+      </BasePopover>
     </template>
     <div v-else class="text-sm text-stone-400">{{ $t('no_options_selected') }}.</div>
   </div>
