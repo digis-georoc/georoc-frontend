@@ -55,6 +55,12 @@ export const useQueryStore = defineStore('query', {
 
       if (shouldCache) window.localStorage.setItem(filter.name + '-filter', filter.value)
     },
+    unsetFilter(name: string) {
+      const index = this.activeFilters.findIndex(({ name: oldName }) => oldName === name)
+      if (index === -1) return
+      this.activeFilters.splice(index, 1)
+      window.localStorage.removeItem(name + '-filter')
+    },
     async execute() {
       debounceMap(() => this.executeMapQuery())
       debounceList(() => this.executeListQuery())
