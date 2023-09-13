@@ -63,7 +63,7 @@ watch(() => props.modelValue, (value) => {
         <div
           :class="[
             active
-              ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-primary-300'
+              ? 'ring-primary ring-opacity-25 ring-4'
               : '',
             checked ? 'bg-primary' : 'hover:bg-zinc-200 dark:hover:bg-zinc-600',
             size === 'small' ? 'px-3 py-1' : '',
