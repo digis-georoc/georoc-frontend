@@ -56,8 +56,8 @@ export const useQueryStore = defineStore('query', {
       if (shouldCache) window.localStorage.setItem(filter.name + '-filter', filter.value)
     },
     async execute() {
-      debounceMap(() => this.executeMapQuery(), mapTimer)
-      debounceList(() => this.executeListQuery(), listTimer)
+      debounceMap(() => this.executeMapQuery())
+      debounceList(() => this.executeListQuery())
     },
     async executeMapQuery() {
       if (abortController) abortController.abort()
