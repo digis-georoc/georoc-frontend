@@ -1,8 +1,11 @@
 <script setup lang="ts">
-const props = defineProps<{
-  title?: string,
+const props = withDefaults(defineProps<{
+  title: string,
   dialogTitle: string
-}>()
+}>(), {
+  title: '',
+  dialogTitle: ''
+})
 
 const emit = defineEmits(['submit'])
 

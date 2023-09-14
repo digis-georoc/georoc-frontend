@@ -35,6 +35,6 @@ export default {
   material_inclusion: 'Material Inclusion',
   please_select_material_inclusion: 'Please select a material inclusion',
   host_material: 'Host Material',
-  inclusion_material: 'Inclusion Material'
-
+  inclusion_material: 'Inclusion Material',
+  loading: 'Loading'
 }

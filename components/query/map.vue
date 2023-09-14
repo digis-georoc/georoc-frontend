@@ -263,7 +263,7 @@ const unsubscribe = queryStore.$onAction(
     text-white pointer-events-none
     ">
     <span class="loader mb-2"></span>
-    {{ $t('Loading') }}...
+    {{ $t('loading') }}...
   </div>
   <div v-if="isDebug" class="fixed z-[9999] top-[60px] right-0 bg-white p-2 text-sm">
     <h2 class="mb-2 font-bold">Debug:</h2>
