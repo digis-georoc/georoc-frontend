@@ -32,10 +32,10 @@ function submit() {
     <QueryFilterMaterial :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
   </div>
   <div class="flex flex-1 flex-col px-4 overflow-auto">
-    <div class="flex-grow" v-if="selectedMaterialId === 'WR'">
+    <div v-if="selectedMaterialId === 'WR'">
       <QueryFilterRockType />
     </div>
-    <div class="flex-grow" v-if="selectedMaterialId === 'INC'">
+    <div v-if="selectedMaterialId === 'INC'">
       <QueryFilterInclusionType />
     </div>
     <div v-if="inclusionTypeFilterValue === 'IMIN'" class="my-6 border-b dark:border-stone-700"></div>
@@ -43,7 +43,7 @@ function submit() {
       <QueryFilterMaterialInclusion />
     </div>
     <div class="my-6 border-b dark:border-stone-700"></div>
-    <div class="flex-grow">
+    <div>
       <QueryFilterBaseContainer :title="$t('chemistry')" @submit="submit">
         <template v-slot:selected>
           <QueryFilterBaseSelected />
@@ -54,7 +54,7 @@ function submit() {
       </QueryFilterBaseContainer>
     </div>
     <div class="my-6 border-b dark:border-stone-700"></div>
-    <div class="flex-grow">
+    <div>
       <QueryFilterBaseContainer :title="$t('tectonic_setting')" @submit="submit">
         <template v-slot:selected>
           <QueryFilterBaseSelected />
@@ -65,7 +65,7 @@ function submit() {
       </QueryFilterBaseContainer>
     </div>
     <div class="my-6 border-b dark:border-stone-700"></div>
-    <div class="flex-grow">
+    <div>
       <QueryFilterBaseContainer :title="$t('location_type')" @submit="submit">
         <template v-slot:selected>
           <QueryFilterBaseSelected />
@@ -76,7 +76,7 @@ function submit() {
       </QueryFilterBaseContainer>
     </div>
     <div class="my-6 border-b dark:border-stone-700"></div>
-    <div class="flex-grow">
+    <div>
       <QueryFilterBaseContainer :title="$t('age')" @submit="submit">
         <template v-slot:selected>
           <QueryFilterBaseSelected />
