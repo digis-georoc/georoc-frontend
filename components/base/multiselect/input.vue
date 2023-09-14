@@ -30,7 +30,7 @@ function onEnter(event: Event) {
       spellcheck="false"
       aria-autocomplete="list"
       type="text"
-      class="outline-0 bg-transparent"
+      class="outline-none bg-transparent"
       :id="id"
       :value="searchValue"
       role="combobox"

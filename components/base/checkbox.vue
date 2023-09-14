@@ -20,8 +20,8 @@ const emit = defineEmits<{
       type="checkbox"
       class="appearance-none w-[20px] h-[20px]
       text-white bg-gray-100 checked:bg-primary checked:dark:bg-primary border border-gray-300 rounded
-      focus:ring-primary-300 dark:ring-offset-gray-800
-      focus:ring-2 dark:bg-zinc-700 dark:border-zinc-600
+      focus:outline-none focus:ring-primary focus:ring-opacity-25 dark:ring-offset-gray-800
+      focus:ring-4 dark:bg-zinc-700 dark:border-zinc-600
       relative z-20 cursor-pointer
       checked:before:content-['\2713'] before:flex before:justify-center before:items-center before:absolute
       before:top-0 before:left-0

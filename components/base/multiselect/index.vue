@@ -80,7 +80,7 @@ function onTagRemove(index: number) {
   <div v-if="tags.length > 0" class="flex mt-2">
     <BaseMultiselectTags v-model="tags" @remove="onTagRemove" />
   </div>
-  <div class="h-[200px] overflow-y-auto pl-[2px] -mr-4 mt-4">
+  <div class="h-[200px] overflow-y-auto pl-4 -mx-4 mt-4">
     <BaseMultiselectOptions v-model="_options" :id-prefix="idPrefix" @change="onOptionChange" />
   </div>
 </div>
