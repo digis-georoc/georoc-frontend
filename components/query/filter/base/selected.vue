@@ -11,12 +11,12 @@ const emit = defineEmits<{
 
 const visibleItems = ref<MultiselectOption[] | RadioGroupOption[]>([])
 const hiddenItems = ref<MultiselectOption[] | RadioGroupOption[]>([])
-const maxVisibleAmount = 3
+const maxVisibleAmount = 7
 
 watch(() => props.items, value => {
   if (value.length > maxVisibleAmount) {
-    visibleItems.value = value.splice(maxVisibleAmount -2);
-    hiddenItems.value = value
+    visibleItems.value = value.slice(0, maxVisibleAmount)
+    hiddenItems.value = value.slice(maxVisibleAmount)
   } else {
     visibleItems.value = value
   }
