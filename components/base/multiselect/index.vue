@@ -15,6 +15,7 @@ const emit = defineEmits(['change'])
 
 watch(() => props.options, (value) => {
   _options.value = value
+  selectedOptions.value = value.filter(({ active }) => !!(active))
 }, {immediate:true})
 function addToSelected(option: MultiselectOption) {
   selectedOptions.value.push(option)
