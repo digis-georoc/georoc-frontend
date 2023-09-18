@@ -279,7 +279,7 @@ const unsubscribe = queryStore.$onAction(
 </template>
 <style>
 .mode-create {
-  cursor: crosshair;
+  cursor: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTUgMTguMDhWMTloLjkybDkuMDYtOS4wNmwtLjkyLS45MnoiIG9wYWNpdHk9Ii4zIi8+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMjAuNzEgNy4wNGEuOTk2Ljk5NiAwIDAgMCAwLTEuNDFsLTIuMzQtMi4zNGMtLjItLjItLjQ1LS4yOS0uNzEtLjI5cy0uNTEuMS0uNy4yOWwtMS44MyAxLjgzbDMuNzUgMy43NWwxLjgzLTEuODN6TTMgMTcuMjVWMjFoMy43NUwxNy44MSA5Ljk0bC0zLjc1LTMuNzVMMyAxNy4yNXpNNS45MiAxOUg1di0uOTJsOS4wNi05LjA2bC45Mi45Mkw1LjkyIDE5eiIvPjwvc3ZnPg==) 0 20, auto;
 }
 
 .marker-icon {
