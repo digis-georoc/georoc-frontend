@@ -50,7 +50,7 @@ function submit() {
 <template>
   <QueryFilterBaseContainer :title="$t('inclusion_type')" :dialog-title="$t('please_select_inclusion_type')" @submit="submit">
     <template v-slot:selected>
-      <QueryFilterBaseSelected v-model="selected" @remove="remove($event)" />
+      <QueryFilterBaseSelected :items="selected" @remove="remove($event)" />
     </template>
     <template v-slot:options>
       <BaseRadioGroup :options="types" v-model="selectedTemp" />
