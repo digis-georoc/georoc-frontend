@@ -91,6 +91,11 @@ export const useQueryStore = defineStore('query', {
           console.log(e)
         }
       }
+    },
+    resetOnMaterialChange() {
+      this.unsetFilter('rocktype')
+      this.unsetFilter('inclusiontype')
+      this.unsetFilter('mineral_inclusion')
     }
   },
   getters: {

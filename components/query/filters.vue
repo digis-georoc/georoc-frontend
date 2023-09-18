@@ -19,6 +19,7 @@ function handleFilterSelection(value: string | null) {
     name: 'material',
     value
   }, true)
+  queryStore.resetOnMaterialChange()
   submit()
 }
 
