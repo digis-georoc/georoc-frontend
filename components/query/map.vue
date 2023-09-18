@@ -257,7 +257,7 @@ const unsubscribe = queryStore.$onAction(
   <div id="map" class="h-full w-full"></div>
   <div
     v-if="isLoading"
-    class="absolute z-[9999] w-[10vw] h-[10vh]
+    class="absolute z-[9999] w-[150px] h-[100px]
     bg-black bg-opacity-50 rounded-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
     flex flex-col items-center justify-center
     text-white pointer-events-none
