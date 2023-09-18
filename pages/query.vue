@@ -19,11 +19,14 @@ function handleListBtn() {
 
 </script>
 <template>
-  <div class="flex flex-col xl:flex-row h-full w-full">
+  <div class="flex flex-col xl:flex-row h-full w-full relative">
     <template v-if="isMobile">
       <QueryActiveFiltersMobile @filter="handleFiltersBtn" @list="handleListBtn" />
       <QueryFiltersPanelMobile v-model="isFilterMobileOpen" />
       <QueryMap/>
+      <div class="absolute top-[78px] z-[9999] left-1/2 -translate-x-1/2">
+        <QueryFilterPolygon />
+      </div>
       <QueryListPanelMobile v-model="isListMobileOpen" />
     </template>
     <template v-else>
