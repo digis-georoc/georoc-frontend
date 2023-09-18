@@ -43,10 +43,10 @@ function submit() {
     <template v-slot:selected>
       <div class="flex flex-col">
         <div class="flex items-center mb-2">
-          <span class="text-sm me-2">{{ $t('host_material') }}:</span><QueryFilterBaseSelected v-model="selectedHost" @remove="removeHost($event)" />
+          <span class="text-sm me-2">{{ $t('host_material') }}:</span><QueryFilterBaseSelected :items="selectedHost" @remove="removeHost($event)" />
         </div>
         <div class="flex items-center">
-          <span class="text-sm me-2">{{ $t('inclusion_material') }}:</span><QueryFilterBaseSelected v-model="selectedInclusion" @remove="removeInclusion($event)" />
+          <span class="text-sm me-2">{{ $t('inclusion_material') }}:</span><QueryFilterBaseSelected :items="selectedInclusion" @remove="removeInclusion($event)" />
         </div>
       </div>
     </template>
