@@ -1,7 +1,7 @@
 import {Feature, MultiPoint, Point, Polygon} from "geojson";
 
 interface QueryFilter {
-  name: 'material' | 'polygon' | 'bbox' | 'rocktype' | 'inclusiontype' | 'mineral_inclusion',
+  name: 'material' | 'polygon' | 'bbox' | 'rocktype' | 'inclusiontype' | 'mineral_inclusion' | 'chemistry',
   value: any
 }
 

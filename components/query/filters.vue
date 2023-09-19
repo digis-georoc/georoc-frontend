@@ -45,14 +45,7 @@ function submit() {
     </div>
     <div class="my-6 border-b dark:border-stone-700"></div>
     <div>
-      <QueryFilterBaseContainer :title="$t('chemistry')" @submit="submit">
-        <template v-slot:selected>
-          <QueryFilterBaseSelected />
-        </template>
-        <template v-slot:options>
-          <QueryFilterChemistry />
-        </template>
-      </QueryFilterBaseContainer>
+      <QueryFilterChemistry />
     </div>
     <div class="my-6 border-b dark:border-stone-700"></div>
     <div>

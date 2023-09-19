@@ -36,6 +36,8 @@ function removeInclusion(index: number) {
 function submit() {
   selectedHost.value = selectedHostTemp.value
   selectedInclusion.value = selectedInclusionTemp.value
+
+  queryStore.execute()
 }
 </script>
 <template>
