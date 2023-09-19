@@ -273,8 +273,8 @@ const unsubscribe = queryStore.$onAction(
     <div>Out of bounds NE: {{ outOfBoundsNE }}</div>
   </div>
   <div class="absolute z-[1000] bottom-0 left-0 bg-white p-1 text-xs">
-    <span>Latitude:</span><span>{{ mouseLat }}</span>&nbsp;
-    <span>Longitude:</span><span>{{ mouseLng }}</span>
+    <span>Latitude: </span><span>{{ mouseLat }}</span>&nbsp;
+    <span>Longitude: </span><span>{{ mouseLng }}</span>
   </div>
 </template>
 <style>
@@ -292,7 +292,8 @@ const unsubscribe = queryStore.$onAction(
 }
 
 .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
-  border-color: theme('colors.zinc.400');
+  border-color: theme('colors.stone.400');
+  border-width: 1px;
 }
 
 .leaflet-control-layers label:not(:last-child) {

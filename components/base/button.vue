@@ -53,7 +53,7 @@
   classes['focus:ring-primary focus:ring-opacity-25 dark:focus:ring-primary-300 dark:focus:ring-opacity-50 bg-none text-primary hover:underline ' +
   'dark:focus:ring-green-800'] = props.display === 'link'
 
-  classes['bg-white text-dark border-2 border-zinc-400 focus:ring-zinc-300 focus:ring-opacity-50 hover:bg-zinc-100 dark:bg-zinc-800'] = props.display === 'mono'
+  classes['bg-white text-dark border border-zinc-400 focus:ring-zinc-300 focus:ring-opacity-50 hover:bg-zinc-100 dark:bg-zinc-800'] = props.display === 'mono'
 
   classes['bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-600 ' +
   'focus:ring-primary dark:focus:ring-primary-300 dark:focus:ring-opacity-50 focus:ring-opacity-25'] = props.display === 'flat'
