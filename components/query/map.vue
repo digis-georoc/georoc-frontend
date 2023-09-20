@@ -272,7 +272,7 @@ const unsubscribe = queryStore.$onAction(
     <div>Out of bounds SW: {{ outOfBoundsSW }}</div>
     <div>Out of bounds NE: {{ outOfBoundsNE }}</div>
   </div>
-  <div class="absolute z-[1000] bottom-0 left-0 bg-white p-1 text-xs">
+  <div v-if="!isMobile" class="absolute z-[1000] bottom-0 left-0 bg-white p-1 text-xs">
     <span>Latitude: </span><span>{{ mouseLat }}</span>&nbsp;
     <span>Longitude: </span><span>{{ mouseLng }}</span>
   </div>
