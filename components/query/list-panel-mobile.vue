@@ -11,6 +11,7 @@ const emit = defineEmits(['update:modelValue'])
   <BaseBottomSheet
       :title="$t('filters')"
       :model-value="modelValue"
+      :full-height="true"
       @update:modelValue="emit('update:modelValue', $event)"
   >
     <QueryList/>
