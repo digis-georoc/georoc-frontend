@@ -28,7 +28,7 @@ const emit = defineEmits<{
       before:w-full before:h-full before:leading-none before:text-[0.75rem]"
     >
     <label
-        for="default-checkbox"
+        :for="id"
         class="ml-2 text-sm font-medium text-gray-900 dark:text-zinc-300">
       {{ label }}
     </label>
