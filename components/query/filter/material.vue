@@ -52,7 +52,7 @@ watch(() => props.modelValue, (value) => {
     class="bg-zinc-200/50 dark:bg-zinc-700 p-1 rounded-xl"
   >
     <RadioGroupLabel class="sr-only">{{ $t('material_filter') }}</RadioGroupLabel>
-    <div class="flex space-x-2">
+    <div class="flex flex-col xl:flex-row space-x-2">
       <RadioGroupOption
         as="template"
         v-for="material in materials"

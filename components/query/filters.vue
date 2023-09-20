@@ -30,7 +30,7 @@ function submit() {
 </script>
 <template>
   <div class="self-start flex items-center mb-8 w-full px-4">
-    <QueryFilterMaterial :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
+    <QueryFilterMaterial class="w-full" :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
   </div>
   <div class="flex flex-1 flex-col px-4 overflow-auto">
     <div v-if="selectedMaterialId === 'WR'">
