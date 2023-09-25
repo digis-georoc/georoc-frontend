@@ -24,16 +24,13 @@ const types = [
     label: t('melt'),
   },
 ]
-
+const selectedValueFromStore = computed(() => queryStore.getFilter('inclusiontype')?.value)
 const selected = ref<RadioGroupOption[]>([])
 const selectedTemp = ref<RadioGroupOption>(types[0])
 
-function remove(index: number) {
-  selected.value.splice(index, 1)
-  queryStore.setPanelFilter({
-    name: 'inclusiontype',
-    value: selected.value.length > 0 ? 'IN:' + selected.value.map(({ value }) => value).join(',') : ''
-  })
+function remove() {
+  selected.value = []
+  queryStore.unsetFilter('inclusiontype')
   queryStore.execute()
 }
 
@@ -41,16 +38,28 @@ function submit() {
   selected.value = [selectedTemp.value]
   queryStore.setPanelFilter({
     name: 'inclusiontype',
-    value: selected.value[0].value
+    value: toQuery(selected.value)
   })
   queryStore.execute()
 }
+
+function toQuery(selected: RadioGroupOption[]) {
+  return selected.length > 0 ? selected[0].value : types[0].value
+}
+
+function fromQuery(query: string): RadioGroupOption | null {
+  return types.find(({ value }) => value === query) ?? null
+}
+
+onMounted(async () => {
+  if (selectedValueFromStore.value) selected.value = [fromQuery(selectedValueFromStore.value) ?? types[0]]
+})
 
 </script>
 <template>
   <QueryFilterBaseContainer :title="$t('inclusion_type')" :dialog-title="$t('please_select_inclusion_type')" @submit="submit">
     <template v-slot:selected>
-      <QueryFilterBaseSelected :items="selected" @remove="remove($event)" />
+      <QueryFilterBaseSelected :items="selected" @remove="remove()" />
     </template>
     <template v-slot:options>
       <BaseRadioGroup :options="types" v-model="selectedTemp" />

@@ -5,6 +5,10 @@ const queryStore = useQueryStore()
 
 const { t } = useI18n()
 
+const selectedHostValueFromStore = computed(() => queryStore.getFilter('hostmaterial')?.value)
+const selectedInclusionValueFromStore = computed(() => queryStore.getFilter('inclusionmaterial')?.value)
+
+
 const minerals = await getMinerals()
 const optionsHost = ref(minerals?.data.map(({ value, label }) => ({ value, label, active: false})) ?? [])
 const optionsInclusion = ref(minerals?.data.map(({ value, label }) => ({ value, label, active: false})) ?? [])
@@ -18,8 +22,8 @@ const selectedInclusionTemp = ref<MultiselectOption[]>([])
 function removeHost(index: number) {
   selectedHost.value.splice(index, 1)
   queryStore.setPanelFilter({
-    name: 'rocktype',
-    value: selectedHost.value.length > 0 ? 'IN:' + selectedHost.value.map(({ value }) => value).join(',') : ''
+    name: 'hostmaterial',
+    value: toQuery(selectedHost.value)
   })
   queryStore.execute()
 }
@@ -27,8 +31,8 @@ function removeHost(index: number) {
 function removeInclusion(index: number) {
   selectedHost.value.splice(index, 1)
   queryStore.setPanelFilter({
-    name: 'rocktype',
-    value: selectedHost.value.length > 0 ? 'IN:' + selectedHost.value.map(({ value }) => value).join(',') : ''
+    name: 'inclusionmaterial',
+    value: toQuery(selectedInclusion.value)
   })
   queryStore.execute()
 }
@@ -37,8 +41,36 @@ function submit() {
   selectedHost.value = selectedHostTemp.value
   selectedInclusion.value = selectedInclusionTemp.value
 
+  queryStore.setPanelFilter({
+    name: 'hostmaterial',
+    value: toQuery(selectedHost.value)
+  })
+  queryStore.setPanelFilter({
+    name: 'inclusionmaterial',
+    value: toQuery(selectedInclusion.value)
+  })
   queryStore.execute()
 }
+
+function toQuery(selected: MultiselectOption[]) {
+  return selected.length > 0 ? 'IN:' + selected.map(({ value }) => value).join(',') : ''
+}
+
+function fromQuery(query: string, options: MultiselectOption[]): MultiselectOption[] {
+  query = query.replace('IN:', '')
+  const queryArr = query.split(',')
+  return queryArr.map(value => ({
+    value,
+    label: options.find(option => option.value === value)?.label ?? value,
+    active: true
+  }))
+}
+
+onMounted(async () => {
+  if (selectedHostValueFromStore.value) selectedHost.value = fromQuery(selectedHostValueFromStore.value, optionsHost.value)
+  if (selectedInclusionValueFromStore.value) selectedInclusion.value = fromQuery(selectedInclusionValueFromStore.value, optionsInclusion.value)
+})
+
 </script>
 <template>
   <QueryFilterBaseContainer :title="$t('material_inclusion')" :dialog-title="$t('please_select_material_inclusion')" @submit="submit">

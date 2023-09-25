@@ -4,13 +4,14 @@ const { t } = useI18n()
 const queryStore = useQueryStore()
 
 const inclusionTypeFilterValue = computed(() => queryStore.getFilter('inclusiontype')?.value)
+const materialFilterValue = computed(() => queryStore.getFilter('material')?.value)
 
 const storedMaterial = window.localStorage.getItem('material-filter')
 const hideMaterialDialog = window.localStorage.getItem('hide-material-dialog')
 
 const selectedMaterialId = ref<string | null>(hideMaterialDialog !== null && storedMaterial ? storedMaterial : null)
 
-handleFilterSelection(selectedMaterialId.value)
+if (!materialFilterValue.value) handleFilterSelection(selectedMaterialId.value)
 
 function handleFilterSelection(value: string | null) {
   if (value === null) return
@@ -26,6 +27,7 @@ function handleFilterSelection(value: string | null) {
 function submit() {
   queryStore.execute()
 }
+
 
 </script>
 <template>

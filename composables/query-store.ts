@@ -77,7 +77,7 @@ export const useQueryStore = defineStore('query', {
         try {
           this.result = await getSamples(this.activeFilters.map(toQuery), abortController)
           this.loadingQuery(false)
-        } catch (e) {
+        } catch (e: any) {
           if (e.message !== 'abort') this.loadingQuery(false)
         }
       }

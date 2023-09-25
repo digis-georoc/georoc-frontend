@@ -2,7 +2,7 @@
 const id = ref(1)
 const searchValue = ref('')
 const props = withDefaults(defineProps<{
-  placeholder: string,
+  placeholder?: string,
 }>(), {
   placeholder: 'please_enter'
 })
@@ -37,7 +37,6 @@ function onEnter(event: Event) {
       aria-haspopup="true"
       aria-expanded="true"
       :aria-controls="`${id}OptionsList`"
-      :aria-aria-activedescendant="`${id}${pointer}HighlightedOption`"
       :aria-owns="`${id}OptionsList`"
       :placeholder="$t(placeholder) + '...'"
       @focus="focus"

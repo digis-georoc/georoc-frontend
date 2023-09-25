@@ -3,6 +3,7 @@ import { MultiselectOption } from "~/types"
 
 const queryStore = useQueryStore()
 
+const selectedValueFromStore = computed(() => queryStore.getFilter('rocktype')?.value)
 const emit = defineEmits<{
   change: [selected: MultiselectOption[]]
 }>()
@@ -14,6 +15,8 @@ const selectedTemp = ref<MultiselectOption[]>([])
 onMounted(async () => {
   const rocktypes = await getRocktypes()
   options.value = rocktypes?.data.map(({ value, label }) => ({ value, label, active: false})) ?? []
+
+  if (selectedValueFromStore.value) selected.value = fromQuery(selectedValueFromStore.value, options.value)
 })
 function remove(index: number) {
   selected.value.splice(index, 1)
@@ -28,11 +31,24 @@ function submit() {
   selected.value = selectedTemp.value
   queryStore.setPanelFilter({
     name: 'rocktype',
-    value: selected.value.length > 0 ? 'IN:' + selected.value.map(({ value }) => value).join(',') : ''
+    value: toQuery(selected.value)
   })
   queryStore.execute()
 }
 
+function toQuery(selected: MultiselectOption[]) {
+  return selected.length > 0 ? 'IN:' + selected.map(({ value }) => value).join(',') : ''
+}
+
+function fromQuery(query: string, options: MultiselectOption[]): MultiselectOption[] {
+  query = query.replace('IN:', '')
+  const queryArr = query.split(',')
+  return queryArr.map(value => ({
+    value,
+    label: options.find(option => option.value === value)?.label ?? value,
+    active: true
+  }))
+}
 </script>
 
 <template>
