@@ -10,8 +10,8 @@ const selectedInclusionValueFromStore = computed(() => queryStore.getFilter('inc
 
 
 const minerals = await getMinerals()
-const optionsHost = ref(minerals?.data.map(({ value, label }) => ({ value, label, active: false})) ?? [])
-const optionsInclusion = ref(minerals?.data.map(({ value, label }) => ({ value, label, active: false})) ?? [])
+const optionsHost = ref<MultiselectOption[]>([])
+const optionsInclusion = ref<MultiselectOption[]>([])
 
 const selectedHost = ref<MultiselectOption[]>([])
 const selectedHostTemp = ref<MultiselectOption[]>([])
@@ -41,6 +41,18 @@ function submit() {
   selectedHost.value = selectedHostTemp.value
   selectedInclusion.value = selectedInclusionTemp.value
 
+  const selectedValuesHost = selectedHost.value.map(({ value }) => value)
+  optionsHost.value = optionsHost.value.map(option => {
+    option.active = selectedValuesHost.includes(option.value)
+    return option
+  })
+
+  const selectedValuesInclusion = selectedInclusion.value.map(({ value }) => value)
+  optionsInclusion.value = optionsInclusion.value.map(option => {
+    option.active = selectedValuesInclusion.includes(option.value)
+    return option
+  })
+
   queryStore.setPanelFilter({
     name: 'hostmaterial',
     value: toQuery(selectedHost.value)
@@ -56,19 +68,44 @@ function toQuery(selected: MultiselectOption[]) {
   return selected.length > 0 ? 'IN:' + selected.map(({ value }) => value).join(',') : ''
 }
 
-function fromQuery(query: string, options: MultiselectOption[]): MultiselectOption[] {
+function fromQuery(query: string): string[] {
   query = query.replace('IN:', '')
-  const queryArr = query.split(',')
-  return queryArr.map(value => ({
-    value,
-    label: options.find(option => option.value === value)?.label ?? value,
-    active: true
-  }))
+  return  query.split(',')
 }
 
 onMounted(async () => {
-  if (selectedHostValueFromStore.value) selectedHost.value = fromQuery(selectedHostValueFromStore.value, optionsHost.value)
-  if (selectedInclusionValueFromStore.value) selectedInclusion.value = fromQuery(selectedInclusionValueFromStore.value, optionsInclusion.value)
+  selectedHost.value = []
+  selectedInclusion.value = []
+
+  let selectedHostValues: string[] = []
+  let selectedInclusionValues: string[] = []
+
+  if (selectedHostValueFromStore.value) selectedHostValues = fromQuery(selectedHostValueFromStore.value)
+  if (selectedInclusionValueFromStore.value) selectedInclusionValues = fromQuery(selectedInclusionValueFromStore.value)
+
+  optionsHost.value = minerals?.data
+    .map(({ value, label }) => {
+      const active = selectedHostValues.includes(value)
+      const option = {
+        value,
+        label,
+        active
+      }
+      if (active) selectedHost.value.push(option)
+      return option
+    }) ?? []
+
+  optionsInclusion.value = minerals?.data
+    .map(({ value, label }) => {
+      const active = selectedInclusionValues.includes(value)
+      const option = {
+        value,
+        label,
+        active
+      }
+      if (active) selectedInclusion.value.push(option)
+      return option
+    }) ?? []
 })
 
 </script>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {MultiselectOption} from "~/types";
+import options from "~/components/base/multiselect/options.vue";
 
 const id = ref(1)
 
@@ -14,9 +15,10 @@ const props = defineProps<{
 const emit = defineEmits(['change'])
 
 watch(() => props.options, (value) => {
-  _options.value = value
+  _options.value = JSON.parse(JSON.stringify(value));
   selectedOptions.value = value.filter(({ active }) => !!(active))
 }, {immediate:true})
+
 function addToSelected(option: MultiselectOption) {
   selectedOptions.value.push(option)
   emit('change', selectedOptions.value)

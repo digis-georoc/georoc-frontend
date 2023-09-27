@@ -13,11 +13,27 @@ const selected = ref<MultiselectOption[]>([])
 const selectedTemp = ref<MultiselectOption[]>([])
 
 onMounted(async () => {
+  selected.value = []
   const rocktypes = await getRocktypes()
-  options.value = rocktypes?.data.map(({ value, label }) => ({ value, label, active: false})) ?? []
 
-  if (selectedValueFromStore.value) selected.value = fromQuery(selectedValueFromStore.value, options.value)
+  let selectedValues: string[] = []
+  if (selectedValueFromStore.value) {
+    selectedValues = fromQuery(selectedValueFromStore.value)
+  }
+
+  options.value = rocktypes?.data
+    .map(({ value, label }) => {
+      const active = selectedValues.includes(value)
+      const option = {
+        value,
+        label,
+        active
+      }
+      if (active) selected.value.push(option)
+      return option
+    }) ?? []
 })
+
 function remove(index: number) {
   selected.value.splice(index, 1)
   queryStore.setPanelFilter({
@@ -29,6 +45,13 @@ function remove(index: number) {
 
 function submit() {
   selected.value = selectedTemp.value
+  const selectedValues = selected.value.map(({ value }) => value)
+
+  options.value = options.value.map(option => {
+    option.active = selectedValues.includes(option.value)
+    return option
+  })
+
   queryStore.setPanelFilter({
     name: 'rocktype',
     value: toQuery(selected.value)
@@ -40,14 +63,14 @@ function toQuery(selected: MultiselectOption[]) {
   return selected.length > 0 ? 'IN:' + selected.map(({ value }) => value).join(',') : ''
 }
 
-function fromQuery(query: string, options: MultiselectOption[]): MultiselectOption[] {
+function fromQuery(query: string): string[] {
   query = query.replace('IN:', '')
-  const queryArr = query.split(',')
-  return queryArr.map(value => ({
-    value,
-    label: options.find(option => option.value === value)?.label ?? value,
-    active: true
-  }))
+  return query.split(',')
+  // return queryArr.map(value => ({
+  //   value,
+  //   label: options.find(option => option.value === value)?.label ?? value,
+  //   active: true
+  // }))
 }
 </script>
 
