@@ -23,7 +23,7 @@ function onSubmit() {
       <div class="flex mb-2">
         <slot name="selected"/>
       </div>
-      <BaseButton class="mt-auto" @click="isOpen = true" text="Select" size="small"></BaseButton>
+      <BaseButton class="mt-3" @click="isOpen = true" text="Select" size="small"></BaseButton>
     </div>
   </div>
   <BaseDialog :title="dialogTitle" v-model="isOpen">

@@ -113,10 +113,10 @@ onMounted(async () => {
   <QueryFilterBaseContainer :title="$t('material_inclusion')" :dialog-title="$t('please_select_material_inclusion')" @submit="submit">
     <template v-slot:selected>
       <div class="flex flex-col">
-        <div class="flex items-center mb-2">
+        <div class="flex items-start mb-3">
           <span class="text-sm me-2">{{ $t('host_material') }}:</span><QueryFilterBaseSelected :items="selectedHost" @remove="removeHost($event)" />
         </div>
-        <div class="flex items-center">
+        <div class="flex items-start">
           <span class="text-sm me-2">{{ $t('inclusion_material') }}:</span><QueryFilterBaseSelected :items="selectedInclusion" @remove="removeInclusion($event)" />
         </div>
       </div>
