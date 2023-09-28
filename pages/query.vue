@@ -33,7 +33,7 @@ function handleListBtn() {
       <div class="flex h-full w-full">
         <QueryFiltersPanel />
         <div class="flex flex-1 relative">
-          <div v-if="!isTouchDevice" class="absolute top-[24px] z-[1111] left-1/2 -translate-x-1/2">
+          <div v-if="!isTouchDevice" class="absolute bottom-16 z-[1111] left-1/2 -translate-x-1/2">
             <QueryFilterPolygon />
           </div>
           <QueryMap/>
