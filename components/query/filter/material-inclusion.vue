@@ -110,7 +110,7 @@ onMounted(async () => {
 
 </script>
 <template>
-  <QueryFilterBaseContainer :title="$t('material_inclusion')" :dialog-title="$t('please_select_material_inclusion')" @submit="submit">
+  <QueryFilterBaseContainer :title="$t('material')" :dialog-title="$t('please_select_material_inclusion')" @submit="submit">
     <template v-slot:selected>
       <div class="flex flex-col">
         <div class="flex items-start mb-3">

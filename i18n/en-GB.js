@@ -30,11 +30,12 @@ export default {
   tectonic_setting: 'Tectonic Setting',
   location_type: 'Location Type',
   age: 'Age',
-  please_select_rock_type: 'Please select a rock type',
-  please_select_inclusion_type: 'Please select an inclusion type',
+  please_select_rock_type: 'Please select one or more Rock Type(s)',
+  please_select_inclusion_type: 'Please select an Inclusion Type',
   material_inclusion: 'Material Inclusion',
-  please_select_material_inclusion: 'Please select a material inclusion',
+  please_select_material_inclusion: 'Please select one or more Host Material(s) and/or one or more Inclusion Material(s)',
   host_material: 'Host Material',
   inclusion_material: 'Inclusion Material',
-  loading: 'Loading'
+  loading: 'Loading',
+  please_select: 'Please select'
 }
