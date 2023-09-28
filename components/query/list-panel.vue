@@ -2,8 +2,8 @@
   const isOpen = ref(false)
 </script>
 <template>
-  <div class="absolute z-[1000] h-full w-[420px] top-0 flex transition-transform border-l dark:border-zinc-600"
-       :class="{'right-0': isOpen, '-right-[420px]': !isOpen }">
+  <div class="relative z-[1000] h-full w-[420px] top-0 flex transition-all border-l dark:border-zinc-600"
+       :class="{'me-0': isOpen, '-me-[420px]': !isOpen }">
     <BaseButton
         :text="$t('list_view')"
         icon="ic:round-format-list-bulleted"
