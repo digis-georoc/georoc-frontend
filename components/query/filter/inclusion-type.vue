@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RadioGroupOption } from "~/types";
+import { QueryKey, RadioGroupOption } from "~/types";
 const queryStore = useQueryStore()
 
 const { t } = useI18n()
@@ -37,7 +37,7 @@ function remove() {
 function submit() {
   selected.value = [selectedTemp.value]
   queryStore.setPanelFilter({
-    name: 'inclusiontype',
+    name: QueryKey.InclusionType,
     value: toQuery(selected.value)
   })
   queryStore.execute()

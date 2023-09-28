@@ -9,7 +9,7 @@ import L, {LatLng, LatLngBounds} from "leaflet"
 import FreeDraw, { MarkerEvent } from "leaflet-freedraw"
 
 import 'leaflet.markercluster/dist/leaflet.markercluster-src'
-import { QueryLocationsResponse } from "~/types";
+import { QueryKey, QueryLocationsResponse } from "~/types";
 import {Feature, Polygon, Position} from "geojson";
 
 const queryStore = useQueryStore()
@@ -146,7 +146,7 @@ function setBboxFilter() {
   ];
 
   queryStore.setBboxFilter({
-    name: 'bbox',
+    name: QueryKey.Bbox,
     value: bbox
   })
 }
@@ -224,7 +224,7 @@ onMounted(() => {
   freeDraw.on("markers",(event: MarkerEvent) => {
     if(event.eventType == 'create') {
       var latLngs: [number, number][] = event.latLngs[0].map(({lat, lng}) => [lng, lat])
-      queryStore.setPanelFilter({ name: 'polygon', value: latLngs})
+      queryStore.setPanelFilter({ name: QueryKey.Polygon, value: latLngs})
       queryStore.execute()
       freeDraw.clear()
 

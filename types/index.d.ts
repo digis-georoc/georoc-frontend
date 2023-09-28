@@ -1,7 +1,17 @@
-import {Feature, MultiPoint, Point, Polygon} from "geojson";
+import {Feature, Point, Polygon} from "geojson";
+
+enum QueryKey {
+  Material = 'material',
+  Polygon = 'polygon',
+  Bbox = 'bbox',
+  RockType = 'rocktype',
+  InclusionType = 'inclusiontype',
+  HostMaterial = 'hostmaterial',
+  InclusionMaterial = 'inclusionmaterial'
+}
 
 interface QueryFilter {
-  name: 'material' | 'polygon' | 'bbox' | 'rocktype' | 'inclusiontype' | 'mineral_inclusion' | 'chemistry',
+  name: FilterKey,
   value: any
 }
 
@@ -76,6 +86,7 @@ interface RadioGroupOption {
 }
 
 export {
+  QueryKey,
   QueryFilter,
   QueryState,
   MapSample,

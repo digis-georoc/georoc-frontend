@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MultiselectOption } from "~/types"
+import { MultiselectOption, QueryKey } from "~/types"
 
 const queryStore = useQueryStore()
 
@@ -37,7 +37,7 @@ onMounted(async () => {
 function remove(index: number) {
   selected.value.splice(index, 1)
   queryStore.setPanelFilter({
-    name: 'rocktype',
+    name: QueryKey.RockType,
     value: selected.value.length > 0 ? 'IN:' + selected.value.map(({ value }) => value).join(',') : ''
   })
   queryStore.execute()
@@ -53,7 +53,7 @@ function submit() {
   })
 
   queryStore.setPanelFilter({
-    name: 'rocktype',
+    name: QueryKey.RockType,
     value: toQuery(selected.value)
   })
   queryStore.execute()

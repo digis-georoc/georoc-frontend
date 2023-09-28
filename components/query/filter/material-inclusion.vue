@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {MultiselectOption} from "~/types";
+import { MultiselectOption, QueryKey } from "~/types";
 
 const queryStore = useQueryStore()
 
@@ -22,7 +22,7 @@ const selectedInclusionTemp = ref<MultiselectOption[]>([])
 function removeHost(index: number) {
   selectedHost.value.splice(index, 1)
   queryStore.setPanelFilter({
-    name: 'hostmaterial',
+    name: QueryKey.HostMaterial,
     value: toQuery(selectedHost.value)
   })
   queryStore.execute()
@@ -31,7 +31,7 @@ function removeHost(index: number) {
 function removeInclusion(index: number) {
   selectedHost.value.splice(index, 1)
   queryStore.setPanelFilter({
-    name: 'inclusionmaterial',
+    name: QueryKey.InclusionMaterial,
     value: toQuery(selectedInclusion.value)
   })
   queryStore.execute()
@@ -54,11 +54,11 @@ function submit() {
   })
 
   queryStore.setPanelFilter({
-    name: 'hostmaterial',
+    name: QueryKey.HostMaterial,
     value: toQuery(selectedHost.value)
   })
   queryStore.setPanelFilter({
-    name: 'inclusionmaterial',
+    name: QueryKey.InclusionMaterial,
     value: toQuery(selectedInclusion.value)
   })
   queryStore.execute()

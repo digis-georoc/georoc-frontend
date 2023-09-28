@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { QueryKey } from "~/types";
+
 const { t } = useI18n()
 
 const queryStore = useQueryStore()
@@ -17,7 +19,7 @@ function handleFilterSelection(value: string | null) {
   if (value === null) return
   selectedMaterialId.value = value
   queryStore.setPanelFilter({
-    name: 'material',
+    name: QueryKey.Material,
     value
   }, true)
   queryStore.resetOnMaterialChange()
@@ -27,7 +29,6 @@ function handleFilterSelection(value: string | null) {
 function submit() {
   queryStore.execute()
 }
-
 
 </script>
 <template>
