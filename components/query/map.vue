@@ -9,7 +9,7 @@ import L, {LatLng, LatLngBounds} from "leaflet"
 import FreeDraw, { MarkerEvent } from "leaflet-freedraw"
 
 import 'leaflet.markercluster/dist/leaflet.markercluster-src'
-import { QueryKey, QueryLocationsResponse } from "~/types";
+import { QueryLocationsResponse } from "~/types";
 import {Feature, Polygon, Position} from "geojson";
 
 const queryStore = useQueryStore()

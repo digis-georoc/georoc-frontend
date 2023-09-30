@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MultiselectOption, QueryKey } from "~/types";
+import { MultiselectOption } from "~/types";
 
 const queryStore = useQueryStore()
 

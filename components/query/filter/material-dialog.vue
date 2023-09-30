@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const emit = defineEmits(['select'])
 
-const isOpen = ref(window.localStorage.getItem('hide-material-dialog') === null)
+const storageKey = 'hide-material-dialog'
+const isOpen = ref(window.localStorage.getItem(storageKey) === null && window.sessionStorage.getItem(storageKey) === null)
 
 const stored = window.localStorage.getItem('material-filter')
 const initial = stored !== null ? stored : 'WR'
@@ -16,12 +17,13 @@ function handleContinue() {
 watch(() => isOpen.value, (value) => {
   if (value === true) return
 
-  if (dontShowAgain.value) window.localStorage.setItem('hide-material-dialog', '')
-  else window.localStorage.removeItem('hide-material-dialog')
+  if (dontShowAgain.value) window.localStorage.setItem(storageKey, '')
+  else window.localStorage.removeItem(storageKey)
+
+  window.sessionStorage.setItem(storageKey, '')
 
   emit('select', selected.value)
 })
-
 </script>
 
 <template>

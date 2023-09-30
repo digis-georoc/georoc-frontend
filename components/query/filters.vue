@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { QueryKey } from "~/types";
-
 const { t } = useI18n()
 
 const queryStore = useQueryStore()
 
-const inclusionTypeFilterValue = computed(() => queryStore.getFilter('inclusiontype')?.value)
-const materialFilterValue = computed(() => queryStore.getFilter('material')?.value)
+const inclusionTypeFilterValue = computed(() => queryStore.getFilter(QueryKey.InclusionType)?.value)
+const materialFilterValue = computed(() => queryStore.getFilter(QueryKey.Material)?.value)
 
+const storageHideKey = 'hide-material-dialog'
 const storedMaterial = window.localStorage.getItem('material-filter')
-const hideMaterialDialog = window.localStorage.getItem('hide-material-dialog')
+const hideMaterialDialog = window.localStorage.getItem(storageHideKey) !== null || window.sessionStorage.getItem(storageHideKey) !== null
 
-const selectedMaterialId = ref<string | null>(hideMaterialDialog !== null && storedMaterial ? storedMaterial : null)
+const selectedMaterialId = ref<string | null>(hideMaterialDialog && storedMaterial ? storedMaterial : null)
 
 if (!materialFilterValue.value) handleFilterSelection(selectedMaterialId.value)
 

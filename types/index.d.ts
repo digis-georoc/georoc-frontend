@@ -1,15 +1,5 @@
 import {Feature, Point, Polygon} from "geojson";
 
-enum QueryKey {
-  Material = 'material',
-  Polygon = 'polygon',
-  Bbox = 'bbox',
-  RockType = 'rocktype',
-  InclusionType = 'inclusiontype',
-  HostMaterial = 'hostmaterial',
-  InclusionMaterial = 'inclusionmaterial'
-}
-
 interface QueryFilter {
   name: FilterKey,
   value: any
@@ -86,7 +76,6 @@ interface RadioGroupOption {
 }
 
 export {
-  QueryKey,
   QueryFilter,
   QueryState,
   MapSample,

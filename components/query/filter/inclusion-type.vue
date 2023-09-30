@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { QueryKey, RadioGroupOption } from "~/types";
+import { RadioGroupOption } from "~/types";
 const queryStore = useQueryStore()
 
 const { t } = useI18n()
@@ -24,13 +24,13 @@ const types = [
     label: t('melt'),
   },
 ]
-const selectedValueFromStore = computed(() => queryStore.getFilter('inclusiontype')?.value)
+const selectedValueFromStore = computed(() => queryStore.getFilter(QueryKey.InclusionType)?.value)
 const selected = ref<RadioGroupOption[]>([])
 const selectedTemp = ref<RadioGroupOption>(types[0])
 
 function remove() {
   selected.value = []
-  queryStore.unsetFilter('inclusiontype')
+  queryStore.unsetFilter(QueryKey.InclusionType)
   queryStore.execute()
 }
 
