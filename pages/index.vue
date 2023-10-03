@@ -30,7 +30,7 @@
           </div>
           <div class="border-r md:border-l md:border-l-0 border-stone-300 dark:border-zinc-700 flex flex-col w-1/2 md:w-1/4 text-center p-4">
             <span class="text-2xl">62,402,280</span>
-            <span>analyzes</span>
+            <span>analyses</span>
           </div>
           <div class="border-stone-300 dark:border-zinc-700 flex flex-col w-1/2 md:w-1/4 text-center p-4">
             <span class="text-2xl">35,166,090</span>

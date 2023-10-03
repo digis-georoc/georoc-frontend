@@ -1,4 +1,11 @@
-import {MineralsResponse, QueryFilter, QueryListResponse, QueryLocationsResponse, RocktypesResponse} from "~/types";
+import {
+  ElementsResponse,
+  MineralsResponse,
+  QueryFilter,
+  QueryListResponse,
+  QueryLocationsResponse,
+  RocktypesResponse
+} from "~/types";
 
 async function getSamples(filters: QueryFilter[] = [], { signal }: AbortController): Promise<QueryLocationsResponse | null> {
 
@@ -21,9 +28,7 @@ async function getSamples(filters: QueryFilter[] = [], { signal }: AbortControll
 }
 
 async function getRocktypes(): Promise<RocktypesResponse | null> {
-  const { data} = await useFetch<RocktypesResponse>(
-    '/api/rocktypes',
-  )
+  const { data} = await useFetch<RocktypesResponse>('/api/rocktypes',)
   return data.value
 }
 
@@ -52,10 +57,22 @@ async function getList(filters: QueryFilter[] = []): Promise<QueryListResponse |
   return null
 }
 
+async function getElements(type: string): Promise<ElementsResponse | null> {
+  const { data} = await useFetch<ElementsResponse>('/api/elements')
+  return data.value
+}
+
+async function getElementTypes(type: string): Promise<ElementsResponse | null> {
+  const { data} = await useFetch<ElementsResponse>('/api/element-types')
+  return data.value
+}
+
 export {
   getSamples,
   getList,
   getRocktypes,
-  getMinerals
+  getMinerals,
+  getElements,
+  getElementTypes
 }
 

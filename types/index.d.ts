@@ -74,6 +74,31 @@ interface RadioGroupOption {
   value: string,
   label: string,
 }
+interface ChemicalElement {
+  name: string
+}
+
+interface ElementsResponse {
+  data: ChemicalElement[],
+  numItems: number
+}
+
+interface ChemicalElementType {
+  name: string
+}
+
+interface ElementTypesResponse {
+  data: ChemicalElementType[],
+  numItems: number
+}
+
+interface SelectedChemicalElement {
+  type: RadioGroupOption | null,
+  element: RadioGroupOption | null,
+  min: number,
+  max: number
+}
+
 
 export {
   QueryFilter,
@@ -87,7 +112,12 @@ export {
   RocktypesResponseItem,
   QueryListResponse,
   RadioGroupOption,
-  MineralsResponse
+  MineralsResponse,
+  ChemicalElement,
+  ElementsResponse,
+  ElementTypesResponse,
+  ChemicalElementType,
+  SelectedChemicalElement
 }
 
 

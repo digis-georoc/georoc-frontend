@@ -37,5 +37,11 @@ export default {
   host_material: 'Host Material',
   inclusion_material: 'Inclusion Material',
   loading: 'Loading',
-  please_select: 'Please select'
+  please_select: 'Please select',
+  please_select_chemistry: 'Please select a chemical element',
+  element_type: 'Element type',
+  element: 'Element',
+  type: 'Type',
+  min: 'Min',
+  max: 'Max'
 }

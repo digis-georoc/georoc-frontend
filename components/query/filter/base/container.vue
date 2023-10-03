@@ -20,7 +20,7 @@ function onSubmit() {
   <div class="flex flex-col h-full">
     <h3 v-if="title" class="mb-2 font-bold">{{ title }}</h3>
     <div class="flex flex-col flex-1 items-start">
-      <div class="flex mb-2">
+      <div class="flex w-full mb-2">
         <slot name="selected"/>
       </div>
       <BaseButton class="mt-3" @click="isOpen = true" text="Select" size="small"></BaseButton>
