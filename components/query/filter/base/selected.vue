@@ -21,8 +21,6 @@ watch(() => props.items, value => {
     visibleItems.value = value
   }
 })
-
-
 </script>
 <template>
   <div class="flex flex-wrap gap-1.5">
@@ -37,7 +35,7 @@ watch(() => props.items, value => {
         v-if="hiddenItems.length > 0"
       >
         <h3 class="font-semibold text-sm mb-2">More:</h3>
-        <div class="min-w-[160px] flex flex-col items-start">
+        <div class="min-w-[160px] flex flex-col items-start gap-1.5">
           <div class="bg-primary-100 py-1.5 px-2 text-primary font-bold rounded-lg flex items-center" v-for="(item, i) in hiddenItems">
             <span class="text-sm leading-none">{{ $t(item.label) }}</span>
             <Icon name="ic:round-close" class="cursor-pointer hover:bg-primary hover:bg-opacity-25 rounded-full p-0.5 ms-2" @click="emit('remove', i)" />
