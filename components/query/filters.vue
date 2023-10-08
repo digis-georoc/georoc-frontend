@@ -31,57 +31,44 @@ function submit() {
 
 </script>
 <template>
-  <div class="self-start flex items-center mb-8 w-full px-4">
+  <div class="self-start flex items-center w-full px-4">
     <QueryFilterMaterial class="w-full" :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
   </div>
   <div class="flex flex-1 flex-col px-4 overflow-auto">
-    <div v-if="selectedMaterialId === 'WR'">
-      <QueryFilterRockType />
-    </div>
-    <div v-if="selectedMaterialId === 'INC'">
-      <QueryFilterInclusionType />
-    </div>
-    <div v-if="inclusionTypeFilterValue === 'IMIN'" class="my-6 border-b dark:border-stone-700"></div>
-    <div v-if="inclusionTypeFilterValue === 'IMIN'" class="flex-grow flex">
-      <QueryFilterMaterialInclusion />
-    </div>
-    <div class="my-6 border-b dark:border-stone-700"></div>
-    <div>
-      <QueryFilterChemistry />
-    </div>
-    <div class="my-6 border-b dark:border-stone-700"></div>
-    <div>
-      <QueryFilterBaseContainer :title="$t('tectonic_setting')" @submit="submit">
-        <template v-slot:selected>
-          <QueryFilterBaseSelected />
-        </template>
-        <template v-slot:options>
-          <QueryFilterTectonic />
-        </template>
-      </QueryFilterBaseContainer>
-    </div>
-    <div class="my-6 border-b dark:border-stone-700"></div>
-    <div>
-      <QueryFilterBaseContainer :title="$t('location_type')" @submit="submit">
-        <template v-slot:selected>
-          <QueryFilterBaseSelected />
-        </template>
-        <template v-slot:options>
-          <QueryFilterLocationType />
-        </template>
-      </QueryFilterBaseContainer>
-    </div>
-    <div class="my-6 border-b dark:border-stone-700"></div>
-    <div>
-      <QueryFilterBaseContainer :title="$t('age')" @submit="submit">
-        <template v-slot:selected>
-          <QueryFilterBaseSelected />
-        </template>
-        <template v-slot:options>
-          <QueryFilterAge />
-        </template>
-      </QueryFilterBaseContainer>
-    </div>
+    <QueryFilterRockType v-if="selectedMaterialId === 'WR'" />
+    <QueryFilterInclusionType v-if="selectedMaterialId === 'INC'" />
+    <template v-if="inclusionTypeFilterValue === 'IMIN'">
+      <QueryFilterHostMaterial />
+      <QueryFilterInclusionMaterial />
+    </template>
+    <template v-if="inclusionTypeFilterValue === 'IFL' || inclusionTypeFilterValue === 'IGL'" class="flex-grow flex">
+      <QueryFilterHostMaterial />
+    </template>
+    <QueryFilterChemistry />
+    <QueryFilterBaseContainer :title="$t('tectonic_setting')" @submit="submit">
+      <template v-slot:selected>
+        <QueryFilterBaseSelected />
+      </template>
+      <template v-slot:options>
+        <QueryFilterTectonic />
+      </template>
+    </QueryFilterBaseContainer>
+    <QueryFilterBaseContainer :title="$t('location_type')" @submit="submit">
+      <template v-slot:selected>
+        <QueryFilterBaseSelected />
+      </template>
+      <template v-slot:options>
+        <QueryFilterLocationType />
+      </template>
+    </QueryFilterBaseContainer>
+    <QueryFilterBaseContainer :title="$t('age')" @submit="submit">
+      <template v-slot:selected>
+        <QueryFilterBaseSelected />
+      </template>
+      <template v-slot:options>
+        <QueryFilterAge />
+      </template>
+    </QueryFilterBaseContainer>
   </div>
   <QueryFilterMaterialDialog @select="handleFilterSelection" />
 </template>

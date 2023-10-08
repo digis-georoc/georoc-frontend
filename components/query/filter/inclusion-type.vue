@@ -45,6 +45,10 @@ function useFilter() {
     name: QueryKey.InclusionType,
     value: toQuery(selected.value)
   })
+
+  queryStore.unsetFilter(QueryKey.HostMaterial)
+  queryStore.unsetFilter(QueryKey.InclusionMaterial)
+
   queryStore.execute()
 }
 
