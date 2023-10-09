@@ -1,9 +1,3 @@
-<template>
-  <div class="flex flex-col items-start flex-wrap">
-    <BaseButton :text="buttonText" @click="handleButton" display="mono" icon="ic:twotone-edit"/>
-<!--    <div class="text-gray-400 text-sm flex-1 mt-2">{{ message }}</div>-->
-  </div>
-</template>
 <script setup lang="ts">
 const { t } = useI18n()
 const queryStore = useQueryStore()
@@ -77,3 +71,9 @@ function stop() {
   queryStore.stopDrawingOnMap()
 }
 </script>
+<template>
+  <div class="flex flex-col items-start flex-wrap">
+    <BaseButton :text="buttonText" @click="handleButton" display="mono" icon="ic:twotone-edit" class="shadow-lg"/>
+    <!--    <div class="text-gray-400 text-sm flex-1 mt-2">{{ message }}</div>-->
+  </div>
+</template>

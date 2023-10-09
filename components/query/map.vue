@@ -254,28 +254,37 @@ const unsubscribe = queryStore.$onAction(
 )
 </script>
 <template>
-  <div id="map" class="h-full w-full"></div>
-  <div
-    v-if="isLoading"
-    class="absolute z-[999] w-[150px] h-[100px]
+  <div class="relative h-full w-full">
+    <div id="map" class="h-full w-full"></div>
+    <div
+        v-if="isLoading"
+        class="absolute z-[999] w-[150px] h-[100px]
     bg-black bg-opacity-50 rounded-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
     flex flex-col items-center justify-center
     text-white pointer-events-none
     ">
-    <span class="loader mb-2"></span>
-    {{ $t('loading') }}...
+      <span class="loader mb-2"></span>
+      {{ $t('loading') }}...
+    </div>
+    <div v-if="isDebug" class="fixed z-[9999] top-[60px] right-0 bg-white p-2 text-sm">
+      <h2 class="mb-2 font-bold">Debug:</h2>
+      <div class="">Last Bbox from API: {{cachedClustersBounds}}</div>
+      <div class="">Current Bbox: {{currentMapBounds}}</div>
+      <div>Out of bounds SW: {{ outOfBoundsSW }}</div>
+      <div>Out of bounds NE: {{ outOfBoundsNE }}</div>
+    </div>
+    <div v-if="!isMobile" class="absolute z-[1000] bottom-0 left-0 bg-white p-1 text-xs">
+      <span>Latitude: </span><span>{{ mouseLat }}</span>&nbsp;
+      <span>Longitude: </span><span>{{ mouseLng }}</span>
+    </div>
+    <div v-if="!isTouchDevice " class="absolute top-[28px] z-[1111] left-1/2 -translate-x-1/2">
+      <QueryFilterPolygon />
+    </div>
+    <!--  <div v-if="!isTouchDevice && !isMobile" class="absolute bottom-16 z-[1111] left-1/2 -translate-x-1/2">-->
+    <!--    <QueryFilterPolygon />-->
+    <!--  </div>-->
   </div>
-  <div v-if="isDebug" class="fixed z-[9999] top-[60px] right-0 bg-white p-2 text-sm">
-    <h2 class="mb-2 font-bold">Debug:</h2>
-    <div class="">Last Bbox from API: {{cachedClustersBounds}}</div>
-    <div class="">Current Bbox: {{currentMapBounds}}</div>
-    <div>Out of bounds SW: {{ outOfBoundsSW }}</div>
-    <div>Out of bounds NE: {{ outOfBoundsNE }}</div>
-  </div>
-  <div v-if="!isMobile" class="absolute z-[1000] bottom-0 left-0 bg-white p-1 text-xs">
-    <span>Latitude: </span><span>{{ mouseLat }}</span>&nbsp;
-    <span>Longitude: </span><span>{{ mouseLng }}</span>
-  </div>
+
 </template>
 <style>
 .mode-create {
