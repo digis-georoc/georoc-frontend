@@ -53,7 +53,7 @@
   classes['p-1'] = props.size === 'small' && isIconOnly
   classes['py-1.5 px-3'] = props.size === 'small' && !_icon
 
-  classes['focus:ring-primary focus:ring-opacity-25 dark:focus:ring-primary-300 dark:focus:ring-opacity-50 bg-primary text-white hover:bg-emerald-700 ' +
+  classes['focus:ring-primary focus:ring-opacity-25 dark:focus:ring-primary-300 dark:focus:ring-opacity-50 bg-primary text-white hover:bg-primary-700 ' +
   'dark:bg-primary dark:hover:bg-primary dark:focus:ring-green-800'] = props.display === 'filled'
 
   classes['focus:ring-primary focus:ring-opacity-25 dark:focus:ring-primary-300 dark:focus:ring-opacity-50 bg-none text-primary hover:underline ' +

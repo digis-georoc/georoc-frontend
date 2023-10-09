@@ -5,10 +5,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#6d466b',
-        'primary-50' : '#c2acc0',
-        'primary-100' : '#ad89ac',
-        'primary-300' : '#915D8E'
+        primary: '#754672',
+        'primary-50' : '#f0dfee',
+        'primary-100' : '#dbc3d9',
+        'primary-300' : '#a374a2',
+        'primary-700' : '#5e385c'
       }
     }
   }

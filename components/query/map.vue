@@ -24,7 +24,7 @@ const outOfBoundsNE = ref(false)
 const mouseLat = ref(0)
 const mouseLng = ref(0)
 let maxClusterSize = 0
-const clusterColors = [theme.colors.lime['300'], theme.colors.amber['300'], theme.colors.red['400']]
+const clusterColors = [theme.colors.lime['200'], theme.colors.amber['200'], theme.colors.orange['300']]
 
 let cachedZoomLevel = initialZoomLevel
 
