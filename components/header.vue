@@ -19,7 +19,7 @@ const navigation = [
             <NuxtLink to="/" class="flex items-center text-stone-800 dark:text-zinc-300 text-sm font-medium">
               <img
                   class="h-8 mr-2"
-                  src="~/assets/images/GEOROC_Logo_clean2.png"
+                  src="~/assets/images/GEOROC_Logo.svg"
                   alt="Your Company"
               />
               GEOROC Database
