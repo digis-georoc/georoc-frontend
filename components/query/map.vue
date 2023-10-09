@@ -23,6 +23,8 @@ const outOfBoundsNE = ref(false)
 
 const mouseLat = ref(0)
 const mouseLng = ref(0)
+let maxClusterSize = 0
+const clusterColors = [theme.colors.lime['300'], theme.colors.amber['300'], theme.colors.red['400']]
 
 let cachedZoomLevel = initialZoomLevel
 
@@ -84,6 +86,13 @@ function addControlLayer() {
   }, {}, {position: 'topleft'}).addTo(map);
 }
 
+function getClusterColor(size: number): string {
+  if (size < maxClusterSize * 0.33) return clusterColors[0]
+  else if (size >= maxClusterSize * 0.33 && size <= maxClusterSize * 0.66) return clusterColors[1]
+  else if (size > maxClusterSize * 0.66) return clusterColors[2]
+  else return theme.colors.stone['200']
+}
+
 function createMarker(feature: Feature, latlng: LatLng) {
   // let icon = L.icon({
   //   iconUrl: useAsset('images/marker.png'),
@@ -96,7 +105,7 @@ function createMarker(feature: Feature, latlng: LatLng) {
   // })
 
   const iconWidth = 50
-  const iconColor = theme.colors.stone['200']
+  const iconColor = getClusterColor(feature.properties?.clusterSize)
   const text = feature.properties?.clusterSize
 
   const icon = L.divIcon({
@@ -166,15 +175,16 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
     pointToLayer: createMarker
   }
 
+  const clusterFeatures = value.clusters
+    .filter(({ centroid }) => centroid.geometry.coordinates !== null)
+    .map(({ centroid }) => centroid)
+
+  const sizes = clusterFeatures.map(({ properties }) => properties?.clusterSize)
+
+  maxClusterSize = Math.max(...sizes)
+
   // Add cluster markers
-  markersGroup.addLayer(
-    L.geoJSON(
-      value.clusters
-        .filter(({ centroid }) => centroid.geometry.coordinates !== null)
-        .map(({ centroid }) => centroid),
-      layerOptions
-    )
-  )
+  markersGroup.addLayer(L.geoJSON(clusterFeatures, layerOptions))
 
   // Add bounds polygon per cluster
   markersGroup.addLayer(
