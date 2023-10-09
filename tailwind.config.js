@@ -5,10 +5,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: colors.emerald['600'],
-        'primary-50' : colors.emerald['50'],
-        'primary-100' : colors.emerald['100'],
-        'primary-300' : colors.emerald['300']
+        primary: '#6d466b',
+        'primary-50' : '#c2acc0',
+        'primary-100' : '#ad89ac',
+        'primary-300' : '#915D8E'
       }
     }
   }
