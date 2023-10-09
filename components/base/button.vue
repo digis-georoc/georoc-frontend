@@ -4,7 +4,8 @@
     display?: 'filled' | 'link' | 'mono' | 'flat',
     size?: 'small' | 'normal',
     icon?: string | null,
-    iconPosition?: 'left' | 'right' | null
+    iconPosition?: 'left' | 'right' | null,
+    rounded?: boolean | null
   }
 
   const props = withDefaults(defineProps<Props>(), {
@@ -12,7 +13,8 @@
     display: 'filled',
     icon: null,
     size: 'normal',
-    iconPosition: 'left'
+    iconPosition: 'left',
+    rounded: null
   })
 
   let _icon = props.icon
@@ -24,6 +26,11 @@
     _iconPosition = null
   }
 
+  let _rounded = false
+  if (props.rounded === null && props.text === '') _rounded = true
+  if (props.rounded === null && props.text !== '') _rounded = false
+  if (props.rounded !== null ) _rounded = props.rounded
+
   const classes: { [key: string]: boolean } = {}
 
   if (props.display === 'link') {
@@ -33,9 +40,8 @@
 
   classes['focus:outline-none focus:ring-4 text-sm font-medium flex items-center leading-2'] = true
 
-  classes['rounded-lg'] = !isIconOnly
-  classes['rounded-full'] = isIconOnly
-
+  classes['rounded-lg'] = !_rounded
+  classes['rounded-full'] = _rounded
 
   classes['py-2.5 ps-3 pe-5'] = props.size === 'normal' && !!(_icon) && _iconPosition === 'left'
   classes['py-2.5 ps-5 pe-3'] = props.size === 'normal' && !!(_icon) && _iconPosition === 'right'
@@ -62,7 +68,7 @@
 <template>
   <button type="button" :class="classes">
     <template v-if="_icon && _iconPosition === 'left'">
-      <Icon :name="_icon" class="text-base me-1 mt-[1px]" />
+      <Icon :name="_icon" class="text-base me-1" />
     </template>
     <template v-if="isIconOnly"><Icon :name="_icon" class="text-xl mt-[1px]" />
     </template>

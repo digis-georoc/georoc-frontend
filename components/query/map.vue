@@ -254,7 +254,6 @@ const unsubscribe = queryStore.$onAction(
 )
 </script>
 <template>
-  <div class="relative h-full w-full">
     <div id="map" class="h-full w-full"></div>
     <div
         v-if="isLoading"
@@ -277,14 +276,9 @@ const unsubscribe = queryStore.$onAction(
       <span>Latitude: </span><span>{{ mouseLat }}</span>&nbsp;
       <span>Longitude: </span><span>{{ mouseLng }}</span>
     </div>
-    <div v-if="!isTouchDevice " class="absolute top-[28px] z-[1111] left-1/2 -translate-x-1/2">
+    <div v-if="!isTouchDevice " class="absolute top-[155px] z-[1111] left-[12px]">
       <QueryFilterPolygon />
     </div>
-    <!--  <div v-if="!isTouchDevice && !isMobile" class="absolute bottom-16 z-[1111] left-1/2 -translate-x-1/2">-->
-    <!--    <QueryFilterPolygon />-->
-    <!--  </div>-->
-  </div>
-
 </template>
 <style>
 .mode-create {

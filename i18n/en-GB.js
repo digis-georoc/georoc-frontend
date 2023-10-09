@@ -43,5 +43,6 @@ export default {
   element: 'Element',
   type: 'Type',
   min: 'Min',
-  max: 'Max'
+  max: 'Max',
+  download_samples: 'Download samples'
 }

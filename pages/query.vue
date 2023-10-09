@@ -16,7 +16,6 @@ function handleListBtn() {
   isListMobileOpen.value = !isListMobileOpen.value
   if (isListMobileOpen.value) isFilterMobileOpen.value = false
 }
-
 </script>
 <template>
   <div class="flex flex-col xl:flex-row h-full w-full relative">
@@ -31,8 +30,11 @@ function handleListBtn() {
         <QueryFiltersPanel />
         <div class="flex flex-1 relative">
           <QueryMap/>
-          <QueryListPanel/>
+          <div class="absolute top-[24px] z-[1111] left-1/2 -translate-x-1/2">
+            <QueryDownloadSamples />
+          </div>
         </div>
+        <QueryListPanel/>
       </div>
     </template>
   </div>
