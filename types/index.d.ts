@@ -75,7 +75,8 @@ interface RadioGroupOption {
   label: string,
 }
 interface ChemicalElement {
-  name: string
+  value: string,
+  label: string,
 }
 
 interface ElementsResponse {

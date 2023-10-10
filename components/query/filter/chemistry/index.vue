@@ -12,13 +12,9 @@ const elementTypesOptions = ref<RadioGroupOption[]>([])
 const selected = ref<SelectedChemicalElement[]>([])
 const selectedItemTemp = ref<SelectedChemicalElement>(createEmptySelectedItem())
 
-function removeSelected(index: number) {
+async function removeSelected(index: number) {
   selected.value.splice(index, 1)
-  // queryStore.setPanelFilter({
-  //   name: 'rocktype',
-  //   value: selected.value.length > 0 ? 'IN:' + selected.value.map(({ value }) => value).join(',') : ''
-  // })
-  // queryStore.execute()
+  await useFilter()
 }
 
 function createEmptySelectedItem() {
@@ -31,31 +27,32 @@ function createEmptySelectedItem() {
 }
 
 async function submit() {
-  console.log(selectedItemTemp.value)
   selected.value.push(selectedItemTemp.value)
   selectedItemTemp.value = createEmptySelectedItem()
+  await useFilter()
+}
 
-  // selected.value = selectedTemp.value
-  // queryStore.setPanelFilter({
-  //   name: 'chemistry',
-  //   value: 'MGO>0.5&SIO2<=1.82|AU=2'
-  // })
-  // await $fetch.raw(apiBaseUrl + '/geodata/samplesclustered', {
-  //   query: Object.fromEntries(params.entries()),
-  //   method: 'GET',
-  //   headers: {
-  //     'DIGIS-API-ACCESSKEY': apiToken,
-  //   }
-  // });
-  // queryStore.execute()
+async function useFilter() {
+  const value = selected.value.map(({ type, element, min, max }) => `(${type?.value},${element?.value},${min},${max})`).join(',')
+
+  if (value === '') {
+    await queryStore.unsetFilter('chemistry')
+  } else {
+    await queryStore.setPanelFilter({
+      name: 'chemistry',
+      value
+    })
+  }
+
+  await queryStore.execute()
 }
 
 onMounted(async () => {
   elements.value = await getElements('')
   elementTypes.value = await getElementTypes()
 
-  elementOptions.value = elements.value?.data.map(({ name }) => ({ label: name, value: name })).slice(0, 10) ?? []
-  elementTypesOptions.value = elementTypes.value?.data.map(({ name }) => ({ label: name, value: name })).slice(0, 10) ?? []
+  elementOptions.value = elements.value?.data ?? []
+  elementTypesOptions.value = elementTypes.value?.data.map(({ name }) => ({ label: name, value: name })) ?? []
 })
 
 </script>
