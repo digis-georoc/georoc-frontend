@@ -27,7 +27,7 @@ watch(() => isOpen.value, (value) => {
 </script>
 
 <template>
-  <BaseDialog :title="$t('please_select')" v-model="isOpen">
+  <BaseDialog :title="$t('please_select')" v-model="isOpen" :closable="false">
     <QueryFilterMaterial v-model="selected" />
     <div class="flex justify-between items-center mt-4">
       <BaseCheckbox label="Don't show again" v-model="dontShowAgain" />

@@ -7,10 +7,13 @@ import {
   DialogTitle,
 } from '@headlessui/vue'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   modelValue: boolean,
-  title: string
-}>()
+  title?: string,
+  closable: boolean
+}>(), {
+  closable: true
+})
 
 const emit = defineEmits<{
   (event: 'update:modelValue', payload: boolean): void;
@@ -50,19 +53,21 @@ function open() {
             leave-to="opacity-0 scale-95"
           >
             <DialogPanel
+
               class="w-full max-w-md transform rounded-2xl bg-white dark:bg-zinc-800 p-6
               text-left align-middle shadow-xl transition-all"
             >
-              <BaseButton
-                  icon="ic:baseline-close"
-                  display="flat"
-                  class="absolute flex xl:hidden top-5 right-5"
-                  @click="emit('update:modelValue', !modelValue)"
-              />
               <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-400">{{ title }}</DialogTitle>
-              <div class="mt-4">
+              <div class="mt-4" ref="containerRef">
                 <slot/>
               </div>
+              <BaseButton
+                  v-if="closable"
+                  icon="ic:close"
+                  display="flat"
+                  class="absolute flex top-5 right-5"
+                  @click="emit('update:modelValue', !modelValue)"
+              />
             </DialogPanel>
           </TransitionChild>
         </div>
