@@ -100,6 +100,22 @@ interface SelectedChemicalElement {
   max: number
 }
 
+interface TreeNode {
+  key: string,
+  label: string,
+  children: TreeNode[],
+}
+
+interface RockClass {
+  value: string,
+  label: string
+}
+
+interface RockClassResponse {
+  data: RockClass[],
+  numItems: number
+}
+
 
 export {
   QueryFilter,
@@ -118,7 +134,10 @@ export {
   ElementsResponse,
   ElementTypesResponse,
   ChemicalElementType,
-  SelectedChemicalElement
+  SelectedChemicalElement,
+  TreeNode,
+  RockClassResponse,
+  RockClass
 }
 
 

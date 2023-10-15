@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import {MultiselectOption, RadioGroupOption} from "~/types";
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   items: MultiselectOption[] | RadioGroupOption[]
-}>()
+}>(), {
+  items: []
+})
 
 const emit = defineEmits<{
   remove: [index: number]
@@ -20,7 +22,7 @@ watch(() => props.items, value => {
   } else {
     visibleItems.value = value
   }
-})
+}, { immediate: true })
 </script>
 <template>
   <div class="flex flex-wrap gap-1.5">

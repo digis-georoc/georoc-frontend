@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+// import "primevue/resources/themes/lara-light-indigo/theme.css";
+
 useHead({
   htmlAttrs: {
     class: 'h-full'

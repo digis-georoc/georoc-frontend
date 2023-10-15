@@ -3,7 +3,7 @@ import {
   MineralsResponse,
   QueryFilter,
   QueryListResponse,
-  QueryLocationsResponse,
+  QueryLocationsResponse, RockClassResponse,
   RocktypesResponse
 } from "~/types";
 
@@ -67,12 +67,18 @@ async function getElementTypes(type: string): Promise<ElementsResponse | null> {
   return data.value
 }
 
+async function getRockClasses(rockType: string): Promise<RockClassResponse | null> {
+  const { data} = await useFetch<RockClassResponse>('/api/rock-classes' + (rockType ? `?rocktype=${rockType}` : ''))
+  return data.value
+}
+
 export {
   getSamples,
   getList,
   getRocktypes,
   getMinerals,
   getElements,
-  getElementTypes
+  getElementTypes,
+  getRockClasses
 }
 

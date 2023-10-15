@@ -3,6 +3,7 @@ export const QueryKey = {
   Polygon: 'polygon',
   Bbox: 'bbox',
   RockType: 'rocktype',
+  RockClass: 'rockclass',
   InclusionType: 'inclusiontype',
   HostMaterial: 'hostmaterial',
   InclusionMaterial: 'inclusionmaterial'

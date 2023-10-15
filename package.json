@@ -29,7 +29,8 @@
     "leaflet-freedraw": "^2.13.3",
     "leaflet.markercluster": "^1.5.3",
     "nuxt-storage": "^1.2.2",
-    "pinia": "^2.1.4"
+    "pinia": "^2.1.4",
+    "primevue": "^3.36.0"
   },
   "overrides": {
     "vue": "latest"

@@ -1,92 +1,130 @@
 <script setup lang="ts">
-import { MultiselectOption } from "~/types"
+import { RadioGroupOption } from "~/types"
+import { TreeNode, TreeSelectionKeys } from "primevue/tree";
 
+interface SelectedRockType {
+  label: string,
+  value: string,
+  classes: RadioGroupOption[]
+}
 const queryStore = useQueryStore()
 
-const selectedValueFromStore = computed(() => queryStore.getFilter('rocktype')?.value)
+const selectedRockTypeValueFromStore = computed(() => queryStore.getFilter('rocktype')?.value)
+const selectedRockClassValueFromStore = computed(() => queryStore.getFilter('rockclass')?.value)
+
 const emit = defineEmits<{
-  change: [selected: MultiselectOption[]]
+  change: [selected: RadioGroupOption[]]
 }>()
 
-const options = ref<MultiselectOption[]>([])
-const selected = ref<MultiselectOption[]>([])
-const selectedTemp = ref<MultiselectOption[]>([])
+const options = ref<RadioGroupOption[]>([])
+const nodes =ref<TreeNode[]>([])
+
+const selected = ref<SelectedRockType[]>([])
+const selectedKeys = ref<TreeSelectionKeys>({})
+const selectedTemp = ref<SelectedRockType[]>([])
 
 onMounted(async () => {
   selected.value = []
-  const rocktypes = await getRocktypes()
+  const rockTypes = await getRocktypes()
 
-  let selectedValues: string[] = []
-  if (selectedValueFromStore.value) {
-    selectedValues = fromQuery(selectedValueFromStore.value)
-  }
-
-  options.value = rocktypes?.data
-    .map(({ value, label }) => {
-      const active = selectedValues.includes(value)
-      const option = {
-        value,
+  nodes.value =  await Promise.all(rockTypes?.data
+    .map(async ({ value, label }, i) => {
+      const rockClasses = await getRockClasses(value)
+      return {
+        key: value,
         label,
-        active
+        children: rockClasses?.data.map(({ value, label }) => ({ key: value, label: value })) ?? []
       }
-      if (active) selected.value.push(option)
-      return option
-    }) ?? []
+    }) ?? [])
+
+  // if (selectedValueFromStore.value) {
+  //   selectedKeys.value = fromQuery(selectedValueFromStore.value)
+  // }
+
+  // options.value = rocktypes?.data
+  //   .map(({ value, label }) => {
+  //     const active = selectedValues.includes(value)
+  //     const option = {
+  //       value,
+  //       label,
+  //       active
+  //     }
+  //     if (active) selected.value.push(option)
+  //     return option
+  //   }) ?? []
 })
 
-function remove(index: number) {
-  selected.value.splice(index, 1)
+function useFilter() {
+  const selectedRockTypes = selected.value.map(({ value, label }) => ({ value, label }))
+  const selectedRockClasses = selected.value.map(({ classes }) => classes).flat()
+
   queryStore.setPanelFilter({
     name: QueryKey.RockType,
-    value: selected.value.length > 0 ? 'IN:' + selected.value.map(({ value }) => value).join(',') : ''
+    value: toQuery(selectedRockTypes)
   })
+
+  queryStore.setPanelFilter({
+    name: QueryKey.RockClass,
+    value: toQuery(selectedRockClasses)
+  })
+
   queryStore.execute()
+}
+
+async function remove(typeIndex: number, classIndex: number) {
+  selected.value[typeIndex].classes = selected.value[typeIndex].classes.filter((item, i) => i !== classIndex)
+  useFilter()
 }
 
 function submit() {
   selected.value = selectedTemp.value
-  const selectedValues = selected.value.map(({ value }) => value)
-
-  options.value = options.value.map(option => {
-    option.active = selectedValues.includes(option.value)
-    return option
-  })
-
-  queryStore.setPanelFilter({
-    name: QueryKey.RockType,
-    value: toQuery(selected.value)
-  })
-  queryStore.execute()
+  useFilter()
 }
 
-function toQuery(selected: MultiselectOption[]) {
+function toQuery(selected: RadioGroupOption[]) {
   return selected.length > 0 ? 'IN:' + selected.map(({ value }) => value).join(',') : ''
 }
 
 function fromQuery(query: string): string[] {
   query = query.replace('IN:', '')
   return query.split(',')
-  // return queryArr.map(value => ({
-  //   value,
-  //   label: options.find(option => option.value === value)?.label ?? value,
-  //   active: true
-  // }))
 }
+
+function onSelect (keys: TreeSelectionKeys) {
+  console.log(keys)
+  selectedTemp.value = nodes.value.filter(({ key }) => key && keys[key]).map(({ key, label }) => {
+    return {
+      value: key ?? '',
+      label: label ?? '',
+      classes: nodes.value.find(({ key: innerKey }) => innerKey === key)
+          ?.children
+          ?.filter(({ key }) => Object.keys(keys).findIndex(selectionKey => selectionKey === key) > -1)
+          .map(({ key, label }) => ({ value: key ?? '', label: label ?? ''}))
+        ?? []
+    }
+  })
+}
+
+watch(() => selectedKeys.value, onSelect)
 </script>
 
 <template>
   <QueryFilterBaseContainer :title="$t('rock_type')" :dialog-title="$t('please_select_rock_type')" @submit="submit">
     <template v-slot:selected>
-      <QueryFilterBaseSelected :items="selected" @remove="remove($event)" />
+      <div class="flex flex-1 flex-col mb-2" v-for="(type, i) in selected" :key="type.value">
+        <h3 class="font-semibold mb-2">{{ type.label }}:</h3>
+        <div class="flex ps-4">
+          <QueryFilterBaseSelected :items="type.classes" @remove="remove(i, $event)" />
+        </div>
+      </div>
     </template>
     <template v-slot:options>
       <div class="w-full">
-        <BaseMultiselect :options="options" id-prefix="rocktype" @change="selectedTemp = $event"/>
+        <BaseTreeSelect :nodes="nodes" v-model="selectedKeys"/>
       </div>
     </template>
   </QueryFilterBaseContainer>
 </template>
 
 <style scoped>
-
 </style>
