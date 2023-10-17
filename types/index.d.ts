@@ -28,7 +28,8 @@ interface QueryLocationsCluster {
 
 interface QueryListResponse {
   data: QueryListItem[],
-  numItems: number
+  numItems: number,
+  totalCount: number
 }
 interface ResponseRef<T> {
   data: T
