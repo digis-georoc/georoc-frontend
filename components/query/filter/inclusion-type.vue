@@ -36,6 +36,15 @@ function remove() {
 
 function submit() {
   selected.value = [selectedTemp.value]
+  useFilter()
+}
+
+function reset() {
+  selected.value = []
+  useFilter()
+}
+
+function useFilter() {
   queryStore.setPanelFilter({
     name: QueryKey.InclusionType,
     value: toQuery(selected.value)
@@ -57,7 +66,12 @@ onMounted(async () => {
 
 </script>
 <template>
-  <QueryFilterBaseContainer :title="$t('inclusion_type')" :dialog-title="$t('please_select_inclusion_type')" @submit="submit">
+  <QueryFilterBaseContainer
+    :title="$t('inclusion_type')"
+    :dialog-title="$t('please_select_inclusion_type')"
+    @submit="submit"
+    @reset="reset"
+  >
     <template v-slot:selected>
       <QueryFilterBaseSelected :items="selected" @remove="remove()" />
     </template>

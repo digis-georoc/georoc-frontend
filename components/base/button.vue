@@ -1,8 +1,8 @@
 <script lang="ts" setup>
   interface Props {
     text?: string,
-    display?: 'filled' | 'link' | 'mono' | 'flat',
-    size?: 'small' | 'normal',
+    display?: 'filled' | 'link' | 'mono' | 'flat' | 'outline',
+    size?: 'tiny' | 'small' | 'normal',
     icon?: string | null,
     iconPosition?: 'left' | 'right' | null,
     rounded?: boolean | null
@@ -53,6 +53,12 @@
   classes['p-1'] = props.size === 'small' && isIconOnly
   classes['py-1.5 px-3'] = props.size === 'small' && !_icon
 
+  classes['py-1 ps-1 pe-1.5'] = props.size === 'tiny' && !!(_icon) && _iconPosition === 'left'
+  classes['py-1 ps-1.5 pe-1'] = props.size === 'tiny' && !!(_icon) && _iconPosition === 'right'
+  classes['p-0.5'] = props.size === 'tiny' && isIconOnly
+  classes['py-1.5 px-2'] = props.size === 'tiny' && !_icon
+  classes['text-xs leading-3'] = props.size === 'tiny'
+
   classes['focus:ring-primary focus:ring-opacity-25 dark:focus:ring-primary-300 dark:focus:ring-opacity-50 bg-primary text-white hover:bg-primary-700 ' +
   'dark:bg-primary dark:hover:bg-primary dark:focus:ring-green-800'] = props.display === 'filled'
 
@@ -60,6 +66,8 @@
   'dark:focus:ring-green-800'] = props.display === 'link'
 
   classes['bg-white text-dark border border-zinc-400 focus:ring-zinc-300 focus:ring-opacity-50 hover:bg-zinc-100 dark:bg-zinc-800'] = props.display === 'mono'
+
+  classes['bg-none text-primary border border-primary focus:ring-zinc-300 focus:ring-opacity-50 hover:bg-primary-50 dark:hover:bg-zinc-800'] = props.display === 'outline'
 
   classes['bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-600 ' +
   'focus:ring-primary dark:focus:ring-primary-300 dark:focus:ring-opacity-50 focus:ring-opacity-25'] = props.display === 'flat'

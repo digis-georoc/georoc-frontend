@@ -58,15 +58,24 @@ function useFilter() {
   const selectedRockTypes = selected.value.map(({ value, label }) => ({ value, label }))
   const selectedRockClasses = selected.value.map(({ classes }) => classes).flat()
 
-  queryStore.setPanelFilter({
-    name: QueryKey.RockType,
-    value: toQuery(selectedRockTypes)
-  })
+  if (selectedRockTypes.length > 0) {
+    queryStore.setPanelFilter({
+      name: QueryKey.RockType,
+      value: toQuery(selectedRockTypes)
+    })
+  } else {
+    queryStore.unsetFilter(QueryKey.RockType)
+  }
 
-  queryStore.setPanelFilter({
-    name: QueryKey.RockClass,
-    value: toQuery(selectedRockClasses)
-  })
+
+  if (selectedRockClasses.length > 0) {
+    queryStore.setPanelFilter({
+      name: QueryKey.RockClass,
+      value: toQuery(selectedRockClasses)
+    })
+  } else {
+    queryStore.unsetFilter(QueryKey.RockClass)
+  }
 
   queryStore.execute()
 }
@@ -81,6 +90,12 @@ function submit() {
   useFilter()
 }
 
+function reset() {
+  selected.value = []
+  selectedTemp.value = []
+  useFilter()
+}
+
 function toQuery(selected: RadioGroupOption[]) {
   return selected.length > 0 ? 'IN:' + selected.map(({ value }) => value).join(',') : ''
 }
@@ -91,7 +106,6 @@ function fromQuery(query: string): string[] {
 }
 
 function onSelect (keys: TreeSelectionKeys) {
-  console.log(keys)
   selectedTemp.value = nodes.value.filter(({ key }) => key && keys[key]).map(({ key, label }) => {
     return {
       value: key ?? '',
@@ -109,7 +123,13 @@ watch(() => selectedKeys.value, onSelect)
 </script>
 
 <template>
-  <QueryFilterBaseContainer :title="$t('rock_type')" :dialog-title="$t('please_select_rock_type')" @submit="submit">
+  <QueryFilterBaseContainer
+    :title="$t('rock_type')"
+    :dialog-title="$t('please_select_rock_type')"
+    :show-reset="selected.length > 0"
+    @submit="submit"
+    @reset="reset"
+  >
     <template v-slot:selected>
       <div class="flex flex-1 flex-col mb-2" v-for="(type, i) in selected" :key="type.value">
         <h3 class="font-semibold mb-2">{{ type.label }}:</h3>

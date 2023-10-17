@@ -26,25 +26,30 @@ function createEmptySelectedItem() {
   }
 }
 
-async function submit() {
+function submit() {
   selected.value.push(selectedItemTemp.value)
   selectedItemTemp.value = createEmptySelectedItem()
-  await useFilter()
+  useFilter()
 }
 
-async function useFilter() {
+function reset() {
+  selected.value = []
+  useFilter()
+}
+
+function useFilter() {
   const value = selected.value.map(({ type, element, min, max }) => `(${type?.value},${element?.value},${min},${max})`).join(',')
 
   if (value === '') {
-    await queryStore.unsetFilter('chemistry')
+    queryStore.unsetFilter('chemistry')
   } else {
-    await queryStore.setPanelFilter({
+    queryStore.setPanelFilter({
       name: 'chemistry',
       value
     })
   }
 
-  await queryStore.execute()
+  queryStore.execute()
 }
 
 onMounted(async () => {
@@ -57,7 +62,12 @@ onMounted(async () => {
 
 </script>
 <template>
-  <QueryFilterBaseContainer :title="$t('chemistry')" :dialog-title="$t('please_select_chemistry')" @submit="submit">
+  <QueryFilterBaseContainer
+    :title="$t('chemistry')"
+    :dialog-title="$t('please_select_chemistry')"
+    @submit="submit"
+    @reset="reset"
+  >
     <template v-slot:selected>
       <div v-if="selected.length > 0" class="flex flex-col flex-1">
         <div class="flex flex-1 mb-2" v-for="(item, i) in selected">
