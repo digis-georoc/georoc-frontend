@@ -17,11 +17,7 @@ const types = [
   },
   {
     value: 'IGL',
-    label: t('glass'),
-  },
-  {
-    value: 'IMELT',
-    label: t('melt'),
+    label: t('glass_melt'),
   },
 ]
 const selectedValueFromStore = computed(() => queryStore.getFilter(QueryKey.InclusionType)?.value)

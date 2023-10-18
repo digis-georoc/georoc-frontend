@@ -44,5 +44,6 @@ export default {
   type: 'Type',
   min: 'Min',
   max: 'Max',
-  download_samples: 'Download samples'
+  download_samples: 'Download samples',
+  glass_melt: 'Glass/Melt'
 }
