@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-  const amount = useQueryStore().listResult?.totalCount ?? 0
+  const queryStore = useQueryStore()
+  const amount = computed(() => queryStore.listResult?.totalCount ?? 0)
 </script>
 <template>
   <div class="flex bg-white dark:bg-zinc-800 dark:border-zinc-600 flex-col
