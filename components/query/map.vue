@@ -5,7 +5,7 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 
 import { theme } from '#tailwind-config'
 
-import L, {LatLng, LatLngBounds} from "leaflet"
+import L, {GeoJSON, LatLng, LatLngBounds} from "leaflet"
 import FreeDraw, { MarkerEvent } from "leaflet-freedraw"
 
 import 'leaflet.markercluster/dist/leaflet.markercluster-src'
@@ -30,6 +30,8 @@ let cachedZoomLevel = initialZoomLevel
 
 const isDebug = ref(window.location.href.includes('?debug'))
 const isLoading = ref(false)
+
+let shownCoveragePolygon: GeoJSON | null = null
 
 function latLngToLngLat(latlng: LatLng) {
   return [latlng.lng, latlng.lat];
@@ -103,7 +105,6 @@ function createMarker(feature: Feature, latlng: LatLng) {
   //   shadowAnchor: [12, 20],  // anchor point of the shadow. should be offset
   //   popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
   // })
-
   const iconWidth = 50
   const iconColor = getClusterColor(feature.properties?.clusterSize)
   const text = feature.properties?.clusterSize
@@ -141,7 +142,14 @@ function createMarker(feature: Feature, latlng: LatLng) {
     iconSize: [iconWidth, iconWidth],
     iconAnchor: [iconWidth/2, iconWidth/2],
   });
-  return L.marker(latlng, { icon })
+  const marker = L.marker(latlng, { icon })
+  marker.on('mouseover', () => showCoverage(feature.properties?.convexHull, {
+    fillColor: iconColor,
+    color: iconColor
+  }))
+  marker.on('mouseout', () => hideCoverage())
+
+  return marker
 }
 
 function setBboxFilter() {
@@ -177,7 +185,11 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
 
   const clusterFeatures = value.clusters
     .filter(({ centroid }) => centroid.geometry.coordinates !== null)
-    .map(({ centroid }) => centroid)
+    .map(({ centroid, convexHull }) => {
+      if (!centroid.properties) centroid.properties = {}
+      centroid.properties.convexHull = convexHull
+      return centroid
+    })
 
   const sizes = clusterFeatures.map(({ properties }) => properties?.clusterSize)
 
@@ -187,13 +199,13 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
   markersGroup.addLayer(L.geoJSON(clusterFeatures, layerOptions))
 
   // Add bounds polygon per cluster
-  markersGroup.addLayer(
-    L.geoJSON(
-        value.clusters
-          .filter(({ centroid, convexHull }) => centroid.geometry.coordinates !== null && convexHull.geometry.type === 'Polygon')
-          .map(({ convexHull }) => convexHull)
-    )
-  )
+  // markersGroup.addLayer(
+  //   L.geoJSON(
+  //       value.clusters
+  //         .filter(({ centroid, convexHull }) => centroid.geometry.coordinates !== null && convexHull.geometry.type === 'Polygon')
+  //         .map(({ convexHull }) => convexHull)
+  //   )
+  // )
 
   cachedClustersBounds.value = getLatLngBoundsFromBbox(value.bbox)
 })
@@ -262,6 +274,29 @@ const unsubscribe = queryStore.$onAction(
       }
     }
 )
+
+function showCoverage(convexHull: Feature, { fillColor, color }) {
+  if (shownCoveragePolygon) {
+    markersGroup.removeLayer(shownCoveragePolygon);
+  }
+  const options = {
+    style: {
+      fillColor,
+      color,
+      fillOpacity: 0.2
+    }
+  }
+  shownCoveragePolygon = L.geoJSON(convexHull, options)
+  markersGroup.addLayer(shownCoveragePolygon)
+}
+
+function hideCoverage() {
+  if (shownCoveragePolygon) {
+    markersGroup.removeLayer(shownCoveragePolygon)
+    shownCoveragePolygon = null
+  }
+}
+
 </script>
 <template>
     <div id="map" class="h-full w-full"></div>
