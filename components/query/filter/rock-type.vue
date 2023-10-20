@@ -82,6 +82,9 @@ function useFilter() {
 
 async function remove(typeIndex: number, classIndex: number) {
   selected.value[typeIndex].classes = selected.value[typeIndex].classes.filter((item, i) => i !== classIndex)
+  if (selected.value[typeIndex].classes.length === 0) {
+    selected.value = selected.value.filter((item, i) => i !== typeIndex)
+  }
   useFilter()
 }
 
