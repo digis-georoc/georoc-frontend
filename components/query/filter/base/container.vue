@@ -23,15 +23,13 @@ function onReset() {
 }
 </script>
 <template>
-  <div class="flex flex-col h-full py-6 border-b dark:border-stone-700">
+  <div class="flex flex-col py-6 border-b dark:border-stone-700">
     <div class="flex">
       <h3 v-if="title" class="mb-2 font-bold">{{ title }}</h3>
       <BaseButton v-if="showReset" size="tiny" display="outline" class="ms-auto self-center" @click="onReset" text="Reset"></BaseButton>
     </div>
     <div class="flex flex-col flex-1 items-start">
-      <div class="mb-2">
-        <slot name="selected"/>
-      </div>
+      <slot name="selected"/>
       <BaseButton class="mt-3" @click="isOpen = true" text="Select" size="small"></BaseButton>
     </div>
   </div>

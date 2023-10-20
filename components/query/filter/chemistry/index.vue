@@ -69,7 +69,7 @@ onMounted(async () => {
     @reset="reset"
   >
     <template v-slot:selected>
-      <div v-if="selected.length > 0" class="flex flex-col flex-1">
+      <div v-if="selected.length > 0" class="w-full flex flex-col flex-1">
         <div class="flex flex-1 mb-2" v-for="(item, i) in selected">
           <div class="w-1/4">
             <p v-if="i === 0" class="text-sm font-semibold">{{ $t('type') }}</p>
