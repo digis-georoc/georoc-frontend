@@ -51,16 +51,6 @@ interface MineralsResponseItem {
   value: string
 }
 
-interface RocktypesResponse {
-  data: RocktypesResponseItem[],
-  numItems: number
-}
-
-interface MineralsResponse {
-  data: MineralsResponseItem[],
-  numItems: number
-}
-
 interface PolygonState {
   activeState: number,
 }
@@ -80,19 +70,10 @@ interface ChemicalElement {
   label: string,
 }
 
-interface ElementsResponse {
-  data: ChemicalElement[],
-  numItems: number
-}
-
 interface ChemicalElementType {
   name: string
 }
 
-interface ElementTypesResponse {
-  data: ChemicalElementType[],
-  numItems: number
-}
 
 interface SelectedChemicalElement {
   type: RadioGroupOption | null,
@@ -112,11 +93,16 @@ interface RockClass {
   label: string
 }
 
-interface RockClassResponse {
-  data: RockClass[],
+interface BaseResponse<T> {
+  data: T[],
   numItems: number
 }
 
+type RockClassResponse = BaseResponse<RockClass>
+type ElementTypesResponse = BaseResponse<ChemicalElementType>
+type MineralsResponse = BaseResponse<MineralsResponseItem>
+type ElementsResponse = BaseResponse<ChemicalElement>
+type RocktypesResponse = BaseResponse<RocktypesResponseItem>
 
 export {
   QueryFilter,
