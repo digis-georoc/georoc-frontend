@@ -34,7 +34,7 @@ function submit() {
   <div class="self-start flex items-center w-full px-4">
     <QueryFilterMaterial class="w-full" :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
   </div>
-  <div class="flex flex-1 flex-col px-4 overflow-auto">
+  <div class="flex flex-1 flex-col px-4 overflow-auto scroll-gradient relative">
     <QueryFilterRockType v-if="selectedMaterialId === 'WR'" />
     <QueryFilterInclusionType v-if="selectedMaterialId === 'INC'" />
     <template v-if="inclusionTypeFilterValue === 'IMIN'">
@@ -72,3 +72,15 @@ function submit() {
   </div>
   <QueryFilterMaterialDialog @select="handleFilterSelection" />
 </template>
+<style scoped>
+.scroll-gradient::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(rgba(255, 255, 255, 0.001), white); /* transparent keyword is broken in Safari */
+  left: 0;
+  pointer-events: none;
+}
+</style>
