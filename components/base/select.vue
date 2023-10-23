@@ -7,11 +7,12 @@ import {
 } from '@headlessui/vue'
 import { RadioGroupOption } from "~/types";
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   options: RadioGroupOption[]
   modelValue: RadioGroupOption | null
-  title: string
-}>()
+  title?: string,
+  disabled?: boolean
+}>(), { disabled: false })
 
 const _selected = ref<RadioGroupOption |null>({ label: 'Please select', value: 'none'})
 const emit = defineEmits<{
@@ -23,20 +24,20 @@ watch(() => props.modelValue, (value) => {
 })
 
 watch(() => _selected.value, (value) => {
-  console.log(value)
   emit('update:modelValue', value)
 })
 
 </script>
 <template>
   <div>
-    <h3 v-if="title" class="font-semibold">{{ title }}</h3>
-    <Listbox v-model="_selected">
+    <h3 v-if="title" class="font-semibold"  :class="{'opacity-50': disabled}">{{ title }}</h3>
+    <Listbox v-model="_selected" :disabled="disabled">
       <div class="relative mt-1">
         <ListboxButton
-            v-slot="{ value }"
-            class="relative w-full cursor-default rounded-lg bg-white dark:bg-zinc-600 border py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500
+          v-slot="{ value, disabled }"
+          class="relative w-full cursor-default rounded-lg bg-white dark:bg-zinc-600 border py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500
         focus-visible:ring-4 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+          :class="{'opacity-50': disabled}"
         >
           <span class="block truncate">{{ value.label }}</span>
           <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">

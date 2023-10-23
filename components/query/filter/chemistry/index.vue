@@ -1,13 +1,7 @@
 <script lang="ts" setup>
-import {ElementsResponse, ElementTypesResponse, RadioGroupOption, SelectedChemicalElement} from "~/types";
+import { SelectedChemicalElement } from "~/types";
 
 const queryStore = useQueryStore()
-
-const elements = ref<ElementsResponse | null>()
-const elementTypes = ref<ElementTypesResponse | null>()
-
-const elementOptions = ref<RadioGroupOption[]>([])
-const elementTypesOptions = ref<RadioGroupOption[]>([])
 
 const selected = ref<SelectedChemicalElement[]>([])
 const selectedItemTemp = ref<SelectedChemicalElement>(createEmptySelectedItem())
@@ -28,7 +22,6 @@ function createEmptySelectedItem() {
 
 function submit() {
   selected.value.push(selectedItemTemp.value)
-  selectedItemTemp.value = createEmptySelectedItem()
   useFilter()
 }
 
@@ -52,14 +45,6 @@ function useFilter() {
   queryStore.execute()
 }
 
-onMounted(async () => {
-  elements.value = await getElements('')
-  elementTypes.value = await getElementTypes()
-
-  elementOptions.value = elements.value?.data ?? []
-  elementTypesOptions.value = elementTypes.value?.data.map(({ name }) => ({ label: name, value: name })) ?? []
-})
-
 </script>
 <template>
   <QueryFilterBaseContainer
@@ -67,6 +52,7 @@ onMounted(async () => {
     :dialog-title="$t('please_select_chemistry')"
     @submit="submit"
     @reset="reset"
+    @open="selectedItemTemp = createEmptySelectedItem()"
   >
     <template v-slot:selected>
       <div v-if="selected.length > 0" class="w-full flex flex-col flex-1">
@@ -87,7 +73,7 @@ onMounted(async () => {
             <p v-if="i === 0" class="text-sm font-semibold">{{ $t('max') }}</p>
             <p>{{ item.max }}</p>
           </div>
-          <div>
+          <div class="flex items-end pb-1.5">
             <Icon name="ic:close" @click="removeSelected(i)" class="cursor-pointer"/>
           </div>
         </div>
@@ -95,11 +81,7 @@ onMounted(async () => {
       <div v-else class="text-sm text-stone-400">{{ $t('no_options_selected') }}.</div>
     </template>
     <template v-slot:options>
-      <QueryFilterChemistrySelect
-        v-model="selectedItemTemp"
-        :element-options="elementOptions"
-        :element-types-options="elementTypesOptions"
-      />
+      <QueryFilterChemistrySelect v-model="selectedItemTemp" />
     </template>
   </QueryFilterBaseContainer>
 </template>

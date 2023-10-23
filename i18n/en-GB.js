@@ -47,5 +47,6 @@ export default {
   download_samples: 'Download samples',
   glass_melt: 'Glass/Melt',
   please_select_host_material: 'Please select one or more Host Material(s)',
-  please_select_inclusion_material: 'Please select one or more Inclusion Material(s)'
+  please_select_inclusion_material: 'Please select one or more Inclusion Material(s)',
+  select: 'Select'
 }

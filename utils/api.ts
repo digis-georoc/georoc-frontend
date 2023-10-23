@@ -58,11 +58,11 @@ async function getList(filters: QueryFilter[] = []): Promise<QueryListResponse |
 }
 
 async function getElements(type: string): Promise<ElementsResponse | null> {
-  const { data} = await useFetch<ElementsResponse>('/api/elements')
+  const { data} = await useFetch<ElementsResponse>('/api/elements' + (type ? `?type=${type}` : ''))
   return data.value
 }
 
-async function getElementTypes(type: string): Promise<ElementsResponse | null> {
+async function getElementTypes(): Promise<ElementsResponse | null> {
   const { data} = await useFetch<ElementsResponse>('/api/element-types')
   return data.value
 }

@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<{
   showReset: false
 })
 
-const emit = defineEmits(['submit', 'reset'])
+const emit = defineEmits(['submit', 'reset', 'open'])
 
 const isOpen = ref(false)
 
@@ -21,6 +21,11 @@ function onSubmit() {
 function onReset() {
   emit('reset')
 }
+
+function openDialog() {
+  emit('open')
+  isOpen.value = true
+}
 </script>
 <template>
   <div class="flex flex-col py-6 border-b dark:border-stone-700">
@@ -30,7 +35,7 @@ function onReset() {
     </div>
     <div class="flex flex-col flex-1 items-start">
       <slot name="selected"/>
-      <BaseButton class="mt-3" @click="isOpen = true" text="Select" size="small"></BaseButton>
+      <BaseButton class="mt-3" @click="openDialog" :text="$t('select')" size="small"></BaseButton>
     </div>
   </div>
   <BaseDialog :title="dialogTitle" v-model="isOpen">

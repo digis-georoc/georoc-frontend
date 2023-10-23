@@ -6,10 +6,12 @@ const props = withDefaults(defineProps<{
   placeholder?: string,
   type: string,
   modelValue: string | number,
-  title?: string
+  title?: string,
+  disabled?: boolean
 }>(), {
   placeholder: 'please_enter',
-  type: 'text'
+  type: 'text',
+  disabled: false
 })
 
 watch(() => props.modelValue, (value) => inputValue.value = value, { immediate: true })
@@ -25,20 +27,22 @@ function onInput(value: string) {
 
 <template>
   <div>
-    <h3 v-if="title" class="font-semibold">{{ title }}</h3>
+    <h3 v-if="title" class="font-semibold" :class="{'opacity-50': disabled}">{{ title }}</h3>
     <div class="border dark:border-zinc-600 rounded-lg p-2" ref="container">
       <input
-          autocapitalize="none"
-          autocorrect="off"
-          autocomplete="off"
-          spellcheck="false"
-          aria-autocomplete="list"
-          :type="type"
-          class="outline-none bg-transparent"
-          :id="id"
-          :placeholder="$t(placeholder) + '...'"
-          @blur="blur"
-          v-model="inputValue"
+        autocapitalize="none"
+        autocorrect="off"
+        autocomplete="off"
+        spellcheck="false"
+        aria-autocomplete="list"
+        :type="type"
+        class="outline-none bg-transparent w-full"
+        :class="{'opacity-50': disabled}"
+        :id="id"
+        :placeholder="$t(placeholder) + '...'"
+        :disabled="disabled"
+        @blur="blur"
+        v-model="inputValue"
       />
     </div>
   </div>
