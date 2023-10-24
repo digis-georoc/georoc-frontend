@@ -67,7 +67,7 @@ export const useQueryStore = defineStore('query', {
       const index = this.activeFilters.findIndex(({ name: oldName }) => oldName === name)
       if (index === -1) return
       this.activeFilters.splice(index, 1)
-      window.localStorage.removeItem(name + '-filter')
+      window.localStorage.removeItem(this.getCachingKey(name))
     },
     async execute() {
       debounceMap(() => this.executeMapQuery())

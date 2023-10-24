@@ -39,10 +39,17 @@ onMounted(async () => {
 
   const rockTypeValues = fromQuery(cachedRockTypeQuery)
   const rockClassValues = fromQuery(cachedRockClassQuery)
-  const keys = [...rockTypeValues, ...rockClassValues].reduce((acc, cur) => {
-    acc[cur] = null
-    return acc
-  }, <TreeSelectionKeys>{})
+  const keys = {
+    ...rockTypeValues
+        .reduce((acc, cur) => {
+          acc[cur] = {checked: false, partialChecked: true}
+          return acc
+        }, <TreeSelectionKeys>{}),
+    ...rockClassValues.reduce((acc, cur) => {
+      acc[cur] = {checked: true}
+      return acc
+    }, <TreeSelectionKeys>{})
+  }
 
   onSelect(keys)
   submit()
@@ -74,11 +81,22 @@ function useFilter() {
 }
 
 async function remove(typeIndex: number, classIndex: number) {
-  selected.value[typeIndex].classes = selected.value[typeIndex].classes.filter((item, i) => i !== classIndex)
-  if (selected.value[typeIndex].classes.length === 0) {
-    selected.value = selected.value.filter((item, i) => i !== typeIndex)
-  }
-  useFilter()
+  const rockClassToRemove = selected.value[typeIndex].classes.find((item, i) => i === classIndex)
+
+  // We have to check if the parent rock type needs to be remove because it was the last selected rock class item
+  const rockTypeToRemove = rockClassToRemove && selected.value[typeIndex].classes.length === 1 ? selected.value[typeIndex] : null
+
+  if (!rockClassToRemove) return
+  let keys = Object.keys(selectedKeys.value).filter(key => {
+    return !(key === rockClassToRemove.value || (rockTypeToRemove && rockTypeToRemove.value === key))
+  }).reduce((acc, cur) => {
+    acc[cur] = selectedKeys.value[cur]
+    return acc
+  }, <TreeSelectionKeys>{})
+
+  onSelect(keys)
+
+  submit()
 }
 
 function submit() {
@@ -104,20 +122,28 @@ function fromQuery(query: string | null): string[] {
 }
 
 function onSelect (keys: TreeSelectionKeys) {
-  selectedTemp.value = nodes.value.filter(({ key }) => key && keys.hasOwnProperty(key)).map(({ key, label }) => {
+  selectedKeys.value = keys
+  selectedTemp.value = nodes.value.filter(({ key }) => key && keys.hasOwnProperty(key)).map(node => {
+    const { key, label } = node
+
+    let classes =
+        nodes.value.find(({ key: innerKey }) => innerKey === key)
+          ?.children
+          ?.filter(({ key }) => Object.keys(keys).findIndex(selectionKey => selectionKey === key) > -1) ?? []
+
+    if (classes.length === node.children?.length) {
+      classes = [{ key: 'ALL', label: 'All'}]
+    }
+
     return {
       value: key ?? '',
       label: label ?? '',
-      classes: nodes.value.find(({ key: innerKey }) => innerKey === key)
-          ?.children
-          ?.filter(({ key }) => Object.keys(keys).findIndex(selectionKey => selectionKey === key) > -1)
-          .map(({ key, label }) => ({ value: key ?? '', label: label ?? ''}))
-        ?? []
+      classes: classes.map(({ key, label }) => ({ value: key ?? '', label: label ?? ''}))
     }
   })
 }
 
-watch(() => selectedKeys.value, onSelect)
+// watch(() => selectedKeys.value, onSelect)
 </script>
 
 <template>
@@ -138,7 +164,7 @@ watch(() => selectedKeys.value, onSelect)
     </template>
     <template v-slot:options>
       <div class="w-full">
-        <BaseTreeSelect :nodes="nodes" v-model="selectedKeys"/>
+        <BaseTreeSelect :nodes="nodes" :model-value="selectedKeys" @update:model-value="onSelect" />
       </div>
     </template>
   </QueryFilterBaseContainer>

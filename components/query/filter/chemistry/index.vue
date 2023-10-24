@@ -64,7 +64,6 @@ function fromQuery(query: string | null): SelectedChemicalElement[] {
     .split('),(')
     .map(item => item.replaceAll(/\)|\(+/g, ''))
     .map(tupel => {
-      console.log(tupel)
       const [type, element, min, max ] = tupel.split(',')
       return {
         type: {value: type, label: type },
