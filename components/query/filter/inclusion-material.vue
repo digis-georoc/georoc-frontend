@@ -49,7 +49,7 @@ onMounted(async () => {
 
   let selectedValues: string[] = []
 
-  if (selectedValueFromStore.value) selectedValues = fromQuery(selectedValueFromStore.value)
+  if (selectedValueFromStore) selectedValues = fromQuery(selectedValueFromStore)
 
   options.value = minerals?.data
       .map(({ value, label }) => {
