@@ -5,6 +5,14 @@ let mapTimer: NodeJS.Timeout
 let listTimer: NodeJS.Timeout
 let abortController: AbortController | null = null
 
+const materialSpecificFilters = [
+  QueryKey.HostMaterial,
+  QueryKey.InclusionMaterial,
+  QueryKey.InclusionType,
+  QueryKey.RockClass,
+  QueryKey.RockType,
+]
+
 function debounceMap(func: Function, timeout = 500){
   clearTimeout(mapTimer)
   mapTimer = setTimeout(() => { func() }, timeout)
@@ -43,17 +51,17 @@ export const useQueryStore = defineStore('query', {
       this.setFilter(filter)
       debounceMap(() => this.executeMapQuery())
     },
-    async setPanelFilter(filter: QueryFilter, shouldCache = false) {
-      this.setFilter(filter, shouldCache)
+    async setPanelFilter(filter: QueryFilter) {
+      this.setFilter(filter)
       // debounceMap(() => this.executeMapQuery(), mapTimer)
       // debounceList(() => this.executeListQuery(), listTimer)
     },
-    setFilter(filter: QueryFilter, shouldCache = false) {
+    setFilter(filter: QueryFilter) {
       const index  = this.activeFilters.findIndex(({ name }) => name === filter.name)
       if (index === -1) this.activeFilters.push(filter)
       else this.activeFilters[index] = filter
 
-      if (shouldCache) window.localStorage.setItem(filter.name + '-filter', filter.value)
+      this.cacheFilter(filter)
     },
     unsetFilter(name: string) {
       const index = this.activeFilters.findIndex(({ name: oldName }) => oldName === name)
@@ -93,9 +101,27 @@ export const useQueryStore = defineStore('query', {
       }
     },
     resetOnMaterialChange() {
-      this.unsetFilter('rocktype')
-      this.unsetFilter('inclusiontype')
-      this.unsetFilter('mineral_inclusion')
+      materialSpecificFilters.forEach(key => this.unsetFilter(key))
+    },
+    cacheFilter(filter: QueryFilter) {
+      window.localStorage.setItem(this.getCachingKey(filter.name), filter.value)
+
+      // TODO: below is the implementation for material specific filter caching by appending the material filter value
+      //      to the storage key. So far it is not necessary because all child filters are different
+      //      when switching the parent material filter
+      // const materialFilter = this.getFilter(QueryKey.Material)
+      // if (filter.name === QueryKey.Material ) {
+      //   window.localStorage.setItem('filter-' + filter.name, filter.value)
+      //   return
+      // }
+      // if (materialFilter && materialSpecificFilters.includes(filter.name)) {
+      //   window.localStorage.setItem('filter-' + filter.name + '-' + materialFilter.value, filter.value)
+      // } else {
+      //   window.localStorage.setItem('filter-' + filter.name, filter.value)
+      // }
+    },
+    getCachedFilterValue(key: typeof QueryKey[keyof typeof QueryKey]) {
+      return window.localStorage.getItem(this.getCachingKey(key))
     }
   },
   getters: {
@@ -105,6 +131,9 @@ export const useQueryStore = defineStore('query', {
         if (index === -1) return null
         return state.activeFilters[index]
       }
+    },
+    getCachingKey() {
+      return (name: string) => 'filter-' + name
     }
   },
 })

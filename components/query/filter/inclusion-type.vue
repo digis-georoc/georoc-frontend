@@ -20,7 +20,7 @@ const types = [
     label: t('glass_melt'),
   },
 ]
-const selectedValueFromStore = computed(() => queryStore.getFilter(QueryKey.InclusionType)?.value)
+const selectedValueFromStore = queryStore.getCachedFilterValue(QueryKey.InclusionType)
 const selected = ref<RadioGroupOption[]>([])
 const selectedTemp = ref<RadioGroupOption>(types[0])
 
@@ -61,7 +61,7 @@ function fromQuery(query: string): RadioGroupOption | null {
 }
 
 onMounted(async () => {
-  if (selectedValueFromStore.value) selected.value = [fromQuery(selectedValueFromStore.value) ?? types[0]]
+  if (selectedValueFromStore) selected.value = [fromQuery(selectedValueFromStore) ?? types[0]]
 })
 
 </script>

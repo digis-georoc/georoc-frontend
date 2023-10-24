@@ -3,7 +3,7 @@ import {MultiselectOption} from "~/types";
 
 const queryStore = useQueryStore()
 
-const selectedValueFromStore = computed(() => queryStore.getFilter(QueryKey.InclusionMaterial)?.value)
+const selectedValueFromStore = queryStore.getCachedFilterValue(QueryKey.InclusionMaterial)
 const minerals = await getMinerals()
 const options = ref<MultiselectOption[]>([])
 const selected = ref<MultiselectOption[]>([])

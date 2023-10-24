@@ -3,8 +3,17 @@ import { SelectedChemicalElement } from "~/types";
 
 const queryStore = useQueryStore()
 
+const cachedValue = queryStore.getCachedFilterValue(QueryKey.Chemistry)
+
 const selected = ref<SelectedChemicalElement[]>([])
 const selectedItemTemp = ref<SelectedChemicalElement>(createEmptySelectedItem())
+
+onMounted(() => {
+  if (cachedValue) {
+    selected.value = fromQuery(cachedValue)
+    useFilter()
+  }
+})
 
 async function removeSelected(index: number) {
   selected.value.splice(index, 1)
@@ -31,18 +40,40 @@ function reset() {
 }
 
 function useFilter() {
-  const value = selected.value.map(({ type, element, min, max }) => `(${type?.value},${element?.value},${min},${max})`).join(',')
+  const value = toQuery(selected.value)
 
   if (value === '') {
-    queryStore.unsetFilter('chemistry')
+    queryStore.unsetFilter(QueryKey.Chemistry)
   } else {
     queryStore.setPanelFilter({
-      name: 'chemistry',
+      name: QueryKey.Chemistry,
       value
     })
   }
 
   queryStore.execute()
+}
+
+function toQuery(selected: SelectedChemicalElement[]) {
+  return selected.map(({ type, element, min, max }) => `(${type?.value},${element?.value},${min},${max})`).join(',')
+}
+
+function fromQuery(query: string | null): SelectedChemicalElement[] {
+  if (!query) return []
+  return query
+    .split('),(')
+    .map(item => item.replaceAll(/\)|\(+/g, ''))
+    .map(tupel => {
+      console.log(tupel)
+      const [type, element, min, max ] = tupel.split(',')
+      return {
+        type: {value: type, label: type },
+        element: { value: element, label: element },
+        min: parseFloat(min),
+        max: parseFloat(max),
+      }
+    })
+
 }
 
 </script>

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 const emit = defineEmits(['select'])
 
+const queryStore = useQueryStore()
 const storageKey = 'hide-material-dialog'
 const isOpen = ref(window.localStorage.getItem(storageKey) === null && window.sessionStorage.getItem(storageKey) === null)
 
-const stored = window.localStorage.getItem('material-filter')
+const stored = window.localStorage.getItem(queryStore.getCachingKey(QueryKey.Material))
 const initial = stored !== null ? stored : 'WR'
 const selected = ref(isOpen.value ? initial : null)
 

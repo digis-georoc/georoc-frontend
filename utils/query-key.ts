@@ -6,5 +6,6 @@ export const QueryKey = {
   RockClass: 'rockclass',
   InclusionType: 'inclusiontype',
   HostMaterial: 'hostmaterial',
-  InclusionMaterial: 'inclusionmaterial'
+  InclusionMaterial: 'inclusionmaterial',
+  Chemistry: 'chemistry'
 }

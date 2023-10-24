@@ -7,7 +7,7 @@ const inclusionTypeFilterValue = computed(() => queryStore.getFilter(QueryKey.In
 const materialFilterValue = computed(() => queryStore.getFilter(QueryKey.Material)?.value)
 
 const storageHideKey = 'hide-material-dialog'
-const storedMaterial = window.localStorage.getItem('material-filter')
+const storedMaterial = window.localStorage.getItem(queryStore.getCachingKey(QueryKey.Material))
 const hideMaterialDialog = window.localStorage.getItem(storageHideKey) !== null || window.sessionStorage.getItem(storageHideKey) !== null
 
 const selectedMaterialId = ref<string | null>(hideMaterialDialog && storedMaterial ? storedMaterial : null)
@@ -20,7 +20,7 @@ function handleFilterSelection(value: string | null) {
   queryStore.setPanelFilter({
     name: QueryKey.Material,
     value
-  }, true)
+  })
   queryStore.resetOnMaterialChange()
   submit()
 }

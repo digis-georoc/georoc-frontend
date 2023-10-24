@@ -9,8 +9,8 @@ interface SelectedRockType {
 }
 const queryStore = useQueryStore()
 
-const selectedRockTypeValueFromStore = computed(() => queryStore.getFilter('rocktype')?.value)
-const selectedRockClassValueFromStore = computed(() => queryStore.getFilter('rockclass')?.value)
+const cachedRockTypeQuery = queryStore.getCachedFilterValue(QueryKey.RockType)
+const cachedRockClassQuery = queryStore.getCachedFilterValue(QueryKey.RockClass)
 
 const emit = defineEmits<{
   change: [selected: RadioGroupOption[]]
@@ -33,25 +33,19 @@ onMounted(async () => {
       return {
         key: value,
         label,
-        children: rockClasses?.data.map(({ value, label }) => ({ key: value, label: value })) ?? []
+        children: rockClasses?.data.map(({ value, label }) => ({ key: value.replaceAll(', ', '__'), label: value })) ?? []
       }
     }) ?? [])
 
-  // if (selectedValueFromStore.value) {
-  //   selectedKeys.value = fromQuery(selectedValueFromStore.value)
-  // }
+  const rockTypeValues = fromQuery(cachedRockTypeQuery)
+  const rockClassValues = fromQuery(cachedRockClassQuery)
+  const keys = [...rockTypeValues, ...rockClassValues].reduce((acc, cur) => {
+    acc[cur] = null
+    return acc
+  }, <TreeSelectionKeys>{})
 
-  // options.value = rocktypes?.data
-  //   .map(({ value, label }) => {
-  //     const active = selectedValues.includes(value)
-  //     const option = {
-  //       value,
-  //       label,
-  //       active
-  //     }
-  //     if (active) selected.value.push(option)
-  //     return option
-  //   }) ?? []
+  onSelect(keys)
+  submit()
 })
 
 function useFilter() {
@@ -66,7 +60,6 @@ function useFilter() {
   } else {
     queryStore.unsetFilter(QueryKey.RockType)
   }
-
 
   if (selectedRockClasses.length > 0) {
     queryStore.setPanelFilter({
@@ -103,13 +96,15 @@ function toQuery(selected: RadioGroupOption[]) {
   return selected.length > 0 ? 'IN:' + selected.map(({ value }) => value).join(',') : ''
 }
 
-function fromQuery(query: string): string[] {
+function fromQuery(query: string | null): string[] {
+  if (!query) return []
+
   query = query.replace('IN:', '')
   return query.split(',')
 }
 
 function onSelect (keys: TreeSelectionKeys) {
-  selectedTemp.value = nodes.value.filter(({ key }) => key && keys[key]).map(({ key, label }) => {
+  selectedTemp.value = nodes.value.filter(({ key }) => key && keys.hasOwnProperty(key)).map(({ key, label }) => {
     return {
       value: key ?? '',
       label: label ?? '',
