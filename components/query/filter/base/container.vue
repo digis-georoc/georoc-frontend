@@ -2,11 +2,13 @@
 const props = withDefaults(defineProps<{
   title: string,
   dialogTitle: string,
-  showReset: boolean
+  showReset: boolean,
+  loading?: boolean
 }>(), {
   title: '',
   dialogTitle: '',
-  showReset: false
+  showReset: false,
+  loading: false
 })
 
 const emit = defineEmits(['submit', 'reset', 'open'])
@@ -33,7 +35,10 @@ function openDialog() {
       <h3 v-if="title" class="mb-2 font-bold">{{ title }}</h3>
       <BaseButton v-if="showReset" size="tiny" display="outline" class="ms-auto self-center" @click="onReset" text="Reset"></BaseButton>
     </div>
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-col items-center justify-center h-[100px] relative" v-if="loading">
+      <BaseLoading/>
+    </div>
+    <div class="flex flex-col flex-1 items-start" v-else>
       <slot name="selected"/>
       <BaseButton class="mt-3" @click="openDialog" :text="$t('select')" size="small"></BaseButton>
     </div>

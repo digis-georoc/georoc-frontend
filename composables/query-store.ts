@@ -63,15 +63,18 @@ export const useQueryStore = defineStore('query', {
 
       this.cacheFilter(filter)
     },
-    unsetFilter(name: string) {
+    unsetFilter(name: string, removeFromCache = true) {
       const index = this.activeFilters.findIndex(({ name: oldName }) => oldName === name)
       if (index === -1) return
       this.activeFilters.splice(index, 1)
-      window.localStorage.removeItem(this.getCachingKey(name))
+
+      if (removeFromCache) window.localStorage.removeItem(this.getCachingKey(name))
     },
     async execute() {
-      debounceMap(() => this.executeMapQuery())
-      debounceList(() => this.executeListQuery())
+      this.executeMapQuery()
+      this.executeListQuery()
+      // debounceMap(() => this.executeMapQuery())
+      // debounceList(() => this.executeListQuery())
     },
     async executeMapQuery() {
       if (abortController) abortController.abort()
@@ -101,7 +104,7 @@ export const useQueryStore = defineStore('query', {
       }
     },
     resetOnMaterialChange() {
-      materialSpecificFilters.forEach(key => this.unsetFilter(key))
+      materialSpecificFilters.forEach(key => this.unsetFilter(key, false))
     },
     cacheFilter(filter: QueryFilter) {
       window.localStorage.setItem(this.getCachingKey(filter.name), filter.value)

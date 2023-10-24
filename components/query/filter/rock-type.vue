@@ -23,7 +23,10 @@ const selected = ref<SelectedRockType[]>([])
 const selectedKeys = ref<TreeSelectionKeys>({})
 const selectedTemp = ref<SelectedRockType[]>([])
 
+const isLoading = ref(false)
+
 onMounted(async () => {
+  isLoading.value = true
   selected.value = []
   const rockTypes = await getRocktypes()
 
@@ -53,6 +56,8 @@ onMounted(async () => {
 
   onSelect(keys)
   submit()
+
+  isLoading.value = false
 })
 
 function useFilter() {
@@ -151,6 +156,7 @@ function onSelect (keys: TreeSelectionKeys) {
     :title="$t('rock_type')"
     :dialog-title="$t('please_select_rock_type')"
     :show-reset="selected.length > 0"
+    :loading="isLoading"
     @submit="submit"
     @reset="reset"
   >
