@@ -10,7 +10,7 @@ export default defineEventHandler<ElementsResponse | H3Error | undefined>(async 
   try {
     const response: FetchResponse<ElementsResponse> = await $fetch.raw(apiBaseUrl + '/queries/results/elements', {
       method: 'GET',
-      // query: Object.fromEntries(params.entries()),
+      query: Object.fromEntries(params.entries()),
       headers: {
         'DIGIS-API-ACCESSKEY': apiToken,
       }
