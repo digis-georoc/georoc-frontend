@@ -173,9 +173,15 @@ function onSelect (keys: TreeSelectionKeys) {
     const { key, label } = node
 
     let classes =
-        nodes.value.find(({ key: innerKey }) => innerKey === key)
+      node
           ?.children
-          ?.filter(({ key }) => Object.keys(keys).findIndex(selectionKey => selectionKey === key) > -1) ?? []
+          ?.filter((child) => Object.keys(keys).findIndex(selectionKey => selectionKey === child.key) > -1) ?? []
+
+    if (classes.length === node?.children?.length) {
+      // When loading values from cache (onMounted) we assumed that the rock type is partially checked
+      // Here we can tell for sure if all classes of that rock type were cached, if yes we mark also the rock type as checked.
+      selectedKeys.value[key] = { checked: true }
+    }
 
     return {
       value: key ?? '',
@@ -187,7 +193,6 @@ function onSelect (keys: TreeSelectionKeys) {
 
 function hasAllClassesSelected(type: SelectedRockType): boolean {
   const node = nodes.value.find((node) => node.key === type.value)
-  console.log(type.classes.length, node?.children?.length)
   return type.classes.length === 0 || type.classes.length === node?.children?.length
 }
 </script>
