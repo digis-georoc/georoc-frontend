@@ -40,14 +40,16 @@ function reset() {
   useFilter()
 }
 
-function useFilter() {
+function useFilter(withCache = true) {
   queryStore.setPanelFilter({
     name: QueryKey.InclusionType,
     value: toQuery(selected.value)
-  })
+  }, withCache)
 
-  queryStore.unsetFilter(QueryKey.HostMaterial)
-  queryStore.unsetFilter(QueryKey.InclusionMaterial)
+  if (withCache) {
+    queryStore.unsetFilter(QueryKey.HostMaterial)
+    queryStore.unsetFilter(QueryKey.InclusionMaterial)
+  }
 
   queryStore.execute()
 }
@@ -61,7 +63,10 @@ function fromQuery(query: string): RadioGroupOption | null {
 }
 
 onMounted(async () => {
-  if (selectedValueFromStore) selected.value = [fromQuery(selectedValueFromStore) ?? types[0]]
+  if (selectedValueFromStore) {
+    selected.value = [fromQuery(selectedValueFromStore) ?? types[0]]
+    useFilter(false)
+  }
 })
 
 </script>
