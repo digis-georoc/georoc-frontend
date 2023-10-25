@@ -123,7 +123,6 @@ async function remove(typeIndex: number, classIndex: number) {
 function removeAll(typeIndex: number) {
   const type = selected.value[typeIndex]
 
-
   let keys = Object.keys(selectedKeys.value).filter(key => {
     const { classes } = type
     return !(classes.findIndex(({ value }) => key === value) > -1 || type.value === key)
@@ -188,6 +187,7 @@ function onSelect (keys: TreeSelectionKeys) {
 
 function hasAllClassesSelected(type: SelectedRockType): boolean {
   const node = nodes.value.find((node) => node.key === type.value)
+  console.log(type.classes.length, node?.children?.length)
   return type.classes.length === 0 || type.classes.length === node?.children?.length
 }
 </script>
