@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.4...v0.0.7) (2023-10-25)
+
+### Features
+
+* cache all filters in local storage and use cached value on mount ([577f868](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/577f86848993fa22c6ff01c922200e68aeeccd3f))
+* set correct selected rock type filter state when load from cache ([30988ac](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/30988ac4e5f2746110f7d6bf44e5787d2e90f996))
+* update loading component ([cdc0682](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/cdc0682faf1038b383324c89b5725716ae1d15dd))
+* add loading comp to rock type filter ([d669c5c](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/d669c5ce8c6db24fe026798e6a202ca6db099ca8))
+* keep a full list of rock classes in cache but don't append them to query when "all selected" at rock type filter ([178df93](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/178df93d1cd7edc7e01f6bbceca5cd050deb21ef))
+
+### Bug Fixes
+* append chemistry query params in api ([90a5fcc](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/90a5fccf20da1fefb41f352f02b610ed64c4f39e))
+* show host and inclusion material filters when loading inclusion type filter value from cache ([bee6178](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/bee61781f31d3b804152e67258a446f19ec77a7d))
+* mark rock type as checked when all classes were cached ([bf8dcfa](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/bf8dcfa5e60146f7235a79aea7dacd519a109c18))
+* update loading ([816e75f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/816e75f58d0bdca0ff11928269dbb5b4a2781d77))
+
+
 ### [0.0.6](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.4...v0.0.6) (2023-10-24)
 
 
