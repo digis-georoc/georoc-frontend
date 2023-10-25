@@ -7,6 +7,11 @@ interface SelectedRockType {
   value: string,
   classes: RadioGroupOption[]
 }
+
+interface NestedSelected {
+  [key: string]: RadioGroupOption[]
+}
+
 const queryStore = useQueryStore()
 
 const cachedRockTypeQuery = queryStore.getCachedFilterValue(QueryKey.RockType)
@@ -36,12 +41,13 @@ onMounted(async () => {
       return {
         key: value,
         label,
-        children: rockClasses?.data.map(({ value, label }) => ({ key: value.replaceAll(', ', '__'), label: value })) ?? []
+        children: rockClasses?.data.map(({ value, label }) => ({ key: value.replaceAll(', ', '__') + i, label: value })) ?? []
       }
     }) ?? [])
 
   const rockTypeValues = fromQuery(cachedRockTypeQuery)
   const rockClassValues = fromQuery(cachedRockClassQuery)
+
   const keys = {
     ...rockTypeValues
         .reduce((acc, cur) => {
@@ -61,8 +67,13 @@ onMounted(async () => {
 })
 
 function useFilter() {
+
   const selectedRockTypes = selected.value.map(({ value, label }) => ({ value, label }))
-  const selectedRockClasses = selected.value.map(({ classes }) => classes).flat()
+  const selectedRockClasses = selected.value.reduce((acc, cur) => {
+    const { classes } = cur
+    acc[cur.value] = classes
+    return acc
+  }, <NestedSelected>{})
 
   if (selectedRockTypes.length > 0) {
     queryStore.setPanelFilter({
@@ -72,15 +83,21 @@ function useFilter() {
   } else {
     queryStore.unsetFilter(QueryKey.RockType)
   }
+  const rockClassesQuery = rockClassesToQuery(selectedRockClasses)
 
-  if (selectedRockClasses.length > 0) {
+  if (Object.keys(selectedRockClasses).length > 0 && rockClassesQuery !== '') {
     queryStore.setPanelFilter({
       name: QueryKey.RockClass,
-      value: toQuery(selectedRockClasses)
-    })
+      value: rockClassesQuery
+    }, false)
   } else {
-    queryStore.unsetFilter(QueryKey.RockClass)
+    queryStore.unsetFilter(QueryKey.RockClass, false)
   }
+
+  queryStore.cacheFilter({
+    name: QueryKey.RockClass,
+    value: toQuery(Object.keys(selectedRockClasses).map(key => selectedRockClasses[key]).flat())
+  })
 
   queryStore.execute()
 }
@@ -88,7 +105,7 @@ function useFilter() {
 async function remove(typeIndex: number, classIndex: number) {
   const rockClassToRemove = selected.value[typeIndex].classes.find((item, i) => i === classIndex)
 
-  // We have to check if the parent rock type needs to be remove because it was the last selected rock class item
+  // We have to check if the parent rock type needs to be removed because it was the last selected rock class item
   const rockTypeToRemove = rockClassToRemove && selected.value[typeIndex].classes.length === 1 ? selected.value[typeIndex] : null
 
   if (!rockClassToRemove) return
@@ -100,7 +117,22 @@ async function remove(typeIndex: number, classIndex: number) {
   }, <TreeSelectionKeys>{})
 
   onSelect(keys)
+  submit()
+}
 
+function removeAll(typeIndex: number) {
+  const type = selected.value[typeIndex]
+
+
+  let keys = Object.keys(selectedKeys.value).filter(key => {
+    const { classes } = type
+    return !(classes.findIndex(({ value }) => key === value) > -1 || type.value === key)
+  }).reduce((acc, cur) => {
+    acc[cur] = selectedKeys.value[cur]
+    return acc
+  }, <TreeSelectionKeys>{})
+
+  onSelect(keys)
   submit()
 }
 
@@ -113,6 +145,16 @@ function reset() {
   selected.value = []
   selectedTemp.value = []
   useFilter()
+}
+
+function rockClassesToQuery(nested: NestedSelected) {
+  const classes = Object
+    .keys(nested)
+    .filter(key => !hasAllClassesSelected({ value: key, classes: nested[key], label: '' }))
+    .map(key => nested[key])
+    .flat()
+
+  return toQuery(classes)
 }
 
 function toQuery(selected: RadioGroupOption[]) {
@@ -136,10 +178,6 @@ function onSelect (keys: TreeSelectionKeys) {
           ?.children
           ?.filter(({ key }) => Object.keys(keys).findIndex(selectionKey => selectionKey === key) > -1) ?? []
 
-    if (classes.length === node.children?.length) {
-      classes = [{ key: 'ALL', label: 'All'}]
-    }
-
     return {
       value: key ?? '',
       label: label ?? '',
@@ -148,7 +186,10 @@ function onSelect (keys: TreeSelectionKeys) {
   })
 }
 
-// watch(() => selectedKeys.value, onSelect)
+function hasAllClassesSelected(type: SelectedRockType): boolean {
+  const node = nodes.value.find((node) => node.key === type.value)
+  return type.classes.length === 0 || type.classes.length === node?.children?.length
+}
 </script>
 
 <template>
@@ -164,7 +205,8 @@ function onSelect (keys: TreeSelectionKeys) {
       <div class="flex flex-1 flex-col mb-2" v-for="(type, i) in selected" :key="type.value">
         <h3 class="font-semibold mb-2">{{ type.label }}:</h3>
         <div class="flex ps-4">
-          <QueryFilterBaseSelected :items="type.classes" @remove="remove(i, $event)" />
+          <QueryFilterBaseSelected v-if="!hasAllClassesSelected(type)" :items="type.classes" @remove="remove(i, $event)" />
+          <QueryFilterBaseSelected v-else :items="[{ value: 'ALL', label: 'All'}]" @remove="removeAll(i)" />
         </div>
       </div>
     </template>

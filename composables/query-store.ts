@@ -51,17 +51,15 @@ export const useQueryStore = defineStore('query', {
       this.setFilter(filter)
       debounceMap(() => this.executeMapQuery())
     },
-    async setPanelFilter(filter: QueryFilter) {
-      this.setFilter(filter)
-      // debounceMap(() => this.executeMapQuery(), mapTimer)
-      // debounceList(() => this.executeListQuery(), listTimer)
+    async setPanelFilter(filter: QueryFilter, withCache = true) {
+      this.setFilter(filter, withCache)
     },
-    setFilter(filter: QueryFilter) {
+    setFilter(filter: QueryFilter, withCache = true) {
       const index  = this.activeFilters.findIndex(({ name }) => name === filter.name)
       if (index === -1) this.activeFilters.push(filter)
       else this.activeFilters[index] = filter
 
-      this.cacheFilter(filter)
+      if (withCache) this.cacheFilter(filter)
     },
     unsetFilter(name: string, removeFromCache = true) {
       const index = this.activeFilters.findIndex(({ name: oldName }) => oldName === name)
@@ -71,10 +69,8 @@ export const useQueryStore = defineStore('query', {
       if (removeFromCache) window.localStorage.removeItem(this.getCachingKey(name))
     },
     async execute() {
-      this.executeMapQuery()
-      this.executeListQuery()
-      // debounceMap(() => this.executeMapQuery())
-      // debounceList(() => this.executeListQuery())
+      debounceMap(() => this.executeMapQuery())
+      debounceList(() => this.executeListQuery())
     },
     async executeMapQuery() {
       if (abortController) abortController.abort()

@@ -21,7 +21,7 @@ const contentLeft = ref(0)
 const isScrollable = function (ele: HTMLElement | null) {
   // https://phuoc.ng/collection/html-dom/check-if-an-element-is-scrollable/
 
-  if (!ele) return false
+  if (!ele || !ele.scrollHeight) return false
 
   // Compare the height to see if the element has scrollable content
   const hasScrollableContent = ele.scrollHeight > ele.clientHeight;
