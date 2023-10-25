@@ -35,7 +35,7 @@ function openDialog() {
       <h3 v-if="title" class="mb-2 font-bold">{{ title }}</h3>
       <BaseButton v-if="showReset" size="tiny" display="outline" class="ms-auto self-center" @click="onReset" text="Reset"></BaseButton>
     </div>
-    <div class="flex flex-col items-center justify-center h-[100px] relative" v-if="loading">
+    <div class="flex flex-col items-center justify-center h-[80px] relative" v-if="loading">
       <BaseLoading/>
     </div>
     <div class="flex flex-col flex-1 items-start" v-else>

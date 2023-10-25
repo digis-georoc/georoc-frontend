@@ -14,9 +14,9 @@ const props = withDefaults(defineProps<{
 
 <style scoped>
 .line {
-  width: 12px;
-  height: 12px;
-  border-radius: 12px;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
   background-color: black;
 }
 
