@@ -48,5 +48,14 @@ export default {
   glass_melt: 'Glass/Melt',
   please_select_host_material: 'Please select one or more Host Material(s)',
   please_select_inclusion_material: 'Please select one or more Inclusion Material(s)',
-  select: 'Select'
+  select: 'Select',
+  authors: 'Authors',
+  title: 'Title',
+  ver: 'Ver.',
+  prod_date: 'Prod. Date',
+  link_to_dataset: 'Link to Dataset',
+  search: 'Search',
+  showing_first_to_last_of_total_entries: 'Showing {first} to {last} of {totalRecords} entries',
+  show_expert_dataset: 'Show Expert Dataset',
+  no_matching_records_found: 'No matching records found.'
 }

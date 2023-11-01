@@ -1,5 +1,6 @@
 import {
   ElementsResponse,
+  ExpertDatasetResponse,
   MineralsResponse,
   QueryFilter,
   QueryListResponse,
@@ -57,6 +58,13 @@ async function getList(filters: QueryFilter[] = []): Promise<QueryListResponse |
   return null
 }
 
+async function getExpertDatasets() {
+    const { data } = await useFetch<ExpertDatasetResponse>(
+      '/api/expertdatasets',
+    )
+    return data.value
+}
+
 async function getElements(type: string): Promise<ElementsResponse | null> {
   const { data} = await useFetch<ElementsResponse>('/api/elements' + (type ? `?type=${type}` : ''))
   return data.value
@@ -77,6 +85,7 @@ export {
   getList,
   getRocktypes,
   getMinerals,
+  getExpertDatasets,
   getElements,
   getElementTypes,
   getRockClasses

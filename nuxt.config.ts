@@ -20,7 +20,9 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         apiToken: process.env.API_TOKEN,
-        apiBaseUrl: process.env.API_BASE_URL
+        apiBaseUrl: process.env.API_BASE_URL,
+        apiExpertToken: process.env.API_EXPERT_TOKEN,
+        apiExpertUrl: process.env.API_EXPERT_URL
     },
     routeRules: {
         // Homepage pre-rendered at build time
@@ -31,5 +33,8 @@ export default defineNuxtConfig({
     tailwindcss: {
         exposeConfig: true
     },
-    css: ['~/assets/css/index.css']
+    css: ['~/assets/css/index.css'],
+    build: {
+		transpile: ["primevue"]
+	}
 })

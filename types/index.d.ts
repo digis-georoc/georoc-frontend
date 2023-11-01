@@ -104,6 +104,18 @@ type MineralsResponse = BaseResponse<MineralsResponseItem>
 type ElementsResponse = BaseResponse<ChemicalElement>
 type RocktypesResponse = BaseResponse<RocktypesResponseItem>
 
+interface ExpertDatasetRow {
+  authors: string,
+  title: string,
+  versionNr: string,
+  productionDate: number,
+  persistentUrl: string,
+}
+
+interface ExpertDatasetResponse {
+  datasets: ExpertDatasetRow[]
+}
+
 export {
   QueryFilter,
   QueryState,
@@ -117,6 +129,8 @@ export {
   QueryListResponse,
   RadioGroupOption,
   MineralsResponse,
+  ExpertDatasetRow,
+  ExpertDatasetResponse,
   ChemicalElement,
   ElementsResponse,
   ElementTypesResponse,
