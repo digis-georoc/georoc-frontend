@@ -58,6 +58,8 @@ build_image_dev:
       --build-arg API_TOKEN=${API_TOKEN}
       --build-arg API_BASE_URL=${API_BASE_URL_DEV}
       --build-arg NUXT_APP_BASE_URL=${NUXT_APP_BASE_URL_DEV}
+      --build-arg API_EXPERT_TOKEN=${API_EXPERT_TOKEN}
+      --build-arg API_EXPERT_URL=${API_EXPERT_URL}
       --reproducible
       --destination ${dest}:${imageTag}
       --destination ${dest}:latest
