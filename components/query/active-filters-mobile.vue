@@ -1,10 +1,12 @@
 <script lang="ts" setup>
+import AmountSamples from "~/components/query/amount-samples.vue";
+
 const emit = defineEmits(['is-filter-open', 'is-list-open'])
 </script>
 
 <template>
   <div class="dark:bg-zinc-800 w-full px-4 py-2">
-    <div class="flex">
+    <div class="flex items-center justify-start">
       <BaseButton
         :text="$t('filters')"
         icon="mi:filter"
@@ -12,6 +14,8 @@ const emit = defineEmits(['is-filter-open', 'is-list-open'])
         class="flex xl:hidden"
         @click="emit('filter', true)"
       />
+      <AmountSamples/>
+
       <BaseButton
         :text="$t('list_view')"
         icon="ic:round-format-list-bulleted"
