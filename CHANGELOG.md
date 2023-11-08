@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.8...v0.0.9) (2023-11-08)
+
+
+### Features
+
+* show amount samples on mobile view ([4ca3e73](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/4ca3e73ae2773ec45fc08d34ba4fccedcfa27fdb))
+* use host/inclusion material endpoints ([0f2df49](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/0f2df49daa581ecf90055f9716b88be28dc158d3))
+
 ### [0.0.8](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.7...v0.0.8) (2023-11-08)
 
 
