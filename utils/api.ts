@@ -1,6 +1,6 @@
 import {
   ElementsResponse,
-  ExpertDatasetResponse,
+  ExpertDatasetResponse, HostMaterialsResponse,
   MineralsResponse,
   QueryFilter,
   QueryListResponse,
@@ -80,6 +80,16 @@ async function getRockClasses(rockType: string): Promise<RockClassResponse | nul
   return data.value
 }
 
+async function getHostMaterials(): Promise<HostMaterialsResponse | null> {
+  const { data} = await useFetch<HostMaterialsResponse>('/api/host-materials')
+  return data.value
+}
+
+async function getInclusionMaterials(): Promise<HostMaterialsResponse | null> {
+  const { data} = await useFetch<HostMaterialsResponse>('/api/inclusion-materials')
+  return data.value
+}
+
 export {
   getSamples,
   getList,
@@ -88,6 +98,8 @@ export {
   getExpertDatasets,
   getElements,
   getElementTypes,
-  getRockClasses
+  getRockClasses,
+  getHostMaterials,
+  getInclusionMaterials
 }
 

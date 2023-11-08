@@ -4,7 +4,7 @@ import {MultiselectOption} from "~/types";
 const queryStore = useQueryStore()
 
 const selectedValueFromStore = queryStore.getCachedFilterValue(QueryKey.InclusionMaterial)
-const minerals = await getMinerals()
+const inclusionMaterials = await getInclusionMaterials()
 const options = ref<MultiselectOption[]>([])
 const selected = ref<MultiselectOption[]>([])
 const selectedTemp = ref<MultiselectOption[]>([])
@@ -51,7 +51,7 @@ onMounted(async () => {
 
   if (selectedValueFromStore) selectedValues = fromQuery(selectedValueFromStore)
 
-  options.value = minerals?.data
+  options.value = inclusionMaterials?.data
       .map(({ value, label }) => {
         const active = selectedValues.includes(value)
         const option = {
@@ -72,7 +72,7 @@ onMounted(async () => {
     </template>
     <template v-slot:options>
       <div class="w-full">
-        <BaseMultiselect :options="options" id-prefix="host_material" @change="selectedTemp = $event"/>
+        <BaseMultiselect :options="options" id-prefix="inclusion_material" @change="selectedTemp = $event"/>
       </div>
     </template>
   </QueryFilterBaseContainer>

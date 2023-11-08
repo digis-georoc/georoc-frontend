@@ -4,7 +4,7 @@ import {MultiselectOption} from "~/types";
 const queryStore = useQueryStore()
 
 const selectedValueFromStore = queryStore.getCachedFilterValue(QueryKey.HostMaterial)
-const minerals = await getMinerals()
+const hostMaterials = await getHostMaterials()
 const options = ref<MultiselectOption[]>([])
 const selected = ref<MultiselectOption[]>([])
 const selectedTemp = ref<MultiselectOption[]>([])
@@ -51,7 +51,7 @@ onMounted(async () => {
 
   if (selectedValueFromStore) selectedValues = fromQuery(selectedValueFromStore)
 
-  options.value = minerals?.data
+  options.value = hostMaterials?.data
       .map(({ value, label }) => {
         const active = selectedValues.includes(value)
         const option = {

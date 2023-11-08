@@ -93,6 +93,18 @@ interface RockClass {
   label: string
 }
 
+interface HostMaterial {
+  count: number,
+  label: string,
+  value: string,
+}
+
+interface InclusionMaterial {
+  count: number,
+  label: string,
+  value: string,
+}
+
 interface BaseResponse<T> {
   data: T[],
   numItems: number
@@ -103,6 +115,8 @@ type ElementTypesResponse = BaseResponse<ChemicalElementType>
 type MineralsResponse = BaseResponse<MineralsResponseItem>
 type ElementsResponse = BaseResponse<ChemicalElement>
 type RocktypesResponse = BaseResponse<RocktypesResponseItem>
+type HostMaterialsResponse = BaseResponse<HostMaterial>
+type InclusionMaterialsResponse = BaseResponse<InclusionMaterial>
 
 interface ExpertDatasetRow {
   authors: string,
@@ -138,7 +152,9 @@ export {
   SelectedChemicalElement,
   TreeNode,
   RockClassResponse,
-  RockClass
+  RockClass,
+  HostMaterialsResponse,
+  InclusionMaterialsResponse
 }
 
 
