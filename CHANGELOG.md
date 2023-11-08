@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [0.0.7](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.4...v0.0.7) (2023-10-25)
+### [0.0.7](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.6...v0.0.7) (2023-10-25)
 
 ### Features
 
@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file. See [standa
 * update loading ([816e75f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/816e75f58d0bdca0ff11928269dbb5b4a2781d77))
 
 
-### [0.0.6](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.4...v0.0.6) (2023-10-24)
+### [0.0.6](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.5...v0.0.6) (2023-10-24)
 
 
 ### Features
