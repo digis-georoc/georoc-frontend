@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import {
-  TransitionRoot,
-  TransitionChild,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-} from '@headlessui/vue'
+import Dialog from 'primevue/dialog'
 
 const props = withDefaults(defineProps<{
   modelValue: boolean,
@@ -27,51 +21,36 @@ function open() {
 }
 </script>
 <template>
-  <TransitionRoot :show="modelValue" as="template">
-    <Dialog as="div" @close="close" class="relative z-[9999]">
-      <TransitionChild
-        as="template"
-        enter="duration-300 ease-out"
-        enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="duration-200 ease-in"
-        leave-from="opacity-100"
-        leave-to="opacity-0"
-      >
-        <div class="fixed inset-0 bg-black bg-opacity-50" />
-      </TransitionChild>
-
-      <div class="fixed inset-0 overflow-y-auto">
-        <div class="flex min-h-full items-center justify-center p-4 text-center">
-          <TransitionChild
-            as="template"
-            enter="duration-300 ease-out"
-            enter-from="opacity-0 scale-95"
-            enter-to="opacity-100 scale-100"
-            leave="duration-200 ease-in"
-            leave-from="opacity-100 scale-100"
-            leave-to="opacity-0 scale-95"
-          >
-            <DialogPanel
-
-              class="w-full max-w-md transform rounded-2xl bg-white dark:bg-zinc-800 p-6
-              text-left align-middle shadow-xl transition-all"
-            >
-              <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-400">{{ title }}</DialogTitle>
-              <div class="mt-4" ref="containerRef">
-                <slot/>
-              </div>
-              <BaseButton
-                  v-if="closable"
-                  icon="ic:close"
-                  display="flat"
-                  class="absolute flex top-5 right-5"
-                  @click="emit('update:modelValue', !modelValue)"
-              />
-            </DialogPanel>
-          </TransitionChild>
-        </div>
-      </div>
-    </Dialog>
-  </TransitionRoot>
+  <Dialog
+    :visible="modelValue"
+    modal
+    unstyled
+    :closable="closable"
+    :dismissableMask="closable"
+    :pt="{
+      root: {
+        class: 'bg-white dark:bg-zinc-800 p-4 rounded-lg lg:w-1/3 shadow-lg'
+      },
+      header: {
+        class: 'flex'
+      },
+      headerIcons: {
+        class: 'ml-auto'
+      },
+      closeButton: {
+        class: 'hover:bg-zinc-100 dark:hover:bg-zinc-700 w-8 h-8 rounded-full flex items-center justify-center'
+      },
+      mask: {
+        class: 'bg-zinc-900 bg-opacity-50'
+      }
+    }"
+    @update:visible="emit('update:modelValue', $event)"
+  >
+    <template #header>
+      <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-400">{{ title }}</h3>
+    </template>
+    <div class="mt-4" ref="containerRef">
+      <slot/>
+    </div>
+  </Dialog>
 </template>
