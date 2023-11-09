@@ -5,7 +5,6 @@ import {
   ListboxOptions,
   ListboxOption,
 } from '@headlessui/vue'
-import { RadioGroupOption } from "~/types";
 
 const props = withDefaults(defineProps<{
   options: RadioGroupOption[]

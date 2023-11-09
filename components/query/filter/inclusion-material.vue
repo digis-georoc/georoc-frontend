@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {MultiselectOption} from "~/types";
-
 const queryStore = useQueryStore()
 
 const selectedValueFromStore = queryStore.getCachedFilterValue(QueryKey.InclusionMaterial)

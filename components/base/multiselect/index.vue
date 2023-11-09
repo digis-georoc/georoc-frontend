@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import {MultiselectOption} from "~/types";
-import options from "~/components/base/multiselect/options.vue";
-
 const id = ref(1)
 
 const _options = ref<MultiselectOption[]>([])

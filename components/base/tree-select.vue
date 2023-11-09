@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Tree, {TreeNode, TreeSelectionKeys} from 'primevue/tree'
+import type Tree, {TreeNode, TreeSelectionKeys} from 'primevue/tree'
 
 const props = withDefaults(defineProps<{
   nodes: TreeNode[]

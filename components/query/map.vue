@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import 'leaflet/dist/leaflet.css'
-import 'leaflet.markercluster/dist/MarkerCluster.css'
-import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 
 import { theme } from '#tailwind-config'
 
 import L, {GeoJSON, LatLng, LatLngBounds} from "leaflet"
-import FreeDraw, { MarkerEvent } from "leaflet-freedraw"
-
-import 'leaflet.markercluster/dist/leaflet.markercluster-src'
-import { QueryLocationsResponse } from "~/types";
-import {Feature, Polygon, Position} from "geojson";
+import FreeDraw from 'leaflet-freedraw'
+import type { MarkerEvent } from 'leaflet-freedraw'
+import type { Feature, Polygon, Position } from "geojson";
 
 const queryStore = useQueryStore()
 const initialZoomLevel = 2

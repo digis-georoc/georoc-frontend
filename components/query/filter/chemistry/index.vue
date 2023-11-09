@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { SelectedChemicalElement } from "~/types";
-
 const queryStore = useQueryStore()
 
 const cachedValue = queryStore.getCachedFilterValue(QueryKey.Chemistry)

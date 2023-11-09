@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RadioGroupOption } from "~/types";
 const queryStore = useQueryStore()
 
 const { t } = useI18n()

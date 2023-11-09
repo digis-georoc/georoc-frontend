@@ -5,11 +5,9 @@ import {
   RadioGroupOption,
 } from '@headlessui/vue'
 
-import { RadioGroupOption as Option } from "~/types"
-
 const props = defineProps<{
-  modelValue: Option
-  options: Option[]
+  modelValue: RadioGroupOption
+  options: RadioGroupOption[]
 }>()
 
 // watch(() => props.options, (value) => {

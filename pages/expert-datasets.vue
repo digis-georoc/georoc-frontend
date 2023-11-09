@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import expertdatasets from '~/server/api/expertdatasets';
-  import { ExpertDatasetResponse } from '~/types';
   const expertDataSets = await getExpertDatasets();
   const { t } = useI18n();
   const columns = [

@@ -1,13 +1,3 @@
-import {
-  ElementsResponse,
-  ExpertDatasetResponse, HostMaterialsResponse,
-  MineralsResponse,
-  QueryFilter,
-  QueryListResponse,
-  QueryLocationsResponse, RockClassResponse,
-  RocktypesResponse
-} from "~/types";
-
 async function getSamples(filters: QueryFilter[] = [], { signal }: AbortController): Promise<QueryLocationsResponse | null> {
 
   const filterObj: any = {}

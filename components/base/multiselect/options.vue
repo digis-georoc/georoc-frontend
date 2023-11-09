@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { MultiselectOption } from "~/types";
-
 const props = withDefaults(defineProps<{
   idPrefix: string,
   modelValue?: MultiselectOption[]

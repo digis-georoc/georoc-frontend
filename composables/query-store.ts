@@ -1,6 +1,4 @@
 import { defineStore } from "pinia";
-import {QueryFilter, QueryState} from "~/types";
-
 let mapTimer: NodeJS.Timeout
 let listTimer: NodeJS.Timeout
 let abortController: AbortController | null = null

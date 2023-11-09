@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {MultiselectOption, RadioGroupOption} from "~/types";
-
 const props = withDefaults(defineProps<{
   items: MultiselectOption[] | RadioGroupOption[]
 }>(), {

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { RadioGroupOption } from "~/types"
-import { TreeNode, TreeSelectionKeys } from "primevue/tree";
+import type {TreeSelectionKeys} from "primevue/tree";
 
 interface SelectedRockType {
   label: string,
@@ -217,7 +216,7 @@ function hasAllClassesSelected(type: SelectedRockType): boolean {
     </template>
     <template v-slot:options>
       <div class="w-full">
-        <BaseTreeSelect :nodes="nodes" :model-value="selectedKeys" @update:model-value="onSelect" />
+<!--        <BaseTreeSelect :nodes="nodes" :model-value="selectedKeys" @update:model-value="onSelect" />-->
       </div>
     </template>
   </QueryFilterBaseContainer>

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { RadioGroupOption, SelectedChemicalElement } from "~/types";
-
 const props = defineProps<{
   modelValue: SelectedChemicalElement
   title: string

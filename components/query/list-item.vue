@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { SampleItem } from "~/types";
-
 const props = defineProps<{
   item: SampleItem | null,
 }>()
