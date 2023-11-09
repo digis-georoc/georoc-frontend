@@ -8,11 +8,21 @@ const selected = ref<MultiselectOption[]>([])
 const selectedTemp = ref<MultiselectOption[]>([])
 
 function remove(index: number) {
+  const optionToRemove = selected.value.find((item, i) => i === index)
+
+  if (!optionToRemove) return
+
+  const optionIndex = options.value.findIndex(({ value }) => value === optionToRemove.value)
+  if (optionIndex === -1) return
+  options.value[optionIndex].active = false
+
   selected.value.splice(index, 1)
+
   queryStore.setPanelFilter({
-    name: QueryKey.InclusionMaterial,
+    name: QueryKey.HostMaterial,
     value: toQuery(selected.value)
   })
+
   queryStore.execute()
 }
 
