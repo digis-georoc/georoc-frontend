@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Checkbox from 'primevue/checkbox'
+
 const props = withDefaults(defineProps<{
   id: string,
   label?: String,
@@ -13,24 +15,36 @@ const emit = defineEmits<{
 </script>
 <template>
   <div class="flex items-center">
-    <input
-      :checked="modelValue"
-      @change="emit('update:modelValue', $event.target.checked)"
-      :id="id"
-      type="checkbox"
-      class="appearance-none w-[20px] h-[20px]
-      text-white bg-gray-100 checked:bg-primary checked:dark:bg-primary border border-gray-300 rounded
-      focus:outline-none focus:ring-primary focus:ring-opacity-25 dark:ring-offset-gray-800
-      focus:ring-4 dark:bg-zinc-700 dark:border-zinc-600
-      relative z-20 cursor-pointer
-      checked:before:content-['\2713'] before:flex before:justify-center before:items-center before:absolute
-      before:top-0 before:left-0
-      before:w-full before:h-full before:leading-none before:text-[0.75rem]"
-    >
+    <Checkbox
+      :model-value="modelValue"
+      @update:modelValue="emit('update:modelValue', $event)"
+      :binary="true"
+      :inputId="id"
+      unstyled
+      :pt="{
+        root: ({ context }) => ({
+          class: [
+            'border-2 rounded-md w-[22px] h-[22px] transition-colors cursor-pointer',
+            {'outline-none border-primary ring ring-opacity-25 ring-primary': context.focused },
+            {
+              'bg-stone-50 hover:border-primary': !context.checked,
+              'bg-primary text-white hover:bg-primary-700 border-primary': context.checked,
+            }
+          ]
+        }),
+        input: {
+          class: 'w-full h-full flex flex items-center justify-center'
+        },
+      }">
+      <template v-slot:icon>
+          <Icon name="ic:round-check" class="text-white dark:text-zinc-800"/>
+      </template>
+    </Checkbox>
     <label
-        :for="id"
-        class="ml-2 text-sm font-medium text-gray-900 dark:text-zinc-300">
-      {{ label }}
+      v-if="label"
+      :for="id"
+      class="ml-2 text-sm font-medium text-gray-900 dark:text-zinc-300">
+    {{ label }}
     </label>
   </div>
 </template>
