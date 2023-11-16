@@ -34,7 +34,7 @@ function submit() {
   <div class="self-start flex items-center w-full px-4">
     <QueryFilterMaterial class="w-full" :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
   </div>
-  <div class="flex flex-1 flex-col px-4 overflow-auto scroll-gradient relative">
+  <div class="flex flex-1 flex-col overflow-auto scroll-gradient relative">
     <QueryFilterRockType v-if="selectedMaterialId === 'WR'" />
     <QueryFilterInclusionType v-if="selectedMaterialId === 'INC'" />
     <template v-if="inclusionTypeFilterValue === 'IMIN'">

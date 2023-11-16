@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {pop} from "@jridgewell/set-array";
-
 const props = withDefaults(defineProps<{
   buttonStyles: string,
   buttonTitle: string
@@ -95,12 +93,4 @@ const handleClickOutside = (event: MouseEvent) => {
       </div>
     </transition>
   </Teleport>
-<!--  <Popover v-slot="{ open }" class="relative">-->
-
-
-<!--      <PopoverPanel class="">-->
-<!--        -->
-<!--      </PopoverPanel>-->
-<!--    </transition>-->
-<!--  </Popover>-->
 </template>
