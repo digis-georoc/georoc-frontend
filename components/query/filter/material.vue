@@ -16,28 +16,34 @@ const emit = defineEmits<{
   (event: 'update:modelValue', payload: string): void;
 }>()
 
-const materials = [
+interface MaterialOption {
+  value: string,
+  label: string,
+  icon: string
+}
+
+const materials: MaterialOption[] = [
   {
-    id: 'WR',
+    value: 'WR',
     label: t('whole_rock_and_glass'),
     icon: 'noto:rock'
   },
   {
-    id: 'INC',
+    value: 'INC',
     label: t('inclusion'),
     icon: 'noto:bubbles'
   },
   {
-    id: 'MIN',
+    value: 'MIN',
     label: t('mineral'),
     icon: 'emojione-v1:diamond-with-a-dot'
   },
 ]
 
-const selectedMaterial = ref<{ id: string }>({ id: ''})
+const selectedMaterial = ref<MaterialOption>(materials[0])
 
 watch(() => props.modelValue, (value) => {
-  const index = materials.findIndex(({ id }) => id === value)
+  const index = materials.findIndex((material) => material.value === value)
   if (index === -1) return
   selectedMaterial.value = materials[index]
 }, { immediate: true })
@@ -45,39 +51,10 @@ watch(() => props.modelValue, (value) => {
 </script>
 
 <template>
-  <RadioGroup
+  <BaseRadioGroup
+    :options="materials"
     :model-value="selectedMaterial"
-    @update:modelValue="value => emit('update:modelValue', value.id)"
-    by="id"
-    class="bg-zinc-200/50 dark:bg-zinc-700 p-1 rounded-xl"
-  >
-    <RadioGroupLabel class="sr-only">{{ $t('material_filter') }}</RadioGroupLabel>
-    <div class="flex flex-col xl:flex-row space-x-2">
-      <RadioGroupOption
-        as="template"
-        v-for="material in materials"
-        :key="material.id"
-        :value="material"
-        v-slot="{ active, checked }"
-      >
-        <div
-          :class="[
-            active
-              ? 'ring-primary ring-opacity-25 ring-4'
-              : '',
-            checked ? 'bg-primary' : 'hover:bg-zinc-200 dark:hover:bg-zinc-600',
-            size === 'small' ? 'px-3 py-1' : '',
-            size === 'normal' ? 'px-3 py-1.5' : '',
-          ]"
-          class="relative flex-shrink-0 flex-grow flex justify-center cursor-pointer rounded-lg focus:outline-none"
-        >
-        <RadioGroupLabel as="p" class="text-sm font-semibold flex items-center">
-            <span :class="checked ? 'text-white' : 'text-zinc-600 dark:text-gray-300'">
-              {{ material.label }}
-            </span>
-          </RadioGroupLabel>
-        </div>
-      </RadioGroupOption>
-    </div>
-  </RadioGroup>
+    @update:modelValue="emit('update:modelValue', $event.value)"
+    size="sm"
+  ></BaseRadioGroup>
 </template>
