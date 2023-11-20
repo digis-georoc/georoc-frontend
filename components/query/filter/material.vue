@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import {
-  RadioGroup,
-  RadioGroupLabel,
-  RadioGroupOption,
-} from '@headlessui/vue'
-
 const { t } = useI18n()
 
 const props = withDefaults(defineProps<{

@@ -133,6 +133,16 @@ declare global {
     datasets: ExpertDatasetRow[]
   }
 
+  interface NestedSelected {
+    [key: string]: RadioGroupOption[]
+  }
+
+  interface SelectedRockType {
+    label: string,
+    value: string,
+    classes: RadioGroupOption[]
+  }
+
 }
 
 export {}

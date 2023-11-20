@@ -7,10 +7,6 @@ interface SelectedRockType {
   classes: RadioGroupOption[]
 }
 
-interface NestedSelected {
-  [key: string]: RadioGroupOption[]
-}
-
 const queryStore = useQueryStore()
 
 const cachedRockTypeQuery = queryStore.getCachedFilterValue(QueryKey.RockType)
@@ -34,7 +30,7 @@ onMounted(async () => {
   selected.value = []
   const rockTypes = await getRocktypes()
 
-  nodes.value =  await Promise.all(rockTypes?.data
+  nodes.value = await Promise.all(rockTypes?.data
     .map(async ({ value, label }, i) => {
       const rockClasses = await getRockClasses(value)
       return {
@@ -216,7 +212,7 @@ function hasAllClassesSelected(type: SelectedRockType): boolean {
     </template>
     <template v-slot:options>
       <div class="w-full">
-<!--        <BaseTreeSelect :nodes="nodes" :model-value="selectedKeys" @update:model-value="onSelect" />-->
+        <BaseTreeSelect :nodes="nodes" :model-value="selectedKeys" @update:model-value="onSelect" />
       </div>
     </template>
   </QueryFilterBaseContainer>

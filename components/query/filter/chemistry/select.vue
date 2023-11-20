@@ -1,6 +1,8 @@
 <script lang="ts" setup>
+import type {TreeNode, TreeSelectionKeys} from "primevue/tree";
+
 const props = defineProps<{
-  modelValue: SelectedChemicalElement
+  modelValue: TreeNode[]
   title: string
 }>()
 
@@ -8,58 +10,63 @@ const elementsSelectDisabled = ref(true)
 
 const elementOptions = ref<RadioGroupOption[]>([])
 const elementTypesOptions = ref<RadioGroupOption[]>([])
+const elementTypesNodes = ref<TreeNode[]>([])
+const loadingChildren = ref(false)
+const selectedKeys = ref<TreeSelectionKeys>({})
+
 
 const emit = defineEmits<{
-  'update:modelValue': [selected: RadioGroupOption]
+  'update:modelValue': [nodes: TreeNode[]]
 }>()
-
-async function selectElementType(type: RadioGroupOption) {
-  props.modelValue.type = type
-  const elements = await getElements(type.value)
-  elementOptions.value = elements?.data ?? []
-
-  elementsSelectDisabled.value = false
-}
 
 onMounted(async () => {
   const elementTypes = await getElementTypes()
-  elementTypesOptions.value = elementTypes?.data.map(({ name }) => ({ label: name, value: name })) ?? []
-
+  elementTypesNodes.value = elementTypes?.data.map(({ value, label }) => ({ key: value, label, children: <TreeNode[]>[], leaf: false })) ?? []
 })
+
+async function loadChildren(node: TreeNode) {
+  const index = elementTypesNodes.value.findIndex(({ key }) => node.key === key)
+
+  if (index === -1) return
+
+  loadingChildren.value = true
+  const elements = await getElements(node.key)
+  elementTypesNodes.value[index].children = elements?.data.map(({ value, label }) => ({key: value, label, children: []})) ?? []
+  loadingChildren.value = false
+}
+
+function onSelect (keys: TreeSelectionKeys) {
+  selectedKeys.value = keys
+  const selectedNodes = elementTypesNodes.value.filter(({ key }) => key && keys.hasOwnProperty(key)).map(node => {
+    const { key, label } = node
+
+    let classes =
+        node
+            ?.children
+            ?.filter((child) => Object.keys(keys).findIndex(selectionKey => selectionKey === child.key) > -1) ?? []
+
+    // if (classes.length === node?.children?.length) {
+    //   // When loading values from cache (onMounted) we assumed that the rock type is partially checked
+    //   // Here we can tell for sure if all classes of that rock type were cached, if yes we mark also the rock type as checked.
+    //   selectedKeys.value[key] = { checked: true }
+    // }
+
+    return {
+      key: key ?? '',
+      label: label ?? '',
+      children: classes.map(({ key, label }) => ({ value: key ?? '', label: label ?? ''}))
+    }
+  })
+
+  emit('update:modelValue', selectedNodes)
+}
 </script>
 <template>
-  <BaseSelect
-    :options="elementTypesOptions"
-    :model-value="modelValue.type"
-    :title="$t('element_type')"
-    @update:modelValue="selectElementType"
-    class="mb-4"
+  <BaseTreeSelect
+    :model-value="modelValue"
+    @update:model-value="emit('update:modelValue', $event)"
+    :nodes="elementTypesNodes"
+    :load-children="loadChildren"
+    :loading="loadingChildren"
   />
-  <BaseSelect
-    :options="elementOptions"
-    :model-value="modelValue.element"
-    :title="$t('element')"
-    :disabled="elementsSelectDisabled"
-    @update:modelValue="modelValue.element = $event"
-    class="mb-4"
-  />
-  <div class="flex space-x-2">
-    <BaseInput
-      class="w-1/2"
-      title="Min"
-      type="number"
-      :model-value="modelValue.min"
-      :disabled="elementsSelectDisabled"
-      @update:modelValue="modelValue.min = $event"
-    />
-    <BaseInput
-      class="w-1/2"
-      title="Max"
-      type="number"
-      :model-value="modelValue.max"
-      :disabled="elementsSelectDisabled"
-      @update:modelValue="modelValue.max = $event"
-    />
-  </div>
-
 </template>
