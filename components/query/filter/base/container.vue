@@ -36,7 +36,7 @@ function openDialog() {
       <BaseButton v-if="showReset" size="tiny" display="outline" class="ms-auto self-center" @click="onReset" text="Reset"></BaseButton>
     </div>
     <div class="flex flex-col items-center justify-center h-[80px] relative" v-if="loading">
-      <BaseLoading/>
+      <BaseLoading class="text-[2rem]"/>
     </div>
     <div class="flex flex-col flex-1 items-start" v-else>
       <slot name="selected"/>

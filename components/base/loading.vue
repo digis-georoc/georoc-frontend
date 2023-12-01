@@ -5,11 +5,7 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="flex space-x-1.5" :style="`opacity:${opacity}`">
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-  </div>
+  <Icon name="codicon:loading" class="text-zinc-300 animate-spin"></Icon>
 </template>
 
 <style scoped>

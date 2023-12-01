@@ -99,11 +99,11 @@ function useFilter() {
 
 async function remove(typeIndex: number, classIndex: number) {
   const rockClassToRemove = selected.value[typeIndex].classes.find((item, i) => i === classIndex)
+  if (!rockClassToRemove) return
 
   // We have to check if the parent rock type needs to be removed because it was the last selected rock class item
-  const rockTypeToRemove = rockClassToRemove && selected.value[typeIndex].classes.length === 1 ? selected.value[typeIndex] : null
+  const rockTypeToRemove = selected.value[typeIndex].classes.length === 1 ? selected.value[typeIndex] : null
 
-  if (!rockClassToRemove) return
   let keys = Object.keys(selectedKeys.value).filter(key => {
     return !(key === rockClassToRemove.value || (rockTypeToRemove && rockTypeToRemove.value === key))
   }).reduce((acc, cur) => {

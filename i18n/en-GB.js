@@ -57,5 +57,7 @@ export default {
   search: 'Search',
   showing_first_to_last_of_total_entries: 'Showing {first} to {last} of {totalRecords} entries',
   show_expert_dataset: 'Show Expert Dataset',
-  no_matching_records_found: 'No matching records found.'
+  no_matching_records_found: 'No matching records found.',
+  unit: 'Unit',
+  show_more_less: 'Show more/less'
 }

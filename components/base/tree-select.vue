@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Tree from 'primevue/tree'
-import type {TreeNode, TreeSelectionKeys} from 'primevue/tree'
+import type {TreeNode, TreeSelectionKeys, TreeExpandedKeys} from 'primevue/tree'
 
 const props = withDefaults(defineProps<{
   nodes: TreeNode[]
@@ -10,17 +10,41 @@ const props = withDefaults(defineProps<{
 }>(),{
   nodes: [],
   modelValue: {},
-  loading: false
+  loading: false,
+  loadChildren: () => {}
 })
 
 const emit = defineEmits<{
   select: [keys: TreeSelectionKeys]
   'update:modelValue': [value: TreeSelectionKeys]
 }>()
+
+const expandedKeys = ref<TreeExpandedKeys>({})
+
+async function onSelect(node: TreeNode) {
+  if (!node.key) return
+
+  const nodeIndex = props.nodes.findIndex(({ key }) => key === node.key)
+  const isTopLevelNode = nodeIndex > -1
+  if (!isTopLevelNode) return
+  expandedKeys.value[node.key] = true
+
+  if (node.children && node.children?.length > 0) return
+
+  await props.loadChildren(node)
+  const keys = {...props.modelValue, ...props.nodes[nodeIndex].children.reduce((acc, cur) => {
+      acc[cur.key] = { checked: true }
+      return acc
+    }, {})}
+
+  emit('update:modelValue', keys)
+}
 </script>
 
 <template>
   <Tree
+    ref="tree"
+    v-model:expandedKeys="expandedKeys"
     :selectionKeys="modelValue"
     @update:selectionKeys="emit('update:modelValue', $event)"
     :value="nodes"
@@ -29,7 +53,8 @@ const emit = defineEmits<{
     selectionMode="checkbox"
     class="w-full"
     unstyled
-    @node-expand="loadChildren($event)"
+    @node-expand="loadChildren"
+    @node-select="onSelect"
     :loading="loading"
     :pt="{
       root: 'relative',
@@ -56,7 +81,7 @@ const emit = defineEmits<{
     }"
   >
     <template v-slot:loadingicon>
-      <Icon name="line-md:loading-loop" class="text-zinc-600 text-[4rem]"></Icon>
+      <BaseLoading class="text-[2rem]" />
     </template>
 
   </Tree>

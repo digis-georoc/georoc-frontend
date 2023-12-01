@@ -1,4 +1,5 @@
 import {Feature, Point, Polygon} from "geojson";
+import type { TreeNode } from "primevue/tree";
 
 declare global {
   interface QueryFilter {
@@ -85,11 +86,11 @@ declare global {
     max: number
   }
 
-  interface TreeNode {
-    key: string,
-    label: string,
-    children: TreeNode[],
-  }
+  // interface TreeNode {
+  //   key: string,
+  //   label: string,
+  //   children: TreeNode[],
+  // }
 
   interface RockClass {
     value: string,
@@ -141,6 +142,11 @@ declare global {
     label: string,
     value: string,
     classes: RadioGroupOption[]
+  }
+
+  interface ChemistryState {
+    nodes: TreeNode[],
+    selected: TreeNode[]
   }
 
 }

@@ -1,45 +1,28 @@
 <script lang="ts" setup>
-import {TreeSelectionKeys} from "primevue/tree";
+import type {TreeSelectionKeys, TreeNode} from "primevue/tree";
+import {storeToRefs} from "pinia";
 
 const queryStore = useQueryStore()
+const chemistryStore = useChemistryStore()
 
 const cachedValue = queryStore.getCachedFilterValue(QueryKey.Chemistry)
 
-const selected = ref<SelectedChemicalElement[]>([])
-const selectedKeys = ref<TreeSelectionKeys>({})
-const selectedTemp = ref<SelectedRockType[]>([])
-onMounted(() => {
-  if (cachedValue) {
-    selected.value = fromQuery(cachedValue)
-    useFilter()
-  }
-})
+const selectedTemp = ref<TreeNode[]>([])
 
-async function removeSelected(index: number) {
-  selected.value.splice(index, 1)
-  await useFilter()
-}
-function createEmptySelectedItem() {
-  return {
-    type: null,
-    element: null,
-    min: 0,
-    max: 100
-  }
-}
+const { selected } = storeToRefs(chemistryStore)
 
 function submit() {
-  selected.value.push(selectedItemTemp.value)
-  useFilter()
+  chemistryStore.selected = [...selectedTemp.value]
 }
 
+watch(selected, () => useFilter())
+
 function reset() {
-  selected.value = []
-  useFilter()
+  chemistryStore.selected = []
 }
 
 function useFilter() {
-  const value = toQuery(selected.value)
+  const value = toQuery(chemistryStore.selected)
 
   if (value === '') {
     queryStore.unsetFilter(QueryKey.Chemistry)
@@ -53,8 +36,14 @@ function useFilter() {
   queryStore.execute()
 }
 
-function toQuery(selected: SelectedChemicalElement[]) {
-  return selected.map(({ type, element, min, max }) => `(${type?.value},${element?.value},${min},${max})`).join(',')
+function toQuery(selected: TreeNode[]) {
+  return selected
+    .reduce((acc, cur) => {
+      const children = cur.children ?? []
+      const tuples = children.map(({ data, key: childKey }) => `(${cur.key},${childKey},${data.min ?? ''},${data.max ?? ''})`)
+      return [...acc, ...tuples]
+    }, <string[]>[])
+    .join(',')
 }
 
 function fromQuery(query: string | null): SelectedChemicalElement[] {
@@ -79,16 +68,12 @@ function fromQuery(query: string | null): SelectedChemicalElement[] {
     :dialog-title="$t('please_select_chemistry')"
     @submit="submit"
     @reset="reset"
-    @open="selectedItemTemp = createEmptySelectedItem()"
   >
     <template v-slot:selected>
-      <QueryFilterChemistrySelected :items="selected" />
+      <QueryFilterChemistrySelected />
     </template>
     <template v-slot:options>
-      <QueryFilterChemistrySelect
-        :model-value="selectedKeys"
-        @update:model-value="onSelect"
-      />
+      <QueryFilterChemistrySelect v-model="selectedTemp" />
     </template>
   </QueryFilterBaseContainer>
 </template>

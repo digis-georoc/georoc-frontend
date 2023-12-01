@@ -38,7 +38,7 @@
     _icon = 'heroicons:arrow-right-20-solid'
   }
 
-  classes['focus:outline-none focus:ring-4 text-sm font-medium flex items-center leading-2'] = true
+  classes['focus:outline-none focus:ring-4 text-sm font-medium flex items-center justify-center leading-2'] = true
 
   classes['rounded-lg'] = !_rounded
   classes['rounded-full'] = _rounded
@@ -78,7 +78,7 @@
     <template v-if="_icon && _iconPosition === 'left'">
       <Icon :name="_icon" class="text-base me-1" />
     </template>
-    <template v-if="isIconOnly"><Icon :name="_icon" class="text-xl mt-[1px]" />
+    <template v-if="isIconOnly"><Icon :name="_icon" class="mt-[1px]" />
     </template>
     <template v-else>{{ text }}</template>
     <template v-if="_icon && _iconPosition === 'right'">

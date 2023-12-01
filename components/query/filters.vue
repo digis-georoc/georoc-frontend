@@ -72,15 +72,3 @@ function submit() {
   </div>
   <QueryFilterMaterialDialog @select="handleFilterSelection" />
 </template>
-<style scoped>
-.scroll-gradient::after {
-  content: '';
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 25px;
-  background: linear-gradient(rgba(255, 255, 255, 0.001), white); /* transparent keyword is broken in Safari */
-  left: 0;
-  pointer-events: none;
-}
-</style>
