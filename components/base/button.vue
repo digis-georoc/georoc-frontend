@@ -40,7 +40,7 @@
 
   classes['focus:outline-none focus:ring-4 text-sm font-medium flex items-center justify-center leading-2'] = true
 
-  classes['rounded-lg'] = !_rounded
+  classes['rounded-md'] = !_rounded
   classes['rounded-full'] = _rounded
 
   classes['py-2.5 ps-3 pe-5'] = props.size === 'normal' && !!(_icon) && _iconPosition === 'left'
