@@ -60,7 +60,7 @@ function remove(itemIndex: number, childIndex: number) {
             <div class="w-1/12">
             </div>
           </div>
-          <div class="flex flex-1 mb-3 text-zinc-500" v-for="(child, j) in item.children">
+          <div class="flex flex-1 mb-3 text-zinc-500 dark:text-zinc-400" v-for="(child, j) in item.children">
             <div class="w-5/12 flex-shrink-0 flex items-center">
               {{ child.label }}
             </div>
@@ -87,7 +87,6 @@ function remove(itemIndex: number, childIndex: number) {
             </div>
             <div class="w-1/12 flex items-center justify-end">
               <BaseButton icon="ic:close" display="outline" size="small" @click="remove(i, j)"/>
-              <!--          <Icon name="ic:close" @click="remove(i, j)" class="cursor-pointer"/>-->
             </div>
           </div>
         </div>
@@ -113,5 +112,9 @@ function remove(itemIndex: number, childIndex: number) {
   background: linear-gradient(rgba(255, 255, 255, 0.001), white); /* transparent keyword is broken in Safari */
   left: 0;
   pointer-events: none;
+
+  .dark & {
+    background: linear-gradient(rgba(0, 0, 0, 0.001), theme('colors.zinc.800')); /* transparent keyword is broken in Safari */
+  }
 }
 </style>
