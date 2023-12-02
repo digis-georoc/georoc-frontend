@@ -75,13 +75,17 @@ function getLatLngBoundsFromBbox(bbox: Feature<Polygon>): LatLngBounds {
   return new L.LatLngBounds(lnglatToLatLng(sw), lnglatToLatLng(ne))
 }
 
-function addControlLayer() {
+function addControlLayers() {
   if (!map) return
   L.control.layers({
     'Streets': layers[0],
     'Topographic': layers[1],
     'Satellite': layers[2]
-  }, {}, {position: 'topleft'}).addTo(map);
+  }, {}, {position: 'bottomleft'}).addTo(map);
+
+  L.control.zoom({
+    position: 'bottomright'
+  }).addTo(map);
 }
 
 function getClusterColor(size: number): string {
@@ -194,15 +198,6 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
   // Add cluster markers
   markersGroup.addLayer(L.geoJSON(clusterFeatures, layerOptions))
 
-  // Add bounds polygon per cluster
-  // markersGroup.addLayer(
-  //   L.geoJSON(
-  //       value.clusters
-  //         .filter(({ centroid, convexHull }) => centroid.geometry.coordinates !== null && convexHull.geometry.type === 'Polygon')
-  //         .map(({ convexHull }) => convexHull)
-  //   )
-  // )
-
   cachedClustersBounds.value = getLatLngBoundsFromBbox(value.bbox)
 })
 
@@ -210,10 +205,11 @@ onMounted(() => {
   map = L.map('map', {
     wheelDebounceTime: 100,
     zoomSnap: 0.5,
+    zoomControl: false,
     layers
   }).setView([0, 0], initialZoomLevel)
 
-  addControlLayer()
+  addControlLayers()
 
   freeDraw = new FreeDraw({ mode: FreeDraw.NONE, strokeWidth:2 })
   map.addLayer(freeDraw)
@@ -317,7 +313,7 @@ function hideCoverage() {
       <span>Latitude: </span><span>{{ mouseLat }}</span>&nbsp;
       <span>Longitude: </span><span>{{ mouseLng }}</span>
     </div>
-    <div v-if="!isTouchDevice " class="absolute top-[155px] z-[1111] left-[12px]">
+    <div v-if="!isTouchDevice " class="absolute top-[26px] z-[1001] left-[20px]">
       <QueryFilterPolygon />
     </div>
 </template>
@@ -333,6 +329,23 @@ function hideCoverage() {
 
 .leaflet-top {
   top: 16px;
+}
+.leaflet-control-container {
+  .leaflet-control-layers {
+    margin-bottom: 32px;
+  }
+
+  .leaflet-right {
+    .leaflet-control-zoom {
+      margin-right: 20px;
+    }
+  }
+
+  .leaflet-left {
+    .leaflet-control {
+      margin-left: 20px;
+    }
+  }
 }
 
 .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {

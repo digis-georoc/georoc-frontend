@@ -13,7 +13,7 @@ const state = computed(() => polygonStore.activeState)
 
 const messageStartText = t('start_drawing_polygon');
 
-const buttonText = ref(t('draw_shape'))
+const buttonText = ref(t('draw_area'))
 const message = ref(messageStartText)
 
 const hasPolygon = computed(() => {
@@ -22,15 +22,15 @@ const hasPolygon = computed(() => {
 
 watch(() => state.value, (value) => {
   if (value === PolygonDrawingStates.Idle) {
-    buttonText.value = t('draw_shape')
+    buttonText.value = t('draw_area')
     message.value = messageStartText
   } else if (value === PolygonDrawingStates.Drawing) {
     start()
     buttonText.value = t('cancel_drawing')
     message.value = t('drawing_mode_active')
   } else if (value === PolygonDrawingStates.Finished) {
-    buttonText.value = t('reset_shape')
-    message.value = t('shape_selected') + '!'
+    buttonText.value = t('reset_area')
+    message.value = t('area_selected') + '!'
   }
 }, { immediate: true })
 
@@ -42,7 +42,7 @@ watch(() => hasPolygon.value, (value) => {
 
 queryStore.$onAction(({ name }) => {
   if (name === 'stopDrawingOnMap') {
-    buttonText.value = t('draw_shape')
+    buttonText.value = t('draw_area')
   }
 })
 
@@ -73,7 +73,7 @@ function stop() {
 </script>
 <template>
   <div class="flex flex-col items-start flex-wrap">
-    <BaseButton @click="handleButton" :rounded="false"  display="mono" icon="ph:polygon-bold" class="shadow-lg"/>
+    <BaseButton @click="handleButton" :rounded="false" :text="buttonText" display="mono" icon="ph:polygon-bold" class="shadow-lg"/>
     <!--    <div class="text-gray-400 text-sm flex-1 mt-2">{{ message }}</div>-->
   </div>
 </template>
