@@ -3,5 +3,5 @@ const queryStore = useQueryStore()
 const amount = computed(() => queryStore.listResult?.totalCount ?? 0)
 </script>
 <template>
-  <span class="text-sm">showing {{ amount.toLocaleString('en') }} samples</span>
+  <span class="text-sm">{{ amount.toLocaleString('en') }} samples found</span>
 </template>

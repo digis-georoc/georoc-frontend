@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import AmountSamples from "~/components/query/amount-samples.vue";
+
 definePageMeta({
   layout: 'query',
 })
@@ -31,7 +33,13 @@ function handleListBtn() {
         <div class="flex flex-1 relative">
           <QueryMap/>
           <div class="absolute top-[24px] z-[1111] left-1/2 -translate-x-1/2">
-            <QueryDownloadSamples />
+            <div class="flex">
+              <div class="bg-white rounded-md rounded-r-none font-semibold border border-primary p-2 text-primary">
+                <AmountSamples class="ml-auto"/>
+              </div>
+              <QueryDownloadSamples class="rounded-l-none"/>
+            </div>
+
           </div>
         </div>
         <QueryListPanel/>

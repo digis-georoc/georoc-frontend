@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <BaseButton :text="$t('download_samples')" icon="solar:download-minimalistic-linear" class="shadow-lg"/>
+  <BaseButton :text="$t('download')" icon="solar:download-minimalistic-linear" class="shadow-lg"/>
 </template>
