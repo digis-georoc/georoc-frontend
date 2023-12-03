@@ -5,7 +5,7 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-  <Icon name="codicon:loading" class="text-zinc-300 animate-spin"></Icon>
+  <Icon name="codicon:loading" class="text-zinc-400 animate-spin"></Icon>
 </template>
 
 <style scoped>

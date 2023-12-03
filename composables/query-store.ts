@@ -87,11 +87,15 @@ export const useQueryStore = defineStore('query', {
         }
       }
     },
-    async executeListQuery() {
+    async executeListQuery(offset: number = 0, limit: number = 30) {
       const hasMaterial = this.activeFilters.findIndex(({ name }) => name === 'material') > -1;
       if (hasMaterial) {
         try {
-          this.listResult = await getList(this.activeFilters.map(toQuery))
+          this.listResult = await getList([
+            ...this.activeFilters.map(toQuery),
+            ...(!!(offset) ? [{ name: 'offset', value: offset }] : []),
+            ...(!!(limit) ? [{ name: 'limit', value: limit }] : []),
+        ])
         } catch (e) {
           console.log(e)
         }

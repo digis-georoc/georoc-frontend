@@ -60,5 +60,6 @@ export default {
   no_matching_records_found: 'No matching records found.',
   unit: 'Unit',
   show_more_less: 'Show more/less',
-  download: 'Download'
+  download: 'Download',
+  samples: 'Samples'
 }

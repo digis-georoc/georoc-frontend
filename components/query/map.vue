@@ -299,7 +299,7 @@ function hideCoverage() {
     flex flex-col items-center justify-center
     text-white pointer-events-none
     ">
-      <BaseLoading class="invert mb-3" :opacity="0.8"/>
+      <BaseLoading class="mb-3 text-[2.5rem]" />
       <span class="opacity-[0.8]">{{ $t('loading') }}...</span>
     </div>
     <div v-if="isDebug" class="fixed z-[9999] top-[60px] right-0 bg-white p-2 text-sm">

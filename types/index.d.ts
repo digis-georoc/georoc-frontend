@@ -9,6 +9,7 @@ declare global {
 
   interface QueryListItem {
     sampleID: number,
+    samplename: string,
     latitude: number,
     longitude: number
   }

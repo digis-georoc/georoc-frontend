@@ -35,7 +35,6 @@ async function getList(filters: QueryFilter[] = []): Promise<QueryListResponse |
   filters.forEach(({ name, value }) => {
     filterObj[name] = Array.isArray(value) ? JSON.stringify(value) : value
   })
-  filterObj['limit'] = 30
 
   try {
     const res: Response = await fetch(

@@ -32,7 +32,7 @@ function handleListBtn() {
         <QueryFiltersPanel />
         <div class="flex flex-1 relative">
           <QueryMap/>
-          <div class="absolute top-[24px] z-[1111] left-1/2 -translate-x-1/2">
+          <div class="absolute top-[24px] z-[1001] left-1/2 -translate-x-1/2">
             <div class="flex">
               <div class="bg-white rounded-md rounded-r-none font-semibold border border-primary p-2 text-primary">
                 <AmountSamples class="ml-auto"/>
