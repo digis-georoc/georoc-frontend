@@ -10,6 +10,11 @@ export default {
         'primary-100' : '#dbcad1',
         'primary-300' : '#a3818f',
         'primary-700' : '#5e3b4a'
+      },
+      screens: {
+        'landscape': {
+          'raw': '(orientation: landscape)'
+        }
       }
     }
   }

@@ -135,6 +135,39 @@ declare global {
     datasets: ExpertDatasetRow[]
   }
 
+  interface PrecompiledFilePreview {
+    protocol: string,
+    authority: string,
+    identifier: string,
+    title: string
+  }
+  
+  interface PrecompiledFilePreviews {
+    preview: PrecompiledFilePreview[]
+  }
+  
+  interface PrecompiledFiles {
+    title: string, 
+    authors: string[],
+    persistentUrl: string,
+    description: string,
+    publicationDate: Date,
+    subject: string,
+    datasetPersistentId: string,
+    productionDate: Date,
+    license: {
+      name: string,
+      uri: string
+    }
+    files: {
+      contentType: string,
+      label: string,
+      persistentId: string,
+      filesize: number,
+      persistentUrl: string
+    }[]
+  }
+
   interface NestedSelected {
     [key: string]: RadioGroupOption[]
   }

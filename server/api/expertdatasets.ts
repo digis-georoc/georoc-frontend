@@ -42,15 +42,12 @@ export default defineEventHandler<ExpertDatasetResponse | H3Error | undefined>(a
       data: error.data,
     });
   }
-})
+});
 
-async function fetchData(path: string): Promise<any | H3Error> {
+export async function fetchData(path: string): Promise<any | H3Error> {
   try{
     const response: FetchResponse<any> = await $fetch.raw(apiExpertUrl + path, {
-      method: 'GET',
-      headers: {
-        'X-Dataverse-Key': apiExpertToken,
-      }
+      method: 'GET'
     });
     return response._data
   } catch (error: any) {
@@ -61,6 +58,7 @@ async function fetchData(path: string): Promise<any | H3Error> {
     });
   }
 }
+
 function formatAuthors(authorList: any) : string {
   function getLastName(fullname: string) : string {
     return fullname.split(",")[0]
