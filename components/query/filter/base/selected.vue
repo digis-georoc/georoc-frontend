@@ -19,6 +19,7 @@ watch(() => props.items, value => {
     hiddenItems.value = value.slice(maxVisibleAmount)
   } else {
     visibleItems.value = value
+    hiddenItems.value = []
   }
 }, { immediate: true })
 </script>
@@ -38,7 +39,7 @@ watch(() => props.items, value => {
         <div class="min-w-[160px] max-h-[300px] overflow-auto flex flex-col items-start gap-1.5">
           <div class="bg-zinc-100 py-1.5 px-2 text-zinc-500 font-bold rounded-lg flex items-center" v-for="(item, i) in hiddenItems">
             <span class="text-sm leading-none">{{ $t(item.label) }}</span>
-            <Icon name="ic:round-close" class="cursor-pointer hover:bg-primary hover:bg-opacity-25 rounded-full p-0.5 ms-2" @click="emit('remove', i)" />
+            <Icon name="ic:round-close" class="cursor-pointer hover:bg-primary hover:bg-opacity-25 rounded-full p-0.5 ms-2" @click="emit('remove', maxVisibleAmount + i)" />
           </div>
         </div>
       </BasePopover>
