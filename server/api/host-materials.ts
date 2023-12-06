@@ -1,6 +1,5 @@
 import {createError, H3Error, H3Event} from "h3";
 import {FetchResponse} from "ofetch/dist/node";
-import {HostMaterialsResponse} from "../../types";
 
 const { apiToken, apiBaseUrl } = useRuntimeConfig()
 

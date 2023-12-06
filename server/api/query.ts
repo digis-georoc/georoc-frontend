@@ -1,4 +1,3 @@
-import { QueryLocationsResponse } from "../../types";
 
 const { apiToken, apiBaseUrl } = useRuntimeConfig()
 

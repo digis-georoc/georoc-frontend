@@ -48,10 +48,25 @@ async function getList(filters: QueryFilter[] = []): Promise<QueryListResponse |
 }
 
 async function getExpertDatasets() {
-    const { data } = await useFetch<ExpertDatasetResponse>(
-      '/api/expertdatasets',
-    )
+    const { data } = await useFetch<ExpertDatasetResponse>('/api/expertdatasets')
     return data.value
+}
+
+async function getPrecompiledPreview() {
+    const { data } = await useFetch<PrecompiledFilePreviews>('/api/precompiled-files/preview')
+    return data.value
+}
+
+async function getPrecompiledFiles(protocol: string, authority: string, id: string) {
+  const params = new URLSearchParams({protocol, authority, id})
+  const { data } = await useFetch<PrecompiledFiles>('/api/precompiled-files/files' + (params ? `?${params.toString()}` : ''));
+  return data.value
+}
+
+async function getPrecompiledFile(identifier: string, isDataset: boolean) {
+  const params = new URLSearchParams({identifier, isDataset: isDataset.toString()})
+  const { data }  = await useFetch<Blob>('/api/precompiled-files/download-file' + (params ? `?${params.toString()}` : ''))
+  return data.value
 }
 
 async function getElements(type: string): Promise<ElementsResponse | null> {
@@ -89,6 +104,9 @@ export {
   getElementTypes,
   getRockClasses,
   getHostMaterials,
-  getInclusionMaterials
+  getInclusionMaterials,
+  getPrecompiledFiles,
+  getPrecompiledFile,
+  getPrecompiledPreview
 }
 

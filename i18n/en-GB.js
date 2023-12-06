@@ -1,4 +1,7 @@
+import precompiledFilePage from "./en-GB/precompiledFilePage"
+
 export default {
+  precompiledFilePage: precompiledFilePage,
   database_query: 'Database Query',
   filters: 'Filters',
   material_filter: 'Material filter',

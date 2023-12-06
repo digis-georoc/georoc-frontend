@@ -1,26 +1,31 @@
 <script setup lang="ts">
   import DataTable from 'primevue/datatable';
-  import Column, { ColumnPassThroughMethodOptions } from 'primevue/column';
+  import Column from 'primevue/column';
   import InputText from 'primevue/inputtext';
-  import { PaginatorPassThroughMethodOptions } from 'primevue/paginator';
-  import { DropdownPassThroughMethodOptions } from 'primevue/dropdown';
   import { FilterMatchMode } from 'primevue/api'
+  import type { ColumnPassThroughMethodOptions } from 'primevue/column';
+  import type { DropdownPassThroughMethodOptions } from 'primevue/dropdown';
+  import type { PaginatorPassThroughMethodOptions } from 'primevue/paginator';
   
   const { t } = useI18n();
   const props = withDefaults(defineProps<{
     rows: any,
-    columns: any,
+    columns: {
+      field: string, 
+      header: string,
+      isSlot?: boolean
+    }[],
     linkToDatasetText: string,
   }>(), {
     rows: [],
-    columns: [],
-    linkToDatasetText: "view"
+    linkToDatasetText: "view",
+    isSlot: false
   });
   let filters = ref({ global: {value: null, matchMode: FilterMatchMode.CONTAINS}});
   //page buttons for Paginator need the same styling, but passtrough options can only be assigned indidually
   const getPaginatorButton = (options: PaginatorPassThroughMethodOptions) => ({
     class: [
-      'rounded-md transition-colors duration-200 min-w-[2.5rem] h-[2.5rem]',
+      'rounded-md transition-colors duration-200 min-w-[2.5rem] h-[2.5rem] focus:outline-none focus:ring-2 focus:ring-primary-300',
       {
        'hover:bg-primary-50 dark:hover:bg-primary-100 dark:text-white hover:text-black': !options.context.disabled
       }
@@ -66,7 +71,7 @@
         pageButton: (options : PaginatorPassThroughMethodOptions) => { return {
           class: [
             'rounded-md text-center transition-colors duration-200 min-w-[2.5rem] h-[2.5rem]',
-            'focus:ring-2 focus:ring-primary-300 hover:bg-primary-50 dark:hover:bg-primary-100 hover:text-black',
+            'focus:outline-none focus:ring-2 focus:ring-primary-300 hover:bg-primary-50 dark:hover:bg-primary-100 hover:text-black',
             {
               'dark:text-white': !options.context.active,
               'bg-primary-50 hover:bg-primary-100 dark:bg-primary-300 dark:text-black': options.context.active
@@ -138,6 +143,9 @@
     }">
       <template #body="{ data }" v-if="col.field == 'persistentUrl'">
         <NuxtLink :to="data.persistentUrl" class ="border-b-primary hover:border-b-2" target="_blank">{{ linkToDatasetText }}</NuxtLink>
+      </template>
+      <template #body="{ data }" v-if="col.isSlot">
+        <slot :name="`${data[col.field]}`">{{ data[col.field] }}</slot>
       </template>
       <template #sorticon=" { sorted, sortOrder }">
         <Icon :name="'typcn:arrow-unsorted'" v-if="!sorted"></Icon>
