@@ -29,7 +29,7 @@ function onUpdate(data: { min: number, max: number }, itemIndex: number, childIn
 }
 
 function remove(itemIndex: number, childIndex: number) {
-  _items.value[itemIndex].children?.splice(childIndex)
+  _items.value[itemIndex].children?.splice(childIndex, 1)
   store.selected = [..._items.value]
 }
 
