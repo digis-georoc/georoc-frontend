@@ -58,14 +58,14 @@ async function getPrecompiledPreview() {
 }
 
 async function getPrecompiledFiles(protocol: string, authority: string, id: string) {
-  const params = new URLSearchParams({protocol, authority, id})
+  const params = new URLSearchParams({protocol, authority, id});
   const { data } = await useFetch<PrecompiledFiles>('/api/precompiled-files/files' + (params ? `?${params.toString()}` : ''));
   return data.value
 }
 
 async function getPrecompiledFile(identifier: string, isDataset: boolean) {
-  const params = new URLSearchParams({identifier, isDataset: isDataset.toString()})
-  const { data }  = await useFetch<Blob>('/api/precompiled-files/download-file' + (params ? `?${params.toString()}` : ''))
+  const params = new URLSearchParams({identifier, isDataset: isDataset.toString()});
+  const { data }  = await useFetch<Blob>('/api/precompiled-files/download-file' + (params ? `?${params.toString()}` : ''));
   return data.value
 }
 
