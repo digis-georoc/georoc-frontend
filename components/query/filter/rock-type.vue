@@ -138,6 +138,7 @@ function submit() {
 function reset() {
   selected.value = []
   selectedTemp.value = []
+  selectedKeys.value = {}
   useFilter()
 }
 
