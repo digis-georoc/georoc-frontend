@@ -17,8 +17,21 @@ const maxVisibleItems = 5
 
 watch(() => store.selected, (value) =>  {
   _items.value = value
+    .sort(sortAlphabetically)
+    .map((item, i) => {
+      item.children = item.children.sort(sortAlphabetically)
+      return item
+    })
+
+  console.log(_items.value)
   collapseState.value = new Array(value.length).fill(true)
 })
+
+function sortAlphabetically(a: TreeNode, b: TreeNode) {
+  if (a.label < b.label) return -1
+  if (a.label > b.label) return 1
+  return 0
+}
 
 function onUpdate(data: { min: number, max: number }, itemIndex: number, childIndex: number) {
   if (itemIndex < 0) return
