@@ -13,6 +13,7 @@ const emit = defineEmits<{
 
 const _items = ref<TreeNode[]>([])
 const collapseState = ref<boolean[]>([])
+const maxVisibleItems = 5
 
 watch(() => store.selected, (value) =>  {
   _items.value = value
@@ -33,6 +34,10 @@ function remove(itemIndex: number, childIndex: number) {
   store.selected = [..._items.value]
 }
 
+function isExpandable(itemsAmount: number) {
+  return itemsAmount > maxVisibleItems
+}
+
 </script>
 
 <template>
@@ -44,8 +49,12 @@ function remove(itemIndex: number, childIndex: number) {
       <h3 class="font-semibold mb-2">{{ item.label }}:</h3>
       <div class="ps-4" >
         <div
-          class="flex flex-col overflow-hidden relative scroll-gradient"
-          :class="{ 'max-h-[280px]': collapseState[i], 'max-h-auto': !collapseState[i]}"
+          class="flex flex-col overflow-hidden relative"
+          :class="{
+            'scroll-gradient': isExpandable(item.children?.length ?? 0),
+            'max-h-[250px]': isExpandable(item.children?.length ?? 0) && collapseState[i],
+            'max-h-auto': isExpandable(item.children?.length ?? 0) && !collapseState[i]
+          }"
         >
           <div class="flex text-sm font-semibold mb-2">
             <div class="w-5/12 flex-shrink-0">
@@ -94,11 +103,12 @@ function remove(itemIndex: number, childIndex: number) {
           </div>
         </div>
         <BaseButton
-            :text="$t('show_more_less')"
-            size="small"
-            display="outline"
-            class="w-full"
-            @click="collapseState[i] = !collapseState[i]"
+          v-if="isExpandable(item.children?.length ?? 0)"
+          :text="$t(collapseState[i] ? 'show_all' : 'show_less')"
+          size="small"
+          display="outline"
+          class="w-full"
+          @click="collapseState[i] = !collapseState[i]"
         />
       </div>
     </div>
