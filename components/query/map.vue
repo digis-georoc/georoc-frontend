@@ -313,7 +313,7 @@ function hideCoverage() {
       <span>Latitude: </span><span>{{ mouseLat }}</span>&nbsp;
       <span>Longitude: </span><span>{{ mouseLng }}</span>
     </div>
-    <div v-if="!isTouchDevice " class="absolute top-[26px] z-[1001] left-[20px]">
+    <div v-if="!isTouchDevice " class="absolute top-[80px] xl:top-[26px] z-[1001] left-[20px]">
       <QueryFilterPolygon />
     </div>
 </template>
