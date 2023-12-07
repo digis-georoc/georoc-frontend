@@ -43,7 +43,10 @@ function remove(itemIndex: number, childIndex: number) {
     <div class="flex flex-1 flex-col mb-2" v-for="(item, i) in _items" :key="item.key">
       <h3 class="font-semibold mb-2">{{ item.label }}:</h3>
       <div class="ps-4" >
-        <div class="flex flex-col overflow-hidden relative scroll-gradient" :class="{ 'max-h-[280px]': collapseState[i], 'max-h-auto': !collapseState[i]}">
+        <div
+          class="flex flex-col overflow-hidden relative scroll-gradient"
+          :class="{ 'max-h-[280px]': collapseState[i], 'max-h-auto': !collapseState[i]}"
+        >
           <div class="flex text-sm font-semibold mb-2">
             <div class="w-5/12 flex-shrink-0">
               <h4>{{ $t('element') }}</h4>
@@ -83,7 +86,7 @@ function remove(itemIndex: number, childIndex: number) {
               />
             </div>
             <div class="w-2/12 flex items-center">
-              ppm
+              {{ child.data.unit }}
             </div>
             <div class="w-1/12 flex items-center justify-end">
               <BaseButton icon="ic:close" display="outline" size="small" @click="remove(i, j)"/>

@@ -44,7 +44,7 @@ async function loadChildren(node: TreeNode) {
   const elements = await getElements(nodes.value[index].key)
   nodes.value[index].children = elements
     ?.data
-    .map(({ value, label }) => ({key: value, label, children: [], data: { min: null, max: null }}))
+    .map(({ value, label, unit }) => ({key: value, label, children: [], data: { min: null, max: null, unit }}))
   ?? []
   store.nodes = nodes.value
   loadingChildren.value = false

@@ -73,6 +73,7 @@ declare global {
   interface ChemicalElement {
     value: string,
     label: string,
+    unit: string
   }
 
   interface ChemicalElementType {
@@ -86,12 +87,6 @@ declare global {
     min: number,
     max: number
   }
-
-  // interface TreeNode {
-  //   key: string,
-  //   label: string,
-  //   children: TreeNode[],
-  // }
 
   interface RockClass {
     value: string,
@@ -141,13 +136,13 @@ declare global {
     identifier: string,
     title: string
   }
-  
+
   interface PrecompiledFilePreviews {
     preview: PrecompiledFilePreview[]
   }
-  
+
   interface PrecompiledFiles {
-    title: string, 
+    title: string,
     authors: string[],
     persistentUrl: string,
     description: string,
