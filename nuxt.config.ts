@@ -25,10 +25,9 @@ export default defineNuxtConfig({
         apiExpertUrl: process.env.API_EXPERT_URL
     },
     routeRules: {
-        // Homepage pre-rendered at build time
         '/': { prerender: true },
-        // Admin dashboard renders only on client-side
         '/query': { ssr: false },
+        '/precompiles-files/*': { isr: true }
     },
     tailwindcss: {
         exposeConfig: true
