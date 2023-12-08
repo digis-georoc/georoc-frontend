@@ -45,6 +45,6 @@ function openDialog() {
   </div>
   <BaseDialog :title="dialogTitle" v-model="isOpen">
     <slot name="options"/>
-    <BaseButton class="ms-auto mt-2" @click="onSubmit" text="Show XY samples"></BaseButton>
+    <BaseButton class="ms-auto mt-2" @click="onSubmit" :text="$t('show_samples')"></BaseButton>
   </BaseDialog>
 </template>
