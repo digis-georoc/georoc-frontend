@@ -38,9 +38,9 @@ function openDialog() {
     <div class="flex flex-col items-center justify-center h-[80px] relative" v-if="loading">
       <BaseLoading class="text-[2rem]"/>
     </div>
-    <div class="flex flex-col flex-1 items-start" v-else>
+    <div class="flex flex-col flex-1" v-else>
       <slot name="selected"/>
-      <BaseButton class="mt-3" @click="openDialog" :text="$t('select')" size="small"></BaseButton>
+      <BaseButton class="self-start mt-3" @click="openDialog" :text="$t('select')" size="small"></BaseButton>
     </div>
   </div>
   <BaseDialog :title="dialogTitle" v-model="isOpen">
