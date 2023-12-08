@@ -65,5 +65,6 @@ export default {
   show_all: 'Show all',
   show_less: 'Show less',
   download: 'Download',
-  samples: 'Samples'
+  samples: 'Samples',
+  selected_samples: 'Selected Samples'
 }
