@@ -1,7 +1,9 @@
 import precompiledFilePage from "./en-GB/precompiledFilePage"
+import queryPage from "~/i18n/en-GB/queryPage";
 
 export default {
-  precompiledFilePage: precompiledFilePage,
+  precompiledFilePage,
+  queryPage,
   database_query: 'Database Query',
   filters: 'Filters',
   material_filter: 'Material filter',
