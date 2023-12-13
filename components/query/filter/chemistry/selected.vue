@@ -23,7 +23,6 @@ watch(() => store.selected, (value) =>  {
       return item
     })
 
-  console.log(_items.value)
   collapseState.value = new Array(value.length).fill(true)
 })
 
