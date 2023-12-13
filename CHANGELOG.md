@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.9...v0.0.10) (2023-12-13)
+
+
+### Features
+
+* add pagination to samples list ([1c03e58](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/1c03e5879a28396c0cd4989fe8313bdecda33905))
+* add precompiled files page that displays the precompiled files with metadata and download options ([f329651](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/f329651ad1e616ba3b249cf46be40ef72100ace6))
+* add units message to chemistry filter selected ([7b72f40](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/7b72f40adf502516fa8758145d2c0ec9de001671))
+* display amount samples next to download button ([ea1532a](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ea1532ae0f3611bdade06158c9460b8f8dda9c40))
+* display chemistry element units from API response ([e5f7dc7](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/e5f7dc76e31450eef15480f4532ebaeb9ab9376f))
+* sort selected chemistry items alphabetically ([09ceba1](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/09ceba1657e1adfec9fafc7f026e12295529eb8e))
+* update button border radius ([e76ed10](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/e76ed107e39c8a0731d71b67c6c1994f3047167d))
+* update chemistry filter to handle hierarchical selection of items ([2f88dc0](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/2f88dc05adf360d6c8b9d7ccc15e8051baebfa15))
+* update map control positions ([55ebad6](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/55ebad6c5d495d8f9f45da2dc613d62838834587))
+* use PrimeVue checkbox ([2f6732f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/2f6732faa3bf817d9dcf723108e2b32f6aee8703))
+
+
+### Bug Fixes
+
+* add missing semicolons ([61cd3a3](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/61cd3a3637fcac3f4d99d045cab470516f74721e))
+* hide show all/less button at chemistryx filter when less that 6 items are selected ([5c6b50e](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/5c6b50ef02bacd139575077b8825634ea723578d))
+* remove selected base filter items from more section correctly ([ffbd299](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ffbd299e4c4772fbe5e66f0e8b2049394fde8a76))
+* remove selected chemistry element correctly ([251172c](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/251172c3c455af7ff36b97ea765a372c822b453f))
+* reset selected keys in the rock type select tree after reset ([0ba813d](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/0ba813d69e3b7156cc86505888c02f77845ab6fc))
+* set ISR rendering mode for precompiles files ([732e35b](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/732e35b0ff9c1cbba9e078bc8685936e0d4b6d16))
+* unselect options in tree when removed value at host/inclusion material filters ([b0182c8](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/b0182c8ce59e582ecf7b20c0a009f98fe59bd38b))
+* update dark mode styles ([2c47e49](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/2c47e49b8cc730ea2fad6ad62d6a88dde701e820))
+* update divider in filter container ([10de23a](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/10de23a07511845b4d45679ec0cafc562afee6b0))
+* update draw area button position on sammler screen ([90f900a](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/90f900aed865811df9de624a17660b18c9cf4ead))
+* update filter base container styles ([7731bb0](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/7731bb015367fef969eb39dd73f4638d35643a7a))
+* update filter dialog button text ([2ff73f3](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/2ff73f35dd5f9d8778088c6b484016270056ba50))
+* update samples list headline ([5a59f2f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/5a59f2fde931c1bc356f0505990eabcc10707624))
+
 ### [0.0.9](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.8...v0.0.9) (2023-11-08)
 
 
