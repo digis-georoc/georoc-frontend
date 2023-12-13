@@ -24,20 +24,23 @@ const emit = defineEmits<{
       :pt="{
         root: ({ context }) => ({
           class: [
-            'border-2 rounded-md w-[22px] h-[22px] transition-colors cursor-pointer',
+            'border-2 dark:border-zinc-600 hover:border-primary hover:dark:border-primary rounded-md w-[22px] h-[22px] transition-colors cursor-pointer',
             {'outline-none border-primary ring ring-opacity-25 ring-primary': context.focused },
             {
-              'bg-stone-50 hover:border-primary': !context.checked,
-              'bg-primary text-white hover:bg-primary-700 border-primary': context.checked,
+              'bg-zinc-50 dark:bg-zinc-700 hover:border-primary': !context.checked,
+              'bg-primary text-white hover:bg-primary-700 border-primary dark:border-primary': context.checked,
             }
           ]
         }),
         input: {
-          class: 'w-full h-full flex flex items-center justify-center'
-        },
+          class: 'w-full h-full flex items-center justify-center'
+        }
       }">
-      <template v-slot:icon>
-          <Icon name="ic:round-check" class="text-white dark:text-zinc-800"/>
+      <template v-slot:icon="{ checked }">
+          <Icon name="ic:round-check" :class="[
+            { '!hidden': !checked },
+            { 'text-white dark:text-zinc-300': checked }
+          ]"/>
       </template>
     </Checkbox>
     <label
