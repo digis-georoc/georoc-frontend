@@ -5,8 +5,6 @@ import {storeToRefs} from "pinia";
 const queryStore = useQueryStore()
 const chemistryStore = useChemistryStore()
 
-const cachedValue = queryStore.getCachedFilterValue(QueryKey.Chemistry)
-
 const selectedTemp = ref<TreeNode[]>([])
 
 const { selected } = storeToRefs(chemistryStore)
@@ -46,21 +44,35 @@ function toQuery(selected: TreeNode[]) {
     .join(',')
 }
 
-function fromQuery(query: string | null): SelectedChemicalElement[] {
+function fromQuery(query: string | null): TreeNode[] {
   if (!query) return []
   return query
     .split('),(')
     .map(item => item.replaceAll(/\)|\(+/g, ''))
     .map(tupel => {
-      const [type, element, min, max ] = tupel.split(',')
+      const [ type, element, min, max ] = tupel.split(',')
       return {
-        type: {value: type, label: type },
+        type: { value: type, label: type },
         element: { value: element, label: element },
-        min: parseFloat(min),
-        max: parseFloat(max),
+        min: !!(min) ? parseFloat(min) : null,
+        max: !!(max) ? parseFloat(max) : null,
       }
     })
+    .reduce((acc, cur) => {
+      const index = acc.findIndex(node => node.key === cur.type.value)
+      const child = { key: cur.element.value, label: cur.element.label, data: { min: cur.min, max: cur.max } }
+      if (index === -1) acc.push({ key: cur.type.value, label: cur.type.label, children: <TreeNode[]>[child] })
+      else acc[index].children.push(child)
+
+      return acc
+    }, <TreeNode[]>[])
 }
+
+onMounted(() => {
+  const activeQuery = queryStore.getFilter(QueryKey.Chemistry)?.value
+  if (!activeQuery) return
+  selected.value = fromQuery(activeQuery)
+})
 </script>
 <template>
   <QueryFilterBaseContainer

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {TreeSelectionKeys} from "primevue/tree";
+import type {TreeSelectionKeys, TreeNode} from "primevue/tree";
 
 interface SelectedRockType {
   label: string,
@@ -8,9 +8,6 @@ interface SelectedRockType {
 }
 
 const queryStore = useQueryStore()
-
-const cachedRockTypeQuery = queryStore.getCachedFilterValue(QueryKey.RockType)
-const cachedRockClassQuery = queryStore.getCachedFilterValue(QueryKey.RockClass)
 
 const emit = defineEmits<{
   change: [selected: RadioGroupOption[]]
@@ -28,6 +25,10 @@ const isLoading = ref(false)
 onMounted(async () => {
   isLoading.value = true
   selected.value = []
+
+  const activeRockTypeQuery = queryStore.getFilter(QueryKey.RockType)?.value
+  const activeRockClassQuery = queryStore.getFilter(QueryKey.RockClass)?.value
+
   const rockTypes = await getRocktypes()
 
   nodes.value = await Promise.all(rockTypes?.data
@@ -40,8 +41,8 @@ onMounted(async () => {
       }
     }) ?? [])
 
-  const rockTypeValues = fromQuery(cachedRockTypeQuery)
-  const rockClassValues = fromQuery(cachedRockClassQuery)
+  const rockTypeValues = fromQuery(activeRockTypeQuery)
+  const rockClassValues = fromQuery(activeRockClassQuery)
 
   const keys = {
     ...rockTypeValues

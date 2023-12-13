@@ -5,11 +5,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#7a495d',
-        'primary-50' : '#f5e6ec',
-        'primary-100' : '#dbcad1',
-        'primary-300' : '#a3818f',
-        'primary-700' : '#5e3b4a'
+        primary: '#824e63',
+        'primary-50' : '#f7e9ee',
+        'primary-100' : '#e0ced5',
+        'primary-300' : '#a88593',
+        'primary-700' : '#664152'
       },
       screens: {
         'landscape': {

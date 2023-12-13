@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const queryStore = useQueryStore()
 
-const selectedValueFromStore = queryStore.getCachedFilterValue(QueryKey.InclusionMaterial)
 const inclusionMaterials = await getInclusionMaterials()
 const options = ref<MultiselectOption[]>([])
 const selected = ref<MultiselectOption[]>([])
@@ -53,11 +52,13 @@ function submit() {
 }
 
 onMounted(async () => {
+  const activeQuery = queryStore.getFilter(QueryKey.InclusionMaterial)?.value
+
   selected.value = []
 
   let selectedValues: string[] = []
 
-  if (selectedValueFromStore) selectedValues = fromQuery(selectedValueFromStore)
+  if (activeQuery) selectedValues = fromQuery(activeQuery)
 
   options.value = inclusionMaterials?.data
       .map(({ value, label }) => {

@@ -8,4 +8,4 @@ export const QueryKey = {
   HostMaterial: 'hostmaterial',
   InclusionMaterial: 'inclusionmaterial',
   Chemistry: 'chemistry'
-}
+} as const

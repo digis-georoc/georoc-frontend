@@ -26,7 +26,7 @@ watch(() => props.items, value => {
 <template>
   <div class="flex flex-wrap gap-1.5">
     <template v-if="items && items.length > 0">
-      <div class="bg-zinc-100 py-1.5 px-2 text-zinc-500 font-bold rounded-lg flex items-center flex-shrink-0" v-for="(item, i) in visibleItems">
+      <div class="bg-zinc-100 dark:bg-zinc-700 py-1.5 px-2 text-zinc-500 dark:text-zinc-400 font-bold rounded-lg flex items-center flex-shrink-0" v-for="(item, i) in visibleItems">
         <span class="text-sm leading-none">{{ $t(item.label) }}</span>
         <Icon name="ic:round-close" class="cursor-pointer hover:bg-zinc-400 hover:bg-opacity-25 rounded-full p-0.5 ms-2" @click="emit('remove', i)" />
       </div>

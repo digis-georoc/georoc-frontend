@@ -1,13 +1,7 @@
-async function getSamples(filters: QueryFilter[] = [], { signal }: AbortController): Promise<QueryLocationsResponse | null> {
-
-  const filterObj: any = {}
-  filters.forEach(({ name, value }) => {
-    filterObj[name] = Array.isArray(value) ? JSON.stringify(value) : value
-  })
-
+async function getSamples(params: URLSearchParams, { signal }: AbortController): Promise<QueryLocationsResponse | null> {
   try {
     const res: Response = await fetch(
-      '/api/query?' + Object.keys(filterObj).map(key => key + '=' + filterObj[key]).join('&'),
+      `/api/query?${params}`,
       { signal }
     )
     return await res.json()

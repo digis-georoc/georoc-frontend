@@ -2,11 +2,11 @@
 const emit = defineEmits(['select'])
 
 const queryStore = useQueryStore()
-const storageKey = 'hide-material-dialog'
-const isOpen = ref(window.localStorage.getItem(storageKey) === null && window.sessionStorage.getItem(storageKey) === null)
+const hideDialogStorageKey = 'hide-material-dialog'
+const isOpen = ref(window.localStorage.getItem(hideDialogStorageKey) === null)
 
 const stored = window.localStorage.getItem(queryStore.getCachingKey(QueryKey.Material))
-const initial = stored !== null ? stored : 'WR'
+const initial = stored !== null ? stored : MaterialKeys.WRGL
 const selected = ref(isOpen.value ? initial : null)
 
 const dontShowAgain = ref(false)
@@ -18,10 +18,8 @@ function handleContinue() {
 watch(() => isOpen.value, (value) => {
   if (value === true) return
 
-  if (dontShowAgain.value) window.localStorage.setItem(storageKey, '')
-  else window.localStorage.removeItem(storageKey)
-
-  window.sessionStorage.setItem(storageKey, '')
+  if (dontShowAgain.value) window.localStorage.setItem(hideDialogStorageKey, '')
+  else window.localStorage.removeItem(hideDialogStorageKey)
 
   emit('select', selected.value)
 })

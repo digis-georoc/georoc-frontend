@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import {MaterialKeys} from "~/utils/material-keys";
+
 const { t } = useI18n()
 
 const props = withDefaults(defineProps<{
@@ -18,17 +20,17 @@ interface MaterialOption {
 
 const materials: MaterialOption[] = [
   {
-    value: 'WR',
+    value: MaterialKeys.WRGL,
     label: t('whole_rock_and_glass'),
     icon: 'noto:rock'
   },
   {
-    value: 'INC',
+    value: MaterialKeys.INC,
     label: t('inclusion'),
     icon: 'noto:bubbles'
   },
   {
-    value: 'MIN',
+    value: MaterialKeys.MIN,
     label: t('mineral'),
     icon: 'emojione-v1:diamond-with-a-dot'
   },

@@ -40,7 +40,14 @@ declare global {
   }
 
   interface QueryState {
-    activeFilters: QueryFilter[],
+    filters: {
+      active: QueryFilter[],
+      material: QueryFilter | null,
+      bbox: QueryFilter | null,
+      WRGL: QueryFilter[],
+      INC: QueryFilter[],
+      MIN: QueryFilter[]
+    },
     result: QueryLocationsResponse | null,
     listResult: QueryListResponse | null
   }
@@ -177,7 +184,6 @@ declare global {
     nodes: TreeNode[],
     selected: TreeNode[]
   }
-
 }
 
 export {}
