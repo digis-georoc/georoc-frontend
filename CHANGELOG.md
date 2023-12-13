@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.11](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.10...v0.0.11) (2023-12-13)
+
+
+### Bug Fixes
+
+* update download button text ([99838db](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/99838dbab86ba604872ea312e6c625e5237a2a9f))
+
 ### [0.0.10](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.9...v0.0.10) (2023-12-13)
 
 
