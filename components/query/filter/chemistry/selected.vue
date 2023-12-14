@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type {TreeNode} from "primevue/tree";
 
-const store = useChemistryStore()
+const chemistryStore = useChemistryStore()
+const queryStore = useQueryStore()
 
 const props = defineProps<{
   items: TreeNode[]
@@ -15,7 +16,7 @@ const _items = ref<TreeNode[]>([])
 const collapseState = ref<boolean[]>([])
 const maxVisibleItems = 5
 
-watch(() => store.selected, (value) =>  {
+watch(() => chemistryStore.selected, (value) =>  {
   _items.value = value
     .sort(sortAlphabetically)
     .map((item, i) => {
@@ -38,16 +39,43 @@ function onUpdate(data: { min: number, max: number }, itemIndex: number, childIn
   if (childIndex < 0) return
   _items.value[itemIndex].children[childIndex].data = data
 
-  store.selected = [..._items.value]
+  chemistryStore.selected = [..._items.value]
+  useFilter()
 }
 
 function remove(itemIndex: number, childIndex: number) {
   _items.value[itemIndex].children?.splice(childIndex, 1)
-  store.selected = [..._items.value]
+  chemistryStore.selected = [..._items.value]
+  useFilter()
 }
 
 function isExpandable(itemsAmount: number) {
   return itemsAmount > maxVisibleItems
+}
+
+function useFilter() {
+  const value = toQuery(chemistryStore.selected)
+
+  if (value === '') {
+    queryStore.unsetFilter(QueryKey.Chemistry)
+  } else {
+    queryStore.setPanelFilter({
+      name: QueryKey.Chemistry,
+      value
+    })
+  }
+
+  queryStore.execute()
+}
+
+function toQuery(selected: TreeNode[]) {
+  return selected
+      .reduce((acc, cur) => {
+        const children = cur.children ?? []
+        const tuples = children.map(({ data, key: childKey }) => `(${cur.key},${childKey},${data.min ?? ''},${data.max ?? ''})`)
+        return [...acc, ...tuples]
+      }, <string[]>[])
+      .join(',')
 }
 
 </script>

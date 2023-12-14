@@ -11,12 +11,12 @@ const { selected } = storeToRefs(chemistryStore)
 
 function submit() {
   chemistryStore.selected = [...selectedTemp.value]
+  useFilter()
 }
-
-watch(selected, () => useFilter())
 
 function reset() {
   chemistryStore.selected = []
+  useFilter()
 }
 
 function useFilter() {
@@ -72,6 +72,11 @@ onMounted(() => {
   const activeQuery = queryStore.getFilter(QueryKey.Chemistry)?.value
   if (!activeQuery) return
   selected.value = fromQuery(activeQuery)
+  useFilter()
+})
+
+onBeforeUnmount(() => {
+  chemistryStore.selected = []
 })
 </script>
 <template>

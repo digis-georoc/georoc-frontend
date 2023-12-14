@@ -174,7 +174,7 @@ export const useQueryStore = defineStore('query', {
     },
     getFiltersByMaterial(state) {
       return (materialKey: keyof typeof MaterialKeys): QueryFilter[] => {
-        return state.filters[materialKey] ?? []
+        return state.filters[materialKey]
       }
     }
   },
