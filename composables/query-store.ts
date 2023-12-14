@@ -111,11 +111,12 @@ export const useQueryStore = defineStore('query', {
       const hasMaterial = !!(this.filters.material)
       if (hasMaterial) {
         try {
-          this.listResult = await getList([
-            ...this.filters.active.map(toQuery),
-            ...(!!(offset) ? [{ name: 'offset', value: offset }] : []),
-            ...(!!(limit) ? [{ name: 'limit', value: limit }] : []),
-        ])
+
+          const params = this.createUrlParams()
+          params.set('offset', offset.toString())
+          params.set('limit', limit.toString())
+
+          this.listResult = await getList(params)
         } catch (e) {
           console.log(e)
         }

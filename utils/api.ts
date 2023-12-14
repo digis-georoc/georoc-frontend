@@ -24,16 +24,9 @@ async function getMinerals(): Promise<MineralsResponse | null> {
   return data.value
 }
 
-async function getList(filters: QueryFilter[] = []): Promise<QueryListResponse | null> {
-  const filterObj: any = {}
-  filters.forEach(({ name, value }) => {
-    filterObj[name] = Array.isArray(value) ? JSON.stringify(value) : value
-  })
-
+async function getList(params: URLSearchParams): Promise<QueryListResponse | null> {
   try {
-    const res: Response = await fetch(
-      '/api/list?' + Object.keys(filterObj).map(key => key + '=' + filterObj[key]).join('&')
-    )
+    const res: Response = await fetch(`/api/list?${params}`)
     return await res.json()
   } catch (err) {
   }
