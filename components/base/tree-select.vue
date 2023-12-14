@@ -60,20 +60,20 @@ async function onSelect(node: TreeNode) {
       root: 'relative',
       wrapper: 'relative h-[400px] overflow-auto',
       filterContainer: 'w-full relative mb-4',
-      input: 'w-full p-2 border rounded-lg transition colors hover:border-primary outline-none focus:ring-2 focus:border-primary focus:ring-primary-100',
+      filterInput: 'w-full p-2 dark:bg-zinc-600 border dark:border-zinc-500 rounded-lg transition colors hover:border-primary dark:hover:border-primary outline-none focus:ring-2 focus:border-primary focus:ring-primary-100',
       searchIcon: 'w-4 h-4 absolute right-3 top-1/2 -mt-2',
       checkboxContainer: 'me-2',
       checkbox: options => { return {
         class: [
-          'border-2 rounded-md w-[22px] h-[22px] transition-colors flex items-center justify-center',
+          'border-2 dark:border-zinc-500 rounded-md w-[22px] h-[22px] transition-colors flex items-center justify-center',
           {
-            'bg-stone-50 hover:border-primary': !options.context.checked,
+            'bg-zinc-50 dark:bg-zinc-600 hover:border-primary dark:hover:border-primary': !options.context.checked,
             'bg-primary text-white hover:bg-primary-700': options.context.checked,
           }
         ]
       }},
       container: 'me-4',
-      content: 'flex py-2 px-3 rounded-lg hover:bg-stone-200 cursor-pointer',
+      content: 'flex py-2 px-3 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer',
       toggler: options => { return { class: ['border-0 me-2', { 'hidden': options.context.leaf }] } },
       label: 'cursor-pointer select-none',
       subgroup: 'ps-4',
