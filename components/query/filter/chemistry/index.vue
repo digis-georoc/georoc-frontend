@@ -52,8 +52,8 @@ function fromQuery(query: string | null): TreeNode[] {
     .map(tupel => {
       const [ type, element, min, max ] = tupel.split(',')
       return {
-        type: { value: type, label: type },
-        element: { value: element, label: element },
+        type: { value: type, label: chemistryStore.getNodeLabel(type) },
+        element: { value: element, label: chemistryStore.getNodeLabel(element) },
         min: !!(min) ? parseFloat(min) : null,
         max: !!(max) ? parseFloat(max) : null,
       }
@@ -62,7 +62,7 @@ function fromQuery(query: string | null): TreeNode[] {
       const index = acc.findIndex(node => node.key === cur.type.value)
       const child = { key: cur.element.value, label: cur.element.label, data: { min: cur.min, max: cur.max } }
       if (index === -1) acc.push({ key: cur.type.value, label: cur.type.label, children: <TreeNode[]>[child] })
-      else acc[index].children.push(child)
+      else acc[index].children?.push(child)
 
       return acc
     }, <TreeNode[]>[])

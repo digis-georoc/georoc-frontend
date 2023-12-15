@@ -13,7 +13,6 @@ const selectedMaterialId = ref<string | null>(hideMaterialDialog ? materialFilte
 if (!materialFilterValue.value) handleFilterSelection(selectedMaterialId.value)
 
 function handleFilterSelection(value: string | null) {
-  console.log('handleFilterSelection', value)
   if (value === null) return
   selectedMaterialId.value = value
   queryStore.setMaterialFilter({
