@@ -9,7 +9,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['change', 'update:modelValue'])
 
-const selectedOptionValue = ref(props.modelValue.value)
+const selectedOptionValue = computed(() => props.modelValue.value)
 function onUpdate(option: RadioGroupOption) {
   selectedOptionValue.value = option.value
   emit('update:modelValue', option)
