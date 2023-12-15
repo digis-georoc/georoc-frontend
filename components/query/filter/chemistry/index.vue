@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type {TreeSelectionKeys, TreeNode} from "primevue/tree";
+import type { TreeNode } from "primevue/tree";
 import {storeToRefs} from "pinia";
 
 const queryStore = useQueryStore()

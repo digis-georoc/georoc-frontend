@@ -20,7 +20,7 @@ watch(() => chemistryStore.selected, (value) =>  {
   _items.value = value
     .sort(sortAlphabetically)
     .map((item, i) => {
-      item.children = item.children.sort(sortAlphabetically)
+      item.children = item.children?.sort(sortAlphabetically)
       return item
     })
 
@@ -45,6 +45,7 @@ function onUpdate(data: { min: number, max: number }, itemIndex: number, childIn
 
 function remove(itemIndex: number, childIndex: number) {
   _items.value[itemIndex].children?.splice(childIndex, 1)
+  if (_items.value[itemIndex].children?.length === 0) _items.value.splice(itemIndex, 1)
   chemistryStore.selected = [..._items.value]
   useFilter()
 }
