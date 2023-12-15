@@ -9,7 +9,7 @@ const emit = defineEmits(['update:modelValue'])
 </script>
 <template>
   <BaseBottomSheet
-      :title="$t('filters')"
+      :title="$t('selected_samples')"
       :model-value="modelValue"
       :full-height="true"
       @update:modelValue="emit('update:modelValue', $event)"

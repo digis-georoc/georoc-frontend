@@ -19,7 +19,7 @@ async function onPageChange(page: PageState) {
       <span>{{ $t('no_samples') }}</span>
     </template>
     <template v-else>
-      <h2 class="text-xl font-bold px-4 mb-4">{{ $t('selected_samples') }}</h2>
+      <h2 class="text-xl font-bold px-4 mb-4 hidden xl:block">{{ $t('selected_samples') }}</h2>
       <div class="overflow-y-auto flex-1 px-4 pb-4 pt-[2px]">
         <template v-if="loading">
           <div class="flex items-center justify-center h-full">
