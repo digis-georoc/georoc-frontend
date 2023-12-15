@@ -15,11 +15,13 @@ async function onPageChange(page: PageState) {
 </script>
 <template>
   <div class="flex flex-col flex-1 bg-white py-4 h-full dark:bg-zinc-800">
-    <template v-if="listResult === null">
-      <span>{{ $t('no_samples') }}</span>
+    <h2 class="text-xl font-bold px-4 mb-4 hidden xl:block">{{ $t('selected_samples') }}</h2>
+    <template v-if="listResult === null || listResult.totalCount === 0">
+      <div class="flex flex-1 items-center justify-center px-4 pb-4 pt-[2px]">
+        <span class="text-zinc-500">{{ $t('no_samples') }}</span>
+      </div>
     </template>
     <template v-else>
-      <h2 class="text-xl font-bold px-4 mb-4 hidden xl:block">{{ $t('selected_samples') }}</h2>
       <div class="overflow-y-auto flex-1 px-4 pb-4 pt-[2px]">
         <template v-if="loading">
           <div class="flex items-center justify-center h-full">
