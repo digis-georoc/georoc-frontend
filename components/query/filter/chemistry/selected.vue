@@ -91,7 +91,7 @@ function toQuery(selected: TreeNode[]) {
       <h3 class="font-semibold mb-2">{{ item.label }}:</h3>
       <div class="ps-4">
         <div
-          class="flex flex-col overflow-hidden relative"
+          class="flex flex-col overflow-y-clip relative"
           :class="{
             'scroll-gradient': isExpandable(item.children?.length ?? 0),
             'max-h-[250px]': isExpandable(item.children?.length ?? 0) && collapseState[i],
@@ -149,7 +149,7 @@ function toQuery(selected: TreeNode[]) {
           :text="$t(collapseState[i] ? 'show_all' : 'show_less')"
           size="small"
           display="outline"
-          class="w-full"
+          class="w-full relative z-10"
           @click="collapseState[i] = !collapseState[i]"
         />
       </div>

@@ -29,7 +29,7 @@ function open() {
     :dismissableMask="closable"
     :pt="{
       root: {
-        class: 'bg-white dark:bg-zinc-800 p-4 rounded-lg lg:w-1/3 shadow-lg'
+        class: 'bg-white dark:bg-zinc-800 p-4 rounded-lg lg:min-w-[33%] shadow-lg'
       },
       header: {
         class: 'flex'
