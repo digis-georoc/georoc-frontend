@@ -65,6 +65,7 @@ onMounted(async () => {
 
   if (activeQuery) {
     selected.value = [fromQuery(activeQuery) ?? types[0]]
+    selectedTemp.value = selected.value[0]
     useFilter(false)
   }
 })
