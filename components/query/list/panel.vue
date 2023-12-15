@@ -8,7 +8,7 @@
         :text="$t('list_view')"
         icon="ic:round-format-list-bulleted"
         display="mono"
-        class="absolute top-6 left-0 -translate-x-[120%] hidden xl:block shadow-lg"
+        class="absolute xl:top-[78px] 2xl:top-[26px] left-0 -translate-x-[120%] hidden xl:block shadow-lg"
         @click="isOpen = !isOpen"
     />
     <QueryList/>

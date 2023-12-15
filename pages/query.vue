@@ -34,7 +34,7 @@ function handleListBtn() {
           <QueryMap/>
           <div class="absolute top-[24px] z-[1001] left-1/2 -translate-x-1/2">
             <div class="flex">
-              <div class="bg-white rounded-md rounded-r-none font-semibold border border-primary p-2 text-primary">
+              <div class="bg-white dark:bg-zinc-800 rounded-md rounded-r-none font-semibold border border-primary dark:border-zinc-600 p-2 text-primary dark:text-zinc-100">
                 <AmountSamples class="ml-auto"/>
               </div>
               <QueryDownloadSamples class="rounded-l-none"/>
