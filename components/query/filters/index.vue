@@ -9,7 +9,7 @@ const storageHideKey = 'hide-material-dialog'
 // const storedMaterial = window.localStorage.getItem(queryStore.getCachingKey(QueryKey.Material))
 const hideMaterialDialog = window.localStorage.getItem(storageHideKey) !== null || window.sessionStorage.getItem(storageHideKey) !== null
 
-const selectedMaterialId = ref<string | null>(hideMaterialDialog ? materialFilterValue.value : null)
+const selectedMaterialId = ref<string | null>(hideMaterialDialog ? (materialFilterValue.value ?? MaterialKeys.WRGL) : null)
 if (!materialFilterValue.value) handleFilterSelection(selectedMaterialId.value)
 
 function handleFilterSelection(value: string | null) {
