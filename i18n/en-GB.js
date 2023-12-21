@@ -70,5 +70,6 @@ export default {
   samples: 'Samples',
   selected_samples: 'Selected Samples',
   show_samples: 'Show samples',
-  download_data: 'Download Data'
+  download_data: 'Download Data',
+  server_error: 'Server Error'
 }

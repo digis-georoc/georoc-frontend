@@ -25,13 +25,13 @@ async function getMinerals(): Promise<MineralsResponse | null> {
 }
 
 async function getList(params: URLSearchParams): Promise<QueryListResponse | null> {
-  try {
-    const res: Response = await fetch(`/api/list?${params}`)
-    return await res.json()
-  } catch (err) {
-  }
+  const res: Response = await fetch(`/api/list?${params}`)
 
-  return null
+  if (res.ok) {
+    return await res.json()
+  } else {
+   throw { statusCode: res.status, statusMessage: res.statusText }
+  }
 }
 
 async function getExpertDatasets() {

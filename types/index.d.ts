@@ -32,7 +32,11 @@ declare global {
   interface QueryListResponse {
     data: QueryListItem[],
     numItems: number,
-    totalCount: number
+    totalCount: number,
+    error?: {
+      statusCode: number,
+      statusMessage: string
+    }
   }
 
   interface ResponseRef<T> {

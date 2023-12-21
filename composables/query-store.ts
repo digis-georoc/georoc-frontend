@@ -129,8 +129,8 @@ export const useQueryStore = defineStore('query', {
           params.set('limit', limit.toString())
 
           this.listResult = await getList(params)
-        } catch (e) {
-          console.log(e)
+        } catch (e: any) {
+          this.listResult = { data: [], numItems: 0, totalCount: 0, error: e }
         }
       }
     },
