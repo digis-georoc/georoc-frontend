@@ -73,7 +73,7 @@ function toQuery(selected: TreeNode[]) {
   return selected
       .reduce((acc, cur) => {
         const children = cur.children ?? []
-        const tuples = children.map(({ data, key: childKey }) => `(${cur.key},${childKey},${data.min ?? ''},${data.max ?? ''})`)
+        const tuples = children.map(({ data, key: childKey = '' }) => `(${cur.key},${childKey.slice(0, -1)},${data.min ?? ''},${data.max ?? ''})`)
         return [...acc, ...tuples]
       }, <string[]>[])
       .join(',')

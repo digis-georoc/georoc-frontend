@@ -79,7 +79,7 @@ async function onSelect(node: TreeNode) {
       toggler: options => { return { class: ['border-0 me-2', { 'hidden': options.context.leaf }] } },
       label: 'cursor-pointer select-none',
       subgroup: 'ps-4',
-      loadingOverlay: 'absolute z-10 w-full h-full flex items-center justify-center bg-white dark:bg-zinc-900 bg-opacity-75'
+      loadingOverlay: 'absolute z-10 w-full h-full flex items-center justify-center bg-white dark:bg-zinc-800 bg-opacity-75 dark:bg-opacity-75'
     }"
   >
     <template v-slot:loadingicon>
