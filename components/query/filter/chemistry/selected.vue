@@ -24,7 +24,16 @@ watch(() => chemistryStore.selected, (value) =>  {
       return item
     })
 
-  collapseState.value = new Array(value.length).fill(true)
+  if ( value.length > collapseState.value.length) {
+    collapseState.value = [
+      ...collapseState.value,
+      ...new Array(value.length - collapseState.value.length).fill(true)
+    ]
+  }
+})
+
+onMounted(() => {
+  collapseState.value = new Array(chemistryStore.selected.length).fill(true)
 })
 
 function sortAlphabetically(a: TreeNode, b: TreeNode) {
@@ -45,7 +54,10 @@ function onUpdate(data: { min: number, max: number }, itemIndex: number, childIn
 
 function remove(itemIndex: number, childIndex: number) {
   _items.value[itemIndex].children?.splice(childIndex, 1)
-  if (_items.value[itemIndex].children?.length === 0) _items.value.splice(itemIndex, 1)
+  if (_items.value[itemIndex].children?.length === 0) {
+    _items.value.splice(itemIndex, 1)
+    collapseState.value.splice(itemIndex, 1)
+  }
   chemistryStore.selected = [..._items.value]
   useFilter()
 }
@@ -78,7 +90,6 @@ function toQuery(selected: TreeNode[]) {
       }, <string[]>[])
       .join(',')
 }
-
 </script>
 
 <template>
