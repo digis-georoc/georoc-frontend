@@ -146,7 +146,14 @@ function reset() {
 function rockClassesToQuery(nested: NestedSelected) {
   const classes = Object
     .keys(nested)
-    .filter(key => !hasAllClassesSelected({ value: key, classes: nested[key], label: '' }))
+    .filter(key => !hasAllClassesSelected({
+      value: key,
+      classes: nested[key].map(classItem => {
+        classItem.value = classItem.value.slice(0, -1)
+        return classItem
+      }),
+      label: ''
+    }))
     .map(key => nested[key])
     .flat()
 
