@@ -69,6 +69,11 @@ export const useQueryStore = defineStore('query', {
       if (index === -1) filters.push(filter)
       else filters[index] = filter
     },
+    removeActiveFilter(key: keyof typeof QueryKey) {
+      const index = this.filters.active.findIndex(({ name }) => name === key)
+      if (index === -1) return
+      this.filters.active.splice(index, 1)
+    },
     addOrUpdateFilterByMaterial(filter: QueryFilter, materialValue: keyof typeof MaterialKeys) {
       const filters = this.getFiltersByMaterial(materialValue)
       if (!filters) return
@@ -76,14 +81,21 @@ export const useQueryStore = defineStore('query', {
       if (index === -1) filters.push(filter)
       else filters[index] = filter
     },
+    removeFilterByMaterial(key: keyof typeof QueryKey, materialValue: keyof typeof MaterialKeys) {
+      const filters = this.getFiltersByMaterial(materialValue)
+      const index = filters.findIndex(({ name }) => name === key)
+
+      if (index === -1) return
+
+      filters.splice(index, 1)
+
+    },
     swapFilters(materialValue: keyof typeof MaterialKeys) {
       this.filters.active = [...this.getFiltersByMaterial(materialValue)]
     },
-    unsetFilter(name: string, removeFromCache = true) {
-      const index = this.filters.active.findIndex(({ name: oldName }) => oldName === name)
-      if (index === -1) return
-      this.filters.active.splice(index, 1)
-
+    unsetFilter(name: keyof typeof QueryKey, removeFromCache = true) {
+      this.removeActiveFilter(name)
+      this.removeFilterByMaterial(name, this.filters.material?.value)
       if (removeFromCache) window.localStorage.removeItem(this.getCachingKey(name))
     },
     async execute() {
@@ -174,7 +186,7 @@ export const useQueryStore = defineStore('query', {
     },
     getFiltersByMaterial(state) {
       return (materialKey: keyof typeof MaterialKeys): QueryFilter[] => {
-        return state.filters[materialKey]
+        return state.filters[materialKey] ?? []
       }
     }
   },
