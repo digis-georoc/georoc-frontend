@@ -28,3 +28,11 @@ Locally preview production build:
 ```bash
 npm run preview
 ```
+
+## Linting
+
+We use Prettier to format our code.
+
+Check all files with `npx prettier . --check`
+
+Reformat all files with `npx prettier . --write`
