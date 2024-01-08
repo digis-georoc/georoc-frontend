@@ -126,8 +126,8 @@ function toQuery(selected: TreeNode[]) {
             </div>
           </div>
           <div class="flex flex-1 mb-3 text-zinc-500 dark:text-zinc-400" v-for="(child, j) in item.children">
-            <div class="w-5/12 flex-shrink-0 flex items-center">
-              {{ child.label }}
+            <div class="w-5/12 flex-shrink-0 flex items-center pr-2" :title="child.label">
+              <span class="truncate">{{ child.label }}</span>
             </div>
             <div class="w-2/12 mr-3 flex items-center">
               <BaseInput
@@ -140,11 +140,11 @@ function toQuery(selected: TreeNode[]) {
             </div>
             <div class="w-2/12 mr-3 flex items-center">
               <BaseInput
-                  type="number"
-                  placeholder=""
-                  size="sm"
-                  :model-value="child.data?.max"
-                  @update:modelValue="onUpdate({ min: child.data.min, max: $event }, i, j)"
+                type="number"
+                placeholder=""
+                size="sm"
+                :model-value="child.data?.max"
+                @update:modelValue="onUpdate({ min: child.data.min, max: $event }, i, j)"
               />
             </div>
             <div class="w-2/12 flex items-center">
