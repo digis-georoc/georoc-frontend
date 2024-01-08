@@ -36,5 +36,5 @@ function submit() {
     <QueryFiltersInclusion v-if="selectedMaterialId === MaterialKeys.INC" />
     <QueryFiltersMineral v-if="selectedMaterialId === MaterialKeys.MIN" />
   </div>
-  <QueryFilterMaterialDialog @select="handleFilterSelection" />
+  <QueryFilterMaterialDialog v-if="!hideMaterialDialog" @select="handleFilterSelection" />
 </template>

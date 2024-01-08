@@ -21,6 +21,10 @@ watch(() => isOpen.value, (value) => {
   if (dontShowAgain.value) window.localStorage.setItem(hideDialogStorageKey, '')
   else window.localStorage.removeItem(hideDialogStorageKey)
 
+  // Set that key also on session storage to rememeber if the user has already
+  // seen the material dialog, so it won't appear again (e.g. when switching to mobile mode)
+  window.sessionStorage.setItem(hideDialogStorageKey, '')
+
   emit('select', selected.value)
 })
 </script>
