@@ -46,4 +46,5 @@ export default {
   cancel_button: 'Cancel',
   tabheader_1: 'Files',
   tabheader_2: 'Meta',
+  error_redirect_button: 'Return home.'
 }

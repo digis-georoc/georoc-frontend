@@ -71,5 +71,6 @@ export default {
   selected_samples: 'Selected Samples',
   show_samples: 'Show samples',
   download_data: 'Download Data',
-  server_error: 'Server Error'
+  server_error: 'Server Error',
+  oh_no_something_went_wrong: 'Oh no! Something went wrong!',
 }
