@@ -44,7 +44,7 @@ async function loadChildren(node: TreeNode) {
   const elements = await getElements(nodes.value[index].key)
   nodes.value[index].children = elements
     ?.data
-    .map(({ value, label, unit }) => ({key: value + index, label, children: [], data: { min: null, max: null, unit }}))
+    .map(({ value, label, unit }) => ({key: generateChildKey(node.key, value), label, children: [], data: { min: null, max: null, unit }}))
   ?? []
   store.nodes = nodes.value
   loadingChildren.value = false
@@ -70,12 +70,6 @@ function mapSelectionKeysToNodes(keys: TreeSelectionKeys): TreeNode[] {
         return child ?? node
       })
     }
-
-    // if (selectedChildren.length === node?.children?.length) {
-    //   // When loading values from cache (onMounted) we assumed that the rock type is partially checked
-    //   // Here we can tell for sure if all classes of that rock type were cached, if yes we mark also the rock type as checked.
-    //   selectedKeys.value[key] = { checked: true }
-    // }
 
     return {
       key,

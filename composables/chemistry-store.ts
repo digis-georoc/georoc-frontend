@@ -21,7 +21,7 @@ export const useChemistryStore = defineStore('chemistry', {
           }
 
           for (const childNode of (node.children ?? [])) {
-            if (childNode.key === key) {
+            if (getCleanChildKey(childNode.key) === key) {
               resultNode = childNode
               break
             }

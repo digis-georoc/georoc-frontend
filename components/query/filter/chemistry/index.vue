@@ -38,7 +38,7 @@ function toQuery(selected: TreeNode[]) {
   return selected
     .reduce((acc, cur) => {
       const children = cur.children ?? []
-      const tuples = children.map(({ data, key: childKey = '' }) => `(${cur.key},${childKey.slice(0, -1)},${data.min ?? ''},${data.max ?? ''})`)
+      const tuples = children.map(({ data, key: childKey = '' }) => `(${cur.key},${getCleanChildKey(childKey)},${data.min ?? ''},${data.max ?? ''})`)
       return [...acc, ...tuples]
     }, <string[]>[])
     .join(',')
@@ -59,8 +59,14 @@ function fromQuery(query: string | null): TreeNode[] {
       }
     })
     .reduce((acc, cur) => {
+      // Iterate over tuples and reduce them to a nested structure with element types as parents
+      // and elements as children.
+      // Child keys need to be generated (parent + delimiter + child)
+      // because there can be same elements for multiple element types.
+      // When applying the filter query, we calculate it back to the original key (see toQuery).
+
       const index = acc.findIndex(node => node.key === cur.type.value)
-      const child = { key: cur.element.value, label: cur.element.label, data: { min: cur.min, max: cur.max } }
+      const child = { key: generateChildKey(cur.type.value, cur.element.value), label: cur.element.label, data: { min: cur.min, max: cur.max } }
       if (index === -1) acc.push({ key: cur.type.value, label: cur.type.label, children: <TreeNode[]>[child] })
       else acc[index].children?.push(child)
 
