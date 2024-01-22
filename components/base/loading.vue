@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  opacity: number
+  opacity?: number
 }>(), { opacity: 0.3})
 </script>
 

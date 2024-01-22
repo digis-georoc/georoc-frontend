@@ -4,7 +4,7 @@ import Dialog from 'primevue/dialog'
 const props = withDefaults(defineProps<{
   modelValue: boolean,
   title?: string,
-  closable: boolean
+  closable?: boolean
 }>(), {
   closable: true
 })

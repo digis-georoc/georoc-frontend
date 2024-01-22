@@ -5,10 +5,6 @@ import { getCleanChildKey } from "~/composables/tree";
 const chemistryStore = useChemistryStore()
 const queryStore = useQueryStore()
 
-const props = defineProps<{
-  items: TreeNode[]
-}>()
-
 const emit = defineEmits<{
   update: [item: TreeNode[]]
 }>()

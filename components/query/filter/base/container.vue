@@ -2,7 +2,7 @@
 const props = withDefaults(defineProps<{
   title: string,
   dialogTitle: string,
-  showReset: boolean,
+  showReset?: boolean,
   loading?: boolean
 }>(), {
   title: '',
