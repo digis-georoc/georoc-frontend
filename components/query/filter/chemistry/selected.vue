@@ -128,7 +128,7 @@ function toQuery(selected: TreeNode[]) {
           </div>
           <div class="flex flex-1 mb-3 text-zinc-500 dark:text-zinc-400" v-for="(child, j) in item.children">
             <div class="w-5/12 flex-shrink-0 flex items-center pr-2" :title="child.label">
-              <span class="truncate">{{ child.label }}</span>
+              <span class="overflow-x-auto xl:truncate">{{ child.label }}</span>
             </div>
             <div class="w-2/12 mr-3 flex items-center">
               <BaseInput
