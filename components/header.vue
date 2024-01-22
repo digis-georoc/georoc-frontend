@@ -9,7 +9,7 @@ const navigation = [
 <template>
   <Disclosure
       as="nav"
-      class="fixed z-[1010] bg-white dark:bg-zinc-800 w-full border-b dark:border-zinc-700"
+      class="fixed z-[9001] bg-white dark:bg-zinc-800 w-full border-b dark:border-zinc-700"
       v-slot="{ open, close }"
   >
     <BaseFluidContainer>
