@@ -15,8 +15,8 @@ function submit() {
 }
 
 function reset() {
-  chemistryStore.selected = []
-  useFilter()
+  selectedTemp.value = []
+  submit()
 }
 
 function useFilter() {
@@ -89,6 +89,7 @@ onBeforeUnmount(() => {
   <QueryFilterBaseContainer
     :title="$t('chemistry')"
     :dialog-title="$t('please_select_chemistry')"
+    :show-reset="selected.length > 0"
     @submit="submit"
     @reset="reset"
   >
