@@ -1,9 +1,11 @@
-import precompiledFilePage from "./en-GB/precompiledFilePage"
-import queryPage from "~/i18n/en-GB/queryPage";
+import precompiledFilePage from './en-GB/precompiledFilePage'
+import queryPage from '~/i18n/en-GB/queryPage'
+import indexPage from './en-GB/indexPage'
 
 export default {
   precompiledFilePage,
   queryPage,
+  indexPage,
   database_query: 'Database Query',
   filters: 'Filters',
   material_filter: 'Material filter',
@@ -38,7 +40,8 @@ export default {
   please_select_rock_type: 'Please select one or more Rock Type(s)',
   please_select_inclusion_type: 'Please select an Inclusion Type',
   material_inclusion: 'Material Inclusion',
-  please_select_material_inclusion: 'Please select one or more Host Material(s) and/or one or more Inclusion Material(s)',
+  please_select_material_inclusion:
+    'Please select one or more Host Material(s) and/or one or more Inclusion Material(s)',
   host_material: 'Host Material',
   inclusion_material: 'Inclusion Material',
   loading: 'Loading',
@@ -52,7 +55,8 @@ export default {
   download_samples: 'Download samples',
   glass_melt: 'Glass/Melt',
   please_select_host_material: 'Please select one or more Host Material(s)',
-  please_select_inclusion_material: 'Please select one or more Inclusion Material(s)',
+  please_select_inclusion_material:
+    'Please select one or more Inclusion Material(s)',
   select: 'Select',
   authors: 'Authors',
   title: 'Title',
@@ -60,7 +64,8 @@ export default {
   prod_date: 'Prod. Date',
   link_to_dataset: 'Link to Dataset',
   search: 'Search',
-  showing_first_to_last_of_total_entries: 'Showing {first} to {last} of {totalRecords} entries',
+  showing_first_to_last_of_total_entries:
+    'Showing {first} to {last} of {totalRecords} entries',
   show_expert_dataset: 'Show Expert Dataset',
   no_matching_records_found: 'No matching records found.',
   unit: 'Unit',
