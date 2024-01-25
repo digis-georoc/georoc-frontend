@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.12](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.11...v0.0.12) (2024-01-25)
+
+
+### Features
+
+* add error handling for precompiled files page and expert dataset page ([c8a09c0](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c8a09c0b29a1a45686388f85bfd85d423913042d))
+* add error message to samples list ([cca7d5c](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/cca7d5c8b905bf61f8d1c0d3493571424c92a6ac))
+* add more background images to the landingpage, where one gets selected at random on reload ([af07058](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/af070587f9e2e97f36bd409dcffcfc9869f287b5))
+* add reset to chemistry filter ([c1837db](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c1837dbd5aceb4481a9daa0c85300d159d8a8a6c))
+* elevate header to stay visible in front of ovrlays ([1f8042f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/1f8042f247c4650216d8dc00ffe874f9bd25c0ca))
+* generate new keys for children in chemistry elements tree (parent key + delimiter + child key) ([b075917](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/b0759172ee04386aa4fce2b9cc74ac53e5929b74))
+* reset chemistry store on material filter change ([4073906](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/4073906f3f561eb8679232a1c8e0533643bfd2d4))
+* swap other filters on material filter change ([3a33802](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/3a33802017d2d7f9bbf10c35fd26b22a8e2fb5b8))
+* update filter panel min width to avoid material filter overflow ([8e4ef3e](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/8e4ef3e3d99d57b56c642a67560da11b12d23722))
+* update footer links and add legal notice and privacy statement ([e58fc50](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/e58fc50cfba8fd2ee97a948d92fa8e5c160761b6))
+
+
+### Bug Fixes
+
+* append index of element type to nested chemistry elements to make them unique, so elements won't be selected multiple times ([3a98a97](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/3a98a97dc4983782dd9ae9fcb732d562c4192f85))
+* avoid overlapping of center top buttons on small desktop screens ([f55f6a5](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/f55f6a538cd64cb375b3e1654ccd1217ccf015af))
+* don't show material dialog again when already seen and switch to mobile display ([c81a10e](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c81a10e68f7b7992cc73cd6271849b00a61e27a1))
+* make chemistry element labels scrollable on mobile ([b3a940c](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/b3a940c532bae7c7e210653b337ad4b3eb98f154))
+* manage collapse state at chemistry filter ([5443348](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/5443348e023adb480e9092ac00f7a00ebac985b4))
+* remove appended index from rock class values when converting to query ([a25a0c8](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/a25a0c801af10aa951a46958e9ececb9c1d716b4))
+* remove whole chemistry element type when last element was removed ([566ad01](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/566ad01ede60b995231066cbf0e52b93a60c25b1))
+* select whole rock glass as preselected material when nothing set ([7caf1ce](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/7caf1ce902582e4d7addec8c2e3db60c34dda801))
+* set correct chemistry labels after switching back to selected state ([c03d452](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c03d452b37201ceaa5b6e91fefca2c9acaa06eec))
+* set correct selected inclusion type after switching material filter ([c5cf9b0](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c5cf9b0a010fc1e42a4c672fa0079b9ed92403dc))
+* set dialog's z-index higher as bottom sheet ([2a29a65](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/2a29a659d4ad6abd2588f7ba718126126d88a924))
+* show correct title for mobile list view ([4481024](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/4481024a23700ef77e87fe27f95d7afd96f10847))
+* show empty placeholder at samples list correctly ([3a22d25](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/3a22d255c3cf25a4ad1af9aa804e217ddeb1866e))
+* truncate long element names in chemistry filter ([e3726bd](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/e3726bdb09e4a8c8aaef3014284d2902a57b520b))
+* unset also in "filters by material" state ([cd9ae58](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/cd9ae5845ca96c21dc5a020b1dce12d4329acb89))
+* update checkbox dark mode styles ([2f3f11a](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/2f3f11a00dc971293417fedd2d561c36600c1361))
+* update query list params ([8eba2be](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/8eba2be60d4fe75c065c2acba5824617ae29f1ae))
+* update radio button group value correctly ([6e38e25](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/6e38e25409664171aaa7cae68fe5967426b0da08))
+* update tree select dark mode styles ([7f4379e](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/7f4379ebfdade825eb8171768c40ed83a0cd441d))
+* updated misc styles at chemistry filter ([a07a5f5](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/a07a5f5d81181d7db543a30c74989a96533c43d3))
+
 ### [0.0.11](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.10...v0.0.11) (2023-12-13)
 
 
