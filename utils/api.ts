@@ -1,3 +1,4 @@
+import { FetchError } from 'ofetch'
 async function getSamples(
   params: URLSearchParams,
   { signal }: AbortController,
@@ -132,6 +133,18 @@ async function getInclusionMaterials(): Promise<HostMaterialsResponse | null> {
   return data.value
 }
 
+async function getStatistics(): Promise<{
+  data: globalThis.Ref<Statistics | null>
+  error: globalThis.Ref<FetchError<any> | null>
+}> {
+  const { data, error } = await useFetch<Statistics>('/api/statistics', {
+    server: false,
+    lazy: true,
+  })
+  //we need to return the reactive values here (Client-only fetching)
+  return { data, error }
+}
+
 export {
   getSamples,
   getList,
@@ -146,4 +159,5 @@ export {
   getPrecompiledFiles,
   getPrecompiledFile,
   getPrecompiledPreview,
+  getStatistics,
 }

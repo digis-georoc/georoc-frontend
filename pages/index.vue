@@ -43,38 +43,7 @@
         {{ backgroundImage.credit }}
       </div>
     </section>
-    <section class="py-5">
-      <BaseContainer>
-        <div
-          class="flex flex-wrap md:flex-nowrap w-full text-stone-700 dark:text-zinc-400"
-        >
-          <div
-            class="border-r border-stone-300 dark:border-zinc-700 flex flex-col w-1/2 md:w-1/4 text-center p-4"
-          >
-            <span class="text-2xl">21,370</span>
-            <span>{{ $t('indexPage.statistic_1') }}</span>
-          </div>
-          <div
-            class="md:border-r border-stone-300 dark:border-zinc-700 flex flex-col w-1/2 md:w-1/4 text-center p-4"
-          >
-            <span class="text-2xl">640,100</span>
-            <span>{{ $t('indexPage.statistic_2') }}</span>
-          </div>
-          <div
-            class="border-r md:border-l md:border-l-0 border-stone-300 dark:border-zinc-700 flex flex-col w-1/2 md:w-1/4 text-center p-4"
-          >
-            <span class="text-2xl">62,402,280</span>
-            <span>{{ $t('indexPage.statistic_3') }}</span>
-          </div>
-          <div
-            class="border-stone-300 dark:border-zinc-700 flex flex-col w-1/2 md:w-1/4 text-center p-4"
-          >
-            <span class="text-2xl">35,166,090</span>
-            <span>{{ $t('indexPage.statistic_4') }}</span>
-          </div>
-        </div>
-      </BaseContainer>
-    </section>
+    <ClientOnly><Stats></Stats></ClientOnly>
     <section class="bg-white dark:bg-zinc-800 mb-6">
       <BaseContainer class="py-24 sm:py-32">
         <div class="mx-auto max-w-7xl">
