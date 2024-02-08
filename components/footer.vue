@@ -112,7 +112,7 @@
         >
       </p>
       <p class="pr-2 sm:pl-2 landscape:pl-2">-</p>
-      <p>Last Database Update: XX-XX-XXXX</p>
+      <p>Last Database Update: Month DD, YYYY</p>
     </BaseContainer>
   </footer>
 </template>

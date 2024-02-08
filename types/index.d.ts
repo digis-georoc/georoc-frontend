@@ -192,6 +192,13 @@ declare global {
     nodes: TreeNode[]
     selected: TreeNode[]
   }
+
+  interface Statistics {
+    numCitations: number
+    numSamples: number
+    numAnalyses: number
+    numResults: number
+  }
 }
 
 export {}
