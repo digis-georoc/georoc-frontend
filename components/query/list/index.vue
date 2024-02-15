@@ -48,7 +48,7 @@ async function onPageChange(page: PageState) {
             :rows="30"
             :totalRecords="listResult.totalCount"
             pageLinkSize="3"
-            @page="onPageChange" :rowsPerPageOptions="[10, 20, 30]"
+            @page="onPageChange"
             :pt="PaginatorPassThroughOptions"
         >
         </Paginator>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  items: MultiselectOption[] | RadioGroupOption[]
+  items?: MultiselectOption[] | RadioGroupOption[]
 }>(), {
   items: []
 })

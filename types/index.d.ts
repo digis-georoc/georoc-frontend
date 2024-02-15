@@ -9,9 +9,14 @@ declare global {
 
   interface QueryListItem {
     sampleID: number
-    samplename: string
+    sampleName: string
     latitude: number
     longitude: number
+    geologicalAge: string | null
+    geologicalSetting: string | null
+    inclusionType: string | null
+    mineral: string | null
+    rockClass: string | null
   }
 
   interface QueryLocationFeature {

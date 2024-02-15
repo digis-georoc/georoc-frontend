@@ -78,4 +78,9 @@ export default {
   download_data: 'Download Data',
   server_error: 'Server Error',
   oh_no_something_went_wrong: 'Oh no! Something went wrong!',
+  sample_name: 'Sample Name',
+  mineral_name: 'Mineral Name',
+  rock_class: 'Rock Class',
+  name: 'Name'
+
 }

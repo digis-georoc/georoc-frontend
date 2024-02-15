@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
   title: string,
-  dialogTitle: string,
+  dialogTitle?: string,
   showReset?: boolean,
   loading?: boolean
 }>(), {
