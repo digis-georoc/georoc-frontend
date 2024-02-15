@@ -1,3 +1,18 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
-  test
+  <QueryFilterBaseContainer :title="$t('location_type')">
+    <template v-slot:selected>
+      <QueryFilterBaseSelected />
+    </template>
+    <template v-slot:options>
+      <QueryFilterLocationType />
+    </template>
+  </QueryFilterBaseContainer>
 </template>
+
+<style scoped>
+
+</style>

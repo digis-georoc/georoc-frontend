@@ -1,5 +1,9 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
-  <QueryFilterBaseContainer :title="$t('age')">
+  <QueryFilterBaseContainer :title="$t('tectonic_setting')">
     <template v-slot:selected>
       <QueryFilterBaseSelected />
     </template>
@@ -7,3 +11,7 @@
     </template>
   </QueryFilterBaseContainer>
 </template>
+
+<style scoped>
+
+</style>
