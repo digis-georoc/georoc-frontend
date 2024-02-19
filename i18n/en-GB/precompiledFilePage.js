@@ -49,10 +49,9 @@ export default {
     'This dataset is made available under the following terms.',
   license_paragraph_2:
     'Please confirm and/or complete the information needed below in order to continue.',
-  license_paragraph_3_1: 'Our',
-  license_paragraph_3_linktext: 'Community norms',
-  license_paragraph_3_2:
-    'as well as good scientific practices expect that proper credit is given via citation. Please use the data citation shown on the dataset page.',
+  license_paragraph_3: 'Our {license_link_1} as well as good scientific practices expect that proper credit is given via { license_link_2 }. Please use the data citation shown on the dataset page.',
+  license_link_1: 'Community norms',
+  license_link_2: 'citation',
   license_subheader: 'License / Data Use Agreement',
   agree_button: 'Agree and download',
   cancel_button: 'Cancel',

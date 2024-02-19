@@ -145,16 +145,27 @@
       <h2 class="font-bold">
         {{ $t('precompiledFilePage.license_subheader') }}
       </h2>
-      <p class="">
-        {{ $t('precompiledFilePage.license_paragraph_3_1') }}
-        <NuxtLink
+      <i18n-t keypath="precompiledFilePage.license_paragraph_3" tag="p" scope="global">
+        <template v-slot:license_link_1>
+          <NuxtLink
           to="https://dataverse.org/best-practices/dataverse-community-norms"
           class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
         >
-          {{ $t('precompiledFilePage.license_paragraph_3_linktext') }}</NuxtLink
+          {{
+            $t('precompiledFilePage.license_link_1')
+          }}</NuxtLink
         >
-        {{ $t('precompiledFilePage.license_paragraph_3_2') }}
-      </p>
+        </template>
+        <template v-slot:license_link_2>
+          <NuxtLink
+          to="/how-to-cite"
+          class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
+          >{{
+            $t('precompiledFilePage.license_link_2')
+          }}</NuxtLink
+          >
+        </template>
+      </i18n-t>
       <p>
         <NuxtLink
           :to="precompiledFiles?.license.uri"
