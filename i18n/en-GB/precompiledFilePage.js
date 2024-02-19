@@ -1,14 +1,22 @@
 export default {
   headline_1: 'Concept of Precompiled Files',
-  select_button: 'Change',
-  paragraph_1: 'Multiple analyses of a sample.ts reported in different publications are compiled so that for each whole-rock or volcanic glass sample.ts only one value is displayed for a certain analyte. Multiple analyses of that element, oxide or ratio are compared by the following rules and only the value with highest priority is selected. Multiple analyses within the same publication are not compiled. Note that these compiled datasets will contain fewer records than a standard query result.',
+  select_button: 'Select a GEOROC Compilation',
+  change_button: 'Change',
+  download_complete_dataset_button: 'Download complete precompiled dataset',
+  download_selection_button: 'Download Selection',
+  paragraph_1:
+    'Multiple analyses of a sample.ts reported in different publications are compiled so that for each whole-rock or volcanic glass sample.ts only one value is displayed for a certain analyte. Multiple analyses of that element, oxide or ratio are compared by the following rules and only the value with highest priority is selected. Multiple analyses within the same publication are not compiled. Note that these compiled datasets will contain fewer records than a standard query result.',
   subheadline_1: 'For isotope ratios',
-  subheadline_2: 'For major elements, rare earth elements, and other trace elements',
+  subheadline_2:
+    'For major elements, rare earth elements, and other trace elements',
   subheadline_3: 'For age data and additional sample.ts information',
-  bullet_point_1: 'The publication years are compared. The most recent value has the highest priority.',
+  bullet_point_1:
+    'The publication years are compared. The most recent value has the highest priority.',
   bullet_point_2: 'The value with highest method priority is selected.',
-  bullet_point_3: 'If several values have the highest priority, the publication years are compared. The most recent value is selected.',
-  bullet_point_4: 'All distinct entries are reported, labelled by their respective publication.',
+  bullet_point_3:
+    'If several values have the highest priority, the publication years are compared. The most recent value is selected.',
+  bullet_point_4:
+    'All distinct entries are reported, labelled by their respective publication.',
   subheadline_4: 'Methods listed below with decreasing priority',
   subsubheadline_1: 'Major elements',
   subsubheadline_2: 'Rare earth elements',
@@ -28,23 +36,27 @@ export default {
   table_header_2: 'File Download',
   table_header_3: 'Size (bytes)',
   table_header_4: 'View',
-  meta_data_1: 'Dataset Persistent ID',
-  meta_data_2: 'Publication Date',
-  meta_data_3: 'Title',
-  meta_data_4_sing: 'Author',
-  meta_data_4_pl: 'Authors',
-  meta_data_5: 'Description',
-  meta_data_6: 'Subject',
+  meta_data_1: 'Persistent URL',
+  meta_data_2: 'Dataset Persistent ID',
+  meta_data_3: 'Publication Date',
+  meta_data_4: 'Title',
+  meta_data_5_sing: 'Author',
+  meta_data_5_pl: 'Authors',
+  meta_data_6: 'Description',
+  meta_data_7: 'Subject',
   license_header: 'Dataset Terms',
-  license_paragraph_1: 'This dataset is made available under the following terms.',
-  license_paragraph_2: 'Please confirm and/or complete the information needed below in order to continue.',
+  license_paragraph_1:
+    'This dataset is made available under the following terms.',
+  license_paragraph_2:
+    'Please confirm and/or complete the information needed below in order to continue.',
   license_paragraph_3_1: 'Our',
   license_paragraph_3_linktext: 'Community norms',
-  license_paragraph_3_2: 'as well as good scientific practices expect that proper credit is given via citation. Please use the data citation shown on the dataset page.',
+  license_paragraph_3_2:
+    'as well as good scientific practices expect that proper credit is given via citation. Please use the data citation shown on the dataset page.',
   license_subheader: 'License / Data Use Agreement',
   agree_button: 'Agree and download',
   cancel_button: 'Cancel',
   tabheader_1: 'Files',
   tabheader_2: 'Meta',
-  error_redirect_button: 'Return home.'
+  error_redirect_button: 'Return home.',
 }

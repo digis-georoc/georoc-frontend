@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { FetchError } from 'ofetch'
+const { t } = useI18n()
 let precompiledFilePreviewArr: PrecompiledFilePreview[] | undefined
 let precompiledPreviewError: FetchError | undefined
 try {
@@ -9,18 +10,37 @@ try {
 } catch (error: any) {
   precompiledPreviewError = error
 }
+const links: {
+  href: string
+  label: string
+  isCurrent?: boolean
+}[] = []
 
-onMounted(async () => {
-  if (precompiledFilePreviewArr) {
-    await navigateTo({
-      path: `/precompiled-files/${precompiledFilePreviewArr[0].protocol}/${precompiledFilePreviewArr[0].authority}/${precompiledFilePreviewArr[0].identifier}`,
+if (precompiledFilePreviewArr) {
+  for (let preview of precompiledFilePreviewArr) {
+    links.push({
+      href: `/precompiled-files/${preview.protocol}/${preview.authority}/${preview.identifier}`,
+      label: preview.title,
     })
   }
-})
+}
 </script>
 <template>
-  <PageContainer v-if="precompiledPreviewError">
-    <PageHead headline="Precompiled Files"></PageHead>
-    <BaseError :error="precompiledPreviewError"></BaseError>
+  <PageContainer>
+    <BaseFluidContainer>
+      <PageHead headline="Precompiled Files"></PageHead>
+    </BaseFluidContainer>
+    <div v-if="precompiledPreviewError">
+      <BaseError :error="precompiledPreviewError"></BaseError>
+    </div>
+    <div v-else>
+      <BaseContainer class="pt-6 pb-12">
+        <BaseDropdown
+          :links="links"
+          :buttontext="t('precompiledFilePage.select_button')"
+        ></BaseDropdown>
+      </BaseContainer>
+      <PrecompiledFilesConcept />
+    </div>
   </PageContainer>
 </template>
