@@ -52,7 +52,7 @@
       <div class="sm:flex-1 w-full sm:w-auto mt-12 sm:mt-0">
         <h4 class="text-xl font-bold mb-4">Useful links</h4>
         <ul class="space-y-1">
-          <li>Useful link</li>
+          <li><BaseNuxtLink to="/how-to-cite">How to cite</BaseNuxtLink></li>
           <li>Useful link</li>
           <li>Useful link</li>
           <li>Useful link</li>
