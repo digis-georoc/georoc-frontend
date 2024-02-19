@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-// import "primevue/resources/themes/lara-light-indigo/theme.css";
-
 useHead({
   htmlAttrs: {
     class: 'h-full'
@@ -9,21 +7,10 @@ useHead({
     class: 'h-full bg-stone-100 dark:bg-zinc-900 text-stone-700 dark:text-stone-300',
   },
 })
-
-const uiStore = useUiStore()
-
-if (process.client) {
-  window.onscroll = () => {
-    uiStore.scrolled = window.scrollY > 64;
-  }
-}
-
 </script>
 
 <template>
-  <div class="min-h-full" :class="{'scrolled' : uiStore.scrolled }">
-    <NuxtLayout>
-      <NuxtPage/>
-    </NuxtLayout>
-  </div>
+  <NuxtLayout>
+    <NuxtPage/>
+  </NuxtLayout>
 </template>

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const queryStore = useQueryStore()
 const materialFilter = queryStore.getFilter(QueryKey.Material)
+const router = useRouter()
 
 const props = defineProps<{
   item: QueryListItem | null,
@@ -20,9 +21,17 @@ function getMaterial() {
   return null
 }
 
+function goToDetailPage() {
+  router.push(`/sample/${props.item?.sampleID}`)
+}
+
 </script>
 <template>
-  <div class="flex flex-wrap gap-x-5 gap-y-2 px-4 py-2 border rounded-lg hover:ring-2 hover:ring-primary hover:bg-primary-50/70 dark:hover:bg-primary-50/10 transition-all cursor-pointer dark:border-zinc-600">
+  <div
+    class="flex flex-wrap gap-x-5 gap-y-2 px-4 py-2 border rounded-lg hover:ring-2 hover:ring-primary
+    hover:bg-primary-50/70 dark:hover:bg-primary-50/10 transition-all cursor-pointer dark:border-zinc-600"
+    @click="goToDetailPage"
+  >
     <div class="flex w-full items-center">
       <span class="text-sm font-bold">{{ item.sampleName }}</span>
       <span class="text-xs text-zinc-300 ml-auto">#{{ item.sampleID }}</span>

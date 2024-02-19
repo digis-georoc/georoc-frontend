@@ -59,6 +59,7 @@ declare global {
     }
     result: QueryLocationsResponse | null
     listResult: QueryListResponse | null
+    listOffset: number
   }
 
   interface RocktypesResponseItem {
@@ -125,6 +126,13 @@ declare global {
     numItems: number
   }
 
+  interface SampleFull {
+    ageMax: number | null
+    ageMin: number | null
+    sampleID: number
+    sampleName: string
+  }
+
   type RockClassResponse = BaseResponse<RockClass>
   type ElementTypesResponse = BaseResponse<ChemicalElementType>
   type MineralsResponse = BaseResponse<MineralsResponseItem>
@@ -132,6 +140,7 @@ declare global {
   type RocktypesResponse = BaseResponse<RocktypesResponseItem>
   type HostMaterialsResponse = BaseResponse<HostMaterial>
   type InclusionMaterialsResponse = BaseResponse<InclusionMaterial>
+  type SampleFullResponse = BaseResponse<SampleFull>
 
   interface ExpertDatasetRow {
     authors: string

@@ -38,7 +38,7 @@
     _icon = 'heroicons:arrow-right-20-solid'
   }
 
-  classes['focus:outline-none focus:ring-4 text-sm font-medium flex items-center justify-center leading-2'] = true
+  classes['focus:outline-none focus:ring-4 text-sm font-medium flex items-center justify-center leading-none'] = true
 
   classes['rounded-md'] = !_rounded
   classes['rounded-full'] = _rounded

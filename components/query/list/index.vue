@@ -44,15 +44,14 @@ async function onPageChange(page: PageState) {
         <div class="overflow-y-auto flex-1 px-4 pb-4 pt-[2px]">
           <QueryListItem v-for="item in listResult.data" :item="item" class="mb-2" />
         </div>
-        <Paginator
-            :rows="30"
-            :totalRecords="listResult.totalCount"
-            pageLinkSize="3"
-            @page="onPageChange"
-            :pt="PaginatorPassThroughOptions"
-        >
-        </Paginator>
       </template>
     </template>
+    <Paginator
+        :rows="30"
+        :totalRecords="listResult?.totalCount"
+        pageLinkSize="5"
+        @page="onPageChange"
+        :pt="PaginatorPassThroughOptions"
+    />
   </div>
 </template>

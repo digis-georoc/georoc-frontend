@@ -1,10 +1,10 @@
 export default {
   headline_1: 'Concept of Precompiled Files',
   select_button: 'Change',
-  paragraph_1: 'Multiple analyses of a sample reported in different publications are compiled so that for each whole-rock or volcanic glass sample only one value is displayed for a certain analyte. Multiple analyses of that element, oxide or ratio are compared by the following rules and only the value with highest priority is selected. Multiple analyses within the same publication are not compiled. Note that these compiled datasets will contain fewer records than a standard query result.',
+  paragraph_1: 'Multiple analyses of a sample.ts reported in different publications are compiled so that for each whole-rock or volcanic glass sample.ts only one value is displayed for a certain analyte. Multiple analyses of that element, oxide or ratio are compared by the following rules and only the value with highest priority is selected. Multiple analyses within the same publication are not compiled. Note that these compiled datasets will contain fewer records than a standard query result.',
   subheadline_1: 'For isotope ratios',
   subheadline_2: 'For major elements, rare earth elements, and other trace elements',
-  subheadline_3: 'For age data and additional sample information',
+  subheadline_3: 'For age data and additional sample.ts information',
   bullet_point_1: 'The publication years are compared. The most recent value has the highest priority.',
   bullet_point_2: 'The value with highest method priority is selected.',
   bullet_point_3: 'If several values have the highest priority, the publication years are compared. The most recent value is selected.',

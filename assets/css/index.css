@@ -24,3 +24,9 @@
 .dark ::-webkit-scrollbar-thumb{
     background: rgb(82 82 91);
 }
+
+#__nuxt {
+    @apply flex;
+    @apply flex-col;
+    @apply min-h-full;
+}

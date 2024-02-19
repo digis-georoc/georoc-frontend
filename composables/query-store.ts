@@ -31,6 +31,7 @@ export const useQueryStore = defineStore('query', {
     },
     result: null,
     listResult: null,
+    listOffset: 0
   }),
   actions: {
     loadingQuery(isLoading: boolean) {
@@ -123,12 +124,12 @@ export const useQueryStore = defineStore('query', {
       const hasMaterial = !!(this.filters.material)
       if (hasMaterial) {
         try {
-
           const params = this.createUrlParams()
           params.set('offset', offset.toString())
           params.set('limit', limit.toString())
 
           this.listResult = await getList(params)
+          this.listOffset = offset
         } catch (e: any) {
           this.listResult = { data: [], numItems: 0, totalCount: 0, error: e }
         }

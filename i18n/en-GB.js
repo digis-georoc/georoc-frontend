@@ -81,6 +81,10 @@ export default {
   sample_name: 'Sample Name',
   mineral_name: 'Mineral Name',
   rock_class: 'Rock Class',
-  name: 'Name'
+  name: 'Name',
+  sample_not_found: 'A sample with the given ID could not be found. Please try a different ID.',
+  previous_sample: 'Previous Sample',
+  next_sample: 'Next Sample',
+  back_to_database_query: 'Back to Database Query'
 
 }
