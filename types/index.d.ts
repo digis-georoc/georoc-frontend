@@ -213,6 +213,12 @@ declare global {
     numAnalyses: number
     numResults: number
   }
+
+  interface DownloadOptions {
+    identifier?: string
+    isDataset: boolean
+    filetitle: string
+  }
 }
 
 export {}
