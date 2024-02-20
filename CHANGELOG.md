@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.13](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.12...v0.0.13) (2024-02-20)
+
+
+### Features
+
+* add additional fields to samples list ([cec9ee0](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/cec9ee00530554fc424a96c90251af16b90edcac))
+* add dynamic statistics to landingpage ([9aaa522](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/9aaa52256f6e3beca6c3a94402537fedb9c24784))
+* add how to cite page ([f25e082](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/f25e0825177733eb1a6f5645b78469dba141794a))
+* add multiselect download to precompiled files, merge metadata panel and tab, remove auto redirect ([046f206](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/046f206ba0fbb4c6b4edf594e5ab0a511dd7f480))
+* add sample detail page ([407121d](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/407121d96b266a6badb01cfaa0562ce8dc622120))
+* re-insert dummy filters ([33d159d](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/33d159d5fcf008d66469549e117f8da3a0072454))
+
+
+### Bug Fixes
+
+* restore unintentionally replaced strings ([b8a9d5c](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/b8a9d5c55168f1d5088d36dd81fbb74b49809633))
+* rock type selection on mounted ([db5b89b](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/db5b89b8da6077131790d53497330c4a46570340))
+* switch list item labels by material filter selection instantly ([34d13f8](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/34d13f85a9d2d0cf0de9a3f9f07c06772fcc64f3))
+* update sample full response interface ([dcbafb7](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/dcbafb7fd04cd8fecd524632bbc544e0fb72a3ab))
+
 ### [0.0.12](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.11...v0.0.12) (2024-01-25)
 
 
