@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const queryStore = useQueryStore()
-const materialFilter = queryStore.getFilter(QueryKey.Material)
+const materialFilter = computed(() => queryStore.getFilter(QueryKey.Material)?.value)
 const router = useRouter()
 
 const props = defineProps<{
