@@ -70,7 +70,7 @@ export const useQueryStore = defineStore('query', {
       if (index === -1) filters.push(filter)
       else filters[index] = filter
     },
-    removeActiveFilter(key: keyof typeof QueryKey) {
+    removeActiveFilter(key: typeof QueryKey[keyof typeof QueryKey]) {
       const index = this.filters.active.findIndex(({ name }) => name === key)
       if (index === -1) return
       this.filters.active.splice(index, 1)
@@ -82,7 +82,7 @@ export const useQueryStore = defineStore('query', {
       if (index === -1) filters.push(filter)
       else filters[index] = filter
     },
-    removeFilterByMaterial(key: keyof typeof QueryKey, materialValue: keyof typeof MaterialKeys) {
+    removeFilterByMaterial(key: typeof QueryKey[keyof typeof QueryKey], materialValue: keyof typeof MaterialKeys) {
       const filters = this.getFiltersByMaterial(materialValue)
       const index = filters.findIndex(({ name }) => name === key)
 
@@ -94,7 +94,7 @@ export const useQueryStore = defineStore('query', {
     swapFilters(materialValue: keyof typeof MaterialKeys) {
       this.filters.active = [...this.getFiltersByMaterial(materialValue)]
     },
-    unsetFilter(name: keyof typeof QueryKey, removeFromCache = true) {
+    unsetFilter(name: typeof QueryKey[keyof typeof QueryKey], removeFromCache = true) {
       this.removeActiveFilter(name)
       this.removeFilterByMaterial(name, this.filters.material?.value)
       if (removeFromCache) window.localStorage.removeItem(this.getCachingKey(name))

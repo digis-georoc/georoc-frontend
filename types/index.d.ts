@@ -218,6 +218,11 @@ declare global {
     isDataset: boolean
     filetitle: string
   }
+
+  interface RockTypeState {
+    nodes: TreeNode[]
+    selected: TreeNode[]
+  }
 }
 
 export {}
