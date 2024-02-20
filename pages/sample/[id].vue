@@ -15,9 +15,7 @@ const loading = ref(false)
 onMounted(async () => {
   loading.value = true
   try {
-    const { data: _data } = await $fetch(`/api/samples/${id}`)
-    data.value = _data[0]
-
+    data.value = await $fetch<SampleFull>(`/api/samples/${id}`)
   } catch (e: FetchError | any) {
     error.value = e
   } finally {
@@ -42,7 +40,7 @@ function back() {
 </script>
 
 <template>
-  <div class="flex flex-col bg-white flex-1 pt-8">
+  <div class="flex flex-col bg-white dark:bg-zinc-800 flex-1 pt-8">
     <BaseContainer class="flex flex-col flex-1">
       <template v-if="loading">
         <div class="flex flex-1 justify-center items-center">

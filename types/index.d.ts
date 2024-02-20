@@ -140,7 +140,6 @@ declare global {
   type RocktypesResponse = BaseResponse<RocktypesResponseItem>
   type HostMaterialsResponse = BaseResponse<HostMaterial>
   type InclusionMaterialsResponse = BaseResponse<InclusionMaterial>
-  type SampleFullResponse = BaseResponse<SampleFull>
 
   interface ExpertDatasetRow {
     authors: string
