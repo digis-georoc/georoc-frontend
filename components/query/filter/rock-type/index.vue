@@ -93,7 +93,7 @@ async function fromQuery(rockTypeQuery: string | null, rockClassQuery: string | 
     ?? []
   }
 
-  const result =  rockTypeStore.nodes.filter(node => selectedRockTypesValues.includes(node.key))
+  const result =  rockTypeStore.nodes.filter(node => selectedRockTypesValues.includes(node.key)).map(node => ({...node}))
 
   // Filter out the rock classes from given query
   for (let i = 0; i < result.length; i++) {
