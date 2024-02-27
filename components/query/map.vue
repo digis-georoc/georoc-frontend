@@ -95,7 +95,7 @@ function getClusterColor(size: number): string {
   else return theme.colors.stone['200']
 }
 
-function createMarker(feature: Feature, latlng: LatLng) {
+function createClusterMarker(feature: Feature, latlng: LatLng) {
   // let icon = L.icon({
   //   iconUrl: useAsset('images/marker.png'),
   //   shadowUrl: useAsset('images/marker-shadow.png'),
@@ -152,6 +152,21 @@ function createMarker(feature: Feature, latlng: LatLng) {
   return marker
 }
 
+function createPointMarker(feature: Feature, latlng: LatLng) {
+  let icon = L.icon({
+    iconUrl: useAsset('images/marker.png'),
+    shadowUrl: useAsset('images/marker-shadow.png'),
+    iconSize:     [25, 34], // width and height of the image in pixels
+    shadowSize:   [35, 20], // width, height of optional shadow image
+    iconAnchor:   [12, 34], // point of the icon which will correspond to marker's location
+    shadowAnchor: [12, 20],  // anchor point of the shadow. should be offset
+    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+  })
+
+  return L.marker(latlng, { icon })
+}
+
+
 function setBboxFilter() {
   const bounds = map.getBounds()
 
@@ -179,10 +194,6 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
 
   markersGroup.clearLayers()
 
-  let layerOptions = {
-    pointToLayer: createMarker
-  }
-
   const clusterFeatures = value.clusters
     .filter(({ centroid }) => centroid.geometry.coordinates !== null)
     .map(({ centroid, convexHull }) => {
@@ -191,12 +202,21 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
       return centroid
     })
 
+  const pointFeatures = value.points.filter(({ geometry }) => geometry.coordinates !== null)
+
   const sizes = clusterFeatures.map(({ properties }) => properties?.clusterSize)
 
   maxClusterSize = Math.max(...sizes)
 
   // Add cluster markers
-  markersGroup.addLayer(L.geoJSON(clusterFeatures, layerOptions))
+  markersGroup.addLayer(L.geoJSON(clusterFeatures, {
+    pointToLayer: createClusterMarker
+  }))
+
+  // Add points markers
+  markersGroup.addLayer(L.geoJSON(pointFeatures, {
+    pointToLayer: createPointMarker
+  }))
 
   cachedClustersBounds.value = getLatLngBoundsFromBbox(value.bbox)
 })

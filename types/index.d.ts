@@ -26,7 +26,8 @@ declare global {
 
   interface QueryLocationsResponse {
     bbox: Feature<Polygon>
-    clusters: QueryLocationsCluster[]
+    clusters: QueryLocationsCluster[],
+    points: Feature<Point>[]
   }
 
   interface QueryLocationsCluster {
