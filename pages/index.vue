@@ -153,7 +153,7 @@ const images = [
     overlay: 'bg-black bg-opacity-[53%]',
   },
   {
-    src: '/images/Granite_2_majestic_half_dome.jpeg',
+    src: '/images/Granite_2_majestic_half_dome.jpg',
     altText:
       'half dome, a batholith in the Yosemite National Park, with pine trees at the base',
     credit: 'Teamrat Ghezzehei (distributed via imaggeo.egu.eu)',
