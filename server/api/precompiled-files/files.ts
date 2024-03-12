@@ -23,6 +23,7 @@ export default defineEventHandler<PrecompiledFiles | undefined>(
     for (let i = 0; i < rawFiles.length; i++) {
       let dataFile = rawFiles[i]['dataFile']
       files.push({
+        id: dataFile['id'],
         contentType: dataFile['contentType'],
         label: rawFiles[i]['label'],
         persistentId: dataFile['persistentId'],

@@ -6,6 +6,7 @@ import { FilterMatchMode } from 'primevue/api'
 import type { ColumnPassThroughMethodOptions } from 'primevue/column'
 import type { DropdownPassThroughMethodOptions } from 'primevue/dropdown'
 import type { PaginatorPassThroughMethodOptions } from 'primevue/paginator'
+import type { Nullable } from 'primevue/ts-helpers'
 
 const { t } = useI18n()
 const props = withDefaults(
@@ -25,11 +26,16 @@ const props = withDefaults(
     multiselect: false,
   },
 )
+defineExpose({
+  deselectAll: () => {
+    selected.value = []
+  },
+})
 let filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
 })
 let selected = ref()
-let selectAll = ref()
+let selectAll = ref<Nullable<boolean>>()
 //page buttons for Paginator need the same styling, but passtrough options can only be assigned indidually
 const getPaginatorButton = (options: PaginatorPassThroughMethodOptions) => ({
   class: [
@@ -181,7 +187,11 @@ const getPaginatorButton = (options: PaginatorPassThroughMethodOptions) => ({
         "
         class="flex items-start"
       >
-        <slot :name="'selectEventButton'" :selected="selected"></slot>
+        <slot
+          :name="'selectEventButton'"
+          :selected="selected"
+          :allSelected="selected.length == rows.length"
+        ></slot>
       </div>
     </template>
     <Column

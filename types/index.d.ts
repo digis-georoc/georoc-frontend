@@ -26,7 +26,7 @@ declare global {
 
   interface QueryLocationsResponse {
     bbox: Feature<Polygon>
-    clusters: QueryLocationsCluster[],
+    clusters: QueryLocationsCluster[]
     points: Feature<Point>[]
   }
 
@@ -184,6 +184,7 @@ declare global {
       uri: string
     }
     files: {
+      id: number
       contentType: string
       label: string
       persistentId: string
@@ -214,11 +215,17 @@ declare global {
     numResults: number
   }
 
-  interface DownloadOptions {
-    identifier?: string
-    isDataset: boolean
+  interface DownloadOptionsDataset {
+    isDataset: true
+    identifier: string
     filetitle: string
   }
+  interface DownloadOptionsFiles {
+    isDataset: false
+    identifier: number | number[]
+    filetitle: string
+  }
+  type DownloadOptions = DownloadOptionsDataset | DownloadOptionsFiles
 
   interface RockTypeState {
     nodes: TreeNode[]
