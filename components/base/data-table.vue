@@ -18,7 +18,7 @@ const props = withDefaults(
       isSlot?: boolean
     }[]
     linkToDatasetText: string
-    multiselect: boolean
+    multiselect?: boolean
   }>(),
   {
     rows: [],
@@ -253,6 +253,9 @@ const getPaginatorButton = (options: PaginatorPassThroughMethodOptions) => ({
             },
           ],
         }),
+        headerTitle: {
+          class: 'text-left',
+        },
         sort: (options: ColumnPassThroughMethodOptions) => ({
           class: [
             'rounded-md border-2 pb-1 px-1 hover:border-primary transition-colors',
