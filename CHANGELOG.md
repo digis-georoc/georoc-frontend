@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.14](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.13...v0.0.14) (2024-03-18)
+
+
+### Features
+
+* add metadata to precompiled file download, zip all downloads ([76d2f52](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/76d2f52d70e70110a58aef4e47b815d982e4dce9))
+* update website menu structure ([59b5514](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/59b5514a196316376c039c5aa3f082366a4b2d64))
+
+
+### Bug Fixes
+
+* datatable header title text should align left ([9b23bd8](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/9b23bd86fa4ea0be78c4c5f268d3a4ba952fbf07))
+* resize images for web ([ae408cd](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ae408cdbff8cfa110414707f9dd25c3ad6a9b3be))
+* show again simple markers on map from query response ([2a16e90](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/2a16e907a19fb2b10f5950c0d7f6f4022c84f73f))
+
 ### [0.0.13](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.12...v0.0.13) (2024-02-20)
 
 
