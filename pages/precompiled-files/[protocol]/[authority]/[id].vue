@@ -14,7 +14,7 @@
         :redirect-text="`${t('precompiledFilePage.error_redirect_button')}`"
       ></BaseError>
     </div>
-    <div v-else>
+    <div v-else-if="precompiledFiles">
       <section>
         <BaseFluidContainer>
           <div
@@ -35,7 +35,7 @@
             <div
               class="flex flex-wrap space-x-4 space-y-2 md:justify-start justify-start items-center"
             >
-              <h2 class="text-xl font-bold">{{ precompiledFiles?.title }}</h2>
+              <h2 class="text-xl font-bold">{{ precompiledFiles.title }}</h2>
               <BaseDropdown
                 :links="links"
                 :buttontext="t('precompiledFilePage.change_button')"
@@ -43,11 +43,14 @@
               <button
                 class="underline underline-offset-4 text-primary dark:text-primary-100"
                 @click="
-                  openDialog({
-                    identifier: precompiledFiles?.datasetPersistentId,
-                    isDataset: true,
-                    filetitle: `${precompiledFiles?.productionDate}_${precompiledFiles?.title}`,
-                  })
+                  openDialog(
+                    {
+                      identifier: precompiledFiles.datasetPersistentId,
+                      isDataset: true,
+                      filetitle: `${precompiledFiles.productionDate}_${precompiledFiles.title}`,
+                    },
+                    precompiledFiles.datasetPersistentId,
+                  )
                 "
               >
                 {{ $t('precompiledFilePage.download_complete_dataset_button') }}
@@ -59,37 +62,48 @@
             <template #[fileslot]>
               <div class="py-4">
                 <BaseDataTable
-                  :rows="precompiledFiles?.files"
+                  ref="datatableRef"
+                  :rows="precompiledFiles.files"
                   :columns="columns"
                   link-to-dataset-text="view original"
                   :multiselect="true"
                 >
                   <template
                     #[file.label]
-                    v-for="file in precompiledFiles?.files"
+                    v-for="file in precompiledFiles.files"
                   >
                     <button
                       class="underline underline-offset-4 text-primary dark:text-primary-100"
                       @click="
-                        openDialog({
-                          identifier: file.persistentId,
-                          isDataset: false,
-                          filetitle: file.label,
-                        })
+                        openDialog(
+                          {
+                            identifier: file.id,
+                            isDataset: false,
+                            filetitle: file.label,
+                          },
+                          precompiledFiles.datasetPersistentId,
+                        )
                       "
                     >
                       {{ file.label }}
                     </button>
                   </template>
-                  <template #selectEventButton="{ selected }">
+                  <template #selectEventButton="{ selected, allSelected }">
                     <BaseButton
                       @click="
                         openDialog(
-                          selected.map(({ persistentId, label }: any) => ({
-                            identifier: persistentId,
+                          {
+                            identifier: selected.map(
+                              (element: any) => element.id,
+                            ),
                             isDataset: false,
-                            filetitle: label,
-                          })),
+                            filetitle: allSelected
+                              ? `${precompiledFiles.productionDate}_${precompiledFiles.title}`
+                              : selected.length == 1
+                                ? selected[0].label
+                                : `${precompiledFiles.productionDate}_${precompiledFiles.title}_SELECTION`,
+                          },
+                          precompiledFiles.datasetPersistentId,
                         )
                       "
                       :text="t('precompiledFilePage.download_selection_button')"
@@ -131,7 +145,7 @@
       <PrecompiledFilesConcept />
     </div>
   </PageContainer>
-
+  <div @submit="console.log('SUBMIT')"></div>
   <BaseDialog
     :closable="true"
     :title="t('precompiledFilePage.license_header')"
@@ -145,24 +159,24 @@
       <h2 class="font-bold">
         {{ $t('precompiledFilePage.license_subheader') }}
       </h2>
-      <i18n-t keypath="precompiledFilePage.license_paragraph_3" tag="p" scope="global">
+      <i18n-t
+        keypath="precompiledFilePage.license_paragraph_3"
+        tag="p"
+        scope="global"
+      >
         <template v-slot:license_link_1>
           <NuxtLink
-          to="https://dataverse.org/best-practices/dataverse-community-norms"
-          class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
-        >
-          {{
-            $t('precompiledFilePage.license_link_1')
-          }}</NuxtLink
-        >
+            to="https://dataverse.org/best-practices/dataverse-community-norms"
+            class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
+          >
+            {{ $t('precompiledFilePage.license_link_1') }}</NuxtLink
+          >
         </template>
         <template v-slot:license_link_2>
           <NuxtLink
-          to="/how-to-cite"
-          class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
-          >{{
-            $t('precompiledFilePage.license_link_2')
-          }}</NuxtLink
+            to="/how-to-cite"
+            class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
+            >{{ $t('precompiledFilePage.license_link_2') }}</NuxtLink
           >
         </template>
       </i18n-t>
@@ -198,6 +212,7 @@
 </template>
 <script setup lang="ts">
 import { FetchError } from 'ofetch'
+import JSZip from 'jszip'
 const { t } = useI18n()
 const route = useRoute()
 
@@ -264,7 +279,9 @@ const errorIsOpen = ref(false)
 
 const downloadError = { statusCode: 500, statusMessage: '' }
 
-const downloadOptions: DownloadOptions[] = []
+let downloadOptions: DownloadOptions
+let downloadMetaDataIdentifier: string
+const datatableRef = ref()
 
 const columns = [
   {
@@ -326,31 +343,20 @@ const metaData = [
 async function onSubmit() {
   emit('submit')
   isOpen.value = false
-
-  for (let downloadOption of downloadOptions) {
-    isLoading.value = true
-    if (downloadOption.identifier) {
-      await download(
-        downloadOption.identifier,
-        downloadOption.isDataset,
-        downloadOption.filetitle,
-      )
-    }
-    isLoading.value = false
+  isLoading.value = true
+  if (datatableRef.value != null) {
+    datatableRef.value.deselectAll()
   }
-  downloadOptions.splice(0, downloadOptions.length)
+  if (downloadOptions.identifier) {
+    await download(downloadOptions, downloadMetaDataIdentifier)
+  }
+  isLoading.value = false
 }
 
-function openDialog(options: DownloadOptions | DownloadOptions[]) {
+function openDialog(options: DownloadOptions, metaDataIdentifier: string) {
   emit('open')
-  if (!Array.isArray(options)) {
-    options = [options]
-  }
-  for (let option of options) {
-    if (option.identifier) {
-      downloadOptions.push(option)
-    }
-  }
+  downloadOptions = options
+  downloadMetaDataIdentifier = metaDataIdentifier
   isOpen.value = true
 }
 function closeDialog() {
@@ -363,21 +369,30 @@ function openDownloadErrorDialog(statusCode: number, statusMessage: string) {
   errorIsOpen.value = true
 }
 /**
- * Fetches a Dataset or Datafile from the server and initiates a download by the clients browser.
- * Datasets will be downloaded as zip files.
+ * Fetches a Dataset or Datafile(s) and the metadata of the compilation from the server, zipps the files and initiates a download by the clients browser.
+ * All files will be downloaded as zip files.
  * @param identifier Identifier of the file or dataset.
  * @param isDataset True, if a dataset should be downloaded.
  * @param filename How the downloaded dataset or file should be named.
  */
 async function download(
-  identifier: string,
-  isDataset: boolean,
-  filename: string,
+  downloadOptions: DownloadOptions,
+  downloadMetaDataIdentifier: string,
 ) {
   let response: Blob | undefined
+  let metadataResponse: string | undefined
   let responseError: FetchError | undefined
   try {
-    response = <Blob>await getPrecompiledFile(identifier, isDataset)
+    if (downloadOptions.isDataset) {
+      response = <Blob>(
+        await getPrecompiledDatasetZip(downloadOptions.identifier)
+      )
+    } else {
+      response = <Blob>await getPrecompiledZip(downloadOptions.identifier)
+    }
+    metadataResponse = <string>(
+      await getPrecompiledMetadataFile(downloadMetaDataIdentifier)
+    )
   } catch (error: any) {
     responseError = error
   }
@@ -388,14 +403,17 @@ async function download(
     )
     return
   }
-  if (response) {
+  if (response && metadataResponse) {
+    const zip = new JSZip()
+    await zip.loadAsync(new Blob([response], { type: response.type }))
+    zip.file('COMPILATION_METADATA.json', metadataResponse)
+    const file: Blob = <Blob>await zip.generateAsync({ type: 'blob' })
+
     const link = document.createElement('a')
-    const url = URL.createObjectURL(
-      new Blob([response], { type: response.type }),
-    )
+    const url = URL.createObjectURL(file)
 
     link.href = url
-    link.download = filename
+    link.download = downloadOptions.filetitle.split('.')[0]
     document.body.appendChild(link)
     link.click()
 

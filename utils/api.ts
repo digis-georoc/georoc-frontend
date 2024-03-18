@@ -78,17 +78,51 @@ async function getPrecompiledFiles(
   }
   return data.value
 }
+async function getPrecompiledZip(
+  fileIds: number | number[],
+): Promise<Blob | null> {
+  const params = new URLSearchParams()
+  params.append(
+    'fileIds',
+    Array.isArray(fileIds) ? fileIds.join(',') : fileIds.toString(),
+  )
+  const { error, data } = await useFetch<Blob>(
+    '/api/precompiled-files/download-files' +
+      (params ? `?fileIds=${params.toString()}` : ''),
+  )
+  if (error.value) {
+    throw createError({
+      statusCode: error.value.statusCode,
+      statusMessage: error.value.statusMessage,
+    })
+  }
+  return data.value
+}
 
-async function getPrecompiledFile(
+async function getPrecompiledDatasetZip(
   identifier: string,
-  isDataset: boolean,
 ): Promise<Blob | null> {
   const params = new URLSearchParams({
     identifier,
-    isDataset: isDataset.toString(),
   })
   const { error, data } = await useFetch<Blob>(
-    '/api/precompiled-files/download-file' +
+    '/api/precompiled-files/download-dataset' +
+      (params ? `?${params.toString()}` : ''),
+  )
+  if (error.value) {
+    throw createError({
+      statusCode: error.value.statusCode,
+      statusMessage: error.value.statusMessage,
+    })
+  }
+  return data.value
+}
+async function getPrecompiledMetadataFile(
+  identifier: string,
+): Promise<string | null> {
+  const params = new URLSearchParams({ identifier })
+  const { error, data } = await useFetch<string>(
+    '/api/precompiled-files/export-metadata' +
       (params ? `?${params.toString()}` : ''),
   )
   if (error.value) {
@@ -157,7 +191,9 @@ export {
   getHostMaterials,
   getInclusionMaterials,
   getPrecompiledFiles,
-  getPrecompiledFile,
+  getPrecompiledDatasetZip,
+  getPrecompiledZip,
+  getPrecompiledMetadataFile,
   getPrecompiledPreview,
   getStatistics,
 }
