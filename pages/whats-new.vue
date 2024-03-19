@@ -1,5 +1,5 @@
 <template>
   <PageContainer>
-    <PageHead headline="Whats new & History" />
+    <PageHead headline="What's New & History" />
   </PageContainer>
 </template>

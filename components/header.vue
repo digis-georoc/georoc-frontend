@@ -55,7 +55,7 @@ const items = ref([
     label: 'Project Info',
     items: [
       {
-        label: 'Whats New & History',
+        label: "What's New & History",
         route: '/whats-new',
       },
       {
