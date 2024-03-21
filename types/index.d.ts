@@ -164,6 +164,7 @@ declare global {
     authority: string
     identifier: string
     title: string
+    productionDate: Date
   }
 
   interface PrecompiledFilePreviews {

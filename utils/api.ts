@@ -61,6 +61,19 @@ async function getPrecompiledPreview(): Promise<PrecompiledFilePreviews | null> 
   return data.value
 }
 
+async function getPrecompiledPreviewForClient(): Promise<{
+  data: globalThis.Ref<PrecompiledFilePreviews | null>
+  error: globalThis.Ref<FetchError<any> | null>
+  pending: globalThis.Ref<boolean>
+}> {
+  const { data, error, pending } = await useFetch<PrecompiledFilePreviews>(
+    'api/precompiled-files/preview',
+    { server: false, lazy: true },
+  )
+  //we need to return the reactive values here (Client-only fetching)
+  return { data, error, pending }
+}
+
 async function getPrecompiledFiles(
   protocol: string,
   authority: string,
@@ -167,16 +180,20 @@ async function getInclusionMaterials(): Promise<HostMaterialsResponse | null> {
   return data.value
 }
 
-async function getStatistics(): Promise<{
+async function getStatisticsForClient(): Promise<{
   data: globalThis.Ref<Statistics | null>
   error: globalThis.Ref<FetchError<any> | null>
+  pending: globalThis.Ref<boolean>
 }> {
-  const { data, error } = await useFetch<Statistics>('/api/statistics', {
-    server: false,
-    lazy: true,
-  })
+  const { data, error, pending } = await useFetch<Statistics>(
+    '/api/statistics',
+    {
+      server: false,
+      lazy: true,
+    },
+  )
   //we need to return the reactive values here (Client-only fetching)
-  return { data, error }
+  return { data, error, pending }
 }
 
 export {
@@ -195,5 +212,6 @@ export {
   getPrecompiledZip,
   getPrecompiledMetadataFile,
   getPrecompiledPreview,
-  getStatistics,
+  getStatisticsForClient,
+  getPrecompiledPreviewForClient,
 }
