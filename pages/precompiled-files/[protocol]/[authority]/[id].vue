@@ -33,7 +33,7 @@
             class="sticky top-[4rem] bg-white dark:bg-zinc-800 ring-2 ring-white dark:ring-zinc-800 z-[1009] py-2"
           >
             <div
-              class="flex flex-wrap space-x-4 space-y-2 md:justify-start justify-start items-center"
+              class="flex flex-col md:flex-row flex-wrap md:space-x-4 space-y-2 justify-start md:items-center items-start"
             >
               <h2 class="text-xl font-bold">{{ precompiledFiles.title }}</h2>
               <BaseDropdown
