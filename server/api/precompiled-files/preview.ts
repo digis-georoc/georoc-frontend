@@ -13,7 +13,14 @@ export default defineEventHandler<PrecompiledFilePreviews | undefined>(
         await fetchData(`datasets/${id}/versions/:latest-published/metadata`)
       ))['data']
       const { title } = precompiled
-      previewArr.push({ protocol, authority, identifier, title })
+      const productionDate = precompiled['citation:productionDate']
+      previewArr.push({
+        protocol,
+        authority,
+        identifier,
+        title,
+        productionDate,
+      })
     }
     return { preview: previewArr }
   },

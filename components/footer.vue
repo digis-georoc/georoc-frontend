@@ -98,22 +98,7 @@
         </div>
       </div>
     </BaseContainer>
-    <BaseContainer
-      class="flex justify-center items-center py-4 border-t dark:border-zinc-700"
-    >
-      <p><BaseNuxtLink to="/legal-notice">Legal Notice</BaseNuxtLink></p>
-      <p class="pr-2 sm:pl-2 landscape:pl-2">-</p>
-      <p>
-        <a
-          href="https://www.uni-goettingen.de/en/439479.html"
-          target="_blank"
-          class="hover:border-b-primary border-transparent border-b-2"
-          >Privacy Statement</a
-        >
-      </p>
-      <p class="pr-2 sm:pl-2 landscape:pl-2">-</p>
-      <p>Last Database Update: Month DD, YYYY</p>
-    </BaseContainer>
+    <SmallFooter></SmallFooter>
   </footer>
 </template>
 <script setup lang="ts"></script>
