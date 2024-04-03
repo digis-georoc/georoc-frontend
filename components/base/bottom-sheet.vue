@@ -11,7 +11,7 @@ const emit = defineEmits(['update:modelValue'])
 <template>
   <div class="flex bg-white dark:bg-zinc-800 border-t dark:border-zinc-600
     absolute left-0 z-[1099] w-full flex-col transition-[bottom] bottom-"
-    :class="{'-bottom-[100vh]': !modelValue, 'bottom-0' : modelValue, 'h-[60%]': !fullHeight, 'h-screen': fullHeight }"
+    :class="{'-bottom-[100vh]': !modelValue, 'bottom-0' : modelValue, 'h-[60%]': !fullHeight, 'h-full': fullHeight }"
     style="box-shadow: 0 -20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.1);"
   >
     <div class="flex items-center px-4 py-2">
