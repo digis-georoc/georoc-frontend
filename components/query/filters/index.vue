@@ -32,7 +32,7 @@ onBeforeUnmount(() => unsubscribe())
 
 </script>
 <template>
-  <div class="overflow-auto flex-1">
+  <div class="overflow-auto flex flex-col flex-1">
     <QueryFiltersCard :title="$t('material')" class="m-2 flex-shrink-0">
       <QueryFilterMaterial class="w-full" :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
     </QueryFiltersCard>
