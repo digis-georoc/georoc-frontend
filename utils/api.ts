@@ -14,8 +14,7 @@ async function getSamples(
 }
 
 async function getRocktypes(): Promise<RocktypesResponse | null> {
-  const { data } = await useFetch<RocktypesResponse>('/api/rocktypes')
-  return data.value
+  return await baseAPIRequest<RocktypesResponse>('/api/rocktypes')
 }
 
 async function getMinerals(): Promise<MineralsResponse | null> {
@@ -155,29 +154,21 @@ async function getElements(type: string): Promise<ElementsResponse | null> {
 }
 
 async function getElementTypes(): Promise<ElementsResponse | null> {
-  const { data } = await useFetch<ElementsResponse>('/api/element-types')
-  return data.value
+  return await baseAPIRequest<ElementsResponse>('/api/element-types')
 }
 
 async function getRockClasses(
   rockType: string,
 ): Promise<RockClassResponse | null> {
-  const { data } = await useFetch<RockClassResponse>(
-    '/api/rock-classes' + (rockType ? `?rocktype=${rockType}` : ''),
-  )
-  return data.value
+  return await baseAPIRequest<RockClassResponse>('/api/rock-classes' + (rockType ? `?rocktype=${rockType}` : ''))
 }
 
 async function getHostMaterials(): Promise<HostMaterialsResponse | null> {
-  const { data } = await useFetch<HostMaterialsResponse>('/api/host-materials')
-  return data.value
+  return await baseAPIRequest<HostMaterialsResponse>('/api/host-materials')
 }
 
 async function getInclusionMaterials(): Promise<HostMaterialsResponse | null> {
-  const { data } = await useFetch<HostMaterialsResponse>(
-    '/api/inclusion-materials',
-  )
-  return data.value
+  return await baseAPIRequest<HostMaterialsResponse>( '/api/inclusion-materials')
 }
 
 async function getStatisticsForClient(): Promise<{
@@ -194,6 +185,12 @@ async function getStatisticsForClient(): Promise<{
   )
   //we need to return the reactive values here (Client-only fetching)
   return { data, error, pending }
+}
+
+async function baseAPIRequest<T>(path: string): Promise<T> {
+  const { data, error } = await useFetch<T>(path)
+  if (!data.value) throw createError({ statusCode: error.value?.statusCode, statusMessage: error.value?.statusMessage})
+  return <T>data.value
 }
 
 export {
