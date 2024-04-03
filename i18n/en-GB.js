@@ -87,6 +87,11 @@ export default {
   sample_not_found: 'A sample with the given ID could not be found. Please try a different ID.',
   previous_sample: 'Previous Sample',
   next_sample: 'Next Sample',
-  back_to_database_query: 'Back to Database Query'
-
+  back_to_database_query: 'Back to Database Query',
+  map_message_no_material_selected: 'Please select a material on the left before using the map.',
+  selected_material: 'Selected Material',
+  confirm: 'Confirm',
+  error_fetching_rock_types: 'Rock Types could not be fetched from the server',
+  please_try_again_later: 'Please try again later.',
+  filter_panel_message_no_material_selected: 'Please select a material to unlock more filters.'
 }

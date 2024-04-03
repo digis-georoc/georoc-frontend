@@ -36,7 +36,7 @@ const materials: MaterialOption[] = [
   },
 ]
 
-const selectedMaterial = ref<MaterialOption>(materials[0])
+const selectedMaterial = ref<MaterialOption | null>(null)
 
 watch(() => props.modelValue, (value) => {
   const index = materials.findIndex((material) => material.value === value)
@@ -48,9 +48,10 @@ watch(() => props.modelValue, (value) => {
 
 <template>
   <BaseRadioGroup
-    :options="materials"
-    :model-value="selectedMaterial"
-    @update:modelValue="emit('update:modelValue', $event.value)"
-    size="sm"
+      :options="materials"
+      :model-value="selectedMaterial"
+      @update:modelValue="emit('update:modelValue', $event.value)"
+      size="sm"
+      vertical
   ></BaseRadioGroup>
 </template>

@@ -13,6 +13,7 @@ const { selected } = storeToRefs(rockTypeStore)
 
 function submit() {
   rockTypeStore.selected = [...selectedTemp.value]
+  console.log(selected.value)
   useFilter()
 }
 
@@ -48,8 +49,6 @@ function useFilter() {
   } else {
     queryStore.unsetFilter(QueryKey.RockClass)
   }
-
-  queryStore.execute()
 }
 
 function toQuery(selected: TreeNode[]) {
@@ -120,7 +119,7 @@ onBeforeUnmount(() => {
   <QueryFilterBaseContainer
     :title="$t('rock_type')"
     :dialog-title="$t('please_select_rock_type')"
-    :show-reset="selected.length > 0"
+    :has-selected="selected.length > 0"
     @submit="submit"
     @reset="reset"
   >

@@ -30,8 +30,6 @@ function useFilter() {
       value
     })
   }
-
-  queryStore.execute()
 }
 
 function toQuery(selected: TreeNode[]) {
@@ -89,7 +87,7 @@ onBeforeUnmount(() => {
   <QueryFilterBaseContainer
     :title="$t('chemistry')"
     :dialog-title="$t('please_select_chemistry')"
-    :show-reset="selected.length > 0"
+    :has-selected="selected.length > 0"
     @submit="submit"
     @reset="reset"
   >

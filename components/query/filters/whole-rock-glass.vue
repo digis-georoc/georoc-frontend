@@ -3,11 +3,18 @@
 </script>
 
 <template>
-  <QueryFilterRockType />
-  <QueryFilterChemistry />
-  <QueryFilterTectonicSetting />
-  <QueryFilterLocationType />
-  <QueryFilterAge />
+  <div class="flex flex-col">
+    <QueryFilterRockType />
+    <QueryFilterChemistry />
+    <QueryFilterTectonicSetting />
+    <QueryFilterLocationType />
+    <QueryFilterAge />
+    <QueryFilterAge />
+    <QueryFilterAge />
+    <QueryFilterAge />
+    <QueryFilterAge />
+  </div>
+
 </template>
 
 <style scoped>

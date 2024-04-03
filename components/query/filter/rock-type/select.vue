@@ -97,11 +97,11 @@ function mapNodesToSelectionKeys(selectedNodes: TreeNode[]): TreeSelectionKeys {
   <div v-if="loading" class="h-[400px] flex items-center justify-center">
     <BaseLoading class="text-[4rem]"/>
   </div>
-  <BaseTreeSelect
-      v-else
-      v-model="selectedKeys"
-      :nodes="nodes"
-      :load-children="loadChildren"
-      :loading="loadingChildren"
-  />
+    <BaseTreeSelect
+        v-else
+        v-model="selectedKeys"
+        :nodes="nodes"
+        :load-children="loadChildren"
+        :loading="loadingChildren"
+    />
 </template>

@@ -74,8 +74,6 @@ function useFilter() {
       value
     })
   }
-
-  queryStore.execute()
 }
 
 function toQuery(selected: TreeNode[]) {
@@ -90,10 +88,7 @@ function toQuery(selected: TreeNode[]) {
 </script>
 
 <template>
-  <template v-if="_items.length === 0">
-    <div class="text-sm text-stone-400">{{ $t('no_options_selected') }}.</div>
-  </template>
-  <template v-else>
+  <template v-if="_items.length > 0">
     <p class="text-sm text-zinc-500 italic mb-4" v-html="$t('queryPage.filter_chemistry_units_message')"></p>
     <div class="flex flex-1 flex-col mb-2" v-for="(item, i) in _items" :key="item.key">
       <h3 class="font-semibold mb-2">{{ item.label }}:</h3>

@@ -8,7 +8,6 @@
       <QueryFilterBaseSelected />
     </template>
     <template v-slot:options>
-      <QueryFilterLocationType />
     </template>
   </QueryFilterBaseContainer>
 </template>

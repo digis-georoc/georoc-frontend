@@ -48,11 +48,10 @@ export const useQueryStore = defineStore('query', {
     },
     async setBboxFilter(filter: QueryFilter) {
       this.filters.bbox = filter
-      debounceMap(() => this.executeMapQuery())
+      // debounceMap(() => this.executeMapQuery())
     },
     async setMaterialFilter(filter: QueryFilter, withCache = true) {
       this.filters.material = filter
-      if (withCache) this.cacheFilter(filter)
       this.swapFilters(filter.value)
     },
     async setPanelFilter(filter: QueryFilter, withCache = true) {
@@ -100,6 +99,7 @@ export const useQueryStore = defineStore('query', {
       if (removeFromCache) window.localStorage.removeItem(this.getCachingKey(name))
     },
     async execute() {
+      console.log('execute')
       debounceMap(() => this.executeMapQuery())
       debounceList(() => this.executeListQuery())
     },

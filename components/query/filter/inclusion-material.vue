@@ -21,8 +21,6 @@ function remove(index: number) {
     name: QueryKey.HostMaterial,
     value: toQuery(selected.value)
   })
-
-  queryStore.execute()
 }
 
 function toQuery(selected: MultiselectOption[]) {
@@ -47,8 +45,6 @@ function submit() {
     name: QueryKey.InclusionMaterial,
     value: toQuery(selected.value)
   })
-
-  queryStore.execute()
 }
 
 onMounted(async () => {

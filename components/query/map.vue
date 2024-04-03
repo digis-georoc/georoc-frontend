@@ -29,6 +29,9 @@ const isLoading = ref(false)
 
 let shownCoveragePolygon: GeoJSON | null = null
 
+const selectedMaterialId = computed(() => queryStore.getFilter(QueryKey.Material)?.value ?? null)
+
+
 function latLngToLngLat(latlng: LatLng) {
   return [latlng.lng, latlng.lat];
 }
@@ -190,7 +193,7 @@ const markersGroup = L.featureGroup()
 const mapSamples = computed(() => queryStore.result)
 
 watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
-  if (!value) return
+  if (!value || !value.clusters && !value.points) return
 
   markersGroup.clearLayers()
 
@@ -246,6 +249,7 @@ onMounted(() => {
     if (isPan && !isOutOfBounds(currentMapBounds.value, cachedClustersBounds.value)) return
 
     setBboxFilter()
+    queryStore.execute()
 
     cachedZoomLevel = currentZoomLevel
   });
@@ -282,6 +286,7 @@ const unsubscribe = queryStore.$onAction(
         polygon.remove()
         freeDraw.mode(FreeDraw.NONE)
       } else if (name === 'loadingQuery') {
+        console.log(args[0])
         isLoading.value = args[0]
       }
     }
@@ -312,9 +317,14 @@ function hideCoverage() {
 </script>
 <template>
     <div id="map" class="h-full w-full"></div>
+    <div v-if="!selectedMaterialId" class="absolute z-[998] w-[33%] h-[100px] px-4 bg-black bg-opacity-50 rounded-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+    flex flex-col items-center justify-center
+    text-zinc-300 pointer-events-none">
+      {{ $t('map_message_no_material_selected') }}
+    </div>
     <div
-        v-if="isLoading"
-        class="absolute z-[999] w-[150px] h-[100px]
+      v-if="isLoading"
+      class="absolute z-[999] w-[150px] h-[100px]
     bg-black bg-opacity-50 rounded-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
     flex flex-col items-center justify-center
     text-white pointer-events-none

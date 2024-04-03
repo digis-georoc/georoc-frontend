@@ -25,7 +25,6 @@ const selectedTemp = ref<RadioGroupOption>(types[0])
 function remove() {
   selected.value = []
   queryStore.unsetFilter(QueryKey.InclusionType)
-  queryStore.execute()
 }
 
 function submit() {
@@ -48,8 +47,6 @@ function useFilter(withCache = true) {
     queryStore.unsetFilter(QueryKey.HostMaterial)
     queryStore.unsetFilter(QueryKey.InclusionMaterial)
   }
-
-  queryStore.execute()
 }
 
 function toQuery(selected: RadioGroupOption[]) {
