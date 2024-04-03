@@ -1,8 +1,8 @@
 include:
-- project: 'subugoe/argo-cd-workflow'
-  file:
-    # trigger downstream cross-project pipeline to update the helm chart; triggered on pushing a new tag
-    - 'ci-templates/trigger-downstream-pipeline.yml'
+  - project: 'subugoe/argo-cd-workflow'
+    file:
+      # trigger downstream cross-project pipeline to update the helm chart; triggered on pushing a new tag
+      - 'ci-templates/trigger-downstream-pipeline.yml'
 
 
 # prevent included job from running unconfigured
@@ -36,7 +36,7 @@ variables:
     - echo "{\"auths\":{\"harbor.gwdg.de\":{\"auth\":\"$(printf "%s:%s" "robot\$sub-fe+sub-fe-digis" "${DIGIS_HARBOR_ROBOT_TOKEN}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
   script:
     - /kaniko/executor
-      --context "${CI_PROJECT_DIR}" 
+      --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --build-arg build_date=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       --build-arg vcs_ref=${CI_COMMIT_SHORT_SHA}
@@ -51,7 +51,7 @@ build_image_dev:
   <<: *kaniko
   script:
     - /kaniko/executor
-      --context "${CI_PROJECT_DIR}" 
+      --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --build-arg build_date=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       --build-arg vcs_ref=${CI_COMMIT_SHORT_SHA}
@@ -81,7 +81,7 @@ build_image_staging:
   <<: *kaniko
   script:
     - /kaniko/executor
-      --context "${CI_PROJECT_DIR}" 
+      --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --build-arg build_date=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       --build-arg vcs_ref=${CI_COMMIT_SHORT_SHA}
@@ -108,14 +108,34 @@ trigger-downstream-pipeline-staging:
 
 # this stage creates a new environment for the current branch.
 pages:
-  image: node:16-alpine3.17
+  image: node:18
+  rules:
+    - when: manual
   script:
-    - node -v
-    - npm ci
-    - echo 'NUXT_APP_BASE_URL=/georoc-frontend/${CI_COMMIT_REF_SLUG}/' >> .env
-    - npm run generate
-    - mkdir --parents public/${CI_COMMIT_REF_SLUG}
-    - cp --recursive .output/public/* public/${CI_COMMIT_REF_SLUG}/
+    - apt-get update -y
+    - apt-get install -y jq
+    - rm -rf public/*
+    - IFS=',' read -ra branches_array <<< "$PAGES_BRANCHES"
+    - |
+      for PAGES_BRANCH_NAME in "${branches_array[@]}"
+      do
+          mkdir $PAGES_BRANCH_NAME
+          cd $PAGES_BRANCH_NAME
+          echo "====== Downloading archive from $PAGES_BRANCH_NAME branch ======"
+          echo "https://gitlab.gwdg.de/api/v4/projects/$CI_PROJECT_ID/repository/archive.tar.gz?ref=$PAGES_BRANCH_LATEST_COMMIT_SHA"
+          curl -H PRIVATE-TOKEN:$GITLAB_TOKEN "https://gitlab.gwdg.de/api/v4/projects/$CI_PROJECT_ID/repository/archive.tar.gz?sha=$PAGES_BRANCH_NAME" -o ./archive.tar.gz
+          tar -xf archive.tar.gz
+          EXTRACTED_DIR_NAME=$(find . -mindepth 1 -maxdepth 1 -type d | head -n 1 | xargs basename)
+          mv $EXTRACTED_DIR_NAME/* .
+          rm -rf $EXTRACTED_DIR_NAME
+          npm ci
+          echo "NUXT_APP_BASE_URL=/georoc-frontend/$PAGES_BRANCH_NAME/" >> .env
+          npm run generate
+          mkdir --parents ../public/$PAGES_BRANCH_NAME
+          cp --recursive .output/public/* ../public/$PAGES_BRANCH_NAME/
+          cd ..
+      done
+      ls -la public
 
   environment:
     name: ${CI_COMMIT_REF_SLUG}
