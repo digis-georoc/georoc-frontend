@@ -3,10 +3,10 @@ import { FetchResponse } from "ofetch";
 
 const { apiToken, apiBaseUrl } = useRuntimeConfig()
 
-export default defineEventHandler<Promise<SampleFull | H3Error | undefined>>(async (event: H3Event) => {
+export default defineEventHandler<Promise<SampleFullData | H3Error | undefined>>(async (event: H3Event) => {
     const id = getRouterParam(event, 'id')
     try {
-        const response: FetchResponse<SampleFull> = await $fetch.raw(`${apiBaseUrl}/queries/fulldata/${id}`, {
+        const response: FetchResponse<SampleFullData> = await $fetch.raw(`${apiBaseUrl}/queries/fulldata/${id}`, {
             method: 'GET',
             headers: {
                 'DIGIS-API-ACCESSKEY': apiToken,

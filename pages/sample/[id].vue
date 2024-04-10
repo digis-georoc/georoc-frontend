@@ -1,21 +1,24 @@
 <script setup lang="ts">
+import DataTable from "primevue/datatable"
+import Column from "primevue/column"
 
-import { FetchError } from "ofetch";
-import { loading } from "@nuxt/ui-templates";
+import { FetchError } from "ofetch"
+import { loading } from "@nuxt/ui-templates"
 
 const queryStore = useQueryStore()
 const route = useRoute()
 const router = useRouter()
+const { t } = useI18n()
 
 const id = parseInt(<string>route.params.id, 10)
-const data = ref<SampleFull | null>(null)
+const data = ref<SampleFullData | null>(null)
 const error = ref<FetchError | null>(null)
 const loading = ref(false)
 
 onMounted(async () => {
   loading.value = true
   try {
-    data.value = await $fetch<SampleFull>(`/api/samples/${id}`)
+    data.value = await $fetch<SampleFullData>(`/api/samples/${id}`)
   } catch (e: FetchError | any) {
     error.value = e
   } finally {
@@ -37,6 +40,14 @@ function next (direction: 1 | -1) {
 function back() {
   router.push(`/query`);
 }
+
+function mapArrayToLabels(fields: BaseField[]) {
+  return fields.map(field => field.label)
+}
+
+function getAuthors(authors: Author[]) {
+  return authors.map(({ firstName, lastName }) => firstName + ' ' + lastName)
+}
 </script>
 
 <template>
@@ -44,7 +55,7 @@ function back() {
     <BaseContainer class="flex flex-col flex-1">
       <template v-if="loading">
         <div class="flex flex-1 justify-center items-center">
-          <BaseLoading class="text-[3rem]" opacity="0.2" />
+          <BaseLoading class="text-[3rem]" :opacity="0.2" />
         </div>
       </template>
       <template v-else>
@@ -61,10 +72,10 @@ function back() {
         <template v-else-if="data">
           <div class="flex space-x-2">
             <BaseButton
-                :text="$t('back_to_database_query')"
-                display="outline"
-                size="small"
-                @click="back()"
+              :text="$t('back_to_database_query')"
+              display="outline"
+              size="small"
+              @click="back()"
             />
             <BaseButton
               :text="$t('previous_sample')"
@@ -82,12 +93,110 @@ function back() {
               @click="next(1)"
             />
           </div>
-          <h1 class="text-3xl font-bold mt-4">{{ data.sampleName }}</h1>
+          <h1 class="text-3xl font-bold my-6">{{ data.sampleName }}</h1>
+
+          <h2 class="text-xl font-semibold mb-2">{{ $t('general_info') }}</h2>
+          <div class="flex mb-4">
+            <SampleField
+              :label="$t('rock_types')"
+              :value="mapArrayToLabels(data.rockTypes)"
+              class="flex-1"
+            />
+            <SampleField
+              :label="$t('rock_classes')"
+              :value="mapArrayToLabels(data.rockClasses)"
+              class="flex-1"
+            />
+            <SampleField
+              :label="$t('rock_textures')"
+              :value="data.rockTextures"
+              class="flex-1"
+            />
+          </div>
+          <SampleField :label="$t('sample_comment')" :value="data.comments"/>
+          <SampleField :label="$t('alteration')" :value="data.rockTextures"/>
+
+          <h3 class="font-semibold">{{ $t('drill_depth') }}</h3>
+          <div class="flex">
+            <SampleField :label="$t('min')" :value="data.drillDepthMin" />
+            <SampleField :label="$t('max')" :value="data.drillDepthMax" class="ml-2" />
+          </div>
+          <SampleField :label="$t('sampling_technique')" :value="data.samplingTechnique"/>
+
+          <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('batch_infos') }}</h2>
+          <BaseCard
+            :title="$t('batch_id') + ': ' + item.batchID"
+            :collapsed="true"
+            v-for="item in data.batchData"
+          >
+            <SampleField :label="$t('inclusion_type')" :value="item.inclusionTypes"/>
+            <SampleField :label="$t('batch_name')" :value="item.batchName"/>
+            <SampleField :label="$t('material')" :value="item.material"/>
+            <SampleField v-if="item.material === MaterialKeys.INC" :label="$t('host_mineral')" :value="mapArrayToLabels(item.hostMinerals)"/>
+            <SampleField
+              v-if="item.material === MaterialKeys.MIN || (item.material === MaterialKeys.INC && item.inclusionTypes.includes('IMIN'))"
+              :label="$t('host_mineral')"
+              :value="mapArrayToLabels(item.hostMinerals)"
+            />
+            <SampleField v-if="item.material === MaterialKeys.MIN" :label="$t('crystal')" :value="item.crystal"/>
+            <SampleField
+              v-if="item.material === MaterialKeys.MIN || (item.material === MaterialKeys.INC && item.inclusionTypes.includes('IMIN'))"
+              :label="$t('rim_or_core_inclusion')"
+              :value="item.rimOrCoreInclusion"
+            />
+            <h3 class="font-semibold">{{ $t('chemical_table') }}</h3>
+            <DataTable :value="item.results" tableStyle="min-width: 50rem">
+              <Column field="itemName" :header="$t('analyte')"></Column>
+              <Column field="method" :header="$t('method')"></Column>
+              <Column field="value" :header="$t('value')"></Column>
+              <Column field="unit" :header="$t('unit')"></Column>
+            </DataTable>
+          </BaseCard>
+
+          <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('age') }}</h2>
+          <div class="flex">
+            <SampleField class="flex-1" :label="$t('geological_age')" :value="data.geologicalAge"/>
+            <div class="flex-1">
+              <h3 class="font-semibold">{{ $t('numeric_age') }}</h3>
+              <div class="flex">
+                <SampleField :label="$t('min')" :value="data.ageMin"/>
+                <SampleField class="ml-4" :label="$t('max')" :value="data.ageMax"/>
+              </div>
+
+            </div>
+            <SampleField class="flex-1" :label="$t('eruption_date')" :value="data.eruptionDate"/>
+          </div>
+          <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('reference_info') }}</h2>
+          <BaseCard
+            :title="item.title"
+            :collapsed="true"
+            v-for="item in data.references"
+            class="mb-2"
+          >
+            <SampleField :label="$t('journal')" :value="item.journal"/>
+            <SampleField :label="$t('volume_no')" :value="item.volume"/>
+            <SampleField :label="$t('issue_no')" :value="item.issue"/>
+            <div class="flex">
+              <SampleField :label="$t('first_page')" :value="item.firstPage"/>
+              <SampleField class="ml-4" :label="$t('last_page')" :value="item.lastPage"/>
+            </div>
+            <SampleField :label="$t('book_title')" :value="item.bookTitle"/>
+            <SampleField :label="$t('book_editors')" :value="item.editors"/>
+            <SampleField :label="$t('publisher')" :value="item.publisher"/>
+            <SampleField :label="$t('authors')" :value="getAuthors(item.authors)"/>
+          </BaseCard>
+          <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('location_info') }}</h2>
+          <SampleField :label="$t('tectonic_setting')" :value="data.tectonicSetting"/>
+          <SampleField :label="$t('location_comment')" :value="data.locationTypes"/>
+          <div class="flex">
+            <SampleField :label="$t('latitude') + ' ' + $t('min_max')" :value="`${data.latitudeMin}/${data.latitudeMax}`"/>
+            <SampleField class="ml-4" :label="$t('longitude') + ' ' + $t('min_max')" :value="`${data.longitudeMin}/${data.longitudeMax}`"/>
+          </div>
+          <SampleField :label="$t('elevation') + ' ' + $t('min_max')" :value="`${data.elevationMin}/${data.elevationMax}`"/>
+          <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('tas_diagram') }}</h2>
+          <SampleTasDiagram/>
         </template>
       </template>
     </BaseContainer>
   </div>
 </template>
-<style scoped>
-
-</style>

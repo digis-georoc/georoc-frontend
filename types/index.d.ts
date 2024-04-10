@@ -127,11 +127,91 @@ declare global {
     numItems: number
   }
 
-  interface SampleFull {
+  interface SampleFullData {
     ageMax: number | null
     ageMin: number | null
+    geologicalAge: string | null
+    eruptionDate: string | null
     sampleID: number
     sampleName: string
+    material: string
+    rockTypes: BaseField[]
+    rockClasses: BaseField[]
+    comments: string[]
+    rockTextures: string[]
+    alteration: string
+    drillDepthMax: string | null
+    drillDepthMin: string | null
+    samplingTechnique: string | null
+    references: Citation[]
+    batchData: BatchData[]
+    tectonicSetting: string | null
+    locationTypes: string[]
+    locationComments: string[]
+    latitudeMax: string | null
+    latitudeMin: string | null
+    longitudeMax: string | null
+    longitudeMin: string | null
+    elevationMax: string | null
+    elevationMin: string | null
+  }
+
+  interface BaseField {
+    value: string
+    label: string
+  }
+
+  interface BatchData {
+    batchID: number | null
+    batchName: string | null
+    crystal: string | null
+    hostMinerals: BaseField[]
+    inclusionMinerals: BaseField[]
+    inclusionTypes: string[]
+    material: string | null
+    minerals: BaseField[]
+    results: BatchDataResult[]
+    rimOrCoreInclusion: string | null
+    rimOrCoreMineral: string | null
+    sampleID: number | null
+    specimenMedium: string | null
+  }
+
+  interface BatchDataResult {
+    itemGroup: string | null
+    itemName: string | null
+    medium: string | null
+    method: string | null
+    standardName: string | null
+    standardValue: number | null
+    standardVariable: string | null
+    unit: string | null
+    value: number | null
+    valueCount: number | null
+  }
+
+  interface Citation {
+    authors: Author[],
+    bookTitle: string | null,
+    citationID: number,
+    citationLink: string | null,
+    editors: string | null,
+    externalIdentifier: string | null,
+    firstPage: string | null,
+    issue: string | null,
+    journal: string | null,
+    lastPage: string | null,
+    publicationYear: number | null,
+    publisher: string | null,
+    title: string | null,
+    volume: string | null,
+  }
+
+  interface Author {
+    firstName: string | null,
+    lastName: string | null,
+    order: number | null,
+    personID: number
   }
 
   type RockClassResponse = BaseResponse<RockClass>

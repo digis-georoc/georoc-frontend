@@ -33,9 +33,9 @@ onBeforeUnmount(() => unsubscribe())
 </script>
 <template>
   <div class="overflow-auto flex flex-col flex-1">
-    <QueryFiltersCard :title="$t('material')" class="m-2 flex-shrink-0">
+    <BaseCard :title="$t('material')" class="m-2 flex-shrink-0">
       <QueryFilterMaterial class="w-full" :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
-    </QueryFiltersCard>
+    </BaseCard>
     <template v-if="selectedMaterialId">
       <h3 class="px-4 py-2 font-bold border-b dark:border-zinc-600 relative">Filters:</h3>
       <div class="flex flex-1 flex-col scroll-gradient relative mb-2 pt-2">
