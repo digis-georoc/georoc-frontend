@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  title?: string,
-  noCollapse?: boolean
-}>(), { title: '', noCollapse: false })
+  title?: string | number | null,
+  noCollapse?: boolean,
+  collapsed?: boolean
+}>(), { title: '', noCollapse: false, collapsed: false })
 
-const collapsed = ref(false)
 </script>
 
 <template>
@@ -23,9 +23,9 @@ const collapsed = ref(false)
         @click="collapsed = !collapsed"
       ></BaseButton>
     </div>
-    <div class="flex flex-col overflow-hidden transition-all duration-300" :class="{
+    <div class="flex flex-col overflow-hidden transition-all duration-600" :class="{
       'max-h-[0px]': collapsed,
-      'max-h-full': !collapsed
+      'max-h-[200vh]': !collapsed
     }">
       <div class="flex flex-col relative p-4">
         <slot />

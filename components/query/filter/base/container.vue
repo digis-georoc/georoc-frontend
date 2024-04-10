@@ -37,7 +37,7 @@ const collapsed = ref(false)
 
 </script>
 <template>
-  <QueryFiltersCard :title="title" class="mx-2 mt-2">
+  <BaseCard :title="title" class="mx-2 mt-2">
     <template #header-right>
       <BaseButton
         v-if="hasSelected"
@@ -70,7 +70,7 @@ const collapsed = ref(false)
       >
       </BaseButton>
     </template>
-  </QueryFiltersCard>
+  </BaseCard>
   <BaseDialog :title="dialogTitle" v-model="isOpen">
     <NuxtErrorBoundary>
     <slot name="options"/>
