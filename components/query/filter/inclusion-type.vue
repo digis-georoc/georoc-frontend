@@ -20,7 +20,7 @@ const types = [
   },
 ]
 const selected = ref<RadioGroupOption[]>([])
-const selectedTemp = ref<RadioGroupOption>(types[0])
+const selectedTemp = ref<RadioGroupOption | null>(null)
 
 function remove() {
   selected.value = []
@@ -28,12 +28,13 @@ function remove() {
 }
 
 function submit() {
-  selected.value = [selectedTemp.value]
+  selected.value = selectedTemp.value ? [selectedTemp.value] : []
   useFilter()
 }
 
 function reset() {
   selected.value = []
+  selectedTemp.value = null
   useFilter()
 }
 
