@@ -94,34 +94,52 @@ function getAuthors(authors: Author[]) {
             />
           </div>
           <h1 class="text-3xl font-bold my-6">{{ data.sampleName }}</h1>
-
-          <h2 class="text-xl font-semibold mb-2">{{ $t('general_info') }}</h2>
-          <div class="flex mb-4">
-            <SampleField
-              :label="$t('rock_types')"
-              :value="mapArrayToLabels(data.rockTypes)"
-              class="flex-1"
-            />
-            <SampleField
-              :label="$t('rock_classes')"
-              :value="mapArrayToLabels(data.rockClasses)"
-              class="flex-1"
-            />
-            <SampleField
-              :label="$t('rock_textures')"
-              :value="data.rockTextures"
-              class="flex-1"
-            />
-          </div>
-          <SampleField :label="$t('sample_comment')" :value="data.comments"/>
-          <SampleField :label="$t('alteration')" :value="data.rockTextures"/>
-
-          <h3 class="font-semibold">{{ $t('drill_depth') }}</h3>
           <div class="flex">
-            <SampleField :label="$t('min')" :value="data.drillDepthMin" />
-            <SampleField :label="$t('max')" :value="data.drillDepthMax" class="ml-2" />
+            <div class="flex-1">
+              <h2 class="text-xl font-semibold mb-2">{{ $t('general_info') }}</h2>
+              <div class="flex mb-4">
+                <SampleField
+                    :label="$t('rock_types')"
+                    :value="mapArrayToLabels(data.rockTypes)"
+                    class="flex-1"
+                />
+                <SampleField
+                    :label="$t('rock_classes')"
+                    :value="mapArrayToLabels(data.rockClasses)"
+                    class="flex-1"
+                />
+                <SampleField
+                    :label="$t('rock_textures')"
+                    :value="data.rockTextures"
+                    class="flex-1"
+                />
+              </div>
+              <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('location_info') }}</h2>
+              <div class="grid grid-cols-3">
+                <SampleField class="flex-1" :label="$t('tectonic_setting')" :value="data.tectonicSetting"/>
+                <SampleField class="flex-1" :label="$t('location_comment')" :value="data.locationTypes"/>
+              </div>
+              <div class="grid grid-cols-3">
+                <SampleField :label="$t('latitude') + ' ' + $t('min_max')" :value="`${data.latitudeMin}/${data.latitudeMax}`"/>
+                <SampleField :label="$t('longitude') + ' ' + $t('min_max')" :value="`${data.longitudeMin}/${data.longitudeMax}`"/>
+                <SampleField :label="$t('elevation') + ' ' + $t('min_max')" :value="`${data.elevationMin}/${data.elevationMax}`"/>
+              </div>
+            </div>
+            <SampleMap class="w-1/3" :lat="data.latitudeMin" :lng="data.longitudeMin"/>
           </div>
-          <SampleField :label="$t('sampling_technique')" :value="data.samplingTechnique"/>
+
+          <div class="grid grid-cols-3 mt-6">
+            <SampleField :label="$t('sample_comment')" :value="data.comments"/>
+            <SampleField :label="$t('alteration')" :value="data.rockTextures"/>
+            <div>
+              <h3 class="font-semibold">{{ $t('drill_depth') }}</h3>
+              <div class="flex">
+                <SampleField :label="$t('min')" :value="data.drillDepthMin" />
+                <SampleField :label="$t('max')" :value="data.drillDepthMax" class="ml-2" />
+              </div>
+            </div>
+            <SampleField :label="$t('sampling_technique')" :value="data.samplingTechnique"/>
+          </div>
 
           <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('batch_infos') }}</h2>
           <BaseCard
@@ -185,14 +203,6 @@ function getAuthors(authors: Author[]) {
             <SampleField :label="$t('publisher')" :value="item.publisher"/>
             <SampleField :label="$t('authors')" :value="getAuthors(item.authors)"/>
           </BaseCard>
-          <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('location_info') }}</h2>
-          <SampleField :label="$t('tectonic_setting')" :value="data.tectonicSetting"/>
-          <SampleField :label="$t('location_comment')" :value="data.locationTypes"/>
-          <div class="flex">
-            <SampleField :label="$t('latitude') + ' ' + $t('min_max')" :value="`${data.latitudeMin}/${data.latitudeMax}`"/>
-            <SampleField class="ml-4" :label="$t('longitude') + ' ' + $t('min_max')" :value="`${data.longitudeMin}/${data.longitudeMax}`"/>
-          </div>
-          <SampleField :label="$t('elevation') + ' ' + $t('min_max')" :value="`${data.elevationMin}/${data.elevationMax}`"/>
           <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('tas_diagram') }}</h2>
           <SampleTasDiagram/>
         </template>

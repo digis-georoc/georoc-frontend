@@ -16,10 +16,9 @@ function valueIsArray() {
     <div class="flex">
       <template v-if="valueIsArray()">
         <template v-if="value.length > 0">
-          <span v-for="(item, i) in value">
-            {{ item }}
-            <template v-if="value.length > 1 && i < (value.length - 1)">,&nbsp;</template>
-          </span>
+          <template v-for="(item, i) in value">
+            {{ item }}<template v-if="value.length > 1 && i < (value.length - 1)">,&nbsp;</template>
+          </template>
         </template>
         <template v-else>
           {{ $t('no_value_given') }}
