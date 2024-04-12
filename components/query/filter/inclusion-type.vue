@@ -72,6 +72,7 @@ onMounted(async () => {
   <QueryFilterBaseContainer
     :title="$t('inclusion_type')"
     :dialog-title="$t('please_select_inclusion_type')"
+    :has-selected="selected.length > 0"
     @submit="submit"
     @reset="reset"
   >
