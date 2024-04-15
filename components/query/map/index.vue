@@ -30,7 +30,8 @@ const isLoading = ref(false)
 let shownCoveragePolygon: GeoJSON | null = null
 
 const selectedMaterialId = computed(() => queryStore.getFilter(QueryKey.Material)?.value ?? null)
-
+const showLocationPopup = ref(false)
+const selectedLocation = ref(null)
 
 function latLngToLngLat(latlng: LatLng) {
   return [latlng.lng, latlng.lat];
@@ -183,6 +184,13 @@ function createMultiPointMarker(feature: Feature, latlng: LatLng) {
   return L.marker(latlng, { icon })
 }
 
+function onEachPointFeature(feature, layer) {
+  layer.on('click', () => {
+    selectedLocation.value = feature.properties
+    showLocationPopup.value = true
+  })
+}
+
 
 function setBboxFilter() {
   const bounds = map.getBounds()
@@ -241,7 +249,7 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
         type: 'Point',
         coordinates: key.split(',').map(coord => parseFloat(coord))
       },
-      properties: null
+      properties: { samples: points.map(point => point.properties) }
     })
     else pointFeatures.push({
       type: 'Feature',
@@ -249,7 +257,7 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
         type: 'Point',
         coordinates: key.split(',').map(coord => parseFloat(coord))
       },
-      properties: null
+      properties: { samples: points.map(point => point.properties) }
     })
   })
 
@@ -269,7 +277,8 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
 
   // Add multi-point markers
   markersGroup.addLayer(L.geoJSON(multiPointFeatures, {
-    pointToLayer: createMultiPointMarker
+    pointToLayer: createMultiPointMarker,
+    onEachFeature: onEachPointFeature
   }))
 
   cachedClustersBounds.value = getLatLngBoundsFromBbox(value.bbox)
@@ -397,6 +406,7 @@ function hideCoverage() {
     <div v-if="!isTouchDevice " class="absolute top-[80px] xl:top-[78px] 2xl:top-[26px] z-[1001] left-[20px]">
       <QueryFilterPolygon />
     </div>
+    <QueryMapLocationPopup v-model="showLocationPopup"  :samples="selectedLocation?.samples ?? []" class="absolute z-[1000] bottom-[32px] left-1/2 -translate-x-1/2 "/>
 </template>
 <style>
 .mode-create {
