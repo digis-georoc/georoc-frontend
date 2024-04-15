@@ -6,7 +6,7 @@ import { theme } from '#tailwind-config'
 import L, {GeoJSON, LatLng, LatLngBounds} from "leaflet"
 import FreeDraw from 'leaflet-freedraw'
 import type { MarkerEvent } from 'leaflet-freedraw'
-import type { Feature, Polygon, Position } from "geojson";
+import type {Feature, GeoJsonProperties, Point, Polygon, Position} from "geojson";
 
 const queryStore = useQueryStore()
 const initialZoomLevel = 2
@@ -169,6 +169,20 @@ function createPointMarker(feature: Feature, latlng: LatLng) {
   return L.marker(latlng, { icon })
 }
 
+function createMultiPointMarker(feature: Feature, latlng: LatLng) {
+  let icon = L.icon({
+    iconUrl: useAsset('images/multi-marker.png'),
+    shadowUrl: useAsset('images/marker-shadow.png'),
+    iconSize:     [25, 34], // width and height of the image in pixels
+    shadowSize:   [35, 20], // width, height of optional shadow image
+    iconAnchor:   [12, 34], // point of the icon which will correspond to marker's location
+    shadowAnchor: [12, 20],  // anchor point of the shadow. should be offset
+    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+  })
+
+  return L.marker(latlng, { icon })
+}
+
 
 function setBboxFilter() {
   const bounds = map.getBounds()
@@ -205,7 +219,39 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
       return centroid
     })
 
-  const pointFeatures = value.points.filter(({ geometry }) => geometry.coordinates !== null)
+  const pointsByLocation = value.points.reduce((acc, cur) => {
+    const { coordinates } = cur.geometry
+    const key = coordinates.join(',')
+
+    if (acc[key]) acc[key].push(cur)
+    else acc[key] = [cur]
+
+    return acc
+  }, <{[key: string]: Feature<Point>[]}>{})
+
+  const multiPointFeatures: Feature<Point, GeoJsonProperties>[] = []
+  const pointFeatures: Feature<Point, GeoJsonProperties>[] = []
+
+  Object.keys(pointsByLocation).forEach(key => {
+    const points = pointsByLocation[key]
+
+    if (points.length > 1) multiPointFeatures.push({
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: key.split(',').map(coord => parseFloat(coord))
+      },
+      properties: null
+    })
+    else pointFeatures.push({
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: key.split(',').map(coord => parseFloat(coord))
+      },
+      properties: null
+    })
+  })
 
   const sizes = clusterFeatures.map(({ properties }) => properties?.clusterSize)
 
@@ -216,9 +262,14 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
     pointToLayer: createClusterMarker
   }))
 
-  // Add points markers
+  // Add point markers
   markersGroup.addLayer(L.geoJSON(pointFeatures, {
     pointToLayer: createPointMarker
+  }))
+
+  // Add multi-point markers
+  markersGroup.addLayer(L.geoJSON(multiPointFeatures, {
+    pointToLayer: createMultiPointMarker
   }))
 
   cachedClustersBounds.value = getLatLngBoundsFromBbox(value.bbox)
