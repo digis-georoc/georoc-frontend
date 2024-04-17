@@ -66,7 +66,7 @@ function createPointMarker(latlng: LatLng) {
 </script>
 
 <template>
-  <div id="map" class="h-[300px] w-full"></div>
+  <div id="map" class="h-[300px]"></div>
 </template>
 
 <style scoped>
