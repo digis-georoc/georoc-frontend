@@ -3,12 +3,10 @@ import DataTable from "primevue/datatable"
 import Column from "primevue/column"
 
 import { FetchError } from "ofetch"
-import { loading } from "@nuxt/ui-templates"
 
 const queryStore = useQueryStore()
 const route = useRoute()
 const router = useRouter()
-const { t } = useI18n()
 
 const id = parseInt(<string>route.params.id, 10)
 const data = ref<SampleFullData | null>(null)
@@ -99,19 +97,19 @@ function getAuthors(authors: Author[]) {
               <h2 class="text-xl font-semibold mb-2">{{ $t('general_info') }}</h2>
               <div class="flex mb-4">
                 <SampleField
-                    :label="$t('rock_types')"
-                    :value="mapArrayToLabels(data.rockTypes)"
-                    class="flex-1"
+                  :label="$t('rock_types')"
+                  :value="mapArrayToLabels(data.rockTypes)"
+                  class="flex-1"
                 />
                 <SampleField
-                    :label="$t('rock_classes')"
-                    :value="mapArrayToLabels(data.rockClasses)"
-                    class="flex-1"
+                  :label="$t('rock_classes')"
+                  :value="mapArrayToLabels(data.rockClasses)"
+                  class="flex-1"
                 />
                 <SampleField
-                    :label="$t('rock_textures')"
-                    :value="data.rockTextures"
-                    class="flex-1"
+                  :label="$t('rock_textures')"
+                  :value="data.rockTextures"
+                  class="flex-1"
                 />
               </div>
               <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('location_info') }}</h2>
