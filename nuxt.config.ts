@@ -27,7 +27,7 @@ export default defineNuxtConfig({
     routeRules: {
         '/': { prerender: true },
         '/query': { ssr: false },
-        '/sample/*': { swr: 5 }
+        '/sample/*': { ssr: false },
     },
     tailwindcss: {
         exposeConfig: true
