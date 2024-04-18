@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import * as d3 from "d3"
-import type {ScaleContinuousNumeric, ScaleLinear} from "d3-scale";
+import { theme } from "#tailwind-config";
 
 const props = defineProps<{
-  data?: string,
+  data: DiagramData | null,
 }>()
 
 const minX = 35
 const maxX = 80
 const maxY = 16
-
-
 
 const margin = {top: 10, right: 30, bottom: 60, left: 60},
     width = 760 - margin.left - margin.right,
@@ -41,7 +39,7 @@ function render() {
     .attr("fill", "#222")
     .attr("font-size", 12)
     .attr("transform",`translate(${width/2 - 10}, ${margin.bottom -20})`)
-    .text("SiO2 wt%")
+    .text((props.data?.xAxisLabel ?? "SiO2") + "wt%")
 
    y = d3.scaleLinear()
     .domain([0, maxY])
@@ -53,7 +51,7 @@ function render() {
     .attr("fill", "#222")
     .attr("font-size", 12)
     .attr("transform",`translate(-${margin.left - 20}, ${height/2 - 20}) rotate(-90)`)
-    .text("Na2O + K2O wt%")
+    .text((props.data?.yAxisLabel ?? "Na2O + K2O") + "wt%")
 
   drawLine([45, 1, 45, 5])
   drawLine([45, 5, 52, 5])
@@ -93,6 +91,20 @@ function render() {
   addAreaText('Tephri- \n phonolite', [52.5, 11.5])
   addAreaText('Phonolite', [57, 14])
   addAreaText('Foidite', [42, 12])
+
+  if (!props.data) return
+  svg
+    .append("g")
+    .selectAll("myCircles")
+    .data(props.data.values)
+    .enter()
+    .append("circle")
+    .attr("fill", theme.colors['primary-300'])
+    .attr("stroke", theme.colors['primary'])
+    .attr("stroke-width", 1)
+      .attr("cx", function(d) { return x(d[0]) })
+    .attr("cy", function(d) { return y(d[1]) })
+    .attr("r", 5)
 
 }
 

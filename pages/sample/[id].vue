@@ -12,6 +12,20 @@ const id = parseInt(<string>route.params.id, 10)
 const data = ref<SampleFullData | null>(null)
 const error = ref<FetchError | null>(null)
 const loading = ref(false)
+const tasData = computed<DiagramData | null>(() => {
+
+  if (!data.value) return null
+  if (data.value.batchData.length === 0) return null
+
+  return {
+    xAxisLabel: 'SiO2',
+    yAxisLabel: 'Na2O + K2O',
+    values: data.value?.batchData.reduce((acc, cur) => {
+      acc.push(...cur.tasData.values)
+      return acc
+    }, <number[][]>[])
+  }
+})
 
 onMounted(async () => {
   loading.value = true
@@ -202,7 +216,7 @@ function getAuthors(authors: Author[]) {
             <SampleField :label="$t('authors')" :value="getAuthors(item.authors)"/>
           </BaseCard>
           <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('tas_diagram') }}</h2>
-          <SampleTasDiagram/>
+          <SampleTasDiagram :data="tasData" />
         </template>
       </template>
     </BaseContainer>

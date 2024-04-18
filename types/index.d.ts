@@ -175,6 +175,7 @@ declare global {
     rimOrCoreMineral: string | null
     sampleID: number | null
     specimenMedium: string | null
+    tasData: DiagramData
   }
 
   interface BatchDataResult {
@@ -188,6 +189,12 @@ declare global {
     unit: string | null
     value: number | null
     valueCount: number | null
+  }
+
+  interface DiagramData {
+    xAxisLabel: string
+    yAxisLabel: string
+    values: number[][]
   }
 
   interface Citation {
