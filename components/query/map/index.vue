@@ -7,6 +7,7 @@ import L, {GeoJSON, LatLng, LatLngBounds} from "leaflet"
 import FreeDraw from 'leaflet-freedraw'
 import type { MarkerEvent } from 'leaflet-freedraw'
 import type {Feature, GeoJsonProperties, Point, Polygon, Position} from "geojson";
+import { getPointMarkerOptions } from "~/utils/marker";
 
 const queryStore = useQueryStore()
 const initialZoomLevel = 2
@@ -157,31 +158,18 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
 }
 
 function createPointMarker(feature: Feature, latlng: LatLng) {
-  let icon = L.icon({
-    iconUrl: useAsset('images/marker.png'),
-    shadowUrl: useAsset('images/marker-shadow.png'),
-    iconSize:     [25, 34], // width and height of the image in pixels
-    shadowSize:   [35, 20], // width, height of optional shadow image
-    iconAnchor:   [12, 34], // point of the icon which will correspond to marker's location
-    shadowAnchor: [12, 20],  // anchor point of the shadow. should be offset
-    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
-  })
-
-  return L.marker(latlng, { icon })
+  const icon = L.divIcon(getPointMarkerOptions({
+    fillColor: theme.colors['primary-300'],
+  }));
+  return  L.marker(latlng, { icon })
 }
 
 function createMultiPointMarker(feature: Feature, latlng: LatLng) {
-  let icon = L.icon({
-    iconUrl: useAsset('images/multi-marker.png'),
-    shadowUrl: useAsset('images/marker-shadow.png'),
-    iconSize:     [25, 34], // width and height of the image in pixels
-    shadowSize:   [35, 20], // width, height of optional shadow image
-    iconAnchor:   [12, 34], // point of the icon which will correspond to marker's location
-    shadowAnchor: [12, 20],  // anchor point of the shadow. should be offset
-    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
-  })
-
-  return L.marker(latlng, { icon })
+  const icon = L.divIcon(getPointMarkerOptions({
+    fillColor: theme.colors['primary-300'],
+    text: feature.properties?.samples.length ?? ''
+  }));
+  return  L.marker(latlng, { icon })
 }
 
 function onEachPointFeature(feature, layer) {
@@ -346,7 +334,6 @@ const unsubscribe = queryStore.$onAction(
         polygon.remove()
         freeDraw.mode(FreeDraw.NONE)
       } else if (name === 'loadingQuery') {
-        console.log(args[0])
         isLoading.value = args[0]
       }
     }
