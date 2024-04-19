@@ -29,7 +29,7 @@ function getPointMarkerOptions({
       <text
         x="12" y="10"
         text-anchor="middle"
-        alignment-baseline="central"
+        dy="3"
         fill="${textColor}"
         font-size="6"
       >

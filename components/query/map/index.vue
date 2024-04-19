@@ -135,7 +135,7 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
         <text
           x="50" y="50"
           text-anchor="middle"
-          alignment-baseline="central"
+          dy="5"
           fill="black"
           font-size="12"
           >
