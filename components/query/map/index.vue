@@ -8,6 +8,7 @@ import FreeDraw from 'leaflet-freedraw'
 import type { MarkerEvent } from 'leaflet-freedraw'
 import type {Feature, GeoJsonProperties, Point, Polygon, Position} from "geojson";
 import { getPointMarkerOptions } from "~/utils/marker";
+import * as d3 from "d3";
 
 const queryStore = useQueryStore()
 const initialZoomLevel = 2
@@ -100,19 +101,21 @@ function getClusterColor(size: number): string {
   else return theme.colors.stone['200']
 }
 
+function getClusterRadius(amount: number) {
+  const maxDomain = 20000
+  const map = d3.scaleLinear()
+      .domain([0, maxDomain])
+      .range([ 20, 50 ])
+
+  return map(amount > maxDomain ? maxDomain : amount)
+}
+
 function createClusterMarker(feature: Feature, latlng: LatLng) {
-  // let icon = L.icon({
-  //   iconUrl: useAsset('images/marker.png'),
-  //   shadowUrl: useAsset('images/marker-shadow.png'),
-  //   iconSize:     [25, 34], // width and height of the image in pixels
-  //   shadowSize:   [35, 20], // width, height of optional shadow image
-  //   iconAnchor:   [12, 34], // point of the icon which will correspond to marker's location
-  //   shadowAnchor: [12, 20],  // anchor point of the shadow. should be offset
-  //   popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
-  // })
-  const iconWidth = 50
-  const iconColor = getClusterColor(feature.properties?.clusterSize)
+  const iconWidth = 100
+  const iconFillColor = theme.colors['primary-100']
+  const iconStrokeColor = theme.colors['primary-300']
   const text = feature.properties?.clusterSize
+  const radius = getClusterRadius(text)
 
   const icon = L.divIcon({
     html: `
@@ -120,23 +123,21 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
         xmlns="http://www.w3.org/2000/svg"
         height="${iconWidth}"
         width="${iconWidth}"
-        viewBox="0 0 120 120"
-        fill="${iconColor}"
-        stroke="${theme.colors.stone['400']}
+        viewBox="0 0 100 100"
       >
-        <g fill="${iconColor}">
-          <circle cx="60" cy="60" r="60" fill-opacity="0.20" />
+        <g>
+          <circle cx="60" cy="60" r="60" fill-opacity="0" />
           <circle cx="60" cy="60" r="54" fill-opacity="0" />
           <circle cx="60" cy="60" r="48" fill-opacity="0" />
           <circle cx="60" cy="60" r="42"  fill-opacity="0" />
-          <circle cx="60" cy="60" r="54" />
+          <circle cx="50" cy="50" r="${radius}" fill="${iconFillColor}" stroke="${iconStrokeColor}" fill-opacity="0.9"/>
         </g>
         <text
-          x="60" y="60"
+          x="50" y="50"
           text-anchor="middle"
           alignment-baseline="central"
           fill="black"
-          font-size="24"
+          font-size="12"
           >
           ${text}
         </text>
@@ -148,11 +149,11 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
     iconAnchor: [iconWidth/2, iconWidth/2],
   });
   const marker = L.marker(latlng, { icon })
-  marker.on('mouseover', () => showCoverage(feature.properties?.convexHull, {
-    fillColor: iconColor,
-    color: iconColor
-  }))
-  marker.on('mouseout', () => hideCoverage())
+  // marker.on('mouseover', () => showCoverage(feature.properties?.convexHull, {
+  //   fillColor: iconFillColor,
+  //   color: iconFillColor
+  // }))
+  // marker.on('mouseout', () => hideCoverage())
 
   return marker
 }
@@ -260,7 +261,8 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
 
   // Add point markers
   markersGroup.addLayer(L.geoJSON(pointFeatures, {
-    pointToLayer: createPointMarker
+    pointToLayer: createPointMarker,
+    onEachFeature: onEachPointFeature
   }))
 
   // Add multi-point markers
