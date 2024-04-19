@@ -128,5 +128,6 @@ export default {
   latitude: 'Latitude',
   longitude: 'Longitude',
   min_max: 'Min/Max',
-  elevation: 'Elevation'
+  elevation: 'Elevation',
+  reset_all: 'Reset all'
 }

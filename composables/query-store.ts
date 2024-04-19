@@ -74,6 +74,11 @@ export const useQueryStore = defineStore('query', {
       if (index === -1) return
       this.filters.active.splice(index, 1)
     },
+    resetAllActiveFilters() {
+      this.filters.active = []
+      let filters = this.getFiltersByMaterial(this.filters.material?.value)
+      filters = []
+    },
     addOrUpdateFilterByMaterial(filter: QueryFilter, materialValue: keyof typeof MaterialKeys) {
       const filters = this.getFiltersByMaterial(materialValue)
       if (!filters) return

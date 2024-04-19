@@ -72,6 +72,14 @@ function fromQuery(query: string | null): TreeNode[] {
     }, <TreeNode[]>[])
 }
 
+const unsubscribe = queryStore.$onAction(
+    ({ name }) => {
+      if (name === 'resetAllActiveFilters') {
+        selected.value = []
+      }
+    }
+)
+
 onMounted(() => {
   const activeQuery = queryStore.getFilter(QueryKey.Chemistry)?.value
   if (!activeQuery) return
@@ -81,6 +89,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   chemistryStore.selected = []
+  unsubscribe()
 })
 </script>
 <template>

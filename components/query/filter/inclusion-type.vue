@@ -58,6 +58,14 @@ function fromQuery(query: string): RadioGroupOption | null {
   return types.find(({ value }) => value === query) ?? null
 }
 
+const unsubscribe = queryStore.$onAction(
+  ({ name }) => {
+    if (name === 'resetAllActiveFilters') {
+      selected.value = []
+    }
+  }
+)
+
 onMounted(async () => {
   const activeQuery = queryStore.getFilter(QueryKey.InclusionType)?.value
 
@@ -66,6 +74,10 @@ onMounted(async () => {
     selectedTemp.value = selected.value[0]
     useFilter(false)
   }
+})
+
+onBeforeUnmount(() => {
+  unsubscribe()
 })
 
 </script>

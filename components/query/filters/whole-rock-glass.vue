@@ -9,10 +9,6 @@
     <QueryFilterTectonicSetting />
     <QueryFilterLocationType />
     <QueryFilterAge />
-    <QueryFilterAge />
-    <QueryFilterAge />
-    <QueryFilterAge />
-    <QueryFilterAge />
   </div>
 
 </template>

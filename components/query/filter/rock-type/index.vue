@@ -13,7 +13,6 @@ const { selected } = storeToRefs(rockTypeStore)
 
 function submit() {
   rockTypeStore.selected = [...selectedTemp.value]
-  console.log(selected.value)
   useFilter()
 }
 
@@ -102,6 +101,14 @@ async function fromQuery(rockTypeQuery: string | null, rockClassQuery: string | 
   return result
 }
 
+const unsubscribe = queryStore.$onAction(
+  ({ name }) => {
+    if (name === 'resetAllActiveFilters') {
+      selected.value = []
+    }
+  }
+)
+
 onMounted(async () => {
   const activeRockTypeQuery = queryStore.getFilter(QueryKey.RockType)?.value
   const activeRockClassQuery = queryStore.getFilter(QueryKey.RockClass)?.value
@@ -113,6 +120,7 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   rockTypeStore.selected = []
+  unsubscribe()
 })
 </script>
 <template>
