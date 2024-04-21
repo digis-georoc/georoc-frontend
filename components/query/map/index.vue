@@ -3,7 +3,7 @@ import 'leaflet/dist/leaflet.css'
 
 import { theme } from '#tailwind-config'
 
-import L, {GeoJSON, LatLng, LatLngBounds} from "leaflet"
+import L, {GeoJSON, LatLng, LatLngBounds, Layer, Marker} from "leaflet"
 import FreeDraw from 'leaflet-freedraw'
 import type { MarkerEvent } from 'leaflet-freedraw'
 import type {Feature, GeoJsonProperties, Point, Polygon, Position} from "geojson";
@@ -33,7 +33,8 @@ let shownCoveragePolygon: GeoJSON | null = null
 
 const selectedMaterialId = computed(() => queryStore.getFilter(QueryKey.Material)?.value ?? null)
 const showLocationPopup = ref(false)
-const selectedLocation = ref(null)
+const selectedLocation = ref<{ samples: number[] } | null>(null)
+const selectedMarker = ref<Layer | null>(null)
 
 function latLngToLngLat(latlng: LatLng) {
   return [latlng.lng, latlng.lat];
@@ -159,7 +160,7 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
 function createPointMarker(feature: Feature, latlng: LatLng) {
   const icon = L.divIcon(getPointMarkerOptions({
     fillColor: theme.colors['primary-400'],
-  }));
+  }))
   return  L.marker(latlng, { icon })
 }
 
@@ -167,15 +168,33 @@ function createMultiPointMarker(feature: Feature, latlng: LatLng) {
   const icon = L.divIcon(getPointMarkerOptions({
     fillColor: theme.colors['primary-400'],
     text: feature.properties?.samples.length ?? ''
-  }));
+  }))
   return  L.marker(latlng, { icon })
 }
 
 function onEachPointFeature(feature, layer) {
   layer.on('click', () => {
+
+    if (selectedMarker.value) {
+      updateMarkerIcon(theme.colors['primary-400'], selectedMarker.value, selectedLocation.value)
+    }
+
+    updateMarkerIcon(theme.colors.yellow['500'], layer, feature.properties)
+
     selectedLocation.value = feature.properties
+    selectedMarker.value = layer
     showLocationPopup.value = true
   })
+}
+
+function updateMarkerIcon(fillColor: string, marker: Marker, properties) {
+  const amountSamples = properties?.samples.length ?? 0
+  marker.setIcon(
+    L.divIcon(getPointMarkerOptions({
+      fillColor: fillColor,
+      text: amountSamples > 1 ? amountSamples : ''
+    }))
+  )
 }
 
 
