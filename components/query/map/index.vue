@@ -126,18 +126,16 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
         viewBox="0 0 100 100"
       >
         <g>
-          <circle cx="60" cy="60" r="60" fill-opacity="0" />
-          <circle cx="60" cy="60" r="54" fill-opacity="0" />
-          <circle cx="60" cy="60" r="48" fill-opacity="0" />
-          <circle cx="60" cy="60" r="42"  fill-opacity="0" />
           <circle cx="50" cy="50" r="${radius}" fill="${iconFillColor}" stroke="${iconStrokeColor}" fill-opacity="0.9"/>
         </g>
         <text
           x="50" y="50"
           text-anchor="middle"
           dy="5"
-          fill="black"
+          fill="#000"
+          opacity="0.5"
           font-size="12"
+          font-weight="700"
           >
           ${text}
         </text>
@@ -160,14 +158,14 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
 
 function createPointMarker(feature: Feature, latlng: LatLng) {
   const icon = L.divIcon(getPointMarkerOptions({
-    fillColor: theme.colors['primary-300'],
+    fillColor: theme.colors['primary-400'],
   }));
   return  L.marker(latlng, { icon })
 }
 
 function createMultiPointMarker(feature: Feature, latlng: LatLng) {
   const icon = L.divIcon(getPointMarkerOptions({
-    fillColor: theme.colors['primary-300'],
+    fillColor: theme.colors['primary-400'],
     text: feature.properties?.samples.length ?? ''
   }));
   return  L.marker(latlng, { icon })

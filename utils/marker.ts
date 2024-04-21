@@ -1,4 +1,7 @@
 import type {DivIconOptions} from "leaflet";
+// <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+// <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5"/></svg>
+
 
 function getPointMarkerOptions({
   fillColor = '#000',
@@ -10,31 +13,41 @@ function getPointMarkerOptions({
     html:   `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24">
       <defs>
         <linearGradient id="shadow" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="transparent" />
+          <stop offset="10%" stop-color="transparent" />
           <stop offset="100%" stop-color="#000" />
         </linearGradient>
         <filter id="blur">
-           <feGaussianBlur stdDeviation="1" />
+           <feGaussianBlur stdDeviation="1.2" />
         </filter>
       </defs>
-      <polygon transform="rotate(60 12 24) translate(-10.5 -1.7) skewX(19) " filter="url(#blur)" opacity="0.8" points="12,24 20,12 4,12" fill="url(#shadow)" />
+      <polygon filter="url(#blur)" opacity="0.5" points="12,24 24,20 8,14" fill="url(#shadow)" />
       <path 
-        id="marker-body"
         fill="${fillColor}" 
-        stroke="#ccc" 
-        stroke-opacity="0.2"
-        stroke-width="0.5"
-        d="M12 12T12 12m0 10q-4.025-3.425-6.012-6.362T4 10.2q0-3.75 2.413-5.975T12 2t5.588 2.225T20 10.2q0 2.5-1.987 5.438T12 22"
+        stroke="#000" 
+        stroke-opacity="0.2" 
+        stroke-width="0.5" 
+        transform="translate(0 2)" 
+        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5"
       />
       <text
         x="12" y="10"
         text-anchor="middle"
         dy="3"
         fill="${textColor}"
+        font-weight="700"
         font-size="6"
       >
         ${text}
-        </text>
+      </text>
+      <circle 
+        cx="12" 
+        cy="11" 
+        r="2.2" 
+        fill="${text === '' ? '#ddd' : 'none'}"
+        stroke="${text === '' ? '#000' : 'none'}" 
+        stroke-opacity="0.2" 
+        stroke-width="0.5" 
+      />
     </svg>`,
     className: "",
     iconSize: [size * 1.5, size],
