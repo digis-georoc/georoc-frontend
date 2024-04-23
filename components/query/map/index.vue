@@ -22,7 +22,6 @@ const outOfBoundsNE = ref(false)
 const mouseLat = ref(0)
 const mouseLng = ref(0)
 let maxClusterSize = 0
-const clusterColors = [theme.colors.lime['200'], theme.colors.amber['200'], theme.colors.orange['300']]
 
 let cachedZoomLevel = initialZoomLevel
 
@@ -93,13 +92,6 @@ function addControlLayers() {
   L.control.zoom({
     position: 'bottomright'
   }).addTo(map);
-}
-
-function getClusterColor(size: number): string {
-  if (size < maxClusterSize * 0.33) return clusterColors[0]
-  else if (size >= maxClusterSize * 0.33 && size <= maxClusterSize * 0.66) return clusterColors[1]
-  else if (size > maxClusterSize * 0.66) return clusterColors[2]
-  else return theme.colors.stone['200']
 }
 
 function getClusterRadius(amount: number) {
@@ -409,7 +401,7 @@ function hideCoverage() {
       <span>Latitude: </span><span>{{ mouseLat }}</span>&nbsp;
       <span>Longitude: </span><span>{{ mouseLng }}</span>
     </div>
-    <div v-if="!isTouchDevice " class="absolute top-[80px] xl:top-[78px] 2xl:top-[26px] z-[1001] left-[20px]">
+    <div v-if="!isTouchDevice && selectedMaterialId" class="absolute top-[80px] xl:top-[78px] 2xl:top-[26px] z-[1001] left-[20px]">
       <QueryFilterPolygon />
     </div>
     <QueryMapLocationPopup v-model="showLocationPopup"  :samples="selectedLocation?.samples ?? []" class="absolute z-[1000] bottom-[32px] left-1/2 -translate-x-1/2 "/>

@@ -39,7 +39,6 @@ function handleListBtn() {
               </div>
               <QueryDownloadSamples class="rounded-l-none"/>
             </div>
-
           </div>
         </div>
         <QueryListPanel/>
