@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.15](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.14...v0.0.15) (2024-04-24)
+
+
+### Features
+
+* add custom map point markers ([7a657f3](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/7a657f373da400aedf675d4e69a9d52400fa7433))
+* add last database update date to footer and stats bar ([ffc582d](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ffc582d5cb0ab779ae05f74e9d7c5f08a89926a1))
+* add map to sample page ([b48ae63](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/b48ae635420fbdccf4d8df25c4594c1041a6e941))
+* add multi marker to display multiple sample for the same location ([3d32704](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/3d327043045b33670f1e8c70bfbc0125e4af4f8f))
+* add reset all filter button ([08b0900](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/08b090095e5679b6a2e8096fe3ea173ec60735d3))
+* add sample detail page content ([8235beb](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/8235beb6347f5c8e42d24d087f0e6edc2ab47588))
+* add TAS diagram data ([e5aaaab](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/e5aaaabad9e661eb32aad63e78494c12cddfdf8d))
+* display location popup on query map ([639f9e6](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/639f9e6e7804b0f8aeb96ee94607583dcf47274f))
+* hide draw area button when no material selected ([ccae3d9](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ccae3d918c4ea07beace76e8ceaf6f81011d1c08))
+* highlight selected marker, update selection popup ([461c8e3](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/461c8e3a106a1688251527e2d91fd57de3852f1e))
+* remove initial selection in inclusion type filter ([866ea21](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/866ea218e1e3b7549be31c81f15aa9745a9f1a70))
+* show cluster icon in different sizes ([8470f82](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/8470f82bc52ae3d8fe3e0e8c5a0f166d8af4a823))
+* update filters panel to trigger query on button click ([36cc5b2](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/36cc5b2a68124444a987ba36d8c1bc4ff88ed2f6))
+
+
+### Bug Fixes
+
+* display edit button at inclusion type filter ([95b5872](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/95b58728231b285036efcc1a3d298d9b992e50a0))
+* filters panel display on mobile ([3957b4a](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/3957b4a8a82096a9a2903deb9e88a07e8b576ab5))
+* filters panel empty message ([e5da2fe](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/e5da2fed2b0247dde6c1797ec016045b365b84e2))
+* fix collapsed state in card ([d874337](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/d874337c6aa7b5ab39f7486932653aad98c00d3c))
+* map width on sample page ([fe149aa](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/fe149aa62951b6a32f75b674f37defd508722438))
+* marker text position on Firefox ([8f2b97c](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/8f2b97c3f662c9051332642e6a7bf8eedf91a145))
+* remove unnecessary offset on select button (precompiled files page) on small to medium screens ([db60973](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/db609732da7143559ad8d76547ebb4b460588b24))
+* typos in whats new ([a7658fd](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/a7658fd75a486992a57a89df781d9f3383e82a45))
+* update map markers ([9eb52b4](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/9eb52b4353d90205a5597d29b69eb25fdb5a7b3f))
+
 ### [0.0.14](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.13...v0.0.14) (2024-03-18)
 
 
