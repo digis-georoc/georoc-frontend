@@ -52,8 +52,8 @@ const getPaginatorButton = (options: PaginatorPassThroughMethodOptions) => ({
   <DataTable
     :value="rows"
     :paginator="true"
-    :rows="10"
-    :rowsPerPageOptions="[5, 10, 15, 20]"
+    :rows="rows.length >= 10 ? 10 : rows.length"
+    :rowsPerPageOptions="[5, 10, 15, 20].filter(elem => elem < rows.length).concat(rows.length)"
     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
     :currentPageReportTemplate="
       t('showing_first_to_last_of_total_entries', {
