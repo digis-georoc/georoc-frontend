@@ -4,14 +4,15 @@ import SelectButton from 'primevue/selectbutton'
 const props = defineProps<{
   modelValue: RadioGroupOption | null
   options: RadioGroupOption[],
-  size: string,
-  vertical: boolean
+  size?: string,
+  vertical?: boolean
 }>()
 
 const emit = defineEmits(['change', 'update:modelValue'])
 const options = props.options
 
-const selectedOptionValue = computed(() => props.modelValue?.value)
+const selectedOptionValue = ref(props.modelValue?.value)
+watch(selectedOptionValue, (value) => selectedOptionValue.value = value)
 function onUpdate(option: RadioGroupOption) {
   selectedOptionValue.value = option.value
   emit('update:modelValue', option)

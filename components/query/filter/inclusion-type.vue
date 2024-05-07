@@ -93,7 +93,7 @@ onBeforeUnmount(() => {
       <QueryFilterBaseSelected :items="selected" @remove="remove()" />
     </template>
     <template v-slot:options>
-      <BaseRadioGroup :options="types" v-model="selectedTemp" />
+      <BaseRadioGroup :options="types" v-model="selectedTemp" vertical />
     </template>
   </QueryFilterBaseContainer>
 </template>
