@@ -41,10 +41,24 @@ function submit() {
     return option
   })
 
+  useFilter()
+}
+
+function useFilter() {
   queryStore.setPanelFilter({
     name: QueryKey.HostMaterial,
     value: toQuery(selected.value)
   })
+}
+
+function reset() {
+  selected.value = []
+  selectedTemp.value = []
+  options.value = options.value.map(option => {
+    option.active = false
+    return option
+  })
+  useFilter()
 }
 
 onMounted(async () => {
@@ -71,7 +85,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <QueryFilterBaseContainer :title="$t('host_material')" :dialog-title="$t('please_select_host_material')" @submit="submit">
+  <QueryFilterBaseContainer
+    :title="$t('host_material')"
+    :dialog-title="$t('please_select_host_material')"
+    :has-selected="selected.length > 0"
+    @submit="submit"
+    @reset="reset"
+  >
     <template v-slot:selected>
       <QueryFilterBaseSelected :items="selected" @remove="remove($event)" />
     </template>
