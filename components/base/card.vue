@@ -13,8 +13,9 @@ watch(() => props.collapsed, (value) => _collapsed.value = value, { immediate: t
 <template>
   <div class="flex flex-col border dark:border-zinc-600 rounded-md bg-white dark:bg-zinc-800 overflow-hidden">
     <div
-      class="flex relative pl-4 pr-12 py-3 border-b transition-colors"
+      class="flex relative pl-4 pr-12 py-3 border-b transition-colors hover:cursor-pointer"
       :class="{'dark:border-zinc-600': !_collapsed, 'border-transparent delay-300': _collapsed }"
+      @click="_collapsed = !_collapsed"
     >
       <h3 class="font-bold">{{ title }}</h3>
       <slot name="header-right" />
@@ -23,7 +24,6 @@ watch(() => props.collapsed, (value) => _collapsed.value = value, { immediate: t
         icon="carbon:chevron-down"
         class="absolute right-2 top-1/2 -translate-y-1/2"
         display="flat"
-        @click="_collapsed = !_collapsed"
       ></BaseButton>
     </div>
     <div class="flex flex-col overflow-hidden transition-all duration-600" :class="{
