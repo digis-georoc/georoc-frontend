@@ -7,6 +7,7 @@ export default {
   statistic_2: 'samples',
   statistic_3: 'analyses',
   statistic_4: 'single data values',
+  statistic_5: 'last database update',
   headline_1: 'Compiled from published, peer-reviewed literature',
   paragraph_1:
     'A comprehensive collection of published analyses of igneous and metamorphic rocks and minerals. It contains major and trace element concentrations, radiogenic and nonradiogenic isotope ratios as well as analytical ages for whole rocks, glasses, minerals and inclusions.',

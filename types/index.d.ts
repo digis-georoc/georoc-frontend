@@ -198,26 +198,26 @@ declare global {
   }
 
   interface Citation {
-    authors: Author[],
-    bookTitle: string | null,
-    citationID: number,
-    citationLink: string | null,
-    editors: string | null,
-    externalIdentifier: string | null,
-    firstPage: string | null,
-    issue: string | null,
-    journal: string | null,
-    lastPage: string | null,
-    publicationYear: number | null,
-    publisher: string | null,
-    title: string | null,
-    volume: string | null,
+    authors: Author[]
+    bookTitle: string | null
+    citationID: number
+    citationLink: string | null
+    editors: string | null
+    externalIdentifier: string | null
+    firstPage: string | null
+    issue: string | null
+    journal: string | null
+    lastPage: string | null
+    publicationYear: number | null
+    publisher: string | null
+    title: string | null
+    volume: string | null
   }
 
   interface Author {
-    firstName: string | null,
-    lastName: string | null,
-    order: number | null,
+    firstName: string | null
+    lastName: string | null
+    order: number | null
     personID: number
   }
 
@@ -297,6 +297,7 @@ declare global {
   }
 
   interface Statistics {
+    latestDate: Date
     numCitations: number
     numSamples: number
     numAnalyses: number

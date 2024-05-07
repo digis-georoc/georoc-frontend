@@ -23,11 +23,7 @@ const props = withDefaults(
     month: 'long',
   },
 )
-const {
-  data: previews,
-  error,
-  pending,
-} = await getPrecompiledPreviewForClient()
+const { data: stats, error, pending } = await getStatisticsForClient()
 const lastDatabaseUpdate = ref<Date | undefined>(undefined)
 watch(
   () => pending.value,
@@ -39,19 +35,10 @@ watch(
           error.value.statusCode,
           error.value.statusMessage,
         )
-      } else if (previews.value) {
-        const dates = previews.value.preview.map(
-          ({ productionDate }) => new Date(productionDate),
-        )
-        if (typeof dates != 'undefined') {
-          lastDatabaseUpdate.value = getLatestDate(dates)
-        }
+      } else if (stats.value) {
+        lastDatabaseUpdate.value = new Date(stats.value.latestDate)
       }
     }
   },
 )
-function getLatestDate(dates: Date[]) {
-  const dateTime = dates.map((d) => d.getTime())
-  return new Date(Math.max(...dateTime))
-}
 </script>
