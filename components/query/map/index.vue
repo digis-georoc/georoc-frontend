@@ -281,7 +281,7 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
   }))
 
   cachedClustersBounds.value = getLatLngBoundsFromBbox(value.bbox)
-})
+}, { immediate: true })
 
 onMounted(() => {
   map = L.map('map', {
