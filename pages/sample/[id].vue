@@ -39,14 +39,69 @@ onMounted(async () => {
 })
 
 const list = computed(() => queryStore.listResult?.data)
-const disablePrevious = ref(false)
+const totalCount = computed(() => queryStore.listResult?.totalCount)
+const curIndex = computed(() => list.value?.findIndex(item => item.sampleID === id) ?? -1)
+
 const limit = 30
 
-function next (direction: 1 | -1) {
-  const nextId = id + direction
 
-  if (nextId < 0) disablePrevious.value = true
-  router.push(`/sample/${nextId}`);
+const disableNext = ref(!isNextEnabled())
+const disablePrevious = ref(!isPreviousEnabled())
+
+function isNextEnabled() {
+  if (!list.value || !totalCount.value) return false
+  if (curIndex.value === -1) return false
+  if (curIndex.value < list.value.length - 1) return true
+
+  const nextOffset = queryStore.listOffset + list.value.length
+  return nextOffset !== totalCount.value
+}
+
+function isPreviousEnabled() {
+  if (!list.value || !totalCount.value) return false
+  if (curIndex.value === -1) return false
+  if (curIndex.value <= list.value.length - 1) return true
+
+  const prevOffset = queryStore.listOffset - list.value.length
+  return prevOffset >= 0
+}
+
+async function getNextId() {
+  if (disableNext.value) return -1
+
+  if (list.value && totalCount.value) {
+    // is not last item, return next
+    if (curIndex.value < list.value.length - 1) return list.value[curIndex.value + 1].sampleID
+
+    // is last item of all, return invalid
+    const nextOffset = queryStore.listOffset + list.value.length
+
+    // is end of page, get next page, return first of page
+    await queryStore.executeListQuery(nextOffset, list.value.length)
+    return list.value[0].sampleID
+  }
+  return -1
+}
+
+async function getPreviousId() {
+  if (disablePrevious.value) return -1
+  if (list.value && totalCount.value) {
+    // is not first item, return prev
+    if (curIndex.value > 0) return list.value[curIndex.value - 1].sampleID
+
+    // is first item of all, return invalid
+    const prevOffset = queryStore.listOffset - list.value.length
+
+    // is start of page, get prev page, return last of page
+    await queryStore.executeListQuery(prevOffset, list.value.length)
+    return list.value[list.value.length - 1].sampleID
+  }
+  return -1
+}
+
+async function navigate(direction: 1 | -1) {
+  const navigateToId = direction > 0 ? await getNextId() : await getPreviousId()
+  if (navigateToId !== -1) await router.push(`/sample/${navigateToId}`)
 }
 
 function back() {
@@ -94,7 +149,8 @@ function getAuthors(authors: Author[]) {
               display="outline"
               size="small"
               icon="material-symbols:arrow-back-ios"
-              @click="next(-1)"
+              :disabled="disablePrevious"
+              @click="navigate(-1)"
             />
             <BaseButton
               :text="$t('next_sample')"
@@ -102,7 +158,8 @@ function getAuthors(authors: Author[]) {
               size="small"
               icon="material-symbols:arrow-forward-ios"
               icon-position="right"
-              @click="next(1)"
+              :disabled="disableNext"
+              @click="navigate(1)"
             />
           </div>
           <h1 class="text-3xl font-bold my-6">{{ data.sampleName }}</h1>
