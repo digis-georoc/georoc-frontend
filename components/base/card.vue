@@ -28,9 +28,9 @@ watch(() => props.collapsed, (value) => _collapsed.value = value, { immediate: t
         @click="_collapsed = !_collapsed"
       ></BaseButton>
     </div>
-    <div class="flex flex-col overflow-hidden transition-all duration-600" :class="{
+    <div class="flex flex-col overflow-hidden" :class="{
       'max-h-[0px]': _collapsed,
-      'max-h-[200vh]': !_collapsed
+      'max-h-auto': !_collapsed
     }">
       <div class="flex flex-col relative p-4">
         <slot />
