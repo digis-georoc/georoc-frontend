@@ -51,19 +51,13 @@ const disablePrevious = ref(!isPreviousEnabled())
 function isNextEnabled() {
   if (!list.value || !totalCount.value) return false
   if (curIndex.value === -1) return false
-  if (curIndex.value < list.value.length - 1) return true
-
-  const nextOffset = queryStore.listOffset + list.value.length
-  return nextOffset !== totalCount.value
+  return !(curIndex.value === totalCount.value - 1 || curIndex.value + queryStore.listOffset === totalCount.value - 1)
 }
 
 function isPreviousEnabled() {
   if (!list.value || !totalCount.value) return false
   if (curIndex.value === -1) return false
-  if (curIndex.value <= list.value.length - 1) return true
-
-  const prevOffset = queryStore.listOffset - list.value.length
-  return prevOffset >= 0
+  return !(curIndex.value === 0 && queryStore.listOffset === 0)
 }
 
 async function getNextId() {
