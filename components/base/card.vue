@@ -11,7 +11,7 @@ watch(() => props.collapsed, (value) => _collapsed.value = value, { immediate: t
 </script>
 
 <template>
-  <div class="flex flex-col border dark:border-zinc-600 rounded-md bg-white dark:bg-zinc-800 overflow-hidden">
+  <div class="flex flex-col border dark:border-zinc-600 shadow-sm rounded-md bg-white dark:bg-zinc-800 overflow-hidden">
     <div
       class="flex relative pr-12 border-b transition-colors"
       :class="{'dark:border-zinc-600': !_collapsed, 'border-transparent delay-300': _collapsed }"

@@ -52,10 +52,10 @@
   classes['py-3 px-5'] = props.size === 'normal' && !_icon
 
   classes['text-sm'] = props.size === 'small'
-  classes['py-1.5 ps-2 pe-3'] = props.size === 'small' && !!(_icon) && _iconPosition === 'left'
-  classes['py-1.5 ps-3 pe-2'] = props.size === 'small' && !!(_icon) && _iconPosition === 'right'
+  classes['py-1 ps-2 pe-3'] = props.size === 'small' && !!(_icon) && _iconPosition === 'left'
+  classes['py-1 ps-3 pe-2'] = props.size === 'small' && !!(_icon) && _iconPosition === 'right'
   classes['p-1'] = props.size === 'small' && isIconOnly
-  classes['py-1.5 px-3'] = props.size === 'small' && !_icon
+  classes['py-1 px-3'] = props.size === 'small' && !_icon
 
   classes['py-1 ps-1 pe-1.5'] = props.size === 'tiny' && !!(_icon) && _iconPosition === 'left'
   classes['py-1 ps-1.5 pe-1'] = props.size === 'tiny' && !!(_icon) && _iconPosition === 'right'
