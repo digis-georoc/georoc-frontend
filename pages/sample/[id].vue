@@ -121,12 +121,12 @@ function getAuthors(authors: Author[]) {
       </template>
       <template v-else>
         <template v-if="error">
-          <template v-if="error.statusCode === 500">
-            <h1 class="text-3xl font-bold">{{ $t('server_error') }}</h1>
-            <p class="mt-4">{{ error.statusMessage }}</p>
-          </template>
           <template v-if="error.statusCode === 404">
             <h1 class="text-3xl font-bold">{{ $t('not_found') }}</h1>
+            <p class="mt-4">{{ error.statusMessage }}</p>
+          </template>
+          <template v-else-if="error.statusCode >= 500">
+            <h1 class="text-3xl font-bold">{{ $t('server_error') }}</h1>
             <p class="mt-4">{{ error.statusMessage }}</p>
           </template>
         </template>
