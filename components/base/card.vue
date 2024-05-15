@@ -5,9 +5,12 @@ const props = withDefaults(defineProps<{
   collapsed?: boolean
 }>(), { title: '', noCollapse: false, collapsed: false })
 
+const emit = defineEmits(['collapsed-change'])
+
 const _collapsed = ref(false)
 
-watch(() => props.collapsed, (value) => _collapsed.value = value, { immediate: true } )
+watch(() => props.collapsed, (value) => _collapsed.value = value, { immediate: true })
+watch(_collapsed, (value) => emit('collapsed-change', value))
 </script>
 
 <template>

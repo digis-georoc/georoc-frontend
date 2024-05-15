@@ -9,6 +9,7 @@ const selectedMaterialId = ref<string | null>(materialFilterValue.value ?? null)
 const isLoading = ref(false)
 const amountActiveFilters = computed(() => queryStore.filters.active.length)
 const hasChanges = computed(() => queryStore.hasChanges)
+const materialFilterIsCollapsed = ref(false)
 
 function handleFilterSelection(value: string | null) {
   if (value === null) return
@@ -46,7 +47,12 @@ onBeforeUnmount(() => unsubscribe())
 </script>
 <template>
   <div class="overflow-auto flex flex-col flex-1">
-    <BaseCard :title="$t('material')" class="m-2 flex-shrink-0">
+    <BaseCard :title="$t('material')" class="m-2 flex-shrink-0" @collapsed-change="materialFilterIsCollapsed = $event">
+      <template #header-right>
+        <div v-if="selectedMaterialId !== null && materialFilterIsCollapsed" class="flex items-center justify-center px-1.5 py-0.5 border border-primary rounded-md text-primary text-xs">
+          {{ $t(selectedMaterialId) }}
+        </div>
+      </template>
       <QueryFilterMaterial class="w-full" :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
     </BaseCard>
     <template v-if="selectedMaterialId">

@@ -32,6 +32,7 @@ export default {
   inclusion_type: 'Inclusion Type',
   material: 'Material',
   WR: '@:whole_rock_and_glass',
+  WRGL: '@:whole_rock_and_glass',
   INC: '@:inclusion',
   MIN: '@:mineral',
   no_options_selected: 'No options selected',
