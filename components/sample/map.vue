@@ -51,7 +51,7 @@ function useAsset(path: string): string {
   return assets['/assets/' + path]
 }
 
-function createPointMarker(latlng: LatLng) {
+function createPointMarker(latlng: LatLng | number[]) {
   const icon = L.divIcon(getPointMarkerOptions({
     fillColor: theme.colors['primary-400'],
   }))

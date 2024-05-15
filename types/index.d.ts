@@ -61,6 +61,7 @@ declare global {
     result: QueryLocationsResponse | null
     listResult: QueryListResponse | null
     listOffset: number
+    hasChanges: boolean
   }
 
   interface RocktypesResponseItem {

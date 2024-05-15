@@ -129,5 +129,7 @@ export default {
   longitude: 'Longitude',
   min_max: 'Min/Max',
   elevation: 'Elevation',
-  reset_all: 'Reset all'
+  reset_all: 'Reset all',
+  update_query: 'Update Query',
+  query_updated: 'Query Updated'
 }

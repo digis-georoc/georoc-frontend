@@ -8,7 +8,7 @@ const materialFilterValue = computed(() => queryStore.getFilter(QueryKey.Materia
 const selectedMaterialId = ref<string | null>(materialFilterValue.value ?? null)
 const isLoading = ref(false)
 const amountActiveFilters = computed(() => queryStore.filters.active.length)
-
+const hasChanges = computed(() => queryStore.hasChanges)
 
 function handleFilterSelection(value: string | null) {
   if (value === null) return
@@ -25,6 +25,12 @@ function submit() {
 
 function resetAll() {
  queryStore.resetAllActiveFilters()
+}
+
+function getSearchButtonIcon() {
+  if (isLoading.value) return 'line-md:loading-loop'
+  if (!hasChanges.value && selectedMaterialId.value !== null) return 'ic:round-check'
+  return ''
 }
 
 const unsubscribe = queryStore.$onAction(
@@ -72,11 +78,11 @@ onBeforeUnmount(() => unsubscribe())
   </div>
   <div class="p-4 border-t dark:border-zinc-600 flex mt-auto bg-white dark:bg-zinc-800">
     <BaseButton
-      :text="$t('search')"
+      :text="hasChanges || selectedMaterialId === null ? $t('update_query') : $t('query_updated')"
       size="normal"
       class="flex-1"
-      :disabled="selectedMaterialId === null"
-      :icon="isLoading ? 'line-md:loading-loop' : 'ic:round-check'"
+      :disabled="selectedMaterialId === null || !hasChanges"
+      :icon="getSearchButtonIcon()"
       @click="submit"
     />
   </div>

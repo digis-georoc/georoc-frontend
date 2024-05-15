@@ -31,7 +31,8 @@ export const useQueryStore = defineStore('query', {
     },
     result: null,
     listResult: null,
-    listOffset: 0
+    listOffset: 0,
+    hasChanges: false
   }),
   actions: {
     loadingQuery(isLoading: boolean) {
@@ -53,6 +54,7 @@ export const useQueryStore = defineStore('query', {
     async setMaterialFilter(filter: QueryFilter, withCache = true) {
       this.filters.material = filter
       this.swapFilters(filter.value)
+      this.hasChanges = true
     },
     async setPanelFilter(filter: QueryFilter, withCache = true) {
       this.setFilter(filter, withCache)
@@ -62,6 +64,7 @@ export const useQueryStore = defineStore('query', {
       this.addOrUpdateFilterByMaterial(filter, this.filters.material?.value)
 
       if (withCache) this.cacheFilter(filter)
+      this.hasChanges = true
     },
     addOrUpdateActiveFilter(filter: QueryFilter) {
       const filters = this.filters.active
@@ -73,11 +76,13 @@ export const useQueryStore = defineStore('query', {
       const index = this.filters.active.findIndex(({ name }) => name === key)
       if (index === -1) return
       this.filters.active.splice(index, 1)
+      this.hasChanges = true
     },
     resetAllActiveFilters() {
       this.filters.active = []
       let filters = this.getFiltersByMaterial(this.filters.material?.value)
       filters = []
+      this.hasChanges = true
     },
     addOrUpdateFilterByMaterial(filter: QueryFilter, materialValue: keyof typeof MaterialKeys) {
       const filters = this.getFiltersByMaterial(materialValue)
@@ -104,7 +109,6 @@ export const useQueryStore = defineStore('query', {
       if (removeFromCache) window.localStorage.removeItem(this.getCachingKey(name))
     },
     async execute() {
-      console.log('execute')
       debounceMap(() => this.executeMapQuery())
       debounceList(() => this.executeListQuery())
     },
@@ -120,6 +124,7 @@ export const useQueryStore = defineStore('query', {
         try {
           this.result = await getSamples(this.createUrlParams(), abortController)
           this.loadingQuery(false)
+          this.hasChanges = false
         } catch (e: any) {
           if (e.message !== 'abort') this.loadingQuery(false)
         }
