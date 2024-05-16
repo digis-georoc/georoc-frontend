@@ -96,8 +96,7 @@ function toQuery(selected: TreeNode[]) {
         <div
           class="flex flex-col overflow-y-clip relative"
           :class="{
-            'scroll-gradient': isExpandable(item.children?.length ?? 0),
-            'max-h-[250px]': isExpandable(item.children?.length ?? 0) && collapseState[i],
+            'scroll-gradient max-h-[250px]': isExpandable(item.children?.length ?? 0) && collapseState[i],
             'max-h-auto': isExpandable(item.children?.length ?? 0) && !collapseState[i]
           }"
         >
