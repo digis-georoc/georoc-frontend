@@ -52,8 +52,8 @@
   classes['py-3 px-5'] = props.size === 'normal' && !_icon
 
   classes['text-sm'] = props.size === 'small'
-  classes['py-1 ps-2 pe-3'] = props.size === 'small' && !!(_icon) && _iconPosition === 'left'
-  classes['py-1 ps-3 pe-2'] = props.size === 'small' && !!(_icon) && _iconPosition === 'right'
+  classes['py-1 ps-1.5 pe-2'] = props.size === 'small' && !!(_icon) && _iconPosition === 'left'
+  classes['py-1 ps-2 pe-1.5'] = props.size === 'small' && !!(_icon) && _iconPosition === 'right'
   classes['p-1'] = props.size === 'small' && isIconOnly
   classes['py-1 px-3'] = props.size === 'small' && !_icon
 
@@ -82,7 +82,7 @@
 <template>
   <button type="button" :class="classes" :disabled="disabled">
     <template v-if="_icon && _iconPosition === 'left'">
-      <Icon :name="_icon" class="text-base me-1.5" />
+      <Icon :name="_icon" class="text-base" :class="{'me-1.5': size === 'normal', 'me-1': size !== 'normal'}" />
     </template>
     <template v-if="isIconOnly"><Icon :name="_icon" class="mt-[1px]" />
     </template>
