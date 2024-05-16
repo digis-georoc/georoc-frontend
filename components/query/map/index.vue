@@ -34,6 +34,7 @@ const selectedMaterialId = computed(() => queryStore.getFilter(QueryKey.Material
 const showLocationPopup = ref(false)
 const selectedLocation = ref<{ samples: number[] } | null>(null)
 const selectedMarker = ref<Layer | null>(null)
+const hasFilterChanges = computed(() => queryStore.hasChanges)
 
 function latLngToLngLat(latlng: LatLng) {
   return [latlng.lng, latlng.lat];
@@ -379,6 +380,11 @@ function hideCoverage() {
     flex flex-col items-center justify-center
     text-zinc-300 pointer-events-none">
       {{ $t('map_message_no_material_selected') }}
+    </div>
+    <div v-if="hasFilterChanges" class="absolute z-[998] p-4 bg-black bg-opacity-50 rounded-lg top-[12%] left-1/2 -translate-x-1/2
+      flex flex-col items-center justify-center
+      text-zinc-300 pointer-events-none">
+      {{ $t('map_message_query_changes') }}
     </div>
     <div
       v-if="isLoading"

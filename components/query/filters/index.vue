@@ -34,6 +34,12 @@ function getSearchButtonIcon() {
   return ''
 }
 
+function getSearchButtonText() {
+  if (isLoading.value) return `${t('updating')}...`
+  if (hasChanges.value || selectedMaterialId.value === null) return t('update_query')
+  return t('query_updated')
+}
+
 const unsubscribe = queryStore.$onAction(
     ({ name, args }) => {
       if (name === 'loadingQuery') {
@@ -84,7 +90,7 @@ onBeforeUnmount(() => unsubscribe())
   </div>
   <div class="p-4 border-t dark:border-zinc-600 flex mt-auto bg-white dark:bg-zinc-800">
     <BaseButton
-      :text="hasChanges || selectedMaterialId === null ? $t('update_query') : $t('query_updated')"
+      :text="getSearchButtonText()"
       size="normal"
       class="flex-1"
       :disabled="selectedMaterialId === null || !hasChanges"

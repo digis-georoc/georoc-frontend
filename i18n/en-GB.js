@@ -89,7 +89,8 @@ export default {
   previous_sample: 'Previous Sample',
   next_sample: 'Next Sample',
   back_to_database_query: 'Back to Database Query',
-  map_message_no_material_selected: 'Please select a material on the left before using the map.',
+  map_message_no_material_selected: 'Please select a material before using the map.',
+  map_message_query_changes: 'The data does not match the filter settings. Please update the query',
   selected_material: 'Selected Material',
   confirm: 'Confirm',
   error_fetching_rock_types: 'Rock Types could not be fetched from the server',
@@ -132,5 +133,6 @@ export default {
   elevation: 'Elevation',
   reset_all: 'Reset all',
   update_query: 'Update Query',
-  query_updated: 'Query Updated'
+  query_updated: 'Query Updated',
+  updating: 'Updating'
 }
