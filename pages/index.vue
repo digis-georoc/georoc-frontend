@@ -1,21 +1,19 @@
 <template>
   <section :class="['relative h-[80vh]', backgroundImage.overlay]">
     <div
-        class="absolute top-0 h-[80vh] inset-x-0 -z-10 overflow-hidden"
-        aria-hidden="true"
+      class="absolute top-0 h-[80vh] inset-x-0 -z-10 overflow-hidden"
+      aria-hidden="true"
     >
       <img
-          :src="backgroundImage.src"
-          :alt="backgroundImage.altText"
-          :class="['h-full w-full object-cover', backgroundImage.style]"
-          aria-hidden="true"
+        :src="backgroundImage.src"
+        :alt="backgroundImage.altText"
+        :class="['h-full w-full object-cover', backgroundImage.style]"
+        aria-hidden="true"
       />
     </div>
     <BaseContainer class="h-full flex items-center">
       <div class="mt-24">
-        <h1
-            class="text-4xl font-bold tracking-tight text-gray-100 sm:text-6xl"
-        >
+        <h1 class="text-4xl font-bold tracking-tight text-gray-100 sm:text-6xl">
           {{ $t('indexPage.title') }}
         </h1>
         <p class="mt-6 text-lg leading-8 text-gray-200">
@@ -23,21 +21,21 @@
         </p>
         <div class="mt-10 flex items-center gap-x-6">
           <NuxtLink
-              to="/query"
-              class="rounded-md bg-primary px-4 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >{{ $t('indexPage.button_1') }}</NuxtLink
+            to="/query"
+            class="rounded-md bg-primary px-4 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >{{ $t('indexPage.button_1') }}</NuxtLink
           >
           <NuxtLink
-              to="/get-started"
-              class="text-sm font-semibold leading-6 text-zinc-300"
-          >{{ $t('indexPage.button_2') }}
+            to="/get-started"
+            class="text-sm font-semibold leading-6 text-zinc-300"
+            >{{ $t('indexPage.button_2') }}
             <span aria-hidden="true">→</span></NuxtLink
           >
         </div>
       </div>
     </BaseContainer>
     <div
-        class="bg-black bg-opacity-50 text-white text-right absolute mx-1 bottom-0 right-0"
+      class="bg-black bg-opacity-50 text-white text-right absolute mx-1 bottom-0 right-0"
     >
       {{ backgroundImage.credit }}
     </div>
@@ -48,7 +46,7 @@
       <div class="mx-auto max-w-7xl">
         <div class="mx-auto max-w-3xl lg:text-center">
           <h3
-              class="mt-2 text-3xl font-bold tracking-tight text-stone-900 dark:text-zinc-300 sm:text-4xl"
+            class="mt-2 text-3xl font-bold tracking-tight text-stone-900 dark:text-zinc-300 sm:text-4xl"
           >
             {{ $t('indexPage.headline_1') }}
           </h3>
@@ -58,36 +56,34 @@
         </div>
         <div class="mx-auto mt-16 max-w-4xl sm:mt-20 lg:mt-24 lg:max-w-6xl">
           <dl
-              class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16"
+            class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16"
           >
-            <div
-                v-for="feature in features"
-                :key="feature.name"
-                class="relative pl-16"
+            <NuxtLink
+              v-for="feature in features"
+              :key="feature.name"
+              class="relative pl-16 lg:pt-16 lg:pl-0 focus:outline-none focus:ring-4 focus:ring-primary-300 rounded-lg hover:bg-stone-300 hover:dark:bg-stone-400 hover:dark:bg-opacity-[0.2] hover:bg-opacity-[0.4] hover:text-stone-800 hover:dark:text-zinc-300"
+              :to="feature.to"
             >
               <dt
-                  class="text-base font-semibold leading-7 text-gray-900 dark:text-zinc-400"
+                class="text-lg font-semibold leading-7 text-gray-900 dark:text-zinc-400 px-4 text-center"
               >
                 <div
-                    class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary"
+                  class="absolute left-0 lg:right-0 lg:m-auto lg:top-3 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary"
                 >
                   <Icon
-                      :name="feature.icon"
-                      class="h-6 w-6 text-white"
-                      aria-hidden="true"
+                    :name="feature.icon"
+                    class="h-6 w-6 text-white"
+                    aria-hidden="true"
                   />
                 </div>
                 {{ feature.name }}
               </dt>
               <dd
-                  class="mt-2 text-base leading-7 text-gray-600 dark:text-zinc-400"
+                class="mt-2 px-4 pb-2 text-center text-base leading-7 text-gray-600 dark:text-zinc-400"
               >
                 {{ feature.description }}
               </dd>
-              <NuxtLink
-              ><BaseButton display="link" text="Try it out"
-              /></NuxtLink>
-            </div>
+            </NuxtLink>
           </dl>
         </div>
       </div>
@@ -103,18 +99,42 @@ const features = [
       'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ' +
       'labore et dolore magna aliquyam erat, sed diam voluptua.',
     icon: 'heroicons:magnifying-glass',
+    to: '/query',
   },
   {
     name: 'Precompiled Files',
     description:
       'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
     icon: 'octicon:package',
+    to: '/precompiled-files',
   },
   {
     name: 'Expert Datasets',
     description:
       'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
     icon: 'tabler:school',
+    to: '/expert-datasets',
+  },
+  {
+    name: 'Disclaimer',
+    description:
+      'At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+    icon: 'carbon:warning',
+    to: '/disclaimer',
+  },
+  {
+    name: 'How to cite',
+    description:
+      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+    icon: 'fluent:tooltip-quote-24-regular',
+    to: '/how-to-cite',
+  },
+  {
+    name: 'How to contribute',
+    description:
+      'At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+    icon: 'fluent:puzzle-cube-piece-20-regular',
+    to: '/how-to-contribute',
   },
 ]
 

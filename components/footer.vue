@@ -52,11 +52,22 @@
       <div class="sm:flex-1 w-full sm:w-auto mt-12 sm:mt-0">
         <h4 class="text-xl font-bold mb-4">Useful links</h4>
         <ul class="space-y-1">
+          <li><BaseNuxtLink to="/query">Database Query</BaseNuxtLink></li>
+          <li>
+            <BaseNuxtLink to="/precompiled-files"
+              >Precompiled Files</BaseNuxtLink
+            >
+          </li>
+          <li>
+            <BaseNuxtLink to="/expert-datasets">Expert Datasets</BaseNuxtLink>
+          </li>
+          <li><BaseNuxtLink to="/disclaimer">Disclaimer</BaseNuxtLink></li>
           <li><BaseNuxtLink to="/how-to-cite">How to cite</BaseNuxtLink></li>
-          <li>Useful link</li>
-          <li>Useful link</li>
-          <li>Useful link</li>
-          <li>Useful link</li>
+          <li>
+            <BaseNuxtLink to="/how-to-contribute"
+              >How to contribute</BaseNuxtLink
+            >
+          </li>
         </ul>
       </div>
       <div class="sm:flex-1 w-full sm:w-auto">
