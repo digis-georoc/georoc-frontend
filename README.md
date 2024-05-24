@@ -36,3 +36,7 @@ We use Prettier to format our code.
 Check all files with `npx prettier . --check`
 
 Reformat all files with `npx prettier . --write`
+
+## License 
+
+The source code is licensed under the BSD-3-Clause [license](LICENSE).
