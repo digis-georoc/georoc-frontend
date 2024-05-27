@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.16](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.15...v0.0.16) (2024-05-27)
+
+
+### Features
+
+* add "show all" option to datatable pagination ([0d8fbe6](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/0d8fbe6fce92e390e997fb649a381a00773c7753))
+* add first version of ZIP file download ([c748a8e](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c748a8e07241c63f2c84e333cc7c66b73100c6d8))
+* add message on map if filter have changes ([e30967a](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/e30967a018ca6ca5a95606afc1b67bcb24024dc4))
+* add more panels/quicklinks to index page ([e398da5](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/e398da508187ab37bfd0884bf4e4a77adc25c6ca))
+* add small footer to the query page layout ([c79a201](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c79a2019425a61731e8cbae0eba84165925db7a1))
+* add versioning to precompiled files page ([c372346](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c37234606aee9f4ae4db35e9d2affc46bd6fa5c4))
+* display same marker icon on detail page as in query map ([a0bbe51](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/a0bbe51de7a668491ac95232514a6a2ad0823e0c))
+* minor design updates ([74deba4](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/74deba4812fe294867ddfb90014cfc4ec55e959c))
+* next and prev button at detail page navigate between query results ([14be2b6](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/14be2b6b3efc870a0d1827f4021749b07afbec26))
+* show inclusion type filter options vertically ([ee46c11](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ee46c1104918c01c35bc0d286c04a871006ec9f6))
+* show selected value on collapsed material filter ([3d79001](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/3d790011740f4f45e6e352022e35505a84de555a))
+* trigger collapsing on header click in cards ([de8fd76](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/de8fd7647ba53decf529be7cb112bd02720dbbe3))
+* update search button states ([c48037e](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c48037e21bbb0eb455355b58243cc7711044e3c3))
+* update styles ([4a563e8](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/4a563e8228773d3634536c95028d135c460d1424))
+
+
+### Bug Fixes
+
+* collapse toggle in card header ([146d292](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/146d2929f01d7b2df82918b7182814f28738bfd5))
+* error message display at detail page ([7f95987](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/7f95987341655e5a6705402f5f617907a353af22))
+* expand cards to their full height ([82e804e](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/82e804e5a9c0763d9a215263ad0e24d96d15d020))
+* hide "add new filter" button at host material and inclusion material filters ([a519d03](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/a519d03a715343ade2c563830e1aac4a50cd2f88))
+* hide scroll gradient at expanded chemistry filter selection ([fbf4b91](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/fbf4b91870cbf1dd7f2605fd0edbe86042354f74))
+* last database update now uses the same api as the other statistics ([706331b](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/706331bb9625da8de2e2e6479cdfef8737d08f53))
+* next and prev buttons validation ([e1dc3b7](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/e1dc3b75303dca5ef485b635fa843d0a9056fe08))
+* show map markers after returning from detail page ([60e1321](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/60e1321bc249a072d0abcbcf6ed8cb1ea62d2867))
+
 ### [0.0.15](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.14...v0.0.15) (2024-04-24)
 
 
