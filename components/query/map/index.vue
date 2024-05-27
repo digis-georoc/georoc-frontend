@@ -6,11 +6,13 @@ import { theme } from '#tailwind-config'
 import L, {GeoJSON, LatLng, LatLngBounds, Layer, Marker} from "leaflet"
 import FreeDraw from 'leaflet-freedraw'
 import type { MarkerEvent } from 'leaflet-freedraw'
-import type {Feature, GeoJsonProperties, Point, Polygon, Position} from "geojson";
-import { getPointMarkerOptions } from "~/utils/marker";
-import * as d3 from "d3";
+import type {Feature, GeoJsonProperties, Point, Polygon, Position} from "geojson"
+import { getPointMarkerOptions } from "~/utils/marker"
+import * as d3 from "d3"
+
 
 const queryStore = useQueryStore()
+
 const initialZoomLevel = 2
 let map: any = null
 let freeDraw: FreeDraw

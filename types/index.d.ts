@@ -3,7 +3,7 @@ import type { TreeNode } from 'primevue/tree'
 
 declare global {
   interface QueryFilter {
-    name: FilterKey
+    name: typeof QueryKey[keyof typeof QueryKey]
     value: any
   }
 

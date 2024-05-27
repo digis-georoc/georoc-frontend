@@ -30,9 +30,11 @@
     "@pinia/nuxt": "^0.4.11",
     "@types/d3": "^7.4.3",
     "d3": "^7.9.0",
+    "dom-to-image": "^2.6.0",
     "jszip": "^3.10.1",
     "leaflet": "^1.9.4",
     "leaflet-freedraw": "^2.13.3",
+    "leaflet-simple-map-screenshoter": "^0.5.0",
     "nuxt-storage": "^1.2.2",
     "pinia": "^2.1.4",
     "primevue": "^3.40.0"
