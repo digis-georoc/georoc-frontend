@@ -77,8 +77,9 @@ async function getPrecompiledFiles(
   protocol: string,
   authority: string,
   id: string,
+  version: string,
 ): Promise<PrecompiledFiles | null> {
-  const params = new URLSearchParams({ protocol, authority, id })
+  const params = new URLSearchParams({ protocol, authority, id, version })
   const { error, data } = await useFetch<PrecompiledFiles>(
     '/api/precompiled-files/files' + (params ? `?${params.toString()}` : ''),
   )
@@ -113,9 +114,11 @@ async function getPrecompiledZip(
 
 async function getPrecompiledDatasetZip(
   identifier: string,
+  version: string,
 ): Promise<Blob | null> {
   const params = new URLSearchParams({
     identifier,
+    version,
   })
   const { error, data } = await useFetch<Blob>(
     '/api/precompiled-files/download-dataset' +
@@ -131,8 +134,16 @@ async function getPrecompiledDatasetZip(
 }
 async function getPrecompiledMetadataFile(
   identifier: string,
+  version: string,
+  fileIds?: number | number[],
 ): Promise<string | null> {
-  const params = new URLSearchParams({ identifier })
+  const params = new URLSearchParams({ identifier, version })
+  if (typeof fileIds !== 'undefined') {
+    params.append(
+      'fileIds',
+      Array.isArray(fileIds) ? fileIds.join(',') : fileIds.toString(),
+    )
+  }
   const { error, data } = await useFetch<string>(
     '/api/precompiled-files/export-metadata' +
       (params ? `?${params.toString()}` : ''),
@@ -160,7 +171,9 @@ async function getElementTypes(): Promise<ElementsResponse | null> {
 async function getRockClasses(
   rockType: string,
 ): Promise<RockClassResponse | null> {
-  return await baseAPIRequest<RockClassResponse>('/api/rock-classes' + (rockType ? `?rocktype=${rockType}` : ''))
+  return await baseAPIRequest<RockClassResponse>(
+    '/api/rock-classes' + (rockType ? `?rocktype=${rockType}` : ''),
+  )
 }
 
 async function getHostMaterials(): Promise<HostMaterialsResponse | null> {
@@ -168,7 +181,7 @@ async function getHostMaterials(): Promise<HostMaterialsResponse | null> {
 }
 
 async function getInclusionMaterials(): Promise<HostMaterialsResponse | null> {
-  return await baseAPIRequest<HostMaterialsResponse>( '/api/inclusion-materials')
+  return await baseAPIRequest<HostMaterialsResponse>('/api/inclusion-materials')
 }
 
 async function getStatisticsForClient(): Promise<{
@@ -189,7 +202,11 @@ async function getStatisticsForClient(): Promise<{
 
 async function baseAPIRequest<T>(path: string): Promise<T> {
   const { data, error } = await useFetch<T>(path)
-  if (!data.value) throw createError({ statusCode: error.value?.statusCode, statusMessage: error.value?.statusMessage})
+  if (!data.value)
+    throw createError({
+      statusCode: error.value?.statusCode,
+      statusMessage: error.value?.statusMessage,
+    })
   return <T>data.value
 }
 
