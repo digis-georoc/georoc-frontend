@@ -10,16 +10,22 @@ export default defineEventHandler<PrecompiledFilePreviews | undefined>(
     for (let dataset of datasets) {
       const { id, protocol, authority, identifier } = dataset
       const precompiled = (<DataverseOKResponse>(
-        await fetchData(`datasets/${id}/versions/:latest-published/metadata`)
+        await fetchData(
+          `datasets/${id}/versions/:latest-published?includeFiles=false`,
+        )
       ))['data']
-      const { title } = precompiled
-      const productionDate = precompiled['citation:productionDate']
+      const title =
+        precompiled['metadataBlocks']['citation']['fields'][0]['value']
+      const version = {
+        major: precompiled['versionNumber'],
+        minor: precompiled['versionMinorNumber'],
+      }
       previewArr.push({
         protocol,
         authority,
         identifier,
         title,
-        productionDate,
+        version,
       })
     }
     return { preview: previewArr }

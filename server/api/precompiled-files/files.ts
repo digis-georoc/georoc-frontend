@@ -7,11 +7,11 @@ export default defineEventHandler<PrecompiledFiles | undefined>(
     const paramsObj = Object.fromEntries(params.entries())
     const data = (<DataverseOKResponse>(
       await fetchData(
-        `datasets/:persistentId/?persistentId=${paramsObj['protocol']}:${paramsObj['authority']}/${paramsObj['id']}`,
+        `datasets/:persistentId/versions/${paramsObj['version']}?persistentId=${paramsObj['protocol']}:${paramsObj['authority']}/${paramsObj['id']}`,
       )
     ))['data']
-    const citation = data['latestVersion']['metadataBlocks']['citation']
-    const rawFiles = data['latestVersion']['files']
+    const citation = data['metadataBlocks']['citation']
+    const rawFiles = data['files']
 
     const authors = []
     const authorData = citation['fields'][1]['value']
@@ -31,19 +31,27 @@ export default defineEventHandler<PrecompiledFiles | undefined>(
         persistentUrl: dataFile['pidURL'],
       })
     }
+    //calling the api with a version does not provide a dataset persistentId anymore, workaround:
+    const fileUrl: string = files[0]['persistentUrl']
+    const persistentUrl: string = fileUrl.substring(0, fileUrl.lastIndexOf('/'))
+
     const precomp: PrecompiledFiles = {
       title: citation['fields'][0]['value'],
       authors: authors,
-      persistentUrl: data['persistentUrl'],
+      persistentUrl: persistentUrl,
       description:
         citation['fields'][3]['value'][0]['dsDescriptionValue']['value'],
       publicationDate: data['publicationDate'],
       subject: citation['fields'][4]['value'][0],
-      datasetPersistentId: data['latestVersion']['datasetPersistentId'],
+      datasetPersistentId: data['datasetPersistentId'],
       productionDate: citation['fields'][5]['value'],
+      version: {
+        major: data['versionNumber'],
+        minor: data['versionMinorNumber'],
+      },
       license: {
-        name: data['latestVersion']['license']['name'],
-        uri: data['latestVersion']['license']['uri'],
+        name: data['license']['name'],
+        uri: data['license']['uri'],
       },
       files: files,
     }

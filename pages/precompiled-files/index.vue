@@ -19,7 +19,7 @@ const links: {
 if (precompiledFilePreviewArr) {
   for (let preview of precompiledFilePreviewArr) {
     links.push({
-      href: `/precompiled-files/${preview.protocol}/${preview.authority}/${preview.identifier}`,
+      href: `/precompiled-files/${preview.protocol}/${preview.authority}/${preview.identifier}/${preview.version.major}.${preview.version.minor}`,
       label: preview.title,
     })
   }

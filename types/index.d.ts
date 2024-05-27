@@ -247,12 +247,17 @@ declare global {
     data: any
   }
 
+  interface Version {
+    major: number
+    minor: number
+  }
+
   interface PrecompiledFilePreview {
     protocol: string
     authority: string
     identifier: string
     title: string
-    productionDate: Date
+    version: Version
   }
 
   interface PrecompiledFilePreviews {
@@ -268,6 +273,7 @@ declare global {
     subject: string
     datasetPersistentId: string
     productionDate: Date
+    version: Version
     license: {
       name: string
       uri: string
@@ -309,6 +315,7 @@ declare global {
     isDataset: true
     identifier: string
     filetitle: string
+    version: Version
   }
   interface DownloadOptionsFiles {
     isDataset: false
@@ -317,6 +324,10 @@ declare global {
   }
   type DownloadOptions = DownloadOptionsDataset | DownloadOptionsFiles
 
+  interface MetaDataDownloadOptions {
+    identifier: string
+    version: Version
+  }
   interface RockTypeState {
     nodes: TreeNode[]
     selected: TreeNode[]

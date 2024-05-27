@@ -48,8 +48,12 @@
                       identifier: precompiledFiles.datasetPersistentId,
                       isDataset: true,
                       filetitle: `${precompiledFiles.productionDate}_${precompiledFiles.title}`,
+                      version: precompiledFiles.version,
                     },
-                    precompiledFiles.datasetPersistentId,
+                    {
+                      identifier: precompiledFiles.datasetPersistentId,
+                      version: precompiledFiles.version,
+                    },
                   )
                 "
               >
@@ -81,7 +85,10 @@
                             isDataset: false,
                             filetitle: file.label,
                           },
-                          precompiledFiles.datasetPersistentId,
+                          {
+                            identifier: precompiledFiles.datasetPersistentId,
+                            version: precompiledFiles.version,
+                          },
                         )
                       "
                     >
@@ -103,7 +110,10 @@
                                 ? selected[0].label
                                 : `${precompiledFiles.productionDate}_${precompiledFiles.title}_SELECTION`,
                           },
-                          precompiledFiles.datasetPersistentId,
+                          {
+                            identifier: precompiledFiles.datasetPersistentId,
+                            version: precompiledFiles.version,
+                          },
                         )
                       "
                       :text="t('precompiledFilePage.download_selection_button')"
@@ -235,10 +245,10 @@ const links: {
 if (precompiledFilePreviewArr) {
   for (let preview of precompiledFilePreviewArr) {
     links.push({
-      href: `/precompiled-files/${preview.protocol}/${preview.authority}/${preview.identifier}`,
+      href: `/precompiled-files/${preview.protocol}/${preview.authority}/${preview.identifier}/${preview.version.major}.${preview.version.minor}`,
       label: preview.title,
       isCurrent:
-        `/precompiled-files/${preview.protocol}/${preview.authority}/${preview.identifier}` ==
+        `/precompiled-files/${preview.protocol}/${preview.authority}/${preview.identifier}/${preview.version.major}.${preview.version.minor}` ===
         route.fullPath,
     })
   }
@@ -253,13 +263,16 @@ const authority: string = Array.isArray(route.params.authority)
 const id: string = Array.isArray(route.params.id)
   ? route.params.id[0]
   : route.params.id
+const version: string = Array.isArray(route.params.version)
+  ? route.params.version[0]
+  : route.params.version
 
 let precompiledFiles: PrecompiledFiles | undefined
 let precompiledFilesError: FetchError | undefined
 
 try {
   precompiledFiles = <PrecompiledFiles>(
-    await getPrecompiledFiles(protocol, authority, id)
+    await getPrecompiledFiles(protocol, authority, id, version)
   )
 } catch (error: any) {
   precompiledFilesError = error
@@ -280,7 +293,7 @@ const errorIsOpen = ref(false)
 const downloadError = { statusCode: 500, statusMessage: '' }
 
 let downloadOptions: DownloadOptions
-let downloadMetaDataIdentifier: string
+let metadataDownloadOptions: MetaDataDownloadOptions
 const datatableRef = ref()
 
 const columns = [
@@ -315,6 +328,7 @@ const metaData = [
     subtitle: t('precompiledFilePage.meta_data_2'),
     data: precompiledFiles?.datasetPersistentId,
   },
+
   {
     subtitle: t('precompiledFilePage.meta_data_3'),
     data: precompiledFiles?.publicationDate,
@@ -332,10 +346,14 @@ const metaData = [
   },
   {
     subtitle: t('precompiledFilePage.meta_data_6'),
-    data: precompiledFiles?.description,
+    data: `${precompiledFiles?.version.major}.${precompiledFiles?.version.minor}`,
   },
   {
     subtitle: t('precompiledFilePage.meta_data_7'),
+    data: precompiledFiles?.description,
+  },
+  {
+    subtitle: t('precompiledFilePage.meta_data_8'),
     data: precompiledFiles?.subject,
   },
 ]
@@ -348,15 +366,18 @@ async function onSubmit() {
     datatableRef.value.deselectAll()
   }
   if (downloadOptions.identifier) {
-    await download(downloadOptions, downloadMetaDataIdentifier)
+    await download(downloadOptions, metadataDownloadOptions)
   }
   isLoading.value = false
 }
 
-function openDialog(options: DownloadOptions, metaDataIdentifier: string) {
+function openDialog(
+  options: DownloadOptions,
+  optionsMeta: MetaDataDownloadOptions,
+) {
   emit('open')
   downloadOptions = options
-  downloadMetaDataIdentifier = metaDataIdentifier
+  metadataDownloadOptions = optionsMeta
   isOpen.value = true
 }
 function closeDialog() {
@@ -371,13 +392,12 @@ function openDownloadErrorDialog(statusCode: number, statusMessage: string) {
 /**
  * Fetches a Dataset or Datafile(s) and the metadata of the compilation from the server, zipps the files and initiates a download by the clients browser.
  * All files will be downloaded as zip files.
- * @param identifier Identifier of the file or dataset.
- * @param isDataset True, if a dataset should be downloaded.
- * @param filename How the downloaded dataset or file should be named.
+ * @param downloadOptions includes { identifier, isDataset, version? } => if isDataset is false, individual file identifier need to be provided as the identifier, else a dataset identifier and a version is required.
+ * @param metadataDownloadOptions includes { identifier, version } => dataset identifier and the version of the dataset
  */
 async function download(
   downloadOptions: DownloadOptions,
-  downloadMetaDataIdentifier: string,
+  metadataDownloadOptions: MetaDataDownloadOptions,
 ) {
   let response: Blob | undefined
   let metadataResponse: string | undefined
@@ -385,14 +405,27 @@ async function download(
   try {
     if (downloadOptions.isDataset) {
       response = <Blob>(
-        await getPrecompiledDatasetZip(downloadOptions.identifier)
+        await getPrecompiledDatasetZip(
+          downloadOptions.identifier,
+          `${downloadOptions.version.major}.${downloadOptions.version.minor}`,
+        )
+      )
+      metadataResponse = <string>(
+        await getPrecompiledMetadataFile(
+          metadataDownloadOptions.identifier,
+          `${metadataDownloadOptions.version.major}.${metadataDownloadOptions.version.minor}`,
+        )
       )
     } else {
       response = <Blob>await getPrecompiledZip(downloadOptions.identifier)
+      metadataResponse = <string>(
+        await getPrecompiledMetadataFile(
+          metadataDownloadOptions.identifier,
+          `${metadataDownloadOptions.version.major}.${metadataDownloadOptions.version.minor}`,
+          downloadOptions.identifier,
+        )
+      )
     }
-    metadataResponse = <string>(
-      await getPrecompiledMetadataFile(downloadMetaDataIdentifier)
-    )
   } catch (error: any) {
     responseError = error
   }
