@@ -60,4 +60,8 @@ export default {
   tabheader_1: 'Files',
   tabheader_2: 'Meta',
   error_redirect_button: 'Return home.',
+  version_hint:
+    'You are currently viewing an older version ({ current_version }) of this dataset. You can find the latest version ({latest_version}) {link_latest_version}. All versions can be found on {link_all_versions}.',
+  link_latest_version: 'here',
+  link_all_versions: 'GRO.data',
 }
