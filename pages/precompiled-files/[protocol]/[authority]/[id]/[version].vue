@@ -61,7 +61,52 @@
               </button>
             </div>
           </div>
-
+          <div
+            v-if="
+              latestVersion?.major !== precompiledFiles.version.major ||
+              latestVersion.minor !== precompiledFiles.version.minor
+            "
+            class="bg-primary-50 dark:bg-zinc-700 rounded-2xl p-3 flex items-center justify-start space-x-4"
+          >
+            <Icon
+              :name="'fluent:info-24-filled'"
+              class="h-6 w-6 shrink-0 text-primary"
+            ></Icon>
+            <i18n-t
+              keypath="precompiledFilePage.version_hint"
+              tag="p"
+              scope="global"
+            >
+              <template v-slot:current_version>
+                {{
+                  `${precompiledFiles.version.major}.${precompiledFiles.version.minor}`
+                }}
+              </template>
+              <template v-slot:latest_version>
+                {{ `${latestVersion?.major}.${latestVersion?.minor}` }}
+              </template>
+              <template v-slot:link_latest_version>
+                <NuxtLink
+                  :to="
+                    links.find((link) => {
+                      return link.label === precompiledFiles?.title
+                    })?.href
+                  "
+                  class="underline underline-offset-4 text-primary dark:text-primary-100"
+                >
+                  {{ $t('precompiledFilePage.link_latest_version') }}
+                </NuxtLink>
+              </template>
+              <template v-slot:link_all_versions>
+                <NuxtLink
+                  :to="precompiledFiles.persistentUrl"
+                  class="underline underline-offset-4 text-primary dark:text-primary-100"
+                >
+                  {{ $t('precompiledFilePage.link_all_versions') }}
+                </NuxtLink>
+              </template>
+            </i18n-t>
+          </div>
           <BaseTabs :headers="tabHeaders" class="pt-4">
             <template #[fileslot]>
               <div class="py-4">
@@ -155,7 +200,6 @@
       <PrecompiledFilesConcept />
     </div>
   </PageContainer>
-  <div @submit="console.log('SUBMIT')"></div>
   <BaseDialog
     :closable="true"
     :title="t('precompiledFilePage.license_header')"
@@ -274,9 +318,17 @@ try {
   precompiledFiles = <PrecompiledFiles>(
     await getPrecompiledFiles(protocol, authority, id, version)
   )
+  console.log(precompiledFiles)
 } catch (error: any) {
   precompiledFilesError = error
 }
+
+const latestVersion = precompiledFilePreviewArr?.find((preview) => {
+  return (
+    `${preview.protocol}:${preview.authority}/${preview.identifier}` ===
+    precompiledFiles?.datasetPersistentId
+  )
+})?.version
 
 const tabHeaders = [
   t('precompiledFilePage.tabheader_1'),
