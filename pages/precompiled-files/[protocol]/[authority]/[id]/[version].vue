@@ -318,7 +318,6 @@ try {
   precompiledFiles = <PrecompiledFiles>(
     await getPrecompiledFiles(protocol, authority, id, version)
   )
-  console.log(precompiledFiles)
 } catch (error: any) {
   precompiledFilesError = error
 }
