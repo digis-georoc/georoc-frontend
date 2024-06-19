@@ -3,7 +3,7 @@ import type { TreeNode } from 'primevue/tree'
 
 declare global {
   interface QueryFilter {
-    name: typeof QueryKey[keyof typeof QueryKey]
+    name: (typeof QueryKey)[keyof typeof QueryKey]
     value: any
   }
 
@@ -322,12 +322,19 @@ declare global {
     identifier: number | number[]
     filetitle: string
   }
-  type DownloadOptions = DownloadOptionsDataset | DownloadOptionsFiles
+  type DataDownloadOptions = DownloadOptionsDataset | DownloadOptionsFiles
 
   interface MetaDataDownloadOptions {
     identifier: string
     version: Version
   }
+
+  interface DownloadOptions {
+    dataOptions: DataDownloadOptions
+    metadataOptions: MetaDataDownloadOptions
+    license: PrecompiledFiles['license']
+  }
+
   interface RockTypeState {
     nodes: TreeNode[]
     selected: TreeNode[]
