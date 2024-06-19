@@ -200,6 +200,20 @@ async function getStatisticsForClient(): Promise<{
   return { data, error, pending }
 }
 
+async function downloadFilteredXlsx(
+  params: URLSearchParams,
+): Promise<Blob | null> {
+  const res: Response = await fetch(`/api/download/filtered?format=xlsx&${params}` )
+  return await res.blob()
+}
+
+async function downloadFilteredCsv(
+  params: URLSearchParams,
+): Promise<string | null> {
+  const res: Response = await fetch(`/api/download/filtered?format=csv&${params}` )
+  return await res.text()
+}
+
 async function baseAPIRequest<T>(path: string): Promise<T> {
   const { data, error } = await useFetch<T>(path)
   if (!data.value)
@@ -228,4 +242,6 @@ export {
   getPrecompiledPreview,
   getStatisticsForClient,
   getPrecompiledPreviewForClient,
+  downloadFilteredXlsx,
+  downloadFilteredCsv
 }

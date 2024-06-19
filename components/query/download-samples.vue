@@ -6,7 +6,10 @@ import {queryToText} from "~/utils/query-to-text";
 interface DownloadFile {
   name: string
   content: Blob | string
+  binary?: boolean
 }
+
+const queryStore = useQueryStore()
 
 const dialogVisible = ref(false)
 const hasCsv = ref(false)
@@ -31,19 +34,37 @@ async function download() {
     document.getElementById('map')?.parentElement
   )
   const metaFileContent = createMetaFileContent()
-  const date = new Date()
-  const fileNamePrefix = `GEOROC_database_data_download_${date.toISOString()}`
-  generateZip(`${fileNamePrefix}.zip`, [{
-    name: `${fileNamePrefix}_map.png`,
-    content: imageContent
-  }, {
-    name: `${fileNamePrefix}_metadata.txt`,
-    content: metaFileContent
-  }])
+  const fileNamePrefix = getFilePrefix(new Date())
 
+  let csvContent = ''
+  if (hasCsv.value) {
+    csvContent = await downloadFilteredCsv(queryStore.createUrlParams())
+  }
+
+  let xlsxContent = null
+  if (hasXlsx.value) {
+    xlsxContent = await downloadFilteredXlsx(queryStore.createUrlParams())
+  }
+
+  generateZip(`${fileNamePrefix}.zip`, [
+      {
+        name: `${fileNamePrefix}_map.png`,
+        content: imageContent
+      }, {
+        name: `${fileNamePrefix}_metadata.txt`,
+        content: metaFileContent
+      },
+        ...(xlsxContent ? [{
+        name: `${fileNamePrefix}_data.xlsx`,
+        content: xlsxContent,
+      }] : []),
+    ...(csvContent ? [{
+      name: `${fileNamePrefix}_data.csv`,
+      content: csvContent,
+    }] : [])
+    ]
+  )
 }
-
-
 
 async function generateZip(name: string, files: DownloadFile[]) {
   const zip = new JSZip()
@@ -66,6 +87,11 @@ async function generateZip(name: string, files: DownloadFile[]) {
   document.body.removeChild(link)
   window.URL.revokeObjectURL(url)
 }
+
+function getFilePrefix(date: Date) {
+  return 'GEOROC_database_data_download_' +
+    `${date.getFullYear()}${('0' + (date.getMonth()) + 1).slice(-2)}${('0' + (date.getDate()) + 1).slice(-2)}_${date.getHours()}${date.getMinutes()}`
+}
 </script>
 
 <template>
@@ -81,7 +107,7 @@ async function generateZip(name: string, files: DownloadFile[]) {
     class="w-1/2"
   >
     <div v-if="page === 1" class="flex flex-col mb-2 w-[33vw] space-y-2">
-      <p>{{ $t('queryPage.download_data_info_1') }}:</p>
+      <p>{{ $t('queryPage.download_data_info_1') }}</p>
       <div class="flex space-x-4">
         <BaseCheckbox v-model="hasCsv" label="CSV" id="format-csv"></BaseCheckbox>
         <BaseCheckbox v-model="hasXlsx" label="XLSX" id="format-xlsx"></BaseCheckbox>
@@ -107,6 +133,9 @@ async function generateZip(name: string, files: DownloadFile[]) {
       <p>{{ $t('queryPage.download_data_info_2') }}</p>
       <BaseButton
         :text="$t('next')"
+        :disabled="!hasCsv && !hasXlsx"
+        icon="solar:arrow-right-outline"
+        icon-position="right"
         @click="page = 2"
         class="ml-auto"
       />
@@ -150,6 +179,7 @@ async function generateZip(name: string, files: DownloadFile[]) {
       </div>
       <div class="flex justify-end space-x-4 mt-2">
         <BaseButton
+          icon="solar:download-minimalistic-linear"
           :text="$t('precompiledFilePage.agree_button')"
           @click="download"
         ></BaseButton>
