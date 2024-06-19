@@ -43,18 +43,19 @@
               <button
                 class="underline underline-offset-4 text-primary dark:text-primary-100"
                 @click="
-                  openDialog(
-                    {
+                  openDownloadDialog({
+                    dataOptions: {
                       identifier: precompiledFiles.datasetPersistentId,
                       isDataset: true,
                       filetitle: `${precompiledFiles.productionDate}_${precompiledFiles.title}`,
                       version: precompiledFiles.version,
                     },
-                    {
+                    metadataOptions: {
                       identifier: precompiledFiles.datasetPersistentId,
                       version: precompiledFiles.version,
                     },
-                  )
+                    license: precompiledFiles.license,
+                  })
                 "
               >
                 {{ $t('precompiledFilePage.download_complete_dataset_button') }}
@@ -124,17 +125,18 @@
                     <button
                       class="underline underline-offset-4 text-primary dark:text-primary-100"
                       @click="
-                        openDialog(
-                          {
+                        openDownloadDialog({
+                          dataOptions: {
                             identifier: file.id,
                             isDataset: false,
                             filetitle: file.label,
                           },
-                          {
+                          metadataOptions: {
                             identifier: precompiledFiles.datasetPersistentId,
                             version: precompiledFiles.version,
                           },
-                        )
+                          license: precompiledFiles.license,
+                        })
                       "
                     >
                       {{ file.label }}
@@ -143,8 +145,8 @@
                   <template #selectEventButton="{ selected, allSelected }">
                     <BaseButton
                       @click="
-                        openDialog(
-                          {
+                        openDownloadDialog({
+                          dataOptions: {
                             identifier: selected.map(
                               (element: any) => element.id,
                             ),
@@ -155,11 +157,12 @@
                                 ? selected[0].label
                                 : `${precompiledFiles.productionDate}_${precompiledFiles.title}_SELECTION`,
                           },
-                          {
+                          metadataOptions: {
                             identifier: precompiledFiles.datasetPersistentId,
                             version: precompiledFiles.version,
                           },
-                        )
+                          license: precompiledFiles.license,
+                        })
                       "
                       :text="t('precompiledFilePage.download_selection_button')"
                     ></BaseButton>
@@ -200,73 +203,15 @@
       <PrecompiledFilesConcept />
     </div>
   </PageContainer>
-  <BaseDialog
-    :closable="true"
-    :title="t('precompiledFilePage.license_header')"
-    v-model="isOpen"
-  >
-    <div class="space-y-2 px-1">
-      <p class="">
-        {{ $t('precompiledFilePage.license_paragraph_1') }}
-        {{ $t('precompiledFilePage.license_paragraph_2') }}
-      </p>
-      <h2 class="font-bold">
-        {{ $t('precompiledFilePage.license_subheader') }}
-      </h2>
-      <i18n-t
-        keypath="precompiledFilePage.license_paragraph_3"
-        tag="p"
-        scope="global"
-      >
-        <template v-slot:license_link_1>
-          <NuxtLink
-            to="https://dataverse.org/best-practices/dataverse-community-norms"
-            class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
-          >
-            {{ $t('precompiledFilePage.license_link_1') }}</NuxtLink
-          >
-        </template>
-        <template v-slot:license_link_2>
-          <NuxtLink
-            to="/how-to-cite"
-            class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
-            >{{ $t('precompiledFilePage.license_link_2') }}</NuxtLink
-          >
-        </template>
-      </i18n-t>
-      <p>
-        <NuxtLink
-          :to="precompiledFiles?.license.uri"
-          class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
-          >{{ precompiledFiles?.license.name }}</NuxtLink
-        >
-      </p>
-    </div>
-    <div class="flex justify-end space-x-4 mt-2">
-      <BaseButton
-        :text="`${t('precompiledFilePage.agree_button')}`"
-        @click="onSubmit"
-      ></BaseButton>
-      <BaseButton
-        :text="`${t('precompiledFilePage.cancel_button')}`"
-        @click="closeDialog"
-      ></BaseButton>
-    </div>
-  </BaseDialog>
-
-  <BaseDialog
-    :closable="true"
-    :title="`${downloadError.statusCode}: ${t('oh_no_something_went_wrong')}`"
-    v-model="errorIsOpen"
-  >
-    <p>{{ downloadError.statusMessage }}</p>
-  </BaseDialog>
-
-  <BaseLoadingIndicator v-model="isLoading"></BaseLoadingIndicator>
+  <PrecompiledFilesDownloadDialog
+    v-if="precompiledFiles"
+    v-model="downloadDialogIsOpen"
+    @submit="downloadDialogOnSubmit()"
+    :options="downloadOptions"
+  />
 </template>
 <script setup lang="ts">
 import { FetchError } from 'ofetch'
-import JSZip from 'jszip'
 const { t } = useI18n()
 const route = useRoute()
 
@@ -336,15 +281,9 @@ const tabHeaders = [
 const fileslot = `${tabHeaders[0]}-slot`
 const metaslot = `${tabHeaders[1]}-slot`
 
-const emit = defineEmits(['submit', 'open', 'close'])
-const isOpen = ref(false)
-const isLoading = ref(false)
-const errorIsOpen = ref(false)
-
-const downloadError = { statusCode: 500, statusMessage: '' }
-
 let downloadOptions: DownloadOptions
-let metadataDownloadOptions: MetaDataDownloadOptions
+const downloadDialogIsOpen = ref(false)
+
 const datatableRef = ref()
 
 const columns = [
@@ -408,104 +347,15 @@ const metaData = [
     data: precompiledFiles?.subject,
   },
 ]
-
-async function onSubmit() {
-  emit('submit')
-  isOpen.value = false
-  isLoading.value = true
+const openDownloadDialog = (options: DownloadOptions) => {
+  downloadOptions = options
+  downloadDialogIsOpen.value = true
+}
+const downloadDialogOnSubmit = () => {
   if (datatableRef.value != null) {
     datatableRef.value.deselectAll()
   }
-  if (downloadOptions.identifier) {
-    await download(downloadOptions, metadataDownloadOptions)
-  }
-  isLoading.value = false
 }
-
-function openDialog(
-  options: DownloadOptions,
-  optionsMeta: MetaDataDownloadOptions,
-) {
-  emit('open')
-  downloadOptions = options
-  metadataDownloadOptions = optionsMeta
-  isOpen.value = true
-}
-function closeDialog() {
-  emit('close')
-  isOpen.value = false
-}
-function openDownloadErrorDialog(statusCode: number, statusMessage: string) {
-  downloadError.statusCode = statusCode
-  downloadError.statusMessage = statusMessage
-  errorIsOpen.value = true
-}
-/**
- * Fetches a Dataset or Datafile(s) and the metadata of the compilation from the server, zipps the files and initiates a download by the clients browser.
- * All files will be downloaded as zip files.
- * @param downloadOptions includes { identifier, isDataset, version? } => if isDataset is false, individual file identifier need to be provided as the identifier, else a dataset identifier and a version is required.
- * @param metadataDownloadOptions includes { identifier, version } => dataset identifier and the version of the dataset
- */
-async function download(
-  downloadOptions: DownloadOptions,
-  metadataDownloadOptions: MetaDataDownloadOptions,
-) {
-  let response: Blob | undefined
-  let metadataResponse: string | undefined
-  let responseError: FetchError | undefined
-  try {
-    if (downloadOptions.isDataset) {
-      response = <Blob>(
-        await getPrecompiledDatasetZip(
-          downloadOptions.identifier,
-          `${downloadOptions.version.major}.${downloadOptions.version.minor}`,
-        )
-      )
-      metadataResponse = <string>(
-        await getPrecompiledMetadataFile(
-          metadataDownloadOptions.identifier,
-          `${metadataDownloadOptions.version.major}.${metadataDownloadOptions.version.minor}`,
-        )
-      )
-    } else {
-      response = <Blob>await getPrecompiledZip(downloadOptions.identifier)
-      metadataResponse = <string>(
-        await getPrecompiledMetadataFile(
-          metadataDownloadOptions.identifier,
-          `${metadataDownloadOptions.version.major}.${metadataDownloadOptions.version.minor}`,
-          downloadOptions.identifier,
-        )
-      )
-    }
-  } catch (error: any) {
-    responseError = error
-  }
-  if (responseError) {
-    openDownloadErrorDialog(
-      responseError.statusCode ?? 500,
-      responseError.statusMessage ?? '',
-    )
-    return
-  }
-  if (response && metadataResponse) {
-    const zip = new JSZip()
-    await zip.loadAsync(new Blob([response], { type: response.type }))
-    zip.file('COMPILATION_METADATA.json', metadataResponse)
-    const file: Blob = <Blob>await zip.generateAsync({ type: 'blob' })
-
-    const link = document.createElement('a')
-    const url = URL.createObjectURL(file)
-
-    link.href = url
-    link.download = downloadOptions.filetitle.split('.')[0]
-    document.body.appendChild(link)
-    link.click()
-
-    document.body.removeChild(link)
-    window.URL.revokeObjectURL(url)
-  }
-}
-
 /**
  * Formats an Array of authornames as a string where the names are seperated by a comma.
  * @param authors Author-array.
