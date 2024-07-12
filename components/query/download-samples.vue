@@ -16,9 +16,15 @@ const hasCsv = ref(false)
 const hasXlsx = ref(false)
 const page = ref(1)
 
+const isLoading = ref(false)
+const downloadReady = ref(false)
+
 function openDialog() {
   dialogVisible.value = true
   page.value = 1
+  downloadReady.value = false
+  hasCsv.value = false
+  hasXlsx.value = false
 }
 
 function createMetaFileContent(dateString: string) {
@@ -32,6 +38,7 @@ function createMetaFileContent(dateString: string) {
   return content
 }
 async function download() {
+  isLoading.value = true
 
   const downloadDatetime = getDownloadDatetime(new Date())
 
@@ -69,6 +76,11 @@ async function download() {
     }] : [])
     ]
   )
+
+  isLoading.value = false
+  downloadReady.value = true
+
+  setTimeout(() => dialogVisible.value = false, 3000)
 }
 
 async function generateZip(name: string, files: DownloadFile[]) {
@@ -124,8 +136,8 @@ function getDownloadDatetime(date: Date) {
     <div v-if="page === 1" class="flex flex-col mb-2 w-[50vw] space-y-3">
       <p>{{ $t('queryPage.download_data_info_1') }}:</p>
       <div class="flex space-x-4">
-        <BaseCheckbox v-model="hasCsv" label="CSV" id="format-csv" class="hover:bg-zinc-100 p-2 pr-8 rounded"></BaseCheckbox>
-        <BaseCheckbox v-model="hasXlsx" label="XLSX" id="format-xlsx" class="hover:bg-zinc-100 p-2 pr-8 rounded"></BaseCheckbox>
+        <BaseCheckbox v-model="hasCsv" label="CSV" id="format-csv" class="hover:bg-zinc-100 dark:hover:bg-zinc-700 p-2 pr-8 rounded"></BaseCheckbox>
+        <BaseCheckbox v-model="hasXlsx" label="XLSX" id="format-xlsx" class="hover:bg-zinc-100 dark:hover:bg-zinc-700 p-2 pr-8 rounded"></BaseCheckbox>
       </div>
       <h3 class="font-semibold border-t pt-4">{{ $t('Contents Summary') }}:</h3>
       <p>The data will be downloaded as zip file. It contains:</p>
@@ -161,7 +173,11 @@ function getDownloadDatetime(date: Date) {
       />
     </div>
     <div v-if="page === 2" class="flex flex-col mb-2 w-[50vw] space-y-2">
-      <div class="space-y-2 px-1">
+      <div v-if="downloadReady" class="py-12 flex justify-center items-center space-x-2">
+        <Icon name="ic:round-check" class="text-5xl text-lime-500 dark:text-lime-600"/>
+        <span class="text-zinc-600 dark:text-zinc-400">{{ $t('queryPage.download_is_ready')}}</span>
+      </div>
+      <div v-else class="space-y-2 px-1">
         <p class="">
           {{ $t('precompiledFilePage.license_paragraph_1') }}
           {{ $t('precompiledFilePage.license_paragraph_2') }}
@@ -197,10 +213,10 @@ function getDownloadDatetime(date: Date) {
           >CC BY-SA 4.0</NuxtLink>
         </p>
       </div>
-      <div class="flex justify-end space-x-4 mt-2">
+      <div v-if="!downloadReady" class="flex justify-end space-x-4 mt-2">
         <BaseButton
-          icon="solar:download-minimalistic-linear"
-          :text="$t('precompiledFilePage.agree_button')"
+          :icon="isLoading ? 'line-md:loading-loop' : 'solar:download-minimalistic-linear'"
+          :text="isLoading ? $t('queryPage.preparing_download') : $t('precompiledFilePage.agree_button')"
           @click="download"
         ></BaseButton>
         <BaseButton
