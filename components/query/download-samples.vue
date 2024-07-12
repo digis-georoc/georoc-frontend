@@ -21,22 +21,27 @@ function openDialog() {
   page.value = 1
 }
 
-function createMetaFileContent() {
+function createMetaFileContent(dateString: string) {
   let content = 'GEOROC 2.0 Download Metadata: \n\n'
   content += 'This file contains metadata for the downloaded content from GEOROC website (www.georoc.eu).\n\n'
+  content += `Download Time: ${dateString}\n`
   content += `Shareble URL: ${window.location.href}\n\n`
+  content += `Amount Samples: ${queryStore.listResult?.totalCount} \n\n`
   content += queryToText()
 
   return content
 }
 async function download() {
+
+  const downloadDatetime = getDownloadDatetime(new Date())
+
   const imageContent = domtoimage.toBlob(
     document.getElementById('map')?.parentElement
   )
-  const metaFileContent = createMetaFileContent()
-  const fileNamePrefix = getFilePrefix(new Date())
+  const metaFileContent = createMetaFileContent(downloadDatetime)
+  const fileNamePrefix = getFilePrefix(downloadDatetime)
 
-  let csvContent = ''
+  let csvContent = null
   if (hasCsv.value) {
     csvContent = await downloadFilteredCsv(queryStore.createUrlParams())
   }
@@ -88,9 +93,20 @@ async function generateZip(name: string, files: DownloadFile[]) {
   window.URL.revokeObjectURL(url)
 }
 
-function getFilePrefix(date: Date) {
-  return 'GEOROC_database_data_download_' +
-    `${date.getFullYear()}${('0' + (date.getMonth()) + 1).slice(-2)}${('0' + (date.getDate()) + 1).slice(-2)}_${date.getHours()}${date.getMinutes()}`
+function getFilePrefix(dateString: string) {
+  return 'GEOROC_database_data_download_' + dateString
+
+}
+
+function getDownloadDatetime(date: Date) {
+  const year = date.getFullYear()
+  const month = ('0' + (date.getMonth() + 1)).slice(-2)
+  const day = ('0' + date.getDate()).slice(-2)
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  const secs = date.getSeconds()
+
+  return `${year}-${month}-${day}_${hours}${minutes}${secs}`
 }
 </script>
 
