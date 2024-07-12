@@ -115,7 +115,7 @@ function getDownloadDatetime(date: Date) {
     :text="$t('download_data')"
     @click="openDialog"
     icon="solar:download-minimalistic-linear"
-    class="shadow-lg whitespace-nowrap"
+    class="shadow-lg whitespace-nowrap rounded-l-none"
   />
   <BaseDialog
     v-model="dialogVisible"
