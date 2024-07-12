@@ -120,28 +120,32 @@ function getDownloadDatetime(date: Date) {
   <BaseDialog
     v-model="dialogVisible"
     :title="$t('download_data')"
-    class="w-1/2"
   >
-    <div v-if="page === 1" class="flex flex-col mb-2 w-[33vw] space-y-2">
-      <p>{{ $t('queryPage.download_data_info_1') }}</p>
+    <div v-if="page === 1" class="flex flex-col mb-2 w-[50vw] space-y-3">
+      <p>{{ $t('queryPage.download_data_info_1') }}:</p>
       <div class="flex space-x-4">
-        <BaseCheckbox v-model="hasCsv" label="CSV" id="format-csv"></BaseCheckbox>
-        <BaseCheckbox v-model="hasXlsx" label="XLSX" id="format-xlsx"></BaseCheckbox>
+        <BaseCheckbox v-model="hasCsv" label="CSV" id="format-csv" class="hover:bg-zinc-100 p-2 pr-8 rounded"></BaseCheckbox>
+        <BaseCheckbox v-model="hasXlsx" label="XLSX" id="format-xlsx" class="hover:bg-zinc-100 p-2 pr-8 rounded"></BaseCheckbox>
       </div>
-      <h3 class="font-bold border-t pt-2">{{ $t('Contents Summary') }}:</h3>
+      <h3 class="font-semibold border-t pt-4">{{ $t('Contents Summary') }}:</h3>
+      <p>The data will be downloaded as zip file. It contains:</p>
       <ul class="list-disc pl-4">
         <li v-if="hasCsv">
-          a CSV file with the sample data, the regarding metadata, a time stamp
+          a csv file with the sample data
         </li>
         <li v-if="hasXlsx">
-          a XLSX file with two worksheets - the sample data in the first and the regarding metadata, a time stamp in the second worksheet
+          a xlsx file with the sample data
         </li>
-        <li>metadata text file with:
-          <ul class="ml-2 list-[circle]">
+        <li>a txt file with the regarding metadata:
+          <ul class="ml-4 list-[circle]">
+            <li>a time stamp of the download</li>
             <li>your filter settings</li>
+            <li>number of found samples</li>
             <li>the URL to recall or share your settings</li>
-            <li>bounding box coordinates of your map section</li>
+            <li>the coordinates of your map section</li>
             <li>information about how to cite these data</li>
+            <li>references</li>
+            <li>an image file with the map section as presented</li>
           </ul>
         </li>
         <li>an image file with the map section as presented</li>
@@ -156,7 +160,7 @@ function getDownloadDatetime(date: Date) {
         class="ml-auto"
       />
     </div>
-    <div v-if="page === 2" class="flex flex-col mb-2 w-[33vw] space-y-2">
+    <div v-if="page === 2" class="flex flex-col mb-2 w-[50vw] space-y-2">
       <div class="space-y-2 px-1">
         <p class="">
           {{ $t('precompiledFilePage.license_paragraph_1') }}
