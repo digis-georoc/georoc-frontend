@@ -38,7 +38,7 @@ const selectedLocation = ref<{ samples: number[] } | null>(null)
 const selectedMarker = ref<Layer | null>(null)
 const hasFilterChanges = computed(() => queryStore.hasChanges)
 
-function latLngToLngLat(latlng: LatLng) {
+function latLngToLngLat(latlng: LatLng): number[] {
   return [latlng.lng, latlng.lat];
 }
 
@@ -201,7 +201,8 @@ function setBboxFilter() {
     latLngToLngLat(bounds.getSouthEast()),
     latLngToLngLat(bounds.getNorthEast()),
     latLngToLngLat(bounds.getNorthWest()),
-  ];
+  ]
+  .map(corner => [Number(corner[0].toFixed(4)), Number(corner[1].toFixed(4))]);
 
   queryStore.setBboxFilter({
     name: QueryKey.Bbox,

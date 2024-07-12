@@ -7,6 +7,11 @@ declare global {
     value: any
   }
 
+  interface BboxQueryFilter {
+    name: (typeof QueryKey)[keyof typeof QueryKey]
+    value: number[][]
+  }
+
   interface QueryListItem {
     sampleID: number
     sampleName: string
@@ -53,7 +58,7 @@ declare global {
     filters: {
       active: QueryFilter[]
       material: QueryFilter | null
-      bbox: QueryFilter | null
+      bbox: BboxQueryFilter | null
       WRGL: QueryFilter[]
       INC: QueryFilter[]
       MIN: QueryFilter[]

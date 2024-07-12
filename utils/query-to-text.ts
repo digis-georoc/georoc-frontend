@@ -2,12 +2,6 @@ import type { TreeNode } from "primevue/tree";
 import { getCleanChildKey } from '~/composables/tree'
 
 const maps = {
-  [QueryKey.Material]: (): string => {
-    return ''
-  },
-  [QueryKey.Bbox]: (): string => {
-    return ''
-  },
   [QueryKey.Polygon]: (): string => {
     return ''
   },
@@ -100,16 +94,21 @@ function getMaterialLabel(value: string) {
   if (value === MaterialKeys.MIN) return 'Mineral'
 }
 
+function getBoundingBoxString(bbox: BboxQueryFilter | null) {
+  const cornersMap = ['SW', 'SE', 'NE', 'NW']
+  return bbox?.value.map((corner, i) => `${cornersMap[i]}: ${corner.join(', ')}`).join('  -  ')
+}
+
 export function queryToText() {
   const queryStore = useQueryStore()
 
   const activeQuery = queryStore.filters.active
 
   let text = 'Filter Settings:\n'
-  text += '========================================\n\n'
+  text += '------------------------------------------------\n\n'
+  text += `Bounding Box: ${getBoundingBoxString(queryStore.filters.bbox)}\n\n`
 
-  const material = getMaterialLabel(queryStore.filters.material?.value)
-  text += `Material: ${material}\n`
+  text += `Material: ${getMaterialLabel(queryStore.filters.material?.value)}\n`
 
   text += activeQuery.reduce((acc, cur) => {
     const mappingFunc = maps[cur.name]

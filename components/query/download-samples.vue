@@ -28,7 +28,8 @@ function openDialog() {
 }
 
 function createMetaFileContent(dateString: string) {
-  let content = 'GEOROC 2.0 Download Metadata: \n\n'
+  let content = 'GEOROC 2.0 Download Metadata: \n'
+  content += '==============================================================\n\n'
   content += 'This file contains metadata for the downloaded content from GEOROC website (www.georoc.eu).\n\n'
   content += `Download Time: ${dateString}\n`
   content += `Shareble URL: ${window.location.href}\n\n`
@@ -120,6 +121,7 @@ function getDownloadDatetime(date: Date) {
 
   return `${year}-${month}-${day}_${hours}${minutes}${secs}`
 }
+
 </script>
 
 <template>
