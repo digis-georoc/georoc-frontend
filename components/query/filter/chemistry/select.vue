@@ -88,22 +88,6 @@ onMounted(async () => {
 
 watch(selectedKeys, (value) => emit('update:modelValue', mapSelectionKeysToNodes(value)))
 
-async function loadChildren(node: TreeNode) {
-  const index = nodes.value.findIndex(({ key }) => node.key === key)
-
-  if (index === -1 || !nodes.value[index]) return
-  if (nodes.value[index].children.length > 0) return
-
-  loadingChildren.value = true
-  const elements = await getElements(nodes.value[index].key)
-  nodes.value[index].children = elements
-          ?.data
-          .map(({ value, label, unit }) => ({key: generateChildKey(node.key, value), label, children: [], data: { min: null, max: null, unit }}))
-      ?? []
-  store.nodes = nodes.value
-  loadingChildren.value = false
-}
-
 function mapSelectionKeysToNodes(keys: TreeSelectionKeys): TreeNode[] {
   if (keys['more_button']) {
     //TODO: Ugly hack to remove keys that came from clicking the "load more" button.
@@ -164,7 +148,6 @@ function parseToLatex(str: string) {
   }
 
   return ''
-  // console.log(latexValue)
 }
 
 function loadMoreButtonHandler(node: TreeNode) {

@@ -19,7 +19,7 @@
     "@types/leaflet-freedraw": "^2.13.6",
     "@types/node": "^18",
     "katex": "^0.16.11",
-    "nuxt": "^3.8.1",
+    "nuxt": "^3.12.3",
     "nuxt-headlessui": "^1.1.4",
     "nuxt-icon": "^0.4.1",
     "prettier": "3.1.1",
