@@ -70,16 +70,21 @@ function onButtonClick(node) {
        'hover:border-primary dark:hover:border-primary ' +
        'outline-none focus:ring-2 focus:border-primary focus:ring-primary-100 dark:focus:ring-primary',
       searchIcon: 'w-4 h-4 absolute left-3 top-1/2 -mt-2',
-      checkboxContainer: 'me-2',
-      checkbox: options => { return {
-        class: [
-          'border-2 rounded-md w-[22px] h-[22px] transition-colors flex items-center justify-center',
-          {
-            'bg-zinc-50 dark:bg-zinc-700 dark:border-zinc-600 hover:border-primary dark:hover:border-primary': !options.context.checked,
-            'bg-primary border-primary dark:border-primary text-white hover:bg-primary-700': options.context.checked,
-          }
-        ]
-      }},
+      nodeCheckbox: options => {
+        return {
+          root: {
+            class: [
+              'me-2 border-2 rounded-md w-[22px] h-[22px] transition-colors flex items-center justify-center',
+              {
+                'bg-zinc-50 dark:bg-zinc-700 dark:border-zinc-600 hover:border-primary-300 dark:hover:border-primary': !options.context.checked,
+                'bg-primary border-primary dark:border-primary text-white hover:bg-primary-700': options.context.checked,
+              }
+            ]
+          },
+          input: 'hidden',
+          box: 'flex items-center'
+        }
+      },
       container: 'me-4',
       content: options => {
         return {
