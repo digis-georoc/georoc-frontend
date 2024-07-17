@@ -43,7 +43,8 @@ function onUpdate(data: { min: number, max: number }, itemIndex: number, childIn
   if (itemIndex < 0) return
   if (!Array.isArray(_items.value[itemIndex].children)) return
   if (childIndex < 0) return
-  _items.value[itemIndex].children[childIndex].data = data
+  const oldData = _items.value[itemIndex].children[childIndex].data
+  _items.value[itemIndex].children[childIndex].data = {...oldData, ...data}
 
   chemistryStore.selected = [..._items.value]
   useFilter()
@@ -89,7 +90,7 @@ function toQuery(selected: TreeNode[]) {
 
 <template>
   <template v-if="_items.length > 0">
-    <p class="text-sm text-zinc-500 italic mb-4" v-html="$t('queryPage.filter_chemistry_units_message')"></p>
+    <p class="text-sm text-zinc-400 italic mb-4" v-html="$t('queryPage.filter_chemistry_units_message')"></p>
     <div class="flex flex-1 flex-col mb-2" v-for="(item, i) in _items" :key="item.key">
       <h3 class="font-semibold mb-2">{{ item.label }}:</h3>
       <div class="ps-4">
@@ -100,49 +101,58 @@ function toQuery(selected: TreeNode[]) {
             'max-h-auto': isExpandable(item.children?.length ?? 0) && !collapseState[i]
           }"
         >
-          <div class="flex text-sm font-semibold mb-2">
-            <div class="w-5/12 flex-shrink-0">
+          <div class="flex text-sm border-b dark:border-zinc-600 pb-1">
+            <div class="w-3/12 pl-2 flex-shrink-0">
               <h4>{{ $t('element') }}</h4>
             </div>
-            <div class="w-2/12 mr-3">
+            <div class="w-3/12 pl-2">
               <h4>{{ $t('min') }}</h4>
             </div>
-            <div class="w-2/12 mr-3">
+            <div class="w-3/12 pl-2">
               <h4>{{ $t('max') }}</h4>
             </div>
-            <div class="w-2/12">
+            <div class="pl-2 w-2/12">
               <h4>{{ $t('unit') }}</h4>
             </div>
             <div class="w-1/12">
             </div>
           </div>
-          <div class="flex flex-1 mb-3 text-zinc-500 dark:text-zinc-400" v-for="(child, j) in item.children">
-            <div class="w-5/12 flex-shrink-0 flex items-center pr-2" :title="child.label">
-              <span class="overflow-x-auto xl:truncate">{{ child.label }}</span>
-            </div>
-            <div class="w-2/12 mr-3 flex items-center">
-              <BaseInput
+          <div class="rounded">
+            <div class="flex flex-1 text-zinc-500 dark:text-zinc-400 py-1.5 pr-2 rounded hover:bg-zinc-50 dark:hover:bg-zinc-700" v-for="(child, j) in item.children">
+              <div class="w-3/12 flex-shrink-0 flex items-center pl-2 pr-2 py-1 border-r dark:border-zinc-600" :title="child.label">
+                <span class="overflow-x-auto xl:truncate" v-html="child.data?.structuredLabel ?? child.label"></span>
+              </div>
+              <div class="w-3/12 flex items-center px-2 py-1 border-r dark:border-zinc-600">
+                <BaseInput
+                  v-if="child.data?.unit !== 'As in the database'"
                   type="number"
                   placeholder=""
                   size="sm"
                   :model-value="child.data?.min"
                   @update:modelValue="onUpdate({ min: $event, max: child.data.max }, i, j)"
-              />
-            </div>
-            <div class="w-2/12 mr-3 flex items-center">
-              <BaseInput
-                type="number"
-                placeholder=""
-                size="sm"
-                :model-value="child.data?.max"
-                @update:modelValue="onUpdate({ min: child.data.min, max: $event }, i, j)"
-              />
-            </div>
-            <div class="w-2/12 flex items-center">
-              {{ child.data.unit }}
-            </div>
-            <div class="w-1/12 flex items-center justify-end">
-              <BaseButton icon="ic:close" display="outline" size="small" @click="remove(i, j)"/>
+                />
+                <span v-else>-</span>
+              </div>
+              <div class="w-3/12 flex items-center px-2 py-1 border-r dark:border-zinc-600">
+                <BaseInput
+                  v-if="child.data?.unit !== 'As in the database'"
+                  type="number"
+                  placeholder=""
+                  size="sm"
+                  :model-value="child.data?.max"
+                  @update:modelValue="onUpdate({ min: child.data.min, max: $event }, i, j)"
+                />
+                <span v-else>-</span>
+              </div>
+              <div class="w-2/12 flex items-center justify-center text-zinc-500 dark:text-zinc-400 font-light pl-2 py-1">
+                <span v-if="child.data.unit !== 'As in the database'">{{ child.data.unit }}</span>
+                <span v-else :title="child.data.unit">
+                  <Icon name="material-symbols:lock-outline" class="text-zinc-300 dark:text-zinc-500" />
+                </span>
+              </div>
+              <div class="w-1/12 flex items-center justify-end">
+                <BaseButton icon="ic:close" display="flat" class="text-primary" size="small" @click="remove(i, j)"/>
+              </div>
             </div>
           </div>
         </div>
@@ -150,7 +160,8 @@ function toQuery(selected: TreeNode[]) {
           v-if="isExpandable(item.children?.length ?? 0)"
           :text="$t(collapseState[i] ? 'show_all' : 'show_less')"
           size="small"
-          display="outline"
+          display="flat"
+          color="neutral"
           class="w-full relative z-10"
           @click="collapseState[i] = !collapseState[i]"
         />

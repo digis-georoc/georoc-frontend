@@ -28,6 +28,7 @@ watch(_collapsed, (value) => emit('collapsed-change', value))
         icon="carbon:chevron-down"
         class="absolute right-2 top-1/2 -translate-y-1/2"
         display="flat"
+        color="neutral"
         @click="_collapsed = !_collapsed"
       ></BaseButton>
     </div>
@@ -35,7 +36,7 @@ watch(_collapsed, (value) => emit('collapsed-change', value))
       'max-h-[0px]': _collapsed,
       'max-h-auto': !_collapsed
     }">
-      <div class="flex flex-col relative p-4">
+      <div class="flex flex-col relative p-4 pr-3">
         <slot />
       </div>
     </div>

@@ -164,6 +164,10 @@ async function getElements(type: string): Promise<ElementsResponse | null> {
   return data.value
 }
 
+async function getChemistryFilterOptions(): Promise<ChemistryFilterOption[] | null> {
+  return await baseAPIRequest<ChemistryFilterOption[]>('/api/chemistry-filter-options')
+}
+
 async function getElementTypes(): Promise<ElementsResponse | null> {
   return await baseAPIRequest<ElementsResponse>('/api/element-types')
 }
@@ -243,5 +247,6 @@ export {
   getStatisticsForClient,
   getPrecompiledPreviewForClient,
   downloadFilteredXlsx,
-  downloadFilteredCsv
+  downloadFilteredCsv,
+  getChemistryFilterOptions
 }

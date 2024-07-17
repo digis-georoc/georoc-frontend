@@ -43,7 +43,8 @@ const collapsed = ref(false)
         v-if="hasSelected"
         size="small"
         display="flat"
-        class="ml-auto mr-2 self-center text-zinc-400"
+        color="neutral"
+        class="ml-auto mr-2 self-center"
         @click="onReset"
         text="Reset" />
       <BaseButton
@@ -51,7 +52,7 @@ const collapsed = ref(false)
         class="self-start"
         icon="ic:twotone-mode-edit"
         icon-position="left"
-        display="outline"
+        display="flat"
         @click="openDialog"
         :text="$t('Edit')"
         size="small" />
@@ -73,7 +74,7 @@ const collapsed = ref(false)
   </BaseCard>
   <BaseDialog :title="dialogTitle" v-model="isOpen">
     <NuxtErrorBoundary>
-    <slot name="options"/>
+      <slot name="options"/>
       <template #error="{ error }">
         <div class="flex flex-col justify-center items-center h-[400px]">
           <span v-if="error.value.statusCode === 500" class="text-zinc-500 dark:text-zinc-400 font-semibold mb-2">

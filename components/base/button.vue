@@ -2,6 +2,7 @@
   interface Props {
     text?: string,
     display?: 'filled' | 'link' | 'mono' | 'flat' | 'outline' | 'outline-dashed',
+    color: 'primary' | 'neutral',
     size?: 'tiny' | 'small' | 'normal',
     icon?: string | null,
     iconPosition?: 'left' | 'right' | null,
@@ -12,6 +13,7 @@
   const props = withDefaults(defineProps<Props>(), {
     text: '',
     display: 'filled',
+    color: 'primary',
     icon: null,
     size: 'normal',
     iconPosition: 'left',
@@ -63,18 +65,25 @@
   classes['py-1.5 px-2'] = props.size === 'tiny' && !_icon
   classes['text-xs leading-3'] = props.size === 'tiny'
 
-  classes['focus-visible:ring-primary focus-visible:ring-opacity-25 dark:focus-visible:ring-primary-300 dark:focus-visible:ring-opacity-50 bg-primary text-white hover:bg-primary-700 ' +
-  'dark:bg-primary dark:hover:bg-primary'] = props.display === 'filled'
+  classes['focus-visible:ring-primary dark:focus-visible:ring-primary-300 focus-visible:ring-opacity-25 dark:focus-visible:ring-opacity-50'] = props.color === 'primary'
+  classes['focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-300 focus-visible:ring-opacity-25 dark:focus-visible:ring-opacity-50'] = props.color === 'neutral'
 
-  classes['focus:ring-primary focus-visible:ring-opacity-25 dark:focus-visible:ring-primary-300 dark:focus:ring-opacity-50 bg-none text-primary hover:underline '] = props.display === 'link'
+  classes['bg-primary text-white hover:bg-primary-700 ' +
+  'dark:bg-primary dark:hover:bg-primary'] = props.display === 'filled' && props.color === 'primary'
 
-  classes['bg-white text-dark border border-zinc-400 focus:ring-zinc-300 focus:ring-opacity-50 hover:bg-zinc-100 dark:bg-zinc-800'] = props.display === 'mono'
+  classes[`zinc-300 text-zinc-600 dark:text-zinc-700 hover:bg-zinc-400 ` +
+  `dark:bg-zinc-500 dark:hover:bg-zinc-600`] = props.display === 'filled' && props.color === 'neutral'
 
-  classes['bg-none text-primary border border-primary focus-visible:ring-primary-300 focus-visible:ring-opacity-50 hover:bg-primary-50 dark:hover:bg-zinc-800'] = props.display === 'outline' || props.display === 'outline-dashed'
+  classes['bg-none text-primary hover:underline '] = props.display === 'link'
+
+  classes['bg-white text-dark border border-zinc-400 focus:ring-zinc-300 hover:bg-zinc-100 dark:bg-zinc-800'] = props.display === 'mono'
+
+  classes['bg-none text-primary border border-primary-300 hover:bg-primary-50 dark:hover:bg-zinc-800'] = props.display === 'outline' || props.display === 'outline-dashed'
   classes['border-dashed'] = props.display === 'outline-dashed'
 
-  classes['bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-600 ' +
-  'focus-visible:ring-primary dark:focus-visible:ring-primary-300 dark:focus-visible:ring-opacity-50 focus-visible:ring-opacity-25'] = props.display === 'flat'
+  classes['bg-transparent hover:bg-primary-50 dark:hover:bg-zinc-600 text-primary'] = props.display === 'flat' && props.color === 'primary'
+
+  classes['bg-transparent text-zinc-500 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-700 dark:hover:text-zinc-400'] = props.display === 'flat' && props.color === 'neutral'
 
   watch(() => props.disabled, value => classes['opacity-[0.6] pointer-events-none'] = value, { immediate: true })
   watch(() => props.icon, value => _icon = value, { immediate: true })

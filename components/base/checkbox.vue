@@ -14,7 +14,7 @@ const emit = defineEmits<{
 }>()
 </script>
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center cursor-pointer">
     <Checkbox
       :model-value="modelValue"
       @update:modelValue="emit('update:modelValue', $event)"
@@ -24,7 +24,7 @@ const emit = defineEmits<{
       :pt="{
         root: ({ context }) => ({
           class: [
-            'border-2 dark:border-zinc-600 hover:border-primary hover:dark:border-primary rounded-md w-[22px] h-[22px] transition-colors cursor-pointer',
+            'border-2 dark:border-zinc-600 hover:border-primary hover:dark:border-primary rounded-md w-[22px] h-[22px] transition-colors peer',
             {'outline-none border-primary ring ring-opacity-25 ring-primary': context.focused },
             {
               'bg-zinc-50 dark:bg-zinc-700 hover:border-primary': !context.checked,
@@ -46,7 +46,7 @@ const emit = defineEmits<{
     <label
       v-if="label"
       :for="id"
-      class="ml-2 text-sm font-medium text-gray-900 dark:text-zinc-300">
+      class="ml-2 text-sm font-medium text-gray-900 dark:text-zinc-300 cursor-pointer peer-hover:text-primary">
     {{ label }}
     </label>
   </div>

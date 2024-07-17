@@ -7,11 +7,12 @@ const props = withDefaults(defineProps<{
   modelValue: TreeSelectionKeys,
   loadChildren: (node: TreeNode) => void
   loading: boolean
+  filterPlaceholder: string
 }>(),{
-  nodes: [],
-  modelValue: {},
+  nodes: () => <TreeNode[]>[],
+  modelValue: () => <TreeSelectionKeys>{},
   loading: false,
-  loadChildren: () => {}
+  loadChildren: () => {},
 })
 
 const emit = defineEmits<{
@@ -39,6 +40,10 @@ async function onSelect(node: TreeNode) {
 
   emit('update:modelValue', keys)
 }
+
+function onButtonClick(node) {
+  node.data.handler(node)
+}
 </script>
 
 <template>
@@ -50,6 +55,7 @@ async function onSelect(node: TreeNode) {
     :value="nodes"
     :filter="true"
     filterMode="lenient"
+    :filterPlaceholder="filterPlaceholder"
     selectionMode="checkbox"
     class="w-full"
     unstyled
@@ -58,12 +64,12 @@ async function onSelect(node: TreeNode) {
     :loading="loading"
     :pt="{
       root: 'relative',
-      wrapper: 'relative h-[400px] overflow-auto',
+      wrapper: 'relative h-[60vh] overflow-auto',
       filterContainer: 'w-full relative mb-4',
-      filterInput: 'w-full p-2 dark:bg-zinc-700 border dark:border-zinc-500 rounded-lg transition colors ' +
+      input: 'w-full p-2 px-9 dark:bg-zinc-700 border dark:border-zinc-500 rounded-lg transition colors ' +
        'hover:border-primary dark:hover:border-primary ' +
        'outline-none focus:ring-2 focus:border-primary focus:ring-primary-100 dark:focus:ring-primary',
-      searchIcon: 'w-4 h-4 absolute right-3 top-1/2 -mt-2',
+      searchIcon: 'w-4 h-4 absolute left-3 top-1/2 -mt-2',
       checkboxContainer: 'me-2',
       checkbox: options => { return {
         class: [
@@ -75,7 +81,15 @@ async function onSelect(node: TreeNode) {
         ]
       }},
       container: 'me-4',
-      content: 'flex py-2 px-3 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer',
+      content: options => {
+        return {
+          class: [
+              'flex px-3 rounded-lg cursor-pointer',
+              { 'py-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-700': options.props.node.type !== 'button' },
+              { 'hidden' : options.props.node.data?.visible === false }
+            ]
+        }
+      },
       toggler: options => { return { class: ['border-0 me-2', { 'hidden': options.context.leaf }] } },
       label: 'cursor-pointer select-none',
       subgroup: 'ps-4',
@@ -85,7 +99,12 @@ async function onSelect(node: TreeNode) {
     <template v-slot:loadingicon>
       <BaseLoading class="text-[2rem]" />
     </template>
-
+    <template v-slot:default="{ node }">
+      <span v-html="node.data?.structuredLabel ?? node.label"></span>
+    </template>
+    <template #button="{ node }">
+      <button @click="onButtonClick(node)" class="ml-5 mb-2 text-primary px-2 py-1 rounded-md hover:bg-primary-50 text-sm">{{ node.label }}</button>
+    </template>
   </Tree>
 </template>
 

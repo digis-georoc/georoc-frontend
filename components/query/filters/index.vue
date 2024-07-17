@@ -71,6 +71,7 @@ onBeforeUnmount(() => unsubscribe())
           v-if="amountActiveFilters > 0"
           size="small"
           display="flat"
+          color="neutral"
           class="ml-auto text-zinc-400"
           @click="resetAll"
           :text="$t('reset_all')" />

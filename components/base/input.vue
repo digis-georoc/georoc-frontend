@@ -27,8 +27,8 @@ function onInput(value: string) {
 }
 
 const classes = [
-  'outline-none bg-transparent w-full transition-colors',
-  'border dark:border-zinc-600 rounded-md hover:border-primary focus:border-primary focus:ring-2 focus:ring-primary-100',
+  'outline-none bg-white dark:bg-zinc-800 w-full transition-colors',
+  'border dark:border-zinc-600 rounded hover:border-primary focus:border-primary focus:ring-2 focus:ring-primary-100',
   {'p-2': props.size === 'md'},
   {'p-1 text-sm': props.size === 'sm'},
   {'opacity-50': props.disabled}

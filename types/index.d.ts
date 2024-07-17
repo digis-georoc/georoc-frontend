@@ -344,6 +344,14 @@ declare global {
     nodes: TreeNode[]
     selected: TreeNode[]
   }
+
+  interface ChemistryFilterOption {
+    value: string
+    type: string
+    unit: string
+    visible: string
+    latex: string
+  }
 }
 
 export {}
