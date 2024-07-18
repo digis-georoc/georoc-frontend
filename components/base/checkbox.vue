@@ -24,7 +24,7 @@ const emit = defineEmits<{
       :pt="{
         root: ({ context }) => ({
           class: [
-            'border-2 dark:border-zinc-600 hover:border-primary hover:dark:border-primary rounded-md w-[22px] h-[22px] transition-colors peer',
+            'relative border-2 dark:border-zinc-600 hover:border-primary hover:dark:border-primary rounded-md w-[22px] h-[22px] transition-colors peer',
             {'outline-none border-primary ring ring-opacity-25 ring-primary': context.focused },
             {
               'bg-zinc-50 dark:bg-zinc-700 hover:border-primary': !context.checked,
@@ -33,7 +33,12 @@ const emit = defineEmits<{
           ]
         }),
         input: {
-          class: 'w-full h-full flex items-center justify-center'
+          class: 'absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer'
+        },
+        box: {
+          class: [
+            'w-full h-full flex items-center justify-center'
+          ]
         }
       }">
       <template v-slot:icon="{ checked }">
