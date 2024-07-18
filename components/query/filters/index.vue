@@ -53,14 +53,18 @@ onBeforeUnmount(() => unsubscribe())
 </script>
 <template>
   <div class="overflow-auto flex flex-col flex-1">
-    <BaseCard :title="$t('material')" class="m-2 flex-shrink-0" @collapsed-change="materialFilterIsCollapsed = $event">
-      <template #header-right>
-        <div v-if="selectedMaterialId !== null && materialFilterIsCollapsed" class="flex items-center justify-center px-1.5 py-0.5 border border-primary rounded-md text-primary text-xs">
-          {{ $t(selectedMaterialId) }}
-        </div>
-      </template>
-      <QueryFilterMaterial class="w-full" :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
-    </BaseCard>
+    <div class="relative m-2">
+      <div class="absolute left-0 top-0  w-full h-full z-0 bg-primary-300 opacity-50 rounded-md" :class="{'ping-running': !selectedMaterialId }"></div>
+      <BaseCard :title="$t('material')" class="relative z-1 flex-shrink-0" @collapsed-change="materialFilterIsCollapsed = $event">
+        <template #header-right>
+          <div v-if="selectedMaterialId !== null && materialFilterIsCollapsed" class="flex items-center justify-center px-1.5 py-0.5 border border-primary rounded-md text-primary text-xs">
+            {{ $t(selectedMaterialId) }}
+          </div>
+        </template>
+        <QueryFilterMaterial class="w-full" :model-value="selectedMaterialId" @update:model-value="handleFilterSelection" size="normal"/>
+      </BaseCard>
+    </div>
+
     <template v-if="selectedMaterialId">
       <div class="flex px-4 pt-2 pb-1 items-end border-b dark:border-zinc-600 relative">
         <h3 class="font-bold mb-2">{{ $t('filters') }}:</h3>
@@ -100,3 +104,21 @@ onBeforeUnmount(() => unsubscribe())
     />
   </div>
 </template>
+<style scoped lang="scss">
+.ping-running {
+  animation: ping 2s .65s ease-out infinite;
+}
+
+
+@keyframes ping {
+  0% {
+    box-shadow: 0 0 2px 2px rgba(#664152, 0.7), inset 0 0 1px rgba(#664152,0.5);
+  }
+  55% {
+    box-shadow: 0 0 50px rgba(#a88593,0), inset 0 0 30px rgba(#a88593,0);
+  }
+  100% {
+    box-shadow: 0 0 50px rgba(#a88593,0), inset 0 0 30px rgba(#a88593,0);
+  }
+}
+</style>
