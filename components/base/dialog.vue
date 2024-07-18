@@ -40,6 +40,9 @@ function open() {
       closeButton: {
         class: 'hover:bg-zinc-100 dark:hover:bg-zinc-700 w-8 h-8 rounded-full flex items-center justify-center'
       },
+      icons: {
+        class: 'ml-auto'
+      },
       mask: {
         class: 'bg-zinc-900 bg-opacity-50'
       }

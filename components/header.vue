@@ -130,7 +130,7 @@ const toggleSidebar = () => {
                       route.path.startsWith(context.item.item.route),
                   },
                   {
-                    'underline underline-offset-8 decoration-primary-50 decoration-4':
+                    'underline underline-offset-8 decoration-primary-400 decoration-4':
                       !context.active &&
                       !context.focused &&
                       context.item.items &&
@@ -148,7 +148,7 @@ const toggleSidebar = () => {
               },
               submenu: {
                 class:
-                  'bg-white dark:bg-zinc-700 p-2 max-w-full rounded-md absolute border-2',
+                  'bg-white dark:bg-zinc-800 p-2 max-w-full rounded-md absolute border dark:border-zinc-600',
               },
               button: {
                 class: 'hidden',
