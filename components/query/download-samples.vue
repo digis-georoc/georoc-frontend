@@ -2,6 +2,7 @@
 import domtoimage from 'dom-to-image'
 import JSZip from "jszip"
 import {queryToText} from "~/utils/query-to-text";
+import howToCitePage from "~/i18n/en-GB/howToCitePage";
 
 interface DownloadFile {
   name: string
@@ -36,8 +37,23 @@ function createMetaFileContent(dateString: string) {
   content += `Shareble URL: ${window.location.href}\n\n`
   content += `Amount Samples: ${queryStore.listResult?.totalCount} \n\n`
   content += queryToText()
-
+  content +='\n\n\n'
+  content += createHowToCiteContent()
   return content
+}
+
+function createHowToCiteContent(): string {
+  return Object.keys(howToCitePage).map(key => {
+      let result = ''
+      result += howToCitePage[key]
+        .replaceAll('({link})', '')
+        .replaceAll('{link}', '')
+        .replaceAll('  ', ' ')
+        .replaceAll('  ', ' ')
+      if (key.includes('headline')) result += '\n------------------------------------------------'
+      result += '\n\n'
+    return result
+  }).join('')
 }
 async function download() {
   isLoading.value = true
@@ -109,7 +125,6 @@ async function generateZip(name: string, files: DownloadFile[]) {
 
 function getFilePrefix(dateString: string) {
   return 'GEOROC_database_data_download_' + dateString
-
 }
 
 function getDownloadDatetime(date: Date) {

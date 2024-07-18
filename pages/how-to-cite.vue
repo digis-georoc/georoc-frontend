@@ -47,9 +47,7 @@
               href="https://georoc.eu/"
               target="_blank"
               class="hover:border-b-primary border-transparent border-b-2"
-            >
-              https://georoc.eu/</a
-            >
+            >https://georoc.eu/</a>
           </template>
           <template v-slot:bold_text>
             <span class="font-bold">{{
