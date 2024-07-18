@@ -10,6 +10,7 @@ interface DownloadFile {
 }
 
 const queryStore = useQueryStore()
+const materialFilterValue = computed(() => queryStore.getFilter(QueryKey.Material)?.value ?? null)
 
 const dialogVisible = ref(false)
 const hasCsv = ref(false)
@@ -128,6 +129,7 @@ function getDownloadDatetime(date: Date) {
   <BaseButton
     :text="$t('download_data')"
     @click="openDialog"
+    :disabled="materialFilterValue === null"
     icon="solar:download-minimalistic-linear"
     class="shadow-lg whitespace-nowrap rounded-l-none"
   />
