@@ -20,11 +20,7 @@
           {{ $t('indexPage.paragraph_below_title') }}
         </p>
         <div class="mt-10 flex items-center gap-x-6">
-          <NuxtLink
-            to="/query"
-            class="rounded-md bg-primary px-4 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >{{ $t('indexPage.button_1') }}</NuxtLink
-          >
+          <BaseButton :text="$t('indexPage.button_1')" size="normal" display="filled" @click="router.push('/query')" />
           <NuxtLink
             to="/get-started"
             class="text-sm font-semibold leading-6 text-zinc-300"
@@ -92,6 +88,8 @@
 </template>
 <script setup lang="ts">
 const { t } = useI18n()
+const router = useRouter()
+
 const features = [
   {
     name: t('indexPage.feature_1_headline'),
