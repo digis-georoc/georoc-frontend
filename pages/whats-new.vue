@@ -1,9 +1,9 @@
 <template>
   <PageContainer>
-    <PageHead headline="What's New & History" />
+    <PageHead headline="What's New" />
     <p class="mb-6">
       Since GEOROC has moved from the Max Planck Institute in Mainz and is now curated by the
-      <BaseNuxtLink class="text-primary" to="digis.geo.uni-goettingen.de" target="_blank" title="Link to DIGIS project website">DIGIS project</BaseNuxtLink>
+      <BaseNuxtLink class="text-primary" to="https://digis.geo.uni-goettingen.de" target="_blank" title="Link to DIGIS project website">DIGIS project</BaseNuxtLink>
       (funded by the German Science Foundation since 2021) at the
       <BaseNuxtLink class="text-primary" to="https://www.uni-goettingen.de/en/125309.html" target="_blank" title="Link to Göttingen Geoscience Center (GZG)">Göttingen Geoscience Center (GZG)</BaseNuxtLink>
       at University Göttingen and the
@@ -37,7 +37,7 @@
       </li>
       <li>
         We have set up the
-        <BaseNuxtLink class="text-primary" to="digis-repo.georoc.eu" target="_blank" title="Link to GEOROC Data Repository">GEOROC Data Repository</BaseNuxtLink>
+        <BaseNuxtLink class="text-primary" to="https://digis-repo.georoc.eu" target="_blank" title="Link to GEOROC Data Repository">GEOROC Data Repository</BaseNuxtLink>
         at GFZ Data Services to enable data
         contributions from the community. Authors can submit new analytical data as well as data compilations.
       </li>

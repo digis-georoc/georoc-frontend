@@ -1,7 +1,7 @@
 <template>
   <PageContainer>
-    <PageHead headline="History of the Database" />
     <BaseFluidContainer>
+    <PageHead headline="History of the Database" />
       <div class="pb-8">
         <p>
           The construction of the GEOROC database under the direction of Bärbel Sarbas
@@ -28,3 +28,5 @@
     </BaseFluidContainer>
   </PageContainer>
 </template>
+<script setup lang="ts">
+</script>

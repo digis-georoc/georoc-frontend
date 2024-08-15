@@ -31,7 +31,7 @@ function openDialog() {
 function createMetaFileContent(dateString: string) {
   let content = 'GEOROC 2.0 Download Metadata: \n'
   content += '==============================================================\n\n'
-  content += 'This file contains metadata for the downloaded content from GEOROC website (www.georoc.eu).\n\n'
+  content += `This file contains metadata for the downloaded content from GEOROC website (${window.location.origin}).\n\n`
   content += `Download Time: ${dateString}\n`
   content += `Shareble URL: ${window.location.href}\n\n`
   content += `Amount Samples: ${queryStore.listResult?.totalCount} \n\n`
@@ -204,7 +204,7 @@ function getDownloadDatetime(date: Date) {
         </p>
         <p class="mb-4">
           Our community norms as well as good scientific practice expect that proper credit is given via
-          <BaseNuxtLink to="/how-to-cite" target="_blank">citation</BaseNuxtLink>
+          <BaseNuxtLink to="/how-to-cite" target="_blank" class="text-primary">citation</BaseNuxtLink>
         </p>
         <ul class="list-disc mb-6 space-y-2 pl-6">
           <li>
@@ -214,7 +214,7 @@ function getDownloadDatetime(date: Date) {
             If you remix, transform, or build upon the material, you are required to distribute your contributions under the same license as the original.
           </li>
           <li>
-            When using datasets downloaded from GEOROC, you must give appropriate credit to GOROC as well as to the original data sources.
+            When using datasets downloaded from GEOROC, you must give appropriate credit to GEOROC as well as to the original data sources.
           </li>
           <li>
             This includes proper referencing in a publication list of cited references in a journal or other publication.

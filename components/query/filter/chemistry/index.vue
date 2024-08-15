@@ -123,7 +123,7 @@ onBeforeUnmount(() => {
         <QueryFilterChemistrySelect v-model="selectedTemp" />
       </template>
     </QueryFilterBaseContainer>
-    <BaseDialog v-model="howToFilterDialogVisible" title="How to Filter?" class="w-1/3">
+    <BaseDialog v-model="howToFilterDialogVisible" title="How to Filter?" class="w-[90vw] xl:w-1/3">
       <p class="mb-4">We provide compositional filters for all analytes in the database in two ways:</p>
       <ol class="list-decimal pl-4 space-y-4">
         <li>

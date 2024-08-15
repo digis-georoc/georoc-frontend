@@ -7,7 +7,7 @@
       <p class="mb-6">
         GEOROC compiles data from published, peer-reviewed literature.
         GEOROC database curation and IT development is the focus of the
-        <BaseNuxtLink class="text-primary" to="digis.geo.uni-goettingen.de" target="_blank" title="Link to DIGIS project website">DIGIS project</BaseNuxtLink>
+        <BaseNuxtLink class="text-primary" to="https://digis.geo.uni-goettingen.de" target="_blank" title="Link to DIGIS project website">DIGIS project</BaseNuxtLink>
         funded by the German Science Foundation at the
         <BaseNuxtLink class="text-primary" to="https://www.uni-goettingen.de/en/125309.html" target="_blank" title="Link to Göttingen Geoscience Center (GZG)">Göttingen Geoscience Center (GZG)</BaseNuxtLink> of the Georg August University of Göttingen.
         GEOROC data are provided free of charge and we ask that you use our data products for scientific and educational purposes only.
@@ -20,7 +20,7 @@
         Creative Commons Attribution-ShareAlike 4.0 International
         (<BaseNuxtLink class="text-primary" to="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" title="Link to License Website">CC BY-SA 4.0</BaseNuxtLink>):
       </p>
-      <ul class="list-disc pl-6">
+      <ul class="list-disc pl-8 mb-4">
         <li>You are free to copy, remix, transform and redistribute the data in any medium and format.</li>
         <li>
           However, in doing so, you <span class="underline font-bold">must</span> give appropriate credit to GEOROC as
@@ -64,11 +64,13 @@
       <p class="font-bold mb-2">
         Example: Cite the dataset with its dataset DOI as a standard reference of your publication. The citation should include the following elements:
       </p>
-      <p class="pl-4">Creator(s) (Publication Year): Title. Publisher. Identifier. Version.</p>
+      <ul class="list-disc pl-8"><li>Creator(s) (Publication Year): Title. Publisher. Identifier. Version.</li></ul>
       <p>and</p>
-      <p class="mb-6">
-        DIGIS Team, 2021, "GEOROC Compilation: Rock Types", https://doi.org/10.25625/2JETOA, Goettingen Research Online / Data, V1.
-      </p>
+      <ul class="list-disc pl-8 mb-6">
+        <li>
+          DIGIS Team, 2021, "GEOROC Compilation: Rock Types", https://doi.org/10.25625/2JETOA, Goettingen Research Online / Data, V1.
+        </li>
+      </ul>
       <p>
         You may also cite specific files within a dataset, for example:<br>
         DIGIS Team, 2021, "2021-11-2JETOA_ADAKITE.csv", GEOROC Compilation: Rock Types, https://doi.org/10.25625/2JETOA/AWTDMI, Goettingen Research Online / Data, V1.

@@ -8,7 +8,7 @@
       </li>
       <li>
         Select from world-wide samples (or from selected samples according to 1.) using filters:
-        <ul class="pl-4 w-3/4">
+        <ul class="pl-4 w-1/2">
           <li class="flex">
             <span class="mr-4">-</span><span class="w-1/2">Geographic location</span><span class="w-1/2">(e.g. “Hawaii”)</span>
           </li>

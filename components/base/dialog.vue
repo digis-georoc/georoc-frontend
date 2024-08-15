@@ -45,6 +45,9 @@ function open() {
       },
       mask: {
         class: 'bg-zinc-900 bg-opacity-50'
+      },
+      content: {
+        class: 'max-h-[80vh] overflow-auto'
       }
     }"
     @update:visible="emit('update:modelValue', $event)"

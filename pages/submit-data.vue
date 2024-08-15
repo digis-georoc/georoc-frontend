@@ -13,7 +13,7 @@
       make is to follow the FAIR guidelines when publishing your geochemical research data
       (<BaseNuxtLink class="text-primary" to="https://doi.org/10.1038/sdata.2016.18" target="_blank" title="Link to Wilkinson et al., 2016">Wilkinson et al., 2016</BaseNuxtLink>; <BaseNuxtLink class="text-primary" to="https://doi.org/10.1038/s43017-021-00237-w" target="_blank" title="Link to Chamberlain el al. 2021">Chamberlain et al. 2021</BaseNuxtLink>.)</p>
     <p class="mb-4">Please submit your data with the minimum set of metadata using our <span class="font-bold">minimum set of metadata</span>
-      using our <BaseNuxtLink class="text-primary" to="digis-repo.georoc.eu" target="_blank" title="Link to Metadata Template">template</BaseNuxtLink>.
+      using our <BaseNuxtLink class="text-primary" to="https://digis-repo.georoc.eu" target="_blank" title="Link to Metadata Template">template</BaseNuxtLink>.
     </p>
     <p class="mb-4">
       DIGIS curators will evaluate whether the dataset meets the schema of our repository and assures proper metadata content.
@@ -21,7 +21,7 @@
     <p class="mb-8">
       After acceptance, your datasets will be registered with a DOI and archived in the DIGIS domain repository
       for geochemical data at GFZ Data Services. Further details and data submission templates are available
-      in the <BaseNuxtLink class="text-primary" to="digis-repo.georoc.eu" target="_blank" title="Link to repository guidelines and policies">repository guidelines and policies</BaseNuxtLink>.
+      in the <BaseNuxtLink class="text-primary" to="https://digis-repo.georoc.eu" target="_blank" title="Link to repository guidelines and policies">repository guidelines and policies</BaseNuxtLink>.
     </p>
     <h3 class="font-bold mb-4">2.	Submit data for DOI-registration during journal submission and review process</h3>
     <p class="mb-4">
