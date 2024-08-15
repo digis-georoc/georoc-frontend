@@ -18,6 +18,7 @@ const maps = {
       .map(item => item.replaceAll(/\)|\(+/g, ''))
       .map(tupel => {
         const [ type, element, min, max ] = tupel.split(',')
+        console.log(tupel)
         return {
           type: { value: type, label: chemistryStore.getNodeLabel(type) },
           element: { value: element, label: chemistryStore.getNodeLabel(element) },
@@ -43,8 +44,9 @@ const maps = {
         const type = cur.label
 
         acc += `${type}:\n`
-        acc += cur.children?.reduce((acc, { label, min, max }) => {
-          const minMax = `${min ?  min : '' } ${max ? max : ''}`
+        acc += cur.children?.reduce((acc, { label, data }) => {
+
+          const minMax = `min: ${data.min ?? '-' }  max: ${data.max ?? '-'}`
 
           acc += `${label} - ${minMax}\n`
           return acc

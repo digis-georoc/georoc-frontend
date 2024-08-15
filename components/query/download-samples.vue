@@ -2,6 +2,7 @@
 import domtoimage from 'dom-to-image'
 import JSZip from "jszip"
 import {queryToText} from "~/utils/query-to-text";
+import howToCiteString from "~/utils/how-to-cite-string";
 
 interface DownloadFile {
   name: string
@@ -42,17 +43,7 @@ function createMetaFileContent(dateString: string) {
 }
 
 function createHowToCiteContent(): string {
-  return Object.keys(howToCitePage).map(key => {
-      let result = ''
-      result += howToCitePage[key]
-        .replaceAll('({link})', '')
-        .replaceAll('{link}', '')
-        .replaceAll('  ', ' ')
-        .replaceAll('  ', ' ')
-      if (key.includes('headline')) result += '\n------------------------------------------------'
-      result += '\n\n'
-    return result
-  }).join('')
+  return howToCiteString
 }
 async function download() {
   isLoading.value = true
