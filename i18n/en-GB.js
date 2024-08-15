@@ -1,13 +1,11 @@
 import precompiledFilePage from './en-GB/precompiledFilePage'
 import queryPage from '~/i18n/en-GB/queryPage'
 import indexPage from './en-GB/indexPage'
-import howToCitePage from './en-GB/howToCitePage'
 
 export default {
   precompiledFilePage,
   queryPage,
   indexPage,
-  howToCitePage,
   database_query: 'Database Query',
   filters: 'Filters',
   material_filter: 'Material filter',

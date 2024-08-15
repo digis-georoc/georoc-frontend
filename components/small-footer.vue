@@ -7,6 +7,8 @@
       class="flex flex-col sm:flex-row justify-center items-center py-4 text-sm"
     >
       <div class="flex flex-row justify-center items-center">
+        <p><BaseNuxtLink to="/terms-of-use">Terms of Use</BaseNuxtLink></p>
+        <p class="px-2">-</p>
         <p><BaseNuxtLink to="/legal-notice">Legal Notice</BaseNuxtLink></p>
         <p class="px-2">-</p>
         <p>
@@ -31,4 +33,5 @@
     </BaseContainer>
   </section>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>

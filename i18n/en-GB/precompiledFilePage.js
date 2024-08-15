@@ -1,11 +1,15 @@
 export default {
-  headline_1: 'Concept of Precompiled Files',
   select_button: 'Select a GEOROC Compilation',
   change_button: 'Change',
   download_complete_dataset_button: 'Download complete precompiled dataset',
   download_selection_button: 'Download Selection',
+  headline_1: 'Concept of Precompiled Files',
   paragraph_1:
-    'Multiple analyses of a sample reported in different publications are compiled so that for each whole-rock or volcanic glass sample.ts only one value is displayed for a certain analyte. Multiple analyses of that element, oxide or ratio are compared by the following rules and only the value with highest priority is selected. Multiple analyses within the same publication are not compiled. Note that these compiled datasets will contain fewer records than a standard query result.',
+    'Selected datasets are regularly compiled from the growing GEOROC database and provided for direct download as CSV files. These files are created/selected by DIGIS curatorial staff with a focus on a particular mineral, rock type, geological setting or geographic region to provide easy access to the most popular search queries. They include metadata such as geospatial coordinates, analytical methods, information on laboratories, reference materials and original data sources. Where applicable, data for a specific sample are combined from different publications.',
+  headline_2: 'Compilation Rules',
+  paragraph_2:
+      'Multiple analyses of a sample reported in different publications are compiled so that for each whole-rock or volcanic glass sample only one value is displayed for a particular analyte. Data from multiple analyses measured by different analytical methods for that element, oxide or isotope ratio are selected by the following rules and only the value with highest priority is included in the precompiled dataset. Repeat analyses of a particular sample within a single publication are not compiled. Note that these compiled datasets will contain fewer data records than a standard query result.',
+
   subheadline_1: 'For isotope ratios',
   subheadline_2:
     'For major elements, rare earth elements, and other trace elements',

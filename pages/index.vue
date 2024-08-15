@@ -94,45 +94,38 @@
 const { t } = useI18n()
 const features = [
   {
-    name: 'Database Query',
-    description:
-      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ' +
-      'labore et dolore magna aliquyam erat, sed diam voluptua.',
+    name: t('indexPage.feature_1_headline'),
+    description: t('indexPage.feature_1_text'),
     icon: 'heroicons:magnifying-glass',
     to: '/query',
   },
   {
-    name: 'Precompiled Files',
-    description:
-      'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
+    name: t('indexPage.feature_2_headline'),
+    description: t('indexPage.feature_2_text'),
     icon: 'octicon:package',
     to: '/precompiled-files',
   },
   {
-    name: 'Expert Datasets',
-    description:
-      'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
+    name: t('indexPage.feature_3_headline'),
+    description: t('indexPage.feature_3_text'),
     icon: 'tabler:school',
     to: '/expert-datasets',
   },
   {
-    name: 'Disclaimer',
-    description:
-      'At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+    name: t('indexPage.feature_4_headline'),
+    description: t('indexPage.feature_4_text'),
     icon: 'carbon:warning',
     to: '/disclaimer',
   },
   {
-    name: 'How to cite',
-    description:
-      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+    name: t('indexPage.feature_5_headline'),
+    description: t('indexPage.feature_5_text'),
     icon: 'fluent:tooltip-quote-24-regular',
     to: '/how-to-cite',
   },
   {
-    name: 'How to contribute',
-    description:
-      'At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+    name: t('indexPage.feature_6_headline'),
+    description: t('indexPage.feature_6_text'),
     icon: 'fluent:puzzle-cube-piece-20-regular',
     to: '/how-to-contribute',
   },

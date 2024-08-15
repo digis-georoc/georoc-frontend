@@ -25,7 +25,7 @@ const items = ref([
     ],
   },
   {
-    label: 'Using Georoc',
+    label: 'Using GEOROC',
     items: [
       {
         label: 'Disclaimer',
@@ -38,29 +38,19 @@ const items = ref([
     ],
   },
   {
-    label: 'Contribute Data',
-    items: [
-      {
-        label: 'How to contribute',
-        route: '/how-to-contribute',
-      },
-      {
-        label: 'Repository Submission Guidelines',
-        href: 'https://uni-goettingen.de/en/georoc+data+repository/651621.html',
-        icon: externalIcon,
-      },
-    ],
+    label: 'Submit Data',
+    route: '/submit-data',
   },
   {
     label: 'Project Info',
     items: [
       {
-        label: "What's New & History",
-        route: '/whats-new',
+        label: "History of the Database",
+        route: '/history-of-the-database',
       },
       {
-        label: 'DIGIS Team & Info',
-        route: '/digis-team',
+        label: 'What\'s New',
+        route: '/whats-new',
       },
     ],
   },

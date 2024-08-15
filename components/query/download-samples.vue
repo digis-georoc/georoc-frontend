@@ -2,7 +2,6 @@
 import domtoimage from 'dom-to-image'
 import JSZip from "jszip"
 import {queryToText} from "~/utils/query-to-text";
-import howToCitePage from "~/i18n/en-GB/howToCitePage";
 
 interface DownloadFile {
   name: string
@@ -176,7 +175,6 @@ function getDownloadDatetime(date: Date) {
             <li>the coordinates of your map section</li>
             <li>information about how to cite these data</li>
             <li>references</li>
-            <li>an image file with the map section as presented</li>
           </ul>
         </li>
         <li>an image file with the map section as presented</li>
@@ -197,40 +195,33 @@ function getDownloadDatetime(date: Date) {
         <span class="text-zinc-600 dark:text-zinc-400">{{ $t('queryPage.download_is_ready')}}</span>
       </div>
       <div v-else class="space-y-2 px-1">
-        <p class="">
-          {{ $t('precompiledFilePage.license_paragraph_1') }}
-          {{ $t('precompiledFilePage.license_paragraph_2') }}
-        </p>
+
         <h2 class="font-bold">
           {{ $t('precompiledFilePage.license_subheader') }}
         </h2>
-        <i18n-t
-            keypath="precompiledFilePage.license_paragraph_3"
-            tag="p"
-            scope="global"
-        >
-          <template v-slot:license_link_1>
-            <NuxtLink
-              to="https://dataverse.org/best-practices/dataverse-community-norms"
-              class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
-            >
-              {{ $t('precompiledFilePage.license_link_1') }}</NuxtLink
-            >
-          </template>
-          <template v-slot:license_link_2>
-            <NuxtLink
-                to="/how-to-cite"
-                class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
-            >{{ $t('precompiledFilePage.license_link_2') }}</NuxtLink
-            >
-          </template>
-        </i18n-t>
-        <p>
-          <NuxtLink
-            to="https://creativecommons.org/licenses/by-sa/4.0/"
-            class="border-b-2 border-gray-400 hover:border-b-primary text-primary dark:text-primary-100"
-          >CC BY-SA 4.0</NuxtLink>
+        <p class="mb-4">
+          This dataset is made available under the terms and regulations of the Creative Commons Attribution-ShareAlike 4.0 International: (CC BY-SA 4.0):
         </p>
+        <p class="mb-4">
+          Our community norms as well as good scientific practice expect that proper credit is given via
+          <BaseNuxtLink to="/how-to-cite" target="_blank">citation</BaseNuxtLink>
+        </p>
+        <ul class="list-disc mb-6 space-y-2 pl-6">
+          <li>
+            You are free to copy, remix, transform and redistribute the data in any medium and format.
+          </li>
+          <li>
+            If you remix, transform, or build upon the material, you are required to distribute your contributions under the same license as the original.
+          </li>
+          <li>
+            When using datasets downloaded from GEOROC, you must give appropriate credit to GOROC as well as to the original data sources.
+          </li>
+          <li>
+            This includes proper referencing in a publication list of cited references in a journal or other publication.
+          </li>
+        </ul>
+        <p>For further information see here for
+          <BaseNuxtLink class="text-primary" to="/how-to-cite" target="_blank">How to Cite.</BaseNuxtLink></p>
       </div>
       <div v-if="!downloadReady" class="flex justify-end space-x-4 mt-2">
         <BaseButton

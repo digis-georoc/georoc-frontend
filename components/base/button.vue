@@ -78,7 +78,11 @@
 
   classes['bg-white text-dark border border-zinc-400 focus:ring-zinc-300 hover:bg-zinc-100 dark:bg-zinc-800'] = props.display === 'mono'
 
-  classes['bg-none text-primary border border-primary-300 hover:bg-primary-50 dark:hover:bg-zinc-800'] = props.display === 'outline' || props.display === 'outline-dashed'
+  classes['bg-none text-primary border border-primary-300 hover:bg-primary-50 dark:hover:bg-zinc-800'] = (props.display === 'outline'  || props.display === 'outline-dashed') && props.color === 'primary'
+
+  classes['bg-none text-zinc-500 border border-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'] = (props.display === 'outline'  || props.display === 'outline-dashed') && props.color === 'neutral'
+
+
   classes['border-dashed'] = props.display === 'outline-dashed'
 
   classes['bg-transparent hover:bg-primary-50 dark:hover:bg-zinc-600 text-primary'] = props.display === 'flat' && props.color === 'primary'

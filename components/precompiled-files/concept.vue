@@ -4,6 +4,10 @@
       {{ $t('precompiledFilePage.headline_1') }}
     </h2>
     <p class="font-medium">{{ $t('precompiledFilePage.paragraph_1') }}</p>
+    <h2 class="mt-4 text-xl py-4 font-bold snap-end scroll-m-20">
+      {{ $t('precompiledFilePage.headline_2') }}
+    </h2>
+    <p class="font-medium">{{ $t('precompiledFilePage.paragraph_2') }}</p>
     <h3 class="text-lg font-semibold">
       {{ $t('precompiledFilePage.subheadline_1') }}:
     </h3>
