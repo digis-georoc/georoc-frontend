@@ -3,12 +3,12 @@
     <MenuButton
       as="button"
       :class="[
-        'inline-flex w-full justify-center items-center bg-primary-50 dark:bg-zinc-700 dark:bg-inherit rounded-md px-4 py-2',
-        'text-sm font-medium select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-300 border-2 border-transparent hover:border-primary',
+        'inline-flex w-full justify-center items-center bg-primary-50 dark:bg-zinc-700 dark:bg-inherit rounded-md px-6 py-4',
+        'font-medium select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-300 border-2 border-transparent hover:border-primary',
       ]"
     >
       {{ buttontext }}
-      <Icon name="pepicons-pop:angle-down" class="ml-1 text-base"></Icon>
+      <Icon name="pepicons-pop:angle-down" class="ml-3 text-base translate-y-[2px]"></Icon>
     </MenuButton>
     <MenuItems
       :class="[
