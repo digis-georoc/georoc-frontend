@@ -60,7 +60,7 @@
     </ul>
     <p class="mt-6 mb-8">
       Here you can find further information on the
-      <BaseNuxtLink class="text-primary" to="digis-repo.georoc.eu" target="_blank" title="Link to GEOROC Data Repository">DIGIS project</BaseNuxtLink>
+      <BaseNuxtLink class="text-primary" to="https://digis-repo.georoc.eu" target="_blank" title="Link to GEOROC Data Repository">DIGIS project</BaseNuxtLink>
       and the
       <BaseNuxtLink class="text-primary" to="https://www.uni-goettingen.de/en/people/643410.html" target="_blank" title="Link to DIGIS-Team">DIGIS-Team</BaseNuxtLink>.
     </p>

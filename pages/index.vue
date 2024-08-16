@@ -25,8 +25,8 @@
             to="/get-started"
             class="text-sm font-semibold leading-6 text-zinc-300"
             >{{ $t('indexPage.button_2') }}
-            <span aria-hidden="true">→</span></NuxtLink
-          >
+            <span aria-hidden="true">→</span>
+          </NuxtLink>
         </div>
       </div>
     </BaseContainer>

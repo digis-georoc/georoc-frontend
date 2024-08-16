@@ -52,6 +52,10 @@ const items = ref([
         label: 'What\'s New',
         route: '/whats-new',
       },
+      {
+        label: "How to contribute",
+        route: '/how-to-contribute',
+      },
     ],
   },
 ])
