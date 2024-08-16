@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.17](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.16...v0.0.17) (2024-08-16)
+
+
+### Features
+
+* add a static list of chemistry filter options ([5483242](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/54832429b8c5e681448706c67cc88b4375b8c239))
+* add bbox to download metadata ([d3167c5](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/d3167c5e1431c777ae2fb7cf2e300a03d65008bb))
+* add how-to-cite text to download metadata file ([a81b4d2](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/a81b4d2d9488607c098d8348c6195bb7bca67693))
+* add loading and finished states to download dialog ([62d1f92](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/62d1f92baffe0ea30982cc3ce9a3756ccecb2845))
+* add new website texts ([0ffe419](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/0ffe419dd8c31bbb6269331053de2a1e1be13948))
+* add ping effect to material filter when no matarial selected yet ([e86b630](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/e86b63034a0ee8a5ad623e094fe88fc5bb22f9d1))
+* add separate how-to-cite text as simple string for download file, fix chemistry filter min/max values in download file ([1c50a08](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/1c50a08586f00889fca0c65253feec86b2efb6e8))
+* add version hint to precompiled files page that is visible if a link with an older version was opened ([d3add9f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/d3add9f09f734b5878c6a0ade294121fca349b9e))
+* change default value of selected rows in a datatable to 20 ([c953b00](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c953b004006eba14a03bc0bbb310645cc9d64940))
+* disable download button when no material selected ([84121a4](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/84121a4e72217161f1289819a3bd7905bcf0a026))
+* make precompiles files dropdown bigger ([abce56f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/abce56f608185700f0b48ef793d5f5a2411c26da))
+* send request to server for download ([58707be](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/58707beba46398ba5a8007dea8837ebe540b5b3e))
+
+
+### Bug Fixes
+
+* add license image ([f66e4ba](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/f66e4ba6e560ceb4f330ff483c8fbeeba1408bf1))
+* checkbox styles ([d61ee7a](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/d61ee7a7f9566812e722cc67786119b1e983a199))
+* download button style ([1523635](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/1523635bdee66765539769307d305965c1bd0575))
+* fix checkbox display ([1f73592](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/1f7359249646d82ecad5bcfd43939ce9995f91de))
+* remove unnecessary log ([b7ce03d](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/b7ce03d4e00f356e72139a5418797bbca932d7d1))
+* update dark mode styles ([0eefdf6](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/0eefdf62ab4e3f57f3dc40b9c3ed1f0d7198b10e))
+* update download date string, add amount of samples to download metadata ([6f7f7af](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/6f7f7af54fd7339b4c94d6b4b425bdbb39ada40e))
+* update download info text ([f298f02](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/f298f02fff5fe60a893a7ab01d4275fecae8ddce))
+* update legal notice style ([f49f83a](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/f49f83a98d64841ff4f7b54411c1b681ea9c03cd))
+* update new website texts ([4fc603f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/4fc603f4484a1f1812aa819f10c32e9e012d720f))
+* update website texts ([ffa930c](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ffa930cf508c32e3f8e96dba60c11ea1843c2726))
+
 ### [0.0.16](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.15...v0.0.16) (2024-05-27)
 
 
