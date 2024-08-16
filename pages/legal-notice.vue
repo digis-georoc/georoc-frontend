@@ -1,7 +1,7 @@
 <template>
   <PageContainer>
-    <PageHead headline="Impressum / Legal Notice" />
     <BaseFluidContainer>
+    <PageHead headline="Impressum / Legal Notice" />
       <div class="pb-8 border-b-2 dark:border-zinc-700">
         <h2 class="font-bold mb-2">Impressum</h2>
         <div class="mb-4">
@@ -112,3 +112,5 @@
     </BaseFluidContainer>
   </PageContainer>
 </template>
+<script setup lang="ts">
+</script>
