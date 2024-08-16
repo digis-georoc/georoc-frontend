@@ -8,8 +8,10 @@
         GEOROC compiles data from published, peer-reviewed literature.
         GEOROC database curation and IT development is the focus of the
         <BaseNuxtLink class="text-primary" to="https://digis.geo.uni-goettingen.de" target="_blank" title="Link to DIGIS project website">DIGIS project</BaseNuxtLink>
-        funded by the German Science Foundation at the
-        <BaseNuxtLink class="text-primary" to="https://www.uni-goettingen.de/en/125309.html" target="_blank" title="Link to Göttingen Geoscience Center (GZG)">Göttingen Geoscience Center (GZG)</BaseNuxtLink> of the Georg August University of Göttingen.
+        funded by the German Science Foundation (DFG) at the
+        <BaseNuxtLink class="text-primary" to="https://www.uni-goettingen.de/en/125309.html" target="_blank" title="Link to Göttingen Geoscience Center (GZG)">Göttingen Geoscience Center (GZG)</BaseNuxtLink>
+        of the Georg August University of Göttingen and the
+        <BaseNuxtLink class="text-primary" to="https://www.sub.uni-goettingen.de/en/news/" target="_blank" title="Link to SUB Website">State and University Library (SUB) at Göttingen</BaseNuxtLink>.
         GEOROC data are provided free of charge and we ask that you use our data products for scientific and educational purposes only.
         When intending to use GEOROC data products for commercial purposes we request that users contact GEOROC/DIGIS staff at
         <BaseNuxtLink class="text-primary" to="mailto:digis-info@uni-goettingen.de">digis-info[at]uni-goettingen.de</BaseNuxtLink>

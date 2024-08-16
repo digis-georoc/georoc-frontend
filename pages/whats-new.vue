@@ -7,7 +7,7 @@
       (funded by the German Science Foundation since 2021) at the
       <BaseNuxtLink class="text-primary" to="https://www.uni-goettingen.de/en/125309.html" target="_blank" title="Link to Göttingen Geoscience Center (GZG)">Göttingen Geoscience Center (GZG)</BaseNuxtLink>
       at University Göttingen and the
-      <BaseNuxtLink class="text-primary" to="https://www.sub.uni-goettingen.de/sub-aktuell/" target="_blank" title="Link to SUB Website">University and State Library (SUB)</BaseNuxtLink>.
+      <BaseNuxtLink class="text-primary" to="https://www.sub.uni-goettingen.de/en/news/" target="_blank" title="Link to SUB Website">University and State Library (SUB)</BaseNuxtLink>.
     </p>
     <p class="mb-6">So far, the DIGIS project for GEOROC 2.0 has achieved these goals:</p>
     <ul class="list-disc pl-4 space-y-4">
@@ -48,10 +48,6 @@
       <li>
         We have refreshed the <span class="font-bold">Expert Datasets:</span> These are author-provided data compilations available
         through the GEOROC Data Repository.
-      </li>
-      <li>
-        We will be launching an entirely <span class="font-bold">new web interface</span> for GEOROC 2.0 for testing by the end of 2024 and
-        expect full functionality by mid 2025.
       </li>
       <li>
         During the second funding phase of the DIGIS project (expected for 2025-2028) the new website will provide

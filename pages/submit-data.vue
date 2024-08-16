@@ -12,11 +12,11 @@
     <p class="mb-4">Since GEOROC relies on data published by the community, the most important contribution you can
       make is to follow the FAIR guidelines when publishing your geochemical research data
       (<BaseNuxtLink class="text-primary" to="https://doi.org/10.1038/sdata.2016.18" target="_blank" title="Link to Wilkinson et al., 2016">Wilkinson et al., 2016</BaseNuxtLink>; <BaseNuxtLink class="text-primary" to="https://doi.org/10.1038/s43017-021-00237-w" target="_blank" title="Link to Chamberlain el al. 2021">Chamberlain et al. 2021</BaseNuxtLink>.)</p>
-    <p class="mb-4">Please submit your data with the minimum set of metadata using our <span class="font-bold">minimum set of metadata</span>
+    <p class="mb-4">Please submit your data with the minimum set of metadata
       using our <BaseNuxtLink class="text-primary" to="https://digis-repo.georoc.eu" target="_blank" title="Link to Metadata Template">template</BaseNuxtLink>.
     </p>
     <p class="mb-4">
-      DIGIS curators will evaluate whether the dataset meets the schema of our repository and assures proper metadata content.
+      DIGIS curators will evaluate whether the dataset meets the schema of our repository and assure proper metadata content.
     </p>
     <p class="mb-8">
       After acceptance, your datasets will be registered with a DOI and archived in the DIGIS domain repository
@@ -36,11 +36,11 @@
     </p>
     <p class="mb-4 relative pl-5">
       <span class="absolute top-0 left-0">2)</span>
-      Once your data submission is completed and curated by DIGIS/GEOROC staff, the dataset will be DOI-registered at GFZ Data Services (GFZ Potsdam) and a protected DOI will be returned to the authors. This DOI will be time-stamped and via moratorium these data will only be accessible to the authors, editors and reviewers during the manuscript review phase.
+      Once your data submission is completed and curated by DIGIS/GEOROC staff, the dataset will be DOI-registered at GFZ Data Services (GFZ Potsdam), a protected DOI will be returned to the authors. This DOI will be time-stamped and via a moratorium these data will only be accessible to the authors, editors and reviewers during the manuscript review phase.
     </p>
     <p class="mb-4 relative pl-5">
       <span class="absolute top-0 left-0">3)</span>
-      After completion of journal review (and potential intermediate modification of the dataset), and editorial decision and acceptance, the authors will need to notify the DIGIS curators.
+      After completion of journal review (and potential intermediate modification of the dataset), editorial decision and acceptance, the authors will need to notify the DIGIS curators.
       At this point, the moratorium on the dataset will be lifted and the DOI made publicly available at the GEOROC domain specific repository for geochemical data at GFZ Data Services.
     </p>
     <p class="mb-8">

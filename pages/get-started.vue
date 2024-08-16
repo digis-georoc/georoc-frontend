@@ -8,30 +8,30 @@
       </li>
       <li>
         Select from world-wide samples (or from selected samples according to 1.) using filters:
-        <ul class="pl-4 w-1/2">
+        <ul class="pl-4 md:w-[500px]">
           <li class="flex">
-            <span class="mr-4">-</span><span class="w-1/2">Geographic location</span><span class="w-1/2">(e.g. “Hawaii”)</span>
+            <span class="mr-4">-</span><span class="w-1/2">Geographic location</span><span class="w-1/2">e.g. “Hawaii”</span>
           </li>
           <li class="flex">
-            <span class="mr-4">-</span><span class="w-1/2">Geological setting</span><span class="w-1/2">(e.g. “oceanic subduction zone”)</span>
+            <span class="mr-4">-</span><span class="w-1/2">Geological setting</span><span class="w-1/2">e.g. “oceanic subduction zone”</span>
           </li>
           <li class="flex">
-            <span class="mr-4">-</span><span class="w-1/2">Rock type</span><span class="w-1/2">(e.g. “alkali basalt”)</span>
+            <span class="mr-4">-</span><span class="w-1/2">Rock type</span><span class="w-1/2">e.g. “alkali basalt”</span>
           </li>
           <li class="flex">
-            <span class="mr-4">-</span><span class="w-1/2">Mineral type</span><span class="w-1/2">(e.g. “olivine”)</span>
+            <span class="mr-4">-</span><span class="w-1/2">Mineral type</span><span class="w-1/2">e.g. “olivine”</span>
           </li>
           <li class="flex">
-            <span class="mr-4">-</span><span class="w-1/2">Inclusion type</span><span class="w-1/2">(glass)</span>
+            <span class="mr-4">-</span><span class="w-1/2">Inclusion type</span><span class="w-1/2">glass</span>
           </li>
           <li class="flex">
-            <span class="mr-4">-</span><span class="w-1/2">Chemical composition</span><span class="w-1/2">(major- and trace elements)</span>
+            <span class="mr-4">-</span><span class="w-1/2">Chemical composition</span><span class="w-1/2">major- and trace elements</span>
           </li>
           <li class="flex">
-            <span class="mr-4">-</span><span class="w-1/2">Isotopic composition</span><span class="w-1/2">(radiogenic and stable isotopes)</span>
+            <span class="mr-4">-</span><span class="w-1/2">Isotopic composition</span><span class="w-1/2">radiogenic and stable isotopes</span>
           </li>
           <li class="flex">
-            <span class="mr-4">-</span><span class="w-1/2">Age</span><span class="w-1/2">(numerical age, geological age)</span>
+            <span class="mr-4">-</span><span class="w-1/2">Age</span><span class="w-1/2">numerical age, geological age</span>
           </li>
         </ul>
       </li>
