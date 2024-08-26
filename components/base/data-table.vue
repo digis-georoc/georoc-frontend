@@ -46,6 +46,22 @@ const getPaginatorButton = (options: PaginatorPassThroughMethodOptions) => ({
     },
   ],
 })
+
+const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
+  return {
+    root: {
+      class: [
+        'relative me-2 border-2 rounded w-[22px] h-[22px] transition-colors flex items-center justify-center',
+        {
+          'bg-zinc-50 border-zinc-300 dark:bg-zinc-700 dark:border-zinc-600 hover:border-primary-300 dark:hover:border-primary': !options.context.checked,
+          'bg-primary border-primary dark:border-primary text-white hover:bg-primary-700': options.context.checked,
+        }
+      ]
+    },
+    input: 'absolute w-full h-full top-0 left-0 opacity-0',
+    box: 'flex items-center'
+  }
+}
 </script>
 
 <template>
@@ -182,9 +198,7 @@ const getPaginatorButton = (options: PaginatorPassThroughMethodOptions) => ({
     /></template>
     <template #paginatorstart>
       <div
-        v-if="
-          multiselect && typeof selected !== 'undefined' && selected?.length > 0
-        "
+        v-if="multiselect && typeof selected !== 'undefined' && selected?.length > 0"
         class="flex items-start"
       >
         <slot
@@ -204,35 +218,10 @@ const getPaginatorButton = (options: PaginatorPassThroughMethodOptions) => ({
         headerContent: {
           class: 'flex justify-left items-center space-x-4',
         },
-        checkbox: {
-          class: 'hover:cursor-pointer',
-        },
+        rowCheckbox,
+        headerCheckBox: rowCheckbox
       }"
     >
-      <template #rowcheckboxicon="{ checked }">
-        <Icon
-          v-if="checked"
-          :name="'material-symbols-light:check-box-outline'"
-          class="min-w-[1.5rem] min-h-[1.5rem]"
-        />
-        <Icon
-          v-if="!checked"
-          :name="'material-symbols-light:check-box-outline-blank'"
-          class="min-w-[1.5rem] min-h-[1.5rem]"
-        />
-      </template>
-      <template #headercheckboxicon="{ checked }">
-        <Icon
-          v-if="checked"
-          :name="'material-symbols-light:check-box-outline'"
-          class="min-w-[1.5rem] min-h-[1.5rem]"
-        />
-        <Icon
-          v-if="!checked"
-          :name="'material-symbols-light:check-box-outline-blank'"
-          class="min-w-[1.5rem] min-h-[1.5rem]"
-        />
-      </template>
     </Column>
     <Column
       v-for="col of columns"
