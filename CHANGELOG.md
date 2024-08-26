@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.19](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.18...v0.0.19) (2024-08-26)
+
+
+### Bug Fixes
+
+* table row checkbox in precompiled files ([50973f5](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/50973f51ab259004869cc5ddabe66a011db29708))
+* update table styles ([c64a7f3](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c64a7f3495022fb30b85cbb87a91dd2c21ab59c3))
+
 ### [0.0.18](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.17...v0.0.18) (2024-08-16)
 
 
