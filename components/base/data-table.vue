@@ -88,11 +88,14 @@ const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
       root: {
         class: 'flex-1 overflow-auto',
       },
+      wrapper: {
+        class: 'pb-4'
+      },
       table: {
         class: 'w-full',
       },
       headerRow: {
-        class: 'border-b-2',
+        class: 'border-b dark:border-zinc-600',
       },
       bodyRow: {
         class: [
@@ -105,7 +108,7 @@ const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
       paginator: {
         root: {
           class:
-            'flex flex-wrap items-center justify-center space-x-2 text-gray-500 border-t-2 py-2 dark:text-white/60',
+            'flex flex-wrap items-center justify-center space-x-2 text-gray-500 border-t dark:border-zinc-600 py-4 dark:text-white/60',
         },
         start: {
           class: {
@@ -138,8 +141,8 @@ const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
         rowPerPageDropdown: {
           root: {
             class: [
-              'p-1 inline-flex items-center cursor-pointer rounded-md transition-colors duration-200 border-2',
-              'hover:bg-primary-50 hover:border-primary hover:text-black',
+              'p-1 inline-flex items-center cursor-pointer rounded-md transition-colors duration-200 border-2 dark:border-zinc-600',
+              'hover:bg-primary-50 dark:hover:bg-zinc-700 hover:border-primary hover:text-black dark:hover:text-zinc-400',
             ],
           },
           input: {
@@ -163,18 +166,13 @@ const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
     }"
   >
     <template #header>
-      <Icon :name="'heroicons:magnifying-glass'" class="justify-center" />
-      <InputText
+      <BaseInput
         v-model="filters['global'].value"
-        :placeholder="t('search')"
+        :placeholder="t('search') + '...'"
+        search
         :unstyled="true"
-        :pt="{
-          root: {
-            class:
-              'p-1 border-2 border-transparent rounded-md bg-transparent transistion-color duration-200 hover:border-primary',
-          },
-        }"
-      ></InputText>
+        class="xl:w-1/3 p-1"
+      ></BaseInput>
     </template>
     <template #empty>{{ $t('no_matching_records_found') }}</template>
     <template #paginatorfirstpagelinkicon
@@ -240,6 +238,9 @@ const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
             {
               'text-primary-300': options.context.sorted,
             },
+            {
+              'cursor-pointer': col.field != 'persistentUrl',
+            },
           ],
         }),
         headerTitle: {
@@ -247,7 +248,7 @@ const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
         },
         sort: (options: ColumnPassThroughMethodOptions) => ({
           class: [
-            'rounded-md border-2 pb-1 px-1 hover:border-primary transition-colors',
+            'cursor-pointer rounded-md pb-1 px-2 hover:bg-zinc-100 transition-colors',
             {
               'text-primary': options.context.sorted,
             },

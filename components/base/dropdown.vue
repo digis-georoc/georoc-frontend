@@ -3,7 +3,9 @@
     <MenuButton
       as="button"
       :class="[
-        'inline-flex w-full justify-center items-center bg-primary-50 dark:bg-zinc-700 dark:bg-inherit rounded-md px-6 py-4',
+        'inline-flex w-full justify-center items-center bg-primary-50 dark:bg-zinc-700 dark:bg-inherit rounded-md',
+        { 'py-2 px-4': size === 'normal'},
+        { 'py-4 px-6': size === 'large'},
         'font-medium select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-300 border-2 border-transparent hover:border-primary',
       ]"
     >
@@ -12,28 +14,26 @@
     </MenuButton>
     <MenuItems
       :class="[
-        'absolute mt-2 origin-top-left divide-y divide-gray-100 bg-white dark:bg-zinc-800 dark:text-white rounded-md shadow-lg ring-1 ring-black/5',
-        'focus:outline-none z-[9999] overflow-y-scroll max-h-96 w-80 md:left-[50%] lg:left-0 md:translate-x-[-50%] lg:translate-x-0',
+        'absolute mt-2 p-3 origin-top-left bg-white border dark:border-zinc-600 dark:bg-zinc-800 dark:text-white rounded-md shadow-lg ring-1 ring-black/5',
+        'focus:outline-none z-[9999] overflow-y-scroll max-h-96 max-w-[50vw] md:left-[50%] lg:left-0 md:translate-x-[-50%] lg:translate-x-0',
       ]"
     >
-      <div class="p-1">
-        <MenuItem
+      <MenuItem
           v-slot="{ active, disabled }"
           v-for="link in links"
           :disabled="link.isCurrent"
-        >
-          <a
+      >
+        <a
             :href="link.href"
             :class="[
-              'flex w-full items-center rounded-md p-2 text-sm',
+              'flex whitespace-nowrap w-full items-center rounded-md p-3',
               active ? 'bg-primary text-white' : '',
               disabled ? 'bg-primary-50 dark:bg-zinc-700' : '',
             ]"
-          >
-            {{ link.label }}
-          </a>
-        </MenuItem>
-      </div>
+        >
+          {{ link.label }}
+        </a>
+      </MenuItem>
     </MenuItems>
   </Menu>
   <!--
@@ -72,10 +72,12 @@ const props = withDefaults(
   defineProps<{
     links: { href: string; label: string; isCurrent?: boolean }[]
     buttontext?: string
+    size?: 'small' | 'normal' | 'large'
   }>(),
   {
     links: () => [],
     buttontext: 'Please select.',
+    size: 'normal'
   },
 )
 //toggle menu and stop teleport

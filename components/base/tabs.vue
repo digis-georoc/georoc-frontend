@@ -9,7 +9,7 @@ const props = defineProps<{
   <TabView
     :unstyled="true"
     :pt="{
-      nav: { class: 'flex space-x-1 py-2' },
+      nav: { class: 'flex space-x-1 border-b dark:border-zinc-600' },
     }"
   >
     <TabPanel
@@ -20,10 +20,10 @@ const props = defineProps<{
         header: { class: 'font-medium' },
         headerAction: ({ props, parent }) => ({
           class: [
-            'p-2 rounded-t-md select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-300',
+            'flex justify-center border-t border-x py-2 px-4 min-w-[100px] rounded-t-md select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus:ring-primary-100',
             parent.state.d_activeIndex === index
-              ? 'bg-primary text-white'
-              : 'hover:bg-primary-50 hover:text-black',
+              ? 'border-primary bg-primary text-white'
+              : 'border-zinc-300 dark:border-zinc-600 hover:bg-primary-50 hover:text-black',
           ],
         }),
       }"

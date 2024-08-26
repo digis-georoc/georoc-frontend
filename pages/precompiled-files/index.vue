@@ -38,6 +38,7 @@ if (precompiledFilePreviewArr) {
         <BaseDropdown
           :links="links"
           :buttontext="t('precompiledFilePage.select_button')"
+          size="large"
         ></BaseDropdown>
       </BaseContainer>
       <PrecompiledFilesConcept />
