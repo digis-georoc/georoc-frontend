@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Tree from 'primevue/tree'
-import type {TreeNode, TreeSelectionKeys, TreeExpandedKeys} from 'primevue/tree'
+import TreeNode, { type TreeSelectionKeys, type TreeExpandedKeys } from 'primevue/tree'
 
 const props = withDefaults(defineProps<{
   nodes: TreeNode[]
@@ -89,7 +89,7 @@ function onButtonClick(node) {
       content: options => {
         return {
           class: [
-              'flex px-3 rounded-lg cursor-pointer',
+              'flex px-3 items-center rounded-lg cursor-pointer',
               { 'py-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-700': options.props.node.type !== 'button' },
               { 'hidden' : options.props.node.data?.visible === false }
             ]

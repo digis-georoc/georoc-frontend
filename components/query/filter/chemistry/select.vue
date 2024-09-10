@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type {TreeNode, TreeSelectionKeys} from "primevue/tree";
+import TreeNode, { type TreeSelectionKeys } from 'primevue/tree'
 import {storeToRefs} from "pinia";
 import {getChemistryFilterOptions} from "~/utils/api";
 import katex from 'katex';
@@ -140,9 +140,7 @@ function mapNodesToSelectionKeys(selectedNodes: TreeNode[]): TreeSelectionKeys {
 
 function parseToLatex(str: string) {
   try {
-    const latexValue = katex.renderToString(str.replaceAll('$', ''))
-    return latexValue;
-
+    return katex.renderToString(str)
   } catch(e) {
     console.log(e)
   }
@@ -157,7 +155,7 @@ function loadMoreButtonHandler(node: TreeNode) {
     .map(childNode => {
       if (childNode.key === 'more_button') return childNode
       if (expanded) {
-        childNode.data.visible = !!(childNode.data.visibleInitial)
+        childNode.data.visible = (childNode.data.visibleInitial)
       } else {
         childNode.data.visible = true
       }
