@@ -95,7 +95,10 @@
 <template>
   <button type="button" :class="classes" :disabled="disabled">
     <template v-if="_icon && _iconPosition === 'left'">
-      <Icon :name="_icon" class="text-base" :class="{'me-1.5': size === 'normal', 'me-1': size !== 'normal'}" />
+      <Icon
+        :name="_icon"
+        class="text-base"
+        :class="['mt-[-2px]', {'me-1.5': size === 'normal', 'me-1': size !== 'normal'}]" />
     </template>
     <template v-if="isIconOnly"><Icon :name="_icon" class="mt-[1px]" />
     </template>
