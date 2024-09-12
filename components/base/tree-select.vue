@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Tree from 'primevue/tree'
-import TreeNode, { type TreeSelectionKeys, type TreeExpandedKeys } from 'primevue/tree'
+import type { TreeNode, TreeSelectionKeys, TreeExpandedKeys } from 'primevue/tree'
 
 const props = withDefaults(defineProps<{
   nodes: TreeNode[]
@@ -20,7 +20,71 @@ const emit = defineEmits<{
   'update:modelValue': [value: TreeSelectionKeys]
 }>()
 
+let typingTimer
+const typingDelay = 500
+
+const _nodes = ref<TreeNode[]>([])
+const filterValue = ref('')
 const expandedKeys = ref<TreeExpandedKeys>({})
+const hasFiltered = ref(false)
+const visibleNodesAfterFiltering = ref<TreeNode[]>([])
+
+function doneTyping(filterText: string) {
+
+  const hasFilterText = filterText !== ''
+  expandedKeys.value = {}
+
+  if (!hasFilterText) {
+    _nodes.value = props.nodes
+    visibleNodesAfterFiltering.value = []
+    hasFiltered.value = false
+    return
+  }
+
+  const copyNodes = JSON.parse(JSON.stringify(props.nodes))
+
+  const resultNodes: TreeNode[] = []
+
+  copyNodes.forEach((node, i) => {
+    let childNodes = [...node.children]
+    node.children = []
+
+    for (let childNode of childNodes) {
+      let copyChildNode = { ...childNode };
+
+      const regex = new RegExp(filterText.toLowerCase(), 'gi')
+      const cleanNodeValue = copyChildNode.key.toLowerCase().split('_/_')[1]
+
+      if (regex.test(cleanNodeValue)) {
+        node.children.push(copyChildNode);
+      }
+    }
+    if (node.children.length > 0) {
+      resultNodes.push(node)
+    }
+  })
+
+  _nodes.value = resultNodes
+
+  _nodes.value.forEach(node => {
+    expandedKeys.value[node.key] = true
+    node.children.forEach(node => {
+      if (node.data && node.data.hasOwnProperty('visible') && !node.data.visible) {
+        node.data.visible = true
+        visibleNodesAfterFiltering.value.push(node)
+      }
+    })
+  })
+
+  hasFiltered.value = true
+}
+
+watch(() => props.nodes, (value) => _nodes.value = value, { immediate: true })
+
+watch(filterValue, (value) => {
+  clearTimeout(typingTimer);
+  typingTimer = setTimeout(() => doneTyping(value), typingDelay);
+})
 
 async function onSelect(node: TreeNode) {
   if (!node.key) return
@@ -41,25 +105,29 @@ async function onSelect(node: TreeNode) {
   emit('update:modelValue', keys)
 }
 
-function onButtonClick(node) {
+function onButtonClick(node: TreeNode) {
   node.data.handler(node)
+}
+
+function onExpand(node: TreeNode) {
+  props.loadChildren(node)
 }
 </script>
 
 <template>
+  <div class="px-3 py-0.5 mb-6">
+    <BaseInput search v-model="filterValue" :placeholder="filterPlaceholder" />
+  </div>
   <Tree
     ref="tree"
     v-model:expandedKeys="expandedKeys"
     :selectionKeys="modelValue"
     @update:selectionKeys="emit('update:modelValue', $event)"
-    :value="nodes"
-    :filter="true"
-    filterMode="lenient"
-    :filterPlaceholder="filterPlaceholder"
+    :value="_nodes"
     selectionMode="checkbox"
     class="w-full"
     unstyled
-    @node-expand="loadChildren"
+    @node-expand="onExpand"
     @node-select="onSelect"
     :loading="loading"
     :pt="{
@@ -89,15 +157,24 @@ function onButtonClick(node) {
       content: options => {
         return {
           class: [
-              'flex px-3 items-center rounded-lg cursor-pointer',
-              { 'py-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-700': options.props.node.type !== 'button' },
+              'flex px-2.5 items-center rounded-lg cursor-pointer',
+              { 'py-3 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-700': options.props.node.type !== 'button' },
               { 'hidden' : options.props.node.data?.visible === false }
             ]
         }
       },
-      toggler: options => { return { class: ['border-0 me-2', { 'hidden': options.context.leaf }] } },
-      label: 'cursor-pointer select-none',
-      subgroup: 'ps-4',
+      toggler: options => { return { class: ['border-0 me-2 -mt-[3px]', { 'hidden': options.context.leaf }] } },
+      label: options => { return {
+          class: [
+            'cursor-pointer select-none',
+            {
+              'text-zinc-600 dark:text-zinc-500': options.context.leaf,
+              'dark:text-zinc-300 font-semibold': !options.context.leaf
+            }
+          ]
+        }
+      },
+      subgroup: 'ps-6',
       loadingOverlay: 'absolute z-10 w-full h-full flex items-center justify-center bg-white dark:bg-zinc-800 bg-opacity-75 dark:bg-opacity-75'
     }"
   >
@@ -106,6 +183,9 @@ function onButtonClick(node) {
     </template>
     <template v-slot:default="{ node }">
       <span v-html="node.data?.structuredLabel ?? node.label"></span>
+      <span v-if="node.children?.length" class="inline-flex items-center justify-center px-1.5 py-0.5 bg-zinc-100 dark:bg-zinc-700 rounded-md text-zinc-600 dark:text-zinc-400 text-xs ml-3">
+        {{ node.children?.length }}
+      </span>
     </template>
     <template #button="{ node }">
       <button @click="onButtonClick(node)" class="ml-5 mb-2 text-primary px-2 py-1 rounded-md hover:bg-primary-50 text-sm">{{ node.label }}</button>
