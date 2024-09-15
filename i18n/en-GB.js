@@ -133,5 +133,6 @@ export default {
   update_query: 'Update Query',
   query_updated: 'Query Updated',
   updating: 'Updating',
-  next: 'Next'
+  next: 'Next',
+  publication_year: 'Publication Year'
 }

@@ -296,6 +296,9 @@ function getAuthors(authors: Author[]) {
             <SampleField :label="$t('book_editors')" :value="item.editors"/>
             <SampleField :label="$t('publisher')" :value="item.publisher"/>
             <SampleField :label="$t('authors')" :value="getAuthors(item.authors)"/>
+            <SampleField :label="$t('DOI')" :value="item.externalIdentifier"/>
+            <SampleField :label="$t('publication_year')" :value="item.publicationYear"/>
+
           </BaseCard>
           <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('tas_diagram') }}</h2>
           <SampleTasDiagram :data="tasData" />
