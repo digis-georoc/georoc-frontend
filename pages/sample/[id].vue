@@ -33,6 +33,7 @@ onMounted(async () => {
   try {
     const sample = await $fetch<SampleFullData>(`/api/samples/${id}`)
 
+    console.log(sample)
     const options = await getChemistryFilterOptions()
 
     if (!options) return
@@ -201,7 +202,7 @@ function getAuthors(authors: Author[]) {
               <h2 class="text-xl font-semibold mt-6 mb-2">{{ $t('location_info') }}</h2>
               <div class="grid grid-cols-3">
                 <SampleField class="flex-1" :label="$t('tectonic_setting')" :value="data.tectonicSetting"/>
-                <SampleField class="flex-1" :label="$t('location_comment')" :value="data.locationTypes"/>
+                <SampleField class="flex-1" :label="$t('location_comment')" :value="data.locationNames"/>
               </div>
               <div class="grid grid-cols-3">
                 <SampleField :label="$t('latitude') + ' ' + $t('min_max')" :value="`${data.latitudeMin}/${data.latitudeMax}`"/>

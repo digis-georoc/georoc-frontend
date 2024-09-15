@@ -152,7 +152,7 @@ declare global {
     references: Citation[]
     batchData: BatchData[]
     tectonicSetting: string | null
-    locationTypes: string[]
+    locationNames: string[]
     locationComments: string[]
     latitudeMax: string | null
     latitudeMin: string | null
