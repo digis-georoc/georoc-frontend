@@ -3,6 +3,7 @@ import DataTable from "primevue/datatable"
 import Column from "primevue/column"
 
 import { FetchError } from "ofetch"
+import {getChemistryFilterOptions} from "~/utils/api";
 
 const queryStore = useQueryStore()
 const route = useRoute()
@@ -30,7 +31,27 @@ const tasData = computed<DiagramData | null>(() => {
 onMounted(async () => {
   loading.value = true
   try {
-    data.value = await $fetch<SampleFullData>(`/api/samples/${id}`)
+    const sample = await $fetch<SampleFullData>(`/api/samples/${id}`)
+
+    const options = await getChemistryFilterOptions()
+
+    if (!options) return
+
+    const referenceMap = options?.reduce((map, item, index) => {
+      map[item.value] = index;
+      return map;
+    }, {});
+
+    sample.batchData.forEach(item => {
+      item.results.sort((a, b) => {
+        const indexA = referenceMap[a.itemName] !== undefined ? referenceMap[a.itemName] : Infinity;
+        const indexB = referenceMap[b.itemName] !== undefined ? referenceMap[b.itemName] : Infinity;
+        return indexA - indexB;
+      });
+    })
+
+    data.value = sample
+
   } catch (e: FetchError | any) {
     error.value = e
   } finally {
@@ -226,11 +247,20 @@ function getAuthors(authors: Author[]) {
               :value="item.rimOrCoreInclusion"
             />
             <h3 class="font-semibold">{{ $t('chemical_table') }}</h3>
-            <DataTable :value="item.results" tableStyle="min-width: 50rem">
+            <DataTable
+              :value="item.results"
+              tableStyle="min-width: 50rem"
+              unstyled
+              :pt="{
+                thead: {
+                  class: 'text-left'
+                }
+              }"
+            >
               <Column field="itemName" :header="$t('analyte')"></Column>
-              <Column field="method" :header="$t('method')"></Column>
               <Column field="value" :header="$t('value')"></Column>
               <Column field="unit" :header="$t('unit')"></Column>
+              <Column field="method" :header="$t('method')"></Column>
             </DataTable>
           </BaseCard>
 
