@@ -36,7 +36,7 @@
         </ul>
       </li>
     </ol>
-    <p class="mt-6">See here: “How to filter” [The correct link will be inserted later]</p>
+    <p class="mt-6">See here: <BaseNuxtLink to="/how-to-filter" class="text-primary">How to filter</BaseNuxtLink></p>
   </PageContainer>
 </template>
 <script setup lang="ts">
