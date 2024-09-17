@@ -8,6 +8,7 @@ const props = withDefaults(defineProps<{
   loadChildren: (node: TreeNode) => void
   loading: boolean
   filterPlaceholder: string
+  filterKey: string
 }>(),{
   nodes: () => <TreeNode[]>[],
   modelValue: () => <TreeSelectionKeys>{},
@@ -45,7 +46,7 @@ function doneTyping(filterText: string) {
 
   const resultNodes: TreeNode[] = []
 
-  copyNodes.forEach((node, i) => {
+  copyNodes.forEach((node) => {
     let childNodes = [...node.children]
     node.children = []
 
@@ -53,7 +54,13 @@ function doneTyping(filterText: string) {
       let copyChildNode = { ...childNode };
 
       const regex = new RegExp(filterText.toLowerCase(), 'gi')
-      const cleanNodeValue = copyChildNode.key.toLowerCase().split('_/_')[1]
+
+      let cleanNodeValue = ''
+      if (props.filterKey) {
+        cleanNodeValue = copyChildNode[props.filterKey].toLowerCase()
+      } else {
+        cleanNodeValue = copyChildNode.key.toLowerCase().split('_/_')[1]
+      }
 
       if (regex.test(cleanNodeValue)) {
         node.children.push(copyChildNode);

@@ -23,8 +23,38 @@ const emit = defineEmits<{
 onMounted(async () => {
   if (store.nodes.length === 0) {
     const rockTypes = await getRocktypes()
-    store.nodes = rockTypes?.data.map(({ value, label }): TreeNode => ({ key: value , label, children: [], leaf: false })) ?? []
+
+    for (const rockType of rockTypes?.data ?? []) {
+      const rockClasses = await getRockClasses(rockType.value)
+
+      store.nodes.push({
+        key: rockType.value,
+        label: rockType.label,
+        children: rockClasses
+            ?.data
+            .map((child) => ({ key: generateChildKey(rockType.value, child.value), label: child.label ?? child.value }))
+          ?? [],
+        leaf: false
+      })
+
+    }
+
+    // store.nodes = rockTypes?.data.map(async ({ value, label }): TreeNode => {
+    //   const rockClasses = await getRockClasses(value)
+    //
+    //   return {
+    //     key: value,
+    //     label,
+    //     children: rockClasses
+    //       ?.data
+    //       .map((child) => ({ key: generateChildKey(value, child.value), label: child.label ?? child.value }))
+    //       ?? [],
+    //     leaf: false
+    //   }
+    // }) ?? []
   }
+
+  console.log(store.nodes)
 
   nodes.value = store.nodes
   selectedKeys.value = mapNodesToSelectionKeys(selected.value)
@@ -98,10 +128,11 @@ function mapNodesToSelectionKeys(selectedNodes: TreeNode[]): TreeSelectionKeys {
     <BaseLoading class="text-[4rem]"/>
   </div>
     <BaseTreeSelect
-        v-else
-        v-model="selectedKeys"
-        :nodes="nodes"
-        :load-children="loadChildren"
-        :loading="loadingChildren"
+      v-else
+      v-model="selectedKeys"
+      :nodes="nodes"
+      :loading="loadingChildren"
+      filter-key="label"
+      filter-placeholder="Type to filter by a rock type/class"
     />
 </template>
