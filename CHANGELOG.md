@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.20](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.19...v0.0.20) (2024-09-17)
+
+
+### Features
+
+* add how-to-filter page ([ea349e2](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ea349e2e24f01f65407ada18edf122426bfac630))
+* add info message to TAS diagram ([8c80314](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/8c8031498860a6489b2401e0233e59a58bdd95a9))
+* display DOI and publication year in sample detail page ([be60a58](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/be60a5889521d4e94460e9692e5182d2c42e8165))
+* display location names instead of location types ([cb60f02](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/cb60f0261643060e2a84f7ee113aa5bb6ab5d1fc))
+* improve tree search - show hidden matches, expand all nodes, show matches count ([a41dacf](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/a41dacf80dc13de82ac1bc0a086d10b00a3e2806))
+* remove lazy loading of children in rock type filter to use the same filtering mechanism as in chemistry filter ([1514745](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/151474509ddc1a54efaa9bb8c52be22b1231f778))
+* sort batch data by static chemical elements list like in chemistry filter options in sample detail page ([7708d27](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/7708d2759296e07a043c28002912679427b6ff50))
+* update chemistry filter options ([fc6eb7d](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/fc6eb7d489388c88b588d51259d4b70aa20d63de))
+
+
+### Bug Fixes
+
+* update button icon style ([7145e3c](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/7145e3c555f8a74d264e17beabce8da0d7890003))
+
 ### [0.0.19](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.18...v0.0.19) (2024-08-26)
 
 
