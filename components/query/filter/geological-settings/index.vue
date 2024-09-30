@@ -130,6 +130,23 @@ function reset() {
   submit()
 }
 
+function remove(index: number) {
+  const optionToRemove = selected.value.find((item, i) => i === index)
+
+  if (!optionToRemove) return
+
+  const optionIndex = options.findIndex(({ key }) => key === optionToRemove.key)
+  if (optionIndex === -1) return
+  options[optionIndex].active = false
+
+  selected.value.splice(index, 1)
+
+  queryStore.setPanelFilter({
+    name: QueryKey.GeologicalSettings,
+    value: toQuery(selected.value)
+  })
+}
+
 function useFilter() {
   const value = toQuery(selected.value)
 
@@ -166,6 +183,10 @@ const unsubscribe = queryStore.$onAction(
 )
 
 onMounted(() => {
+  options.forEach(option => {
+    option.active = false
+  })
+
   const activeQuery = queryStore.getFilter(QueryKey.GeologicalSettings)?.value
   if (!activeQuery) return
   selected.value = fromQuery(activeQuery)
@@ -180,14 +201,14 @@ onBeforeUnmount(() => {
 <template>
   <div class="relative">
     <QueryFilterBaseContainer
-        :title="$t('geological_settings')"
-        :dialog-title="$t('please_select_geological_settings')"
-        :has-selected="selected.length > 0"
-        @submit="submit"
-        @reset="reset"
+      :title="$t('geological_settings')"
+      :dialog-title="$t('please_select_geological_settings')"
+      :has-selected="selected.length > 0"
+      @submit="submit"
+      @reset="reset"
     >
       <template v-slot:selected>
-        <QueryFilterChemistrySelected />
+        <QueryFilterBaseSelected :items="selected" @remove="remove"/>
       </template>
       <template v-slot:options>
         <QueryFilterGeologicalSettingsSelect v-model="selectedTemp" :options="options" />

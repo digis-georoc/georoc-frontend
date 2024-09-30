@@ -14,8 +14,6 @@ const props = withDefaults(defineProps<{
   options: () => []
 })
 
-const selected = ref<TreeNode[]>(<TreeNode[]>[])
-
 const nodes = ref<TreeNode[]>([])
 const loading = ref(true)
 const selectedKeys = ref<TreeSelectionKeys>({})
@@ -26,49 +24,23 @@ const emit = defineEmits<{
 
 onMounted(async () => {
   nodes.value = props.options
-  selectedKeys.value = mapNodesToSelectionKeys(selected.value)
+  selectedKeys.value = mapNodesToSelectionKeys(props.modelValue)
   loading.value = false
 })
 
 watch(selectedKeys, (value) => emit('update:modelValue', mapSelectionKeysToNodes(value)))
 
 function mapSelectionKeysToNodes(keys: TreeSelectionKeys): TreeNode[] {
-  return nodes.value.filter(({ key }) => key && keys.hasOwnProperty(key)).map(node => {
-    const { key = '', label = '' } = node
-
-    let selectedChildren =
-      node
-        ?.children
-        ?.filter((child) => Object.keys(keys).findIndex(selectionKey => selectionKey === child.key) > -1)
-      ?? []
-
-    const storedSelectedNode = store.selected.find(({ key: storedKey }) => storedKey === key)
-
-    if (storedSelectedNode) {
-      selectedChildren = selectedChildren.map((node) => {
-        const { key: selectedChildKey} = node
-        const { children } = storedSelectedNode
-        const child = children?.find(({key: storedChildKey }) => selectedChildKey === storedChildKey)
-        return child ?? node
-      })
-    }
-
-    return {
-      key,
-      label,
-      children: selectedChildren
-    }
-  })
+  return nodes.value.filter(({ key }) => key && keys.hasOwnProperty(key))
 }
 
 function mapNodesToSelectionKeys(selectedNodes: TreeNode[]): TreeSelectionKeys {
   const keys = <TreeSelectionKeys>{}
 
-  selectedNodes.forEach(({ key, children = [] }) => {
+  selectedNodes.forEach(({ key }) => {
     const node = nodes.value.find(node => node.key === key)
     if (!node) return
-    keys[key ?? ''] = node.children?.length === children.length ? {checked: true } : {checked: false, partialChecked: true }
-    children.forEach(({ key }) => keys[key ?? ''] = {checked: true})
+    keys[key ?? ''] = {checked: true }
   })
 
   return keys

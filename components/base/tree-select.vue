@@ -104,7 +104,7 @@ async function onSelect(node: TreeNode) {
   if (node.children && node.children?.length > 0) return
 
   await props.loadChildren(node)
-  const keys = {...props.modelValue, ...props.nodes[nodeIndex].children.reduce((acc, cur) => {
+  const keys = {...props.modelValue, ...props.nodes[nodeIndex].children?.reduce((acc, cur) => {
       acc[cur.key] = { checked: true }
       return acc
     }, {})}
