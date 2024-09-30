@@ -102,12 +102,12 @@ onBeforeUnmount(() => {
 <template>
   <div class="relative">
     <BaseButton
-        display="outline"
+        display="flat"
         color="neutral"
         icon="material-symbols:help-outline"
         text="How to Filter"
         size="tiny"
-        class="absolute z-10 top-[1.3rem] left-28"
+        class="absolute z-10 top-[0.9rem] left-28"
         @click="openHowToFilterDialog"
     />
     <QueryFilterBaseContainer

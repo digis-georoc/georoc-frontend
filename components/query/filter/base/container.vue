@@ -37,7 +37,7 @@ const collapsed = ref(false)
 
 </script>
 <template>
-  <BaseCard :title="title" class="mx-2 mt-2">
+  <BaseCard :title="title" class="mx-2 mb-3">
     <template #header-right>
       <BaseButton
         v-if="hasSelected"
@@ -64,7 +64,7 @@ const collapsed = ref(false)
           class="my-4 self-start mx-auto text-primary-300 border-primary-300"
           icon="material-symbols:add-rounded"
           icon-position="left"
-          display="outline-dashed"
+          display="flat"
           @click="openDialog"
           :text="$t('Add New Filter')"
           size="small"
@@ -80,7 +80,7 @@ const collapsed = ref(false)
           <span v-if="error.value.statusCode === 500" class="text-zinc-500 dark:text-zinc-400 font-semibold mb-2">
             {{ $t('server_error') }}:
           </span>
-          <p class="text-zinc-400 dark:text-zinc-500">{{ error?.value?.statusMessage ?? $t('oh_no_something_went_wrong') }}</p>
+          <p class="text-zinc-400 dark:text-zinc-500">{{ error?.value?.statusMessage ?? $t('oh_no_something_went_wrong') }}<br>{{ error }}</p>
         </div>
       </template>
     </NuxtErrorBoundary>
