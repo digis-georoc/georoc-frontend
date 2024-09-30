@@ -134,5 +134,7 @@ export default {
   query_updated: 'Query Updated',
   updating: 'Updating',
   next: 'Next',
-  publication_year: 'Publication Year'
+  publication_year: 'Publication Year',
+  geological_settings: 'Geological Settings',
+  please_select_geological_settings: 'Please select Geological Settings'
 }

@@ -6,17 +6,19 @@ import katex from 'katex';
 import 'katex/dist/katex.css';
 import { chemistryTypesLabels } from "~/utils/chemistry-types";
 
-const props = defineProps<{
+withDefaults(defineProps<{
   modelValue: TreeNode[]
   title: string
-}>()
+}>(), {
+  modelValue: () => [],
+  title: ''
+})
 
 const store = useChemistryStore()
 
 const { selected } = storeToRefs(store)
 
 const nodes = ref<TreeNode[]>([])
-const loadingChildren = ref(false)
 const loading = ref(true)
 const selectedKeys = ref<TreeSelectionKeys>({})
 

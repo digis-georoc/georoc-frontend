@@ -6,7 +6,7 @@ import HowToFilter from "~/components/how-to-filter.vue";
 const queryStore = useQueryStore()
 const chemistryStore = useChemistryStore()
 
-const selectedTemp = ref<TreeNode[]>([])
+const selectedTemp = ref<TreeNode[]>(<TreeNode[]>[])
 const howToFilterDialogVisible = ref(false)
 
 const { selected } = storeToRefs(chemistryStore)

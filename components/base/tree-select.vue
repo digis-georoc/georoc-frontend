@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<{
   loadChildren: (node: TreeNode) => void
   loading: boolean
   filterPlaceholder: string
-  filterKey: string
+  filterKey?: string
 }>(),{
   nodes: () => <TreeNode[]>[],
   modelValue: () => <TreeSelectionKeys>{},

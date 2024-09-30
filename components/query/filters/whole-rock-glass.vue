@@ -6,7 +6,7 @@
   <div class="flex flex-col">
     <QueryFilterRockType />
     <QueryFilterChemistry />
-    <QueryFilterTectonicSetting />
+    <QueryFilterGeologicalSettings />
     <QueryFilterLocationType />
     <QueryFilterAge />
   </div>

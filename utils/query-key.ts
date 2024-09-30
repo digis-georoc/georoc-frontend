@@ -7,5 +7,6 @@ export const QueryKey = {
   InclusionType: 'inclusiontype',
   HostMaterial: 'hostmaterial',
   InclusionMaterial: 'inclusionmaterial',
-  Chemistry: 'chemistry'
+  Chemistry: 'chemistry',
+  GeologicalSettings: 'setting'
 } as const
