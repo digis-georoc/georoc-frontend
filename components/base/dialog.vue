@@ -53,7 +53,7 @@ function open() {
     @update:visible="emit('update:modelValue', $event)"
   >
     <template #header>
-      <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-400">{{ title }}</h3>
+      <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-400" autofocus>{{ title }}</h3>
     </template>
     <div class="mt-4" ref="containerRef">
       <slot/>
