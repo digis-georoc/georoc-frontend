@@ -2,7 +2,7 @@
   <PageContainer>
     <BaseFluidContainer>
     <PageHead headline="Impressum / Legal Notice" />
-      <div class="pb-8 border-b-2 dark:border-zinc-700">
+      <div class="pb-8 border-b-2 dark:border-gray-700">
         <h2 class="font-bold mb-2">Impressum</h2>
         <div class="mb-4">
           <p>Fakultät für Geowissenschaften und Geographie</p>

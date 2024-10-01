@@ -30,7 +30,7 @@
             </NuxtLink>
           </div>
           <div
-            class="sticky top-[4rem] bg-white dark:bg-zinc-800 ring-2 ring-white dark:ring-zinc-800 z-[1009] py-2"
+            class="sticky top-[4rem] bg-white dark:bg-gray-800 ring-2 ring-white dark:ring-gray-800 z-[1009] py-2"
           >
             <div
               class="flex flex-col md:flex-row flex-wrap md:space-x-4 space-y-2 justify-start md:items-center items-start"
@@ -67,7 +67,7 @@
               latestVersion?.major !== precompiledFiles.version.major ||
               latestVersion.minor !== precompiledFiles.version.minor
             "
-            class="bg-primary-50 dark:bg-zinc-700 rounded-2xl p-3 flex items-center justify-start space-x-4"
+            class="bg-primary-50 dark:bg-gray-700 rounded-2xl p-3 flex items-center justify-start space-x-4"
           >
             <Icon
               :name="'fluent:info-24-filled'"

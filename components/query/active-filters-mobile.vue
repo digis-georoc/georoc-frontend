@@ -5,7 +5,7 @@ const emit = defineEmits(['is-filter-open', 'is-list-open'])
 </script>
 
 <template>
-  <div class="dark:bg-zinc-800 w-full px-4 py-2">
+  <div class="dark:bg-gray-800 w-full px-4 py-2">
     <div class="flex items-center justify-start">
       <BaseButton
         :text="$t('filters')"

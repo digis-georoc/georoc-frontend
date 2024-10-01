@@ -66,7 +66,7 @@ onBeforeUnmount(() => unsubscribe())
     </div>
 
     <template v-if="selectedMaterialId">
-      <div class="flex px-4 pt-2 pb-1 items-end border-b dark:border-zinc-600 relative">
+      <div class="flex px-4 pt-2 pb-1 items-end border-b dark:border-gray-600 relative">
         <h3 class="font-bold mb-2">{{ $t('filters') }}:</h3>
         <div v-if="amountActiveFilters > 0" class="flex items-center justify-center px-1.5 py-0.5 border border-primary rounded-md text-primary text-xs ml-2 mb-2">
           {{ amountActiveFilters }}
@@ -76,7 +76,7 @@ onBeforeUnmount(() => unsubscribe())
           size="small"
           display="flat"
           color="neutral"
-          class="ml-auto text-zinc-400"
+          class="ml-auto text-gray-400"
           @click="resetAll"
           :text="$t('reset_all')" />
 
@@ -89,11 +89,11 @@ onBeforeUnmount(() => unsubscribe())
     </template>
     <template v-else>
       <div class="flex-1 flex justify-center items-center">
-        <span class="text-zinc-400"> {{ $t('filter_panel_message_no_material_selected') }}</span>
+        <span class="text-gray-400"> {{ $t('filter_panel_message_no_material_selected') }}</span>
       </div>
     </template>
   </div>
-  <div class="p-4 border-t dark:border-zinc-600 flex mt-auto bg-white dark:bg-zinc-800">
+  <div class="p-4 border-t dark:border-gray-600 flex mt-auto bg-white dark:bg-gray-800">
     <BaseButton
       :text="getSearchButtonText()"
       size="normal"

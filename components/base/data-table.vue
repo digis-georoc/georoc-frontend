@@ -53,7 +53,7 @@ const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
       class: [
         'relative me-2 border-2 rounded w-[22px] h-[22px] transition-colors flex items-center justify-center',
         {
-          'bg-zinc-50 border-zinc-300 dark:bg-zinc-700 dark:border-zinc-600 hover:border-primary-300 dark:hover:border-primary': !options.context.checked,
+          'bg-gray-50 border-gray-300 dark:bg-gray-700 dark:border-gray-600 hover:border-primary-300 dark:hover:border-primary': !options.context.checked,
           'bg-primary border-primary dark:border-primary text-white hover:bg-primary-700': options.context.checked,
         }
       ]
@@ -95,11 +95,11 @@ const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
         class: 'w-full',
       },
       headerRow: {
-        class: 'border-b dark:border-zinc-600',
+        class: 'border-b dark:border-gray-600',
       },
       bodyRow: {
         class: [
-          'text-stone-800 dark:text-zinc-300 hover:bg-stone-300 dark:hover:bg-stone-400',
+          'text-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-400',
           'dark:hover:bg-opacity-[0.2]',
           'hover:bg-opacity-[0.4]',
           'text-base font-normal',
@@ -108,7 +108,7 @@ const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
       paginator: {
         root: {
           class:
-            'flex flex-wrap items-center justify-center space-x-2 text-gray-500 border-t dark:border-zinc-600 py-4 dark:text-white/60',
+            'flex flex-wrap items-center justify-center space-x-2 text-gray-500 border-t dark:border-gray-600 py-4 dark:text-white/60',
         },
         start: {
           class: {
@@ -141,20 +141,20 @@ const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
         rowPerPageDropdown: {
           root: {
             class: [
-              'p-1 inline-flex items-center cursor-pointer rounded-md transition-colors duration-200 border-2 dark:border-zinc-600',
-              'hover:bg-primary-50 dark:hover:bg-zinc-700 hover:border-primary hover:text-black dark:hover:text-zinc-400',
+              'p-1 inline-flex items-center cursor-pointer rounded-md transition-colors duration-200 border-2 dark:border-gray-600',
+              'hover:bg-primary-50 dark:hover:bg-gray-700 hover:border-primary hover:text-black dark:hover:text-gray-400',
             ],
           },
           input: {
             class: 'p-1 select-none',
           },
           wrapper: {
-            class: 'rounded-md border-2 my-1 bg-white dark:bg-zinc-800',
+            class: 'rounded-md border-2 my-1 bg-white dark:bg-gray-800',
           },
           item: (options: DropdownPassThroughMethodOptions) => {
             return {
               class: [
-                'flex justify-center p-2 hover:bg-stone-300 hover:bg-opacity-[0.4] dark:hover:text-black cursor-pointer',
+                'flex justify-center p-2 hover:bg-gray-300 hover:bg-opacity-[0.4] dark:hover:text-black cursor-pointer',
                 {
                   'bg-primary-50 dark:text-black': options.context.selected,
                 },
@@ -248,7 +248,7 @@ const rowCheckbox = (options: ColumnPassThroughMethodOptions) => {
         },
         sort: (options: ColumnPassThroughMethodOptions) => ({
           class: [
-            'cursor-pointer rounded-md pb-1 px-2 hover:bg-zinc-100 transition-colors',
+            'cursor-pointer rounded-md pb-1 px-2 hover:bg-gray-100 transition-colors',
             {
               'text-primary': options.context.sorted,
             },

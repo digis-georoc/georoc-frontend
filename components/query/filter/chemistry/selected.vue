@@ -90,7 +90,7 @@ function toQuery(selected: TreeNode[]) {
 
 <template>
   <template v-if="_items.length > 0">
-    <p class="text-sm text-zinc-400 italic mb-4" v-html="$t('queryPage.filter_chemistry_units_message')"></p>
+    <p class="text-sm text-gray-400 italic mb-4" v-html="$t('queryPage.filter_chemistry_units_message')"></p>
     <div class="flex flex-1 flex-col mb-2" v-for="(item, i) in _items" :key="item.key">
       <h3 class="font-semibold mb-2">{{ item.label }}:</h3>
       <div class="ps-4">
@@ -101,7 +101,7 @@ function toQuery(selected: TreeNode[]) {
             'max-h-auto': isExpandable(item.children?.length ?? 0) && !collapseState[i]
           }"
         >
-          <div class="flex text-sm border-b dark:border-zinc-600 pb-1">
+          <div class="flex text-sm border-b dark:border-gray-600 pb-1">
             <div class="w-3/12 pl-2 flex-shrink-0">
               <h4>{{ $t('element') }}</h4>
             </div>
@@ -118,11 +118,11 @@ function toQuery(selected: TreeNode[]) {
             </div>
           </div>
           <div class="rounded">
-            <div class="flex flex-1 text-zinc-500 dark:text-zinc-400 py-1.5 pr-2 rounded hover:bg-zinc-50 dark:hover:bg-zinc-700" v-for="(child, j) in item.children">
-              <div class="w-3/12 flex-shrink-0 flex items-center pl-2 pr-2 py-1 border-r dark:border-zinc-600" :title="child.label">
+            <div class="flex flex-1 text-gray-500 dark:text-gray-400 py-1.5 pr-2 rounded hover:bg-gray-50 dark:hover:bg-gray-700" v-for="(child, j) in item.children">
+              <div class="w-3/12 flex-shrink-0 flex items-center pl-2 pr-2 py-1 border-r dark:border-gray-600" :title="child.label">
                 <span class="overflow-x-auto xl:truncate" v-html="child.data?.structuredLabel ?? child.label"></span>
               </div>
-              <div class="w-3/12 flex items-center px-2 py-1 border-r dark:border-zinc-600">
+              <div class="w-3/12 flex items-center px-2 py-1 border-r dark:border-gray-600">
                 <BaseInput
                   v-if="child.data?.unit !== 'As in the database'"
                   type="number"
@@ -133,7 +133,7 @@ function toQuery(selected: TreeNode[]) {
                 />
                 <span v-else>-</span>
               </div>
-              <div class="w-3/12 flex items-center px-2 py-1 border-r dark:border-zinc-600">
+              <div class="w-3/12 flex items-center px-2 py-1 border-r dark:border-gray-600">
                 <BaseInput
                   v-if="child.data?.unit !== 'As in the database'"
                   type="number"
@@ -144,10 +144,10 @@ function toQuery(selected: TreeNode[]) {
                 />
                 <span v-else>-</span>
               </div>
-              <div class="w-2/12 flex items-center justify-center text-zinc-500 dark:text-zinc-400 font-light pl-2 py-1">
+              <div class="w-2/12 flex items-center justify-center text-gray-500 dark:text-gray-400 font-light pl-2 py-1">
                 <span v-if="child.data.unit !== 'As in the database'">{{ child.data.unit }}</span>
                 <span v-else :title="child.data.unit">
-                  <Icon name="material-symbols:lock-outline" class="text-zinc-300 dark:text-zinc-500" />
+                  <Icon name="material-symbols:lock-outline" class="text-gray-300 dark:text-gray-500" />
                 </span>
               </div>
               <div class="w-1/12 flex items-center justify-end">
@@ -182,7 +182,7 @@ function toQuery(selected: TreeNode[]) {
   pointer-events: none;
 
   .dark & {
-    background: linear-gradient(rgba(0, 0, 0, 0.001), theme('colors.zinc.800')); /* transparent keyword is broken in Safari */
+    background: linear-gradient(rgba(0, 0, 0, 0.001), theme('colors.gray.800')); /* transparent keyword is broken in Safari */
   }
 }
 </style>

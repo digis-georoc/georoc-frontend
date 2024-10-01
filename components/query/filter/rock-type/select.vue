@@ -54,8 +54,6 @@ onMounted(async () => {
     // }) ?? []
   }
 
-  console.log(store.nodes)
-
   nodes.value = store.nodes
   selectedKeys.value = mapNodesToSelectionKeys(selected.value)
 

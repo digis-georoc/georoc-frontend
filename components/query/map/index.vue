@@ -10,6 +10,13 @@ import type {Feature, GeoJsonProperties, Point, Polygon, Position} from "geojson
 import { getPointMarkerOptions } from "~/utils/marker"
 import * as d3 from "d3"
 
+const singleMarkerBgColor = theme.colors.white
+const singleMarkerStrokeColor = theme.colors.neutral['400']
+const singleMarkerTextColor = theme.colors.neutral['800']
+
+const clusterMarkerBgColor = theme.colors.white
+const clusterMarkerBorderColor = theme.colors.stone['400']
+const clusterMarkerTextColor = theme.colors.stone['800']
 
 const queryStore = useQueryStore()
 
@@ -99,8 +106,6 @@ function getClusterRadius(amount: number) {
 
 function createClusterMarker(feature: Feature, latlng: LatLng) {
   const iconWidth = 100
-  const iconFillColor = theme.colors['primary-100']
-  const iconStrokeColor = theme.colors['primary-300']
   const text = feature.properties?.clusterSize
   const radius = getClusterRadius(text)
 
@@ -113,14 +118,14 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
         viewBox="0 0 100 100"
       >
         <g>
-          <circle cx="50" cy="50" r="${radius}" fill="${iconFillColor}" stroke="${iconStrokeColor}" fill-opacity="0.9"/>
+          <circle cx="50" cy="50" r="${radius}" fill="${clusterMarkerBgColor}" stroke="${clusterMarkerBorderColor}" fill-opacity="1"/>
         </g>
         <text
           x="50" y="50"
           text-anchor="middle"
           dy="5"
-          fill="#000"
-          opacity="0.5"
+          fill="${clusterMarkerTextColor}"
+          opacity="1"
           font-size="12"
           font-weight="700"
           >
@@ -145,15 +150,18 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
 
 function createPointMarker(feature: Feature, latlng: LatLng) {
   const icon = L.divIcon(getPointMarkerOptions({
-    fillColor: theme.colors['primary-400'],
+    fillColor: singleMarkerBgColor,
+    strokeColor: singleMarkerStrokeColor
   }))
   return  L.marker(latlng, { icon })
 }
 
 function createMultiPointMarker(feature: Feature, latlng: LatLng) {
   const icon = L.divIcon(getPointMarkerOptions({
-    fillColor: theme.colors['primary-400'],
-    text: feature.properties?.samples.length ?? ''
+    fillColor: singleMarkerBgColor,
+    text: feature.properties?.samples.length ?? '',
+    textColor: singleMarkerTextColor,
+    strokeColor: singleMarkerStrokeColor
   }))
   return  L.marker(latlng, { icon })
 }
@@ -372,12 +380,12 @@ function hideCoverage() {
     <div id="map" class="h-full w-full"></div>
     <div v-if="!selectedMaterialId" class="absolute z-[998] w-[33%] h-[100px] px-4 bg-black bg-opacity-50 rounded-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
     flex flex-col items-center justify-center
-    text-zinc-300 pointer-events-none">
+    text-gray-300 pointer-events-none">
       {{ $t('map_message_no_material_selected') }}
     </div>
     <div v-if="hasFilterChanges" class="absolute z-[998] p-4 bg-black bg-opacity-50 rounded-lg top-[12%] left-1/2 -translate-x-1/2
       flex flex-col items-center justify-center
-      text-zinc-300 pointer-events-none">
+      text-gray-300 pointer-events-none">
       {{ $t('map_message_query_changes') }}
     </div>
     <div
@@ -438,7 +446,7 @@ function hideCoverage() {
 }
 
 .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
-  border-color: theme('colors.stone.400');
+  border-color: theme('colors.gray.400');
   border-width: 1px;
 }
 
@@ -473,18 +481,18 @@ function hideCoverage() {
 
 .dark {
   .leaflet-bar a, .leaflet-control-layers {
-    background: theme('colors.zinc.800');
-    color: theme('colors.zinc.300');
-    border-color: theme('colors.zinc.300');
+    background: theme('colors.gray.800');
+    color: theme('colors.gray.300');
+    border-color: theme('colors.gray.300');
   }
 
   .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
-    border-color: theme('colors.zinc.600');
+    border-color: theme('colors.gray.600');
   }
 
   .leaflet-control-layers-selector {
-    background: theme('colors.zinc.800');
-    border-color: theme('colors.zinc.600');
+    background: theme('colors.gray.800');
+    border-color: theme('colors.gray.600');
     &:checked {
       border-color: theme('colors.primary');
     }
@@ -493,7 +501,7 @@ function hideCoverage() {
 }
 
 .marker-cluster span {
-  color: theme('colors.zinc.800');
+  color: theme('colors.gray.800');
 }
 
 .loader {

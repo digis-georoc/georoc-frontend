@@ -22,7 +22,7 @@ function onEnter(event: Event) {
 </script>
 
 <template>
-  <div class="border border-zinc-300 dark:border-zinc-600 rounded p-2" ref="container">
+  <div class="border border-gray-300 dark:border-gray-600 rounded p-2" ref="container">
     <input
       autocapitalize="none"
       autocorrect="off"

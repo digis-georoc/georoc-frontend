@@ -2,7 +2,7 @@
   const isOpen = ref(false)
 </script>
 <template>
-  <div class="relative z-[1000] h-full shadow-2xl w-[480px] top-0 flex transition-all border-l dark:border-zinc-600"
+  <div class="relative z-[1000] h-full shadow-2xl w-[480px] top-0 flex transition-all border-l dark:border-gray-600"
        :class="{'me-0': isOpen, '-me-[480px]': !isOpen }">
     <BaseButton
         :text="$t('list_view')"

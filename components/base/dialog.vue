@@ -29,7 +29,7 @@ function open() {
     :dismissableMask="closable"
     :pt="{
       root: {
-        class: 'bg-white dark:bg-zinc-800 p-4 rounded-lg lg:min-w-[33%] shadow-lg'
+        class: 'bg-white dark:bg-gray-800 p-4 rounded-lg lg:min-w-[33%] shadow-lg'
       },
       header: {
         class: 'flex'
@@ -38,13 +38,13 @@ function open() {
         class: 'ml-auto'
       },
       closeButton: {
-        class: 'hover:bg-zinc-100 dark:hover:bg-zinc-700 w-8 h-8 rounded-full flex items-center justify-center'
+        class: 'hover:bg-gray-100 dark:hover:bg-gray-700 w-8 h-8 rounded-full flex items-center justify-center'
       },
       icons: {
         class: 'ml-auto'
       },
       mask: {
-        class: 'bg-zinc-900 bg-opacity-50'
+        class: 'bg-gray-900 bg-opacity-50'
       },
       content: {
         class: 'max-h-[80vh] overflow-auto'
@@ -53,7 +53,7 @@ function open() {
     @update:visible="emit('update:modelValue', $event)"
   >
     <template #header>
-      <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-400">{{ title }}</h3>
+      <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-400">{{ title }}</h3>
     </template>
     <div class="mt-4" ref="containerRef">
       <slot/>

@@ -15,10 +15,6 @@ const emit = defineEmits(['submit', 'reset', 'open'])
 
 const isOpen = ref(false)
 
-watch(() => props.hasSelected, (value) => {
-  console.log(value)
-})
-
 function onSubmit() {
   isOpen.value = false
   emit('submit')
@@ -61,10 +57,11 @@ const collapsed = ref(false)
       <slot name="selected"/>
       <BaseButton
           v-if="!hasSelected"
-          class="my-4 self-start mx-auto text-primary-300 border-primary-300"
+          class="my-4 py-2.5 ps-6 pe-6 self-start mx-auto border-primary-300"
           icon="material-symbols:add-rounded"
           icon-position="left"
           display="flat"
+          color="neutral"
           @click="openDialog"
           :text="$t('Add New Filter')"
           size="small"
@@ -77,10 +74,10 @@ const collapsed = ref(false)
       <slot name="options"/>
       <template #error="{ error }">
         <div class="flex flex-col justify-center items-center h-[400px]">
-          <span v-if="error.value.statusCode === 500" class="text-zinc-500 dark:text-zinc-400 font-semibold mb-2">
+          <span v-if="error.value.statusCode === 500" class="text-gray-500 dark:text-gray-400 font-semibold mb-2">
             {{ $t('server_error') }}:
           </span>
-          <p class="text-zinc-400 dark:text-zinc-500">{{ error?.value?.statusMessage ?? $t('oh_no_something_went_wrong') }}<br>{{ error }}</p>
+          <p class="text-gray-400 dark:text-gray-500">{{ error?.value?.statusMessage ?? $t('oh_no_something_went_wrong') }}<br>{{ error }}</p>
         </div>
       </template>
     </NuxtErrorBoundary>

@@ -148,7 +148,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <p class="text-zinc-500 dark:text-zinc-500 italic mb-4">
+  <p class="text-gray-500 dark:text-gray-500 italic mb-4">
     Caution, the elements are not normalized to 100% water-free, but are presented as reported in the original publication.
   </p>
   <div id="tas"></div>

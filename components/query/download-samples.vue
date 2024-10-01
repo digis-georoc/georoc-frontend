@@ -145,8 +145,8 @@ function getDownloadDatetime(date: Date) {
     <div v-if="page === 1" class="flex flex-col mb-2 w-[50vw] space-y-3">
       <p>{{ $t('queryPage.download_data_info_1') }}:</p>
       <div class="flex space-x-4">
-        <BaseCheckbox v-model="hasCsv" label="CSV" id="format-csv" class="hover:bg-zinc-100 dark:hover:bg-zinc-700 p-2 pr-8 rounded"></BaseCheckbox>
-        <BaseCheckbox v-model="hasXlsx" label="XLSX" id="format-xlsx" class="hover:bg-zinc-100 dark:hover:bg-zinc-700 p-2 pr-8 rounded"></BaseCheckbox>
+        <BaseCheckbox v-model="hasCsv" label="CSV" id="format-csv" class="hover:bg-gray-100 dark:hover:bg-gray-700 p-2 pr-8 rounded"></BaseCheckbox>
+        <BaseCheckbox v-model="hasXlsx" label="XLSX" id="format-xlsx" class="hover:bg-gray-100 dark:hover:bg-gray-700 p-2 pr-8 rounded"></BaseCheckbox>
       </div>
       <h3 class="font-semibold border-t pt-4">{{ $t('Contents Summary') }}:</h3>
       <p>The data will be downloaded as zip file. It contains:</p>
@@ -183,7 +183,7 @@ function getDownloadDatetime(date: Date) {
     <div v-if="page === 2" class="flex flex-col mb-2 w-[50vw] space-y-2">
       <div v-if="downloadReady" class="py-12 flex justify-center items-center space-x-2">
         <Icon name="ic:round-check" class="text-5xl text-lime-500 dark:text-lime-600"/>
-        <span class="text-zinc-600 dark:text-zinc-400">{{ $t('queryPage.download_is_ready')}}</span>
+        <span class="text-gray-600 dark:text-gray-400">{{ $t('queryPage.download_is_ready')}}</span>
       </div>
       <div v-else class="space-y-2 px-1">
 

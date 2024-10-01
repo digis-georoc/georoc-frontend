@@ -29,23 +29,23 @@ function goToDetailPage() {
 <template>
   <div
     class="flex flex-wrap gap-x-5 gap-y-2 px-4 py-2 border rounded-lg hover:ring-2 hover:ring-primary
-    hover:bg-primary-50/70 dark:hover:bg-primary-50/10 transition-all cursor-pointer dark:border-zinc-600"
+    hover:bg-primary-50/70 dark:hover:bg-primary-50/10 transition-all cursor-pointer dark:border-gray-600"
     @click="goToDetailPage"
   >
     <div class="flex w-full items-center">
       <span class="text-sm font-bold">{{ item.sampleName }}</span>
-      <span class="text-xs text-zinc-300 ml-auto">#{{ item.sampleID }}</span>
+      <span class="text-xs text-gray-300 ml-auto">#{{ item.sampleID }}</span>
     </div>
     <div class="flex flex-col">
-      <span class="text-xs text-zinc-500">{{ $t(getMaterialLabel()) }}</span>
+      <span class="text-xs text-gray-500">{{ $t(getMaterialLabel()) }}</span>
       <span class="text-sm">{{ getMaterial() }}</span>
     </div>
     <div class="flex flex-col">
-      <span class="text-xs text-zinc-500">{{ $t('tectonic_setting') }}</span>
+      <span class="text-xs text-gray-500">{{ $t('tectonic_setting') }}</span>
       <span class="text-sm">{{ item.geologicalSetting }}</span>
     </div>
     <div class="flex flex-col">
-      <span class="text-xs text-zinc-500">{{ $t('age') }}</span>
+      <span class="text-xs text-gray-500">{{ $t('age') }}</span>
       <span class="text-sm">{{ item.geologicalAge ?? '-' }}</span>
     </div>
   </div>

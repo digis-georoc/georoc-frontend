@@ -141,7 +141,7 @@ function onExpand(node: TreeNode) {
       root: 'relative',
       wrapper: 'relative h-[60vh] overflow-auto',
       filterContainer: 'w-full relative mb-4',
-      input: 'w-full p-2 px-9 dark:bg-zinc-700 border dark:border-zinc-500 rounded-lg transition colors ' +
+      input: 'w-full p-2 px-9 dark:bg-gray-700 border dark:border-gray-500 rounded-lg transition-colors ' +
        'hover:border-primary dark:hover:border-primary ' +
        'outline-none focus:ring-2 focus:border-primary focus:ring-primary-100 dark:focus:ring-primary',
       searchIcon: 'w-4 h-4 absolute left-3 top-1/2 -mt-2',
@@ -151,8 +151,8 @@ function onExpand(node: TreeNode) {
             class: [
               'me-2 border-2 rounded-md w-[22px] h-[22px] transition-colors flex items-center justify-center',
               {
-                'bg-zinc-50 dark:bg-zinc-700 dark:border-zinc-600 hover:border-primary-300 dark:hover:border-primary': !options.context.checked,
-                'bg-primary border-primary dark:border-primary text-white hover:bg-primary-700': options.context.checked,
+                'bg-gray-50 dark:bg-gray-700 dark:border-gray-600 hover:border-primary-300 dark:hover:border-primary': !options.context.checked,
+                'bg-primary border-primary dark:border-primary text-white hover:bg-primary-300': options.context.checked,
               }
             ]
           },
@@ -165,7 +165,7 @@ function onExpand(node: TreeNode) {
         return {
           class: [
               'flex px-2.5 items-center rounded-lg cursor-pointer',
-              { 'py-3 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-700': options.props.node.type !== 'button' },
+              { 'py-3 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700': options.props.node.type !== 'button' },
               { 'hidden' : options.props.node.data?.visible === false }
             ]
         }
@@ -175,14 +175,14 @@ function onExpand(node: TreeNode) {
           class: [
             'cursor-pointer select-none',
             {
-              'text-zinc-600 dark:text-zinc-500': options.context.leaf,
-              'dark:text-zinc-300 font-semibold': !options.context.leaf
+              'text-gray-600 dark:text-gray-500': options.context.leaf,
+              'dark:text-gray-300 font-semibold': !options.context.leaf
             }
           ]
         }
       },
       subgroup: 'ps-6',
-      loadingOverlay: 'absolute z-10 w-full h-full flex items-center justify-center bg-white dark:bg-zinc-800 bg-opacity-75 dark:bg-opacity-75'
+      loadingOverlay: 'absolute z-10 w-full h-full flex items-center justify-center bg-white dark:bg-gray-800 bg-opacity-75 dark:bg-opacity-75'
     }"
   >
     <template v-slot:loadingicon>
@@ -190,7 +190,7 @@ function onExpand(node: TreeNode) {
     </template>
     <template v-slot:default="{ node }">
       <span v-html="node.data?.structuredLabel ?? node.label"></span>
-      <span v-if="node.children?.length" class="inline-flex items-center justify-center px-1.5 py-0.5 bg-zinc-100 dark:bg-zinc-700 rounded-md text-zinc-600 dark:text-zinc-400 text-xs ml-3">
+      <span v-if="node.children?.length" class="inline-flex items-center justify-center px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded-md text-gray-600 dark:text-gray-400 text-xs ml-3">
         {{ node.children?.length }}
       </span>
     </template>

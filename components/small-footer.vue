@@ -1,7 +1,7 @@
 <template>
   <section
     id="smallFooter"
-    class="bg-white dark:bg-zinc-800 border-t dark:border-zinc-700"
+    class="bg-white dark:bg-gray-800 border-t dark:border-gray-700"
   >
     <BaseContainer
       class="flex flex-col sm:flex-row justify-center items-center py-4 text-sm"

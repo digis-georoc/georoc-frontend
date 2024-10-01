@@ -23,7 +23,7 @@
           <BaseButton :text="$t('indexPage.button_1')" size="normal" display="filled" @click="router.push('/query')" />
           <NuxtLink
             to="/get-started"
-            class="text-sm font-semibold leading-6 text-zinc-300"
+            class="text-sm font-semibold leading-6 text-gray-300"
             >{{ $t('indexPage.button_2') }}
             <span aria-hidden="true">→</span>
           </NuxtLink>
@@ -37,16 +37,16 @@
     </div>
   </section>
   <ClientOnly><Stats></Stats></ClientOnly>
-  <section class="bg-white dark:bg-zinc-800 mb-6">
+  <section class="bg-white dark:bg-gray-800 mb-6">
     <BaseContainer class="py-24 sm:py-32">
       <div class="mx-auto max-w-7xl">
         <div class="mx-auto max-w-3xl lg:text-center">
           <h3
-            class="mt-2 text-3xl font-bold tracking-tight text-stone-900 dark:text-zinc-300 sm:text-4xl"
+            class="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-300 sm:text-4xl"
           >
             {{ $t('indexPage.headline_1') }}
           </h3>
-          <p class="mt-6 text-lg leading-8 text-stone-600 dark:text-zinc-400">
+          <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
             {{ $t('indexPage.paragraph_1') }}
           </p>
         </div>
@@ -57,11 +57,11 @@
             <NuxtLink
               v-for="feature in features"
               :key="feature.name"
-              class="relative pl-16 lg:pt-16 lg:pl-0 focus:outline-none focus:ring-4 focus:ring-primary-300 rounded-lg hover:bg-stone-300 hover:dark:bg-stone-400 hover:dark:bg-opacity-[0.2] hover:bg-opacity-[0.4] hover:text-stone-800 hover:dark:text-zinc-300"
+              class="relative pl-16 lg:pt-16 lg:pl-0 focus:outline-none focus:ring-4 focus:ring-primary-300 rounded-lg hover:bg-gray-300 hover:dark:bg-gray-400 hover:dark:bg-opacity-[0.2] hover:bg-opacity-[0.4] hover:text-gray-800 hover:dark:text-gray-300"
               :to="feature.to"
             >
               <dt
-                class="text-lg font-semibold leading-7 text-gray-900 dark:text-zinc-400 px-4 text-center"
+                class="text-lg font-semibold leading-7 text-gray-900 dark:text-gray-400 px-4 text-center"
               >
                 <div
                   class="absolute left-0 lg:right-0 lg:m-auto lg:top-3 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary"
@@ -75,7 +75,7 @@
                 {{ feature.name }}
               </dt>
               <dd
-                class="mt-2 px-4 pb-2 text-center text-base leading-7 text-gray-600 dark:text-zinc-400"
+                class="mt-2 px-4 pb-2 text-center text-base leading-7 text-gray-600 dark:text-gray-400"
               >
                 {{ feature.description }}
               </dd>

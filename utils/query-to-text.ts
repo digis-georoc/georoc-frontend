@@ -18,7 +18,6 @@ const maps = {
       .map(item => item.replaceAll(/\)|\(+/g, ''))
       .map(tupel => {
         const [ type, element, min, max ] = tupel.split(',')
-        console.log(tupel)
         return {
           type: { value: type, label: chemistryStore.getNodeLabel(type) },
           element: { value: element, label: chemistryStore.getNodeLabel(element) },

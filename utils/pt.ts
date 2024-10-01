@@ -40,11 +40,11 @@ export const PaginatorPassThroughOptions = {
       class: 'p-1 select-none'
     },
     wrapper: {
-      class: 'rounded-md border-2 my-1 bg-white dark:bg-zinc-800'
+      class: 'rounded-md border-2 my-1 bg-white dark:bg-gray-800'
     },
     item: (options: DropdownPassThroughMethodOptions) => { return {
       class: [
-        'flex justify-center p-2 hover:bg-stone-300 hover:bg-opacity-[0.4] dark:hover:text-black cursor-pointer',
+        'flex justify-center p-2 hover:bg-gray-300 hover:bg-opacity-[0.4] dark:hover:text-black cursor-pointer',
         {
           'bg-primary-50 dark:text-black': options.context.selected
         }

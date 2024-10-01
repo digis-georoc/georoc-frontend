@@ -24,8 +24,8 @@ const horizontalPT = {
   },
   button: ({ context }) => ({
     class: [
-      'dark:border-zinc-700',
-      context.active ? 'bg-primary text-white z-10' : 'bg-white dark:bg-zinc-800',
+      'dark:border-gray-700',
+      context.active ? 'bg-primary text-white z-10' : 'bg-white dark:bg-gray-800',
       options.findIndex(option => option.value === context.option.value) === 0 ? 'rounded-l-lg border-l border-r' : '',
       {
         'border-r':
@@ -35,7 +35,7 @@ const horizontalPT = {
       },
       options.findIndex(option => option.value === context.option.value) === options.length - 1 ? 'rounded-r-lg border-r border-l' : '',
       // { 'ring-2 ring-offset-2 ring-primary-300': context.focused },
-      { 'hover:bg-zinc-100 dark:hover:bg-zinc-700': !context.active },
+      { 'hover:bg-gray-100 dark:hover:bg-gray-700': !context.active },
       { 'text-sm': props.size === 'sm'},
       'relative py-3 px-4 whitespace-nowrap flex-1 flex items-center font-semibold border-t border-b cursor-pointer transition-colors outline-none focus:ring-2 focus:ring-primary-300'
     ]
@@ -49,9 +49,9 @@ const verticalPT = {
   button: ({ context }) => ({
     class: [
       'flex w-full',
-      'dark:border-zinc-700 rounded-md border',
-      context.active ? 'border border-primary bg-primary-50 text-primary font-bold z-10' : 'bg-white dark:bg-zinc-800',
-      { 'hover:bg-zinc-50 dark:hover:bg-zinc-700': !context.active },
+      'dark:border-gray-700 rounded-md border',
+      context.active ? 'border border-primary bg-primary-50 text-primary font-bold z-10' : 'bg-white dark:bg-gray-800',
+      { 'hover:bg-gray-50 dark:hover:bg-gray-700': !context.active },
       { 'text-sm': props.size === 'sm'},
       'relative py-3 px-4 whitespace-nowrap flex-1 flex items-center font-semibold border-t border-b cursor-pointer transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-300'
     ]
@@ -72,7 +72,7 @@ const verticalPT = {
       <Icon
         :class="{
           'text-primary': selectedOptionValue === option.value,
-          'text-zinc-300': selectedOptionValue !== option.value,
+          'text-gray-300': selectedOptionValue !== option.value,
         }"
         :name="selectedOptionValue === option.value ? 'ic:baseline-check-circle' : 'ic:outline-circle'"
         class="ml-auto text-lg transition-colors ease-in"

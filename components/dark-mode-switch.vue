@@ -35,15 +35,15 @@
 <template>
   <Switch
     v-model="isDarkMode"
-    :class="isDarkMode ? 'bg-stone-400 dark:bg-stone-700' : 'bg-zinc-300 dark:bg-stone-800'"
-    class="relative inline-flex h-7 w-[56px] items-center rounded-full border border-stone-300 dark:border-stone-700"
+    :class="isDarkMode ? 'bg-gray-400 dark:bg-gray-700' : 'bg-gray-300 dark:bg-gray-800'"
+    class="relative inline-flex h-7 w-[56px] items-center rounded-full border border-gray-300 dark:border-gray-700"
   >
     <span class="sr-only">Switch dark mode</span>
     <span
       :class="isDarkMode ? 'translate-x-[29px]' : 'translate-x-0'"
-      class="inline-flex justify-center items-center h-6 w-6 transform rounded-full bg-white dark:bg-stone-300 transition"
+      class="inline-flex justify-center items-center h-6 w-6 transform rounded-full bg-white dark:bg-gray-300 transition"
     >
-      <Icon :name="isDarkMode ? 'ph:moon-fill' : 'ic:baseline-wb-sunny'" class="text-sm text-stone-400 dark:text-stone-600"/>
+      <Icon :name="isDarkMode ? 'ph:moon-fill' : 'ic:baseline-wb-sunny'" class="text-sm text-gray-400 dark:text-gray-600"/>
     </span>
   </Switch>
 </template>

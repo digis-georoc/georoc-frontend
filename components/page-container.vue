@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-zinc-800">
+  <div class="bg-white dark:bg-gray-800">
     <BaseContainer :style="{'min-height': minHeight + 'px'}">
       <slot/>
     </BaseContainer>
@@ -21,8 +21,6 @@ onMounted(() => {
   if (footer) {
     footerHeight = footer.clientHeight;
   }
-
-  console.log(footerHeight)
 
   minHeight.value = viewHeight - headerHeight - footerHeight;
 

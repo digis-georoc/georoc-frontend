@@ -94,7 +94,7 @@ const options = [
     "key": "OP"
   },
   {
-    "label": "Archean greenstone belt",
+    "label": "Archean greengray belt",
     "altLabel": "-",
     "key": "AGB"
   },

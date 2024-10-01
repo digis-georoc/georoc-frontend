@@ -14,10 +14,10 @@ watch(_collapsed, (value) => emit('collapsed-change', value))
 </script>
 
 <template>
-  <div class="flex flex-col border dark:border-zinc-600 shadow-sm rounded-md bg-white dark:bg-zinc-800 overflow-hidden">
+  <div class="flex flex-col border dark:border-gray-600 shadow-sm rounded-md bg-white dark:bg-gray-800 overflow-hidden">
     <div
       class="flex relative pr-12 border-b transition-colors"
-      :class="{'dark:border-zinc-600': !_collapsed, 'border-transparent delay-300': _collapsed }"
+      :class="{'dark:border-gray-600': !_collapsed, 'border-transparent delay-300': _collapsed }"
     >
       <h3 class="font-bold flex-1 py-3 pl-4 hover:cursor-pointer" @click="_collapsed = !_collapsed">{{ title }}</h3>
       <div class="py-3 flex flex-shrink-0">

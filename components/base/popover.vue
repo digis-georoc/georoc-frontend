@@ -88,7 +88,7 @@ const handleClickOutside = (event: MouseEvent) => {
       <div
         ref="contentEl"
         :style="{top: `${contentTop}px`, left: `${contentLeft}px`}"
-        class="fixed z-[9999] mt-3 bg-white dark:bg-zinc-800 rounded-xl border dark:border-zinc-600 py-3 px-4 shadow">
+        class="fixed z-[9999] mt-3 bg-white dark:bg-gray-800 rounded-xl border dark:border-gray-600 py-3 px-4 shadow">
         <slot />
       </div>
     </transition>

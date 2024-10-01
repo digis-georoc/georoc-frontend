@@ -78,7 +78,7 @@ const toggleSidebar = () => {
 </script>
 <template>
   <div
-    class="fixed z-[9001] bg-white dark:bg-zinc-800 w-full border-b dark:border-zinc-700"
+    class="fixed z-[9001] bg-white dark:bg-gray-800 w-full border-b dark:border-gray-700"
   >
     <BaseFluidContainer>
       <div class="flex h-16 items-center justify-between">
@@ -86,14 +86,10 @@ const toggleSidebar = () => {
           <div class="flex-shrink-0 flex">
             <NuxtLink
               to="/"
-              class="flex items-center text-stone-800 dark:text-zinc-300 text-sm font-medium"
+              class="flex items-center text-gray-800 dark:text-gray-300 text-sm font-medium"
             >
-              <img
-                class="h-8 mr-2"
-                src="~/assets/images/GEOROC_Logo.svg"
-                alt="Your Company"
-              />
-              GEOROC Database
+              <Logo class="mr-2" />
+              <span class="whitespace-nowrap">GEOROC Database</span>
             </NuxtLink>
           </div>
           <Menubar
@@ -115,16 +111,16 @@ const toggleSidebar = () => {
                   context.active
                     ? 'underline underline-offset-8 decoration-primary decoration-4'
                     : context.focused
-                      ? 'text-stone-800 dark:text-zinc-300 bg-stone-300 dark:bg-stone-400 dark:bg-opacity-[0.2] bg-opacity-[0.4]'
+                      ? 'text-gray-800 dark:text-gray-300 bg-gray-300 dark:bg-gray-400 dark:bg-opacity-[0.2] bg-opacity-[0.4]'
                       : undefined,
                   {
-                    'bg-primary-50 dark:bg-zinc-700 text-primary dark:text-primary-50':
+                    'bg-primary-50 dark:bg-gray-700 text-primary dark:text-primary-50':
                       context.item.item.route &&
                       context.item.item.route?.length > 1 &&
                       route.path.startsWith(context.item.item.route),
                   },
                   {
-                    'underline underline-offset-8 decoration-primary-400 decoration-4':
+                    'underline underline-offset-8 decoration-primary decoration-4':
                       !context.active &&
                       !context.focused &&
                       context.item.items &&
@@ -142,7 +138,7 @@ const toggleSidebar = () => {
               },
               submenu: {
                 class:
-                  'bg-white dark:bg-zinc-800 p-2 max-w-full rounded-md absolute border dark:border-zinc-600',
+                  'bg-white dark:bg-gray-800 p-2 max-w-full rounded-md absolute border dark:border-gray-600',
               },
               button: {
                 class: 'hidden',
@@ -199,7 +195,7 @@ const toggleSidebar = () => {
             </button>
             <aside
               v-if="showSidebar"
-              class="lg:hidden w-full sm:w-[50%] h-full bg-white dark:bg-zinc-800 border-t dark:border-zinc-700 shadow-md top-16 right-0 fixed z-[9001] transition-transform translate-x-0"
+              class="lg:hidden w-full sm:w-[50%] h-full bg-white dark:bg-gray-800 border-t dark:border-gray-700 shadow-md top-16 right-0 fixed z-[9001] transition-transform translate-x-0"
             >
               <PanelMenu
                 :model="mobileItems"
@@ -211,13 +207,13 @@ const toggleSidebar = () => {
                   headerContent: ({ context }) => ({
                     class: [
                       'flex flex-row px-2 shadow-sm px-4 py-2 text-normal font-medium',
-                      'hover:bg-stone-300 hover:dark:bg-stone-400 hover:dark:bg-opacity-[0.2] hover:bg-opacity-[0.4] hover:text-stone-800 hover:dark:text-zinc-300',
+                      'hover:bg-gray-300 hover:dark:bg-gray-400 hover:dark:bg-opacity-[0.2] hover:bg-opacity-[0.4] hover:text-gray-800 hover:dark:text-gray-300',
                       {
-                        'text-stone-800 dark:text-zinc-300 bg-stone-300 dark:bg-stone-400 dark:bg-opacity-[0.2] bg-opacity-[0.4]':
+                        'text-gray-800 dark:text-gray-300 bg-gray-300 dark:bg-gray-400 dark:bg-opacity-[0.2] bg-opacity-[0.4]':
                           context.focused,
                       },
                       {
-                        'bg-primary-50 dark:bg-zinc-700 text-primary dark:text-primary-50':
+                        'bg-primary-50 dark:bg-gray-700 text-primary dark:text-primary-50':
                           (!context.focused &&
                             mobileItems[context.index]?.items &&
                             mobileItems[context.index].items.some(
@@ -236,13 +232,13 @@ const toggleSidebar = () => {
                   content: ({ context }) => ({
                     class: [
                       'rounded-md px-4 py-1 text-normal font-medium',
-                      'hover:bg-stone-300 hover:dark:bg-stone-400 hover:dark:bg-opacity-[0.2] hover:bg-opacity-[0.4] hover:text-stone-800 hover:dark:text-zinc-300',
+                      'hover:bg-gray-300 hover:dark:bg-gray-400 hover:dark:bg-opacity-[0.2] hover:bg-opacity-[0.4] hover:text-gray-800 hover:dark:text-gray-300',
                       {
-                        'bg-stone-300 dark:bg-stone-400 dark:bg-opacity-[0.2] bg-opacity-[0.4]':
+                        'bg-gray-300 dark:bg-gray-400 dark:bg-opacity-[0.2] bg-opacity-[0.4]':
                           context.focused,
                       },
                       {
-                        'bg-primary-50 dark:bg-zinc-700 text-primary dark:text-primary-50':
+                        'bg-primary-50 dark:bg-gray-700 text-primary dark:text-primary-50':
                           !context.focused &&
                           context.item.item.route &&
                           context.item.item.route?.length > 1 &&

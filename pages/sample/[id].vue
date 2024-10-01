@@ -33,7 +33,6 @@ onMounted(async () => {
   try {
     const sample = await $fetch<SampleFullData>(`/api/samples/${id}`)
 
-    console.log(sample)
     const options = await getChemistryFilterOptions()
 
     if (!options) return
@@ -134,7 +133,7 @@ function getAuthors(authors: Author[]) {
 </script>
 
 <template>
-  <div class="flex flex-col bg-white dark:bg-zinc-800 flex-1 pt-8">
+  <div class="flex flex-col bg-white dark:bg-gray-800 flex-1 pt-8">
     <BaseContainer class="flex flex-col flex-1">
       <template v-if="loading">
         <div class="flex flex-1 justify-center items-center">

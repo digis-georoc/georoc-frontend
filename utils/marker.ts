@@ -5,8 +5,9 @@ function getPointMarkerOptions({
   fillColor = '#000',
   size = 48,
   text = '',
-  textColor = '#fff'
-}: {fillColor?: string , size?: number, text?: string, textColor?: string}): DivIconOptions {
+  textColor = '#fff',
+  strokeColor = '#000'
+}: {fillColor?: string , size?: number, text?: string, textColor?: string, strokeColor?: string}): DivIconOptions {
   return {
     html:   `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24">
       <defs>
@@ -21,8 +22,7 @@ function getPointMarkerOptions({
       <polygon filter="url(#blur)" opacity="0.5" points="12,24 24,20 8,14" fill="url(#shadow)" />
       <path 
         fill="${fillColor}" 
-        stroke="#000" 
-        stroke-opacity="0.2" 
+        stroke="${strokeColor}" 
         stroke-width="0.5" 
         transform="translate(0 2)" 
         d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5"

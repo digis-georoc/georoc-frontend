@@ -4,7 +4,7 @@ useHead({
     class: 'h-full'
   },
   bodyAttrs: {
-    class: 'h-full bg-stone-100 dark:bg-zinc-900 text-stone-700 dark:text-stone-300',
+    class: 'h-full bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300',
   },
 })
 </script>

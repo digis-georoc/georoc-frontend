@@ -3,7 +3,7 @@
     <MenuButton
       as="button"
       :class="[
-        'inline-flex w-full justify-center items-center bg-primary-50 dark:bg-zinc-700 dark:bg-inherit rounded-md',
+        'inline-flex w-full justify-center items-center bg-primary-50 dark:bg-gray-700 dark:bg-inherit rounded-md',
         { 'py-2 px-4': size === 'normal'},
         { 'py-4 px-6': size === 'large'},
         'font-medium select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-300 border-2 border-transparent hover:border-primary',
@@ -14,7 +14,7 @@
     </MenuButton>
     <MenuItems
       :class="[
-        'absolute mt-2 p-3 origin-top-left bg-white border dark:border-zinc-600 dark:bg-zinc-800 dark:text-white rounded-md shadow-lg ring-1 ring-black/5',
+        'absolute mt-2 p-3 origin-top-left bg-white border dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md shadow-lg ring-1 ring-black/5',
         'focus:outline-none z-[9999] overflow-y-scroll max-h-96 max-w-[50vw] md:left-[50%] lg:left-0 md:translate-x-[-50%] lg:translate-x-0',
       ]"
     >
@@ -28,7 +28,7 @@
             :class="[
               'flex whitespace-nowrap w-full items-center rounded-md p-3',
               active ? 'bg-primary text-white' : '',
-              disabled ? 'bg-primary-50 dark:bg-zinc-700' : '',
+              disabled ? 'bg-primary-50 dark:bg-gray-700' : '',
             ]"
         >
           {{ link.label }}
@@ -39,7 +39,7 @@
   <!--
   <div id="dropdown_menu" class="relative inline-block text-left">
     <button :class="[
-      'inline-flex justify-center items-center space-x-2 bg-primary-50 dark:bg-zinc-700 rounded-md px-2 py-2',
+      'inline-flex justify-center items-center space-x-2 bg-primary-50 dark:bg-gray-700 rounded-md px-2 py-2',
       'text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-300 border-2 border-transparent hover:border-primary'
 
     ]" @click="toggle" aria-haspopup="true" aria-controls="overlay_menu">
@@ -48,7 +48,7 @@
     </button>
     <Menu ref="menu" id="overlay_menu" :model="links" :popup="true" :autoZIndex="false" :baseZIndex="9999" :unstyled="true" appendTo="#dropdown_menu" :pt="{
       root: {
-        class: 'absolute top-0 left-0 mt-12 bg-white dark:bg-zinc-800 dark:text-white rounded-md shadow-lg max-h-96 overflow-y-scroll',
+        class: 'absolute top-0 left-0 mt-12 bg-white dark:bg-gray-800 dark:text-white rounded-md shadow-lg max-h-96 overflow-y-scroll',
         style: {top: '0px !important', left: '0px !important', transformOrigin: 'top !important'}
       },
       menuItem: {
