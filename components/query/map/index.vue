@@ -11,8 +11,8 @@ import { getPointMarkerOptions } from "~/utils/marker"
 import * as d3 from "d3"
 
 const singleMarkerBgColor = theme.colors.white
-const singleMarkerStrokeColor = theme.colors.neutral['400']
-const singleMarkerTextColor = theme.colors.neutral['800']
+const singleMarkerStrokeColor = theme.colors.gray['400']
+const singleMarkerTextColor = theme.colors.gray['700']
 
 const clusterMarkerBgColor = theme.colors.white
 const clusterMarkerBorderColor = theme.colors.stone['400']
@@ -109,35 +109,13 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
   const text = feature.properties?.clusterSize
   const radius = getClusterRadius(text)
 
-  const icon = L.divIcon({
-    html: `
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        height="${iconWidth}"
-        width="${iconWidth}"
-        viewBox="0 0 100 100"
-      >
-        <g>
-          <circle cx="50" cy="50" r="${radius}" fill="${clusterMarkerBgColor}" stroke="${clusterMarkerBorderColor}" fill-opacity="1"/>
-        </g>
-        <text
-          x="50" y="50"
-          text-anchor="middle"
-          dy="5"
-          fill="${clusterMarkerTextColor}"
-          opacity="1"
-          font-size="12"
-          font-weight="700"
-          >
-          ${text}
-        </text>
-      </svg>
-    `,
+  const icon = L.divIcon(getPointMarkerOptions({
+    fillColor: singleMarkerBgColor,
+    strokeColor: singleMarkerStrokeColor,
+    textColor: singleMarkerTextColor,
+    text: text
+  }))
 
-    className: "",
-    iconSize: [iconWidth, iconWidth],
-    iconAnchor: [iconWidth/2, iconWidth/2],
-  });
   const marker = L.marker(latlng, { icon })
   // marker.on('mouseover', () => showCoverage(feature.properties?.convexHull, {
   //   fillColor: iconFillColor,
@@ -151,7 +129,9 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
 function createPointMarker(feature: Feature, latlng: LatLng) {
   const icon = L.divIcon(getPointMarkerOptions({
     fillColor: singleMarkerBgColor,
-    strokeColor: singleMarkerStrokeColor
+    textColor: singleMarkerTextColor,
+    strokeColor: singleMarkerStrokeColor,
+    text: '1'
   }))
   return  L.marker(latlng, { icon })
 }
@@ -170,10 +150,10 @@ function onEachPointFeature(feature, layer) {
   layer.on('click', () => {
 
     if (selectedMarker.value) {
-      updateMarkerIcon(theme.colors['primary-400'], selectedMarker.value, selectedLocation.value)
+      updateMarkerIcon(false, selectedMarker.value, selectedLocation.value)
     }
 
-    updateMarkerIcon(theme.colors.yellow['500'], layer, feature.properties)
+    updateMarkerIcon(true, layer, feature.properties)
 
     selectedLocation.value = feature.properties
     selectedMarker.value = layer
@@ -181,12 +161,14 @@ function onEachPointFeature(feature, layer) {
   })
 }
 
-function updateMarkerIcon(fillColor: string, marker: Marker, properties) {
+function updateMarkerIcon(isActive: boolean, marker: Marker, properties) {
   const amountSamples = properties?.samples.length ?? 0
   marker.setIcon(
     L.divIcon(getPointMarkerOptions({
-      fillColor: fillColor,
-      text: amountSamples > 1 ? amountSamples : ''
+      fillColor: isActive ? singleMarkerTextColor : singleMarkerBgColor,
+      text: amountSamples,
+      textColor:  isActive ? singleMarkerBgColor : singleMarkerTextColor,
+      strokeColor: isActive ? singleMarkerBgColor : singleMarkerTextColor
     }))
   )
 }
