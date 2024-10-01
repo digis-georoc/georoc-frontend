@@ -291,7 +291,7 @@ onMounted(() => {
     wheelDebounceTime: 100,
     zoomSnap: 0.5,
     zoomControl: false,
-    layers
+    layers: [layers[2]]
   }).setView([0, 0], initialZoomLevel)
 
   addControlLayers()
