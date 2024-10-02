@@ -4,7 +4,7 @@
 
 <template>
   <QueryFilterChemistry />
-  <QueryFilterTectonicSetting />
+  <QueryFilterGeologicalSettings />
   <QueryFilterLocationType />
   <QueryFilterAge />
 </template>

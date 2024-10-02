@@ -15,7 +15,7 @@ const inclusionTypeFilterValue = computed(() => queryStore.getFilter(QueryKey.In
     <QueryFilterHostMaterial />
   </template>
   <QueryFilterChemistry />
-  <QueryFilterTectonicSetting />
+  <QueryFilterGeologicalSettings />
   <QueryFilterLocationType />
   <QueryFilterAge />
 </template>
