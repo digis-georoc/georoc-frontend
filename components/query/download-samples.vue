@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import domtoimage from 'dom-to-image'
+import html2canvas from "html2canvas";
 import JSZip from "jszip"
 import {queryToText} from "~/utils/query-to-text";
 import howToCiteString from "~/utils/how-to-cite-string";
@@ -20,6 +20,12 @@ const page = ref(1)
 
 const isLoading = ref(false)
 const downloadReady = ref(false)
+
+function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob | null> {
+  return new Promise((resolve) => {
+    canvas.toBlob(blob => resolve(blob), 'image/png');
+  });
+}
 
 function openDialog() {
   dialogVisible.value = true
@@ -50,9 +56,21 @@ async function download() {
 
   const downloadDatetime = getDownloadDatetime(new Date())
 
-  const imageContent = domtoimage.toBlob(
-    document.getElementById('map')?.parentElement
-  )
+  const canvas = await html2canvas(
+    document.getElementById('map')?.parentElement, {
+    useCORS: true,
+    onclone(doc, element) {
+      element.querySelectorAll('[data-obstacle], .leaflet-control-container').forEach((elem) => elem.remove());
+      element.querySelectorAll('.leaflet-marker-icon span').forEach(el => {
+        el.style.background = 'none';
+        el.style.transform = 'translateY(-6px)';
+      })
+    },
+    scale: 1.1
+  });
+
+  const imageContent = await canvasToBlob(canvas);
+
   const metaFileContent = createMetaFileContent(downloadDatetime)
   const fileNamePrefix = getFilePrefix(downloadDatetime)
 
@@ -69,7 +87,7 @@ async function download() {
   generateZip(`${fileNamePrefix}.zip`, [
       {
         name: `${fileNamePrefix}_map.png`,
-        content: imageContent
+        content: imageContent ?? ''
       }, {
         name: `${fileNamePrefix}_metadata.txt`,
         content: metaFileContent

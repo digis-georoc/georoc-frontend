@@ -362,12 +362,12 @@ function hideCoverage() {
     <div id="map" class="h-full w-full"></div>
     <div v-if="!selectedMaterialId" class="absolute z-[998] w-[33%] h-[100px] px-4 bg-black bg-opacity-50 rounded-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
     flex flex-col items-center justify-center
-    text-gray-300 pointer-events-none">
+    text-gray-300 pointer-events-none" data-obstacle>
       {{ $t('map_message_no_material_selected') }}
     </div>
     <div v-if="hasFilterChanges" class="absolute z-[998] p-4 bg-black bg-opacity-50 rounded-lg top-[12%] left-1/2 -translate-x-1/2
       flex flex-col items-center justify-center
-      text-gray-300 pointer-events-none">
+      text-gray-300 pointer-events-none" data-obstacle>
       {{ $t('map_message_query_changes') }}
     </div>
     <div
@@ -376,25 +376,25 @@ function hideCoverage() {
     bg-black bg-opacity-50 rounded-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
     flex flex-col items-center justify-center
     text-white pointer-events-none
-    ">
+    " data-obstacle>
       <BaseLoading class="mb-3 text-[2.5rem]" />
       <span class="opacity-[0.8]">{{ $t('loading') }}...</span>
     </div>
-    <div v-if="isDebug" class="fixed z-[9999] top-[60px] right-0 bg-white p-2 text-sm">
+    <div v-if="isDebug" class="fixed z-[9999] top-[60px] right-0 bg-white p-2 text-sm" data-obstacle>
       <h2 class="mb-2 font-bold">Debug:</h2>
       <div class="">Last Bbox from API: {{cachedClustersBounds}}</div>
       <div class="">Current Bbox: {{currentMapBounds}}</div>
       <div>Out of bounds SW: {{ outOfBoundsSW }}</div>
       <div>Out of bounds NE: {{ outOfBoundsNE }}</div>
     </div>
-    <div v-if="!isMobile" class="absolute z-[1000] bottom-0 left-0 bg-white p-1 text-xs">
+    <div v-if="!isMobile" class="absolute z-[1000] bottom-0 left-0 bg-white p-1 text-xs" data-obstacle>
       <span>Latitude: </span><span>{{ mouseLat }}</span>&nbsp;
       <span>Longitude: </span><span>{{ mouseLng }}</span>
     </div>
-    <div v-if="!isTouchDevice && selectedMaterialId" class="absolute top-[80px] xl:top-[78px] 2xl:top-[26px] z-[1001] left-[20px]">
+    <div v-if="!isTouchDevice && selectedMaterialId" class="absolute top-[80px] xl:top-[78px] 2xl:top-[26px] z-[1001] left-[20px]" data-obstacle>
       <QueryFilterPolygon />
     </div>
-    <QueryMapLocationPopup v-model="showLocationPopup"  :samples="selectedLocation?.samples ?? []" class="absolute z-[1000] bottom-[32px] left-1/2 -translate-x-1/2 "/>
+    <QueryMapLocationPopup v-model="showLocationPopup"  :samples="selectedLocation?.samples ?? []" class="absolute z-[1000] bottom-[32px] left-1/2 -translate-x-1/2" data-obstacle />
 </template>
 <style>
 .mode-create {
