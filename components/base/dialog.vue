@@ -27,6 +27,7 @@ function open() {
     unstyled
     :closable="closable"
     :dismissableMask="closable"
+    :base-z-index="9000"
     :pt="{
       root: {
         class: 'bg-white dark:bg-gray-800 p-4 rounded-lg lg:min-w-[33%] shadow-lg'
