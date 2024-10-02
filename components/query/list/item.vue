@@ -4,7 +4,7 @@ const materialFilter = computed(() => queryStore.getFilter(QueryKey.Material)?.v
 const router = useRouter()
 
 const props = defineProps<{
-  item: QueryListItem | null,
+  item: QueryListItem,
 }>()
 
 function getMaterialLabel() {

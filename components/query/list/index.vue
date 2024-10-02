@@ -49,7 +49,7 @@ async function onPageChange(page: PageState) {
     <Paginator
         :rows="30"
         :totalRecords="listResult?.totalCount"
-        pageLinkSize="5"
+        :pageLinkSize="5"
         @page="onPageChange"
         :pt="PaginatorPassThroughOptions"
     />

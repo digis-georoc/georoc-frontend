@@ -105,16 +105,48 @@ function getClusterRadius(amount: number) {
 }
 
 function createClusterMarker(feature: Feature, latlng: LatLng) {
-  const iconWidth = 100
+  const iconWidth = 48
   const text = feature.properties?.clusterSize
   const radius = getClusterRadius(text)
 
-  const icon = L.divIcon(getPointMarkerOptions({
-    fillColor: singleMarkerBgColor,
-    strokeColor: singleMarkerStrokeColor,
-    textColor: singleMarkerTextColor,
-    text: text
-  }))
+  const icon = L.divIcon({
+    html: `
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="${iconWidth}"
+        width="${iconWidth}"
+        viewBox="0 0 ${iconWidth} ${iconWidth}"
+      >
+        <g>
+          <circle
+            cx="${iconWidth/2}"
+            cy="${iconWidth/2}"
+            r="${radius}"
+            fill="${clusterMarkerBgColor}"
+            stroke="${clusterMarkerBorderColor}"
+            fill-opacity="1"
+          />
+        </g>
+        <text
+          x="${iconWidth/2}" y="${iconWidth/2}"
+          text-anchor="middle"
+          dy="5"
+          fill="${clusterMarkerTextColor}"
+          opacity="1"
+          font-size="12"
+          font-weight="700"
+          >
+          ${text}
+        </text>
+      </svg>
+    `,
+
+    className: "",
+    iconSize: [iconWidth, iconWidth],
+    iconAnchor: [iconWidth/2, iconWidth/2],
+  });
+
+
 
   const marker = L.marker(latlng, { icon })
   // marker.on('mouseover', () => showCoverage(feature.properties?.convexHull, {
