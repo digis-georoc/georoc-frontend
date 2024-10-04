@@ -5,6 +5,8 @@ const props = defineProps<{
   modelValue: boolean
 }>()
 
+console.log(props.samples)
+
 const emit = defineEmits(['update:modelValue'])
 
 </script>
@@ -17,8 +19,8 @@ const emit = defineEmits(['update:modelValue'])
     </div>
     <BaseButton display="flat" class="absolute z-1 right-1 top-1" icon="ic:close" @click="emit('update:modelValue', false)"/>
     <div class="overflow-x-auto flex space-x-2 pb-2 h-32">
-      <div class="p-2 flex-shrink-0 border dark:border-gray-600 rounded-md" :class="{'w-[90%]': samples.length > 1, 'w-full': samples.length === 1}" v-for="sample in samples">
-        <NuxtLink :to="`/sample/${sample.sampleID}`">{{ sample.sampleID }}</NuxtLink>
+      <div class="flex-shrink-0 pl-[2px] -ml-[2px] pt-[2px]" :class="{'w-[90%]': samples.length > 1, 'w-full': samples.length === 1}" v-for="sample in samples">
+        <QueryListItem :item="sample" class="h-full"/>
       </div>
     </div>
   </div>

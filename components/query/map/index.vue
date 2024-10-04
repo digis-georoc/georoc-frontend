@@ -41,7 +41,7 @@ let shownCoveragePolygon: GeoJSON | null = null
 
 const selectedMaterialId = computed(() => queryStore.getFilter(QueryKey.Material)?.value ?? null)
 const showLocationPopup = ref(false)
-const selectedLocation = ref<{ samples: number[] } | null>(null)
+const selectedLocation = ref<{ samples: QueryListItem[] } | null>(null)
 const selectedMarker = ref<Layer | null>(null)
 const hasFilterChanges = computed(() => queryStore.hasChanges)
 
@@ -223,6 +223,17 @@ function setBboxFilter() {
   })
 }
 
+function createPointFeature(coordsString: string, points: Feature<Point>[]): Feature<Point> {
+  return {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: coordsString.split(',').map(coord => parseFloat(coord))
+    },
+    properties: { samples: points.map(point => ({ ...point.properties?.sampleData, sampleID: point.properties?.sampleID })) }
+  }
+}
+
 let polygon: Polygon
 
 const markersGroup = L.featureGroup()
@@ -257,23 +268,10 @@ watch(() => mapSamples.value, (value: QueryLocationsResponse | null) => {
 
   Object.keys(pointsByLocation).forEach(key => {
     const points = pointsByLocation[key]
+    const customFeature = createPointFeature(key, points)
 
-    if (points.length > 1) multiPointFeatures.push({
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: key.split(',').map(coord => parseFloat(coord))
-      },
-      properties: { samples: points.map(point => point.properties) }
-    })
-    else pointFeatures.push({
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: key.split(',').map(coord => parseFloat(coord))
-      },
-      properties: { samples: points.map(point => point.properties) }
-    })
+    if (points.length > 1) multiPointFeatures.push(customFeature)
+    else pointFeatures.push(customFeature)
   })
 
   const sizes = clusterFeatures.map(({ properties }) => properties?.clusterSize)
