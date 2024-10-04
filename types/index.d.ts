@@ -17,11 +17,11 @@ declare global {
     sampleName: string
     latitude: number
     longitude: number
-    geologicalAge: string | null
-    geologicalSetting: string | null
-    inclusionType: string | null
-    mineral: string | null
-    rockClass: string | null
+    geologicalAges: string[]
+    geologicalSettings: string[]
+    inclusionTypes: string[]
+    minerals: string[] | null
+    rockClasses: string[]
   }
 
   interface QueryLocationFeature {

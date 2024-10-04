@@ -15,9 +15,9 @@ function getMaterialLabel() {
 }
 
 function getMaterial() {
-  if (materialFilter?.value === MaterialKeys.WRGL) return props.item?.rockClass
-  if (materialFilter?.value === MaterialKeys.MIN) return props.item?.mineral
-  if (materialFilter?.value === MaterialKeys.INC) return props.item?.inclusionType
+  if (materialFilter?.value === MaterialKeys.WRGL) return props.item?.rockClasses.join(', ')
+  if (materialFilter?.value === MaterialKeys.MIN) return props.item?.minerals?.join(', ')
+  if (materialFilter?.value === MaterialKeys.INC) return props.item?.inclusionTypes.join(', ')
   return null
 }
 
@@ -41,12 +41,12 @@ function goToDetailPage() {
       <span class="text-sm">{{ getMaterial() }}</span>
     </div>
     <div class="flex flex-col">
-      <span class="text-xs text-gray-500">{{ $t('tectonic_setting') }}</span>
-      <span class="text-sm">{{ item.geologicalSetting }}</span>
+      <span class="text-xs text-gray-500">{{ $t('geological_settings') }}</span>
+      <span class="text-sm">{{ item.geologicalSettings.join(', ') }}</span>
     </div>
     <div class="flex flex-col">
       <span class="text-xs text-gray-500">{{ $t('age') }}</span>
-      <span class="text-sm">{{ item.geologicalAge ?? '-' }}</span>
+      <span class="text-sm">{{ item.geologicalAges.length > 0 ? item.geologicalAges.join(', ') : '-' }}</span>
     </div>
   </div>
 </template>
