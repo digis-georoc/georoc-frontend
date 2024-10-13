@@ -12,6 +12,7 @@ const emit = defineEmits<{
 const _items = ref<TreeNode[]>([])
 const collapseState = ref<boolean[]>([])
 const maxVisibleItems = 5
+const UNITS_AS_IN_THE_DATABASE = 'Units as in the database'
 
 watch(() => chemistryStore.selected, (value) =>  {
   _items.value = value
@@ -124,7 +125,7 @@ function toQuery(selected: TreeNode[]) {
               </div>
               <div class="w-3/12 flex items-center px-2 py-1 border-r dark:border-gray-600">
                 <BaseInput
-                  v-if="child.data?.unit !== 'As in the database'"
+                  v-if="child.data?.unit !== UNITS_AS_IN_THE_DATABASE"
                   type="number"
                   placeholder=""
                   size="sm"
@@ -135,7 +136,7 @@ function toQuery(selected: TreeNode[]) {
               </div>
               <div class="w-3/12 flex items-center px-2 py-1 border-r dark:border-gray-600">
                 <BaseInput
-                  v-if="child.data?.unit !== 'As in the database'"
+                  v-if="child.data?.unit !== UNITS_AS_IN_THE_DATABASE"
                   type="number"
                   placeholder=""
                   size="sm"
@@ -145,8 +146,8 @@ function toQuery(selected: TreeNode[]) {
                 <span v-else>-</span>
               </div>
               <div class="w-2/12 flex items-center justify-center text-gray-500 dark:text-gray-400 font-light pl-2 py-1">
-                <span v-if="child.data.unit !== 'As in the database'">{{ child.data.unit }}</span>
-                <span v-else :title="child.data.unit">
+                <span v-if="child.data.unit !== UNITS_AS_IN_THE_DATABASE">{{ child.data.unit }}</span>
+                <span v-else :title="child.data.unit" class="cursor-pointer">
                   <Icon name="material-symbols:lock-outline" class="text-gray-300 dark:text-gray-500" />
                 </span>
               </div>

@@ -1,0 +1,469 @@
+﻿value;type;unit;visible;latex
+SIO2;mj;Wt.%;Yes;SiO_2
+TIO2;mj;Wt.%;Yes;TiO_2
+AL2O3;mj;Wt.%;Yes;Al_2O_3
+FEOT;mj;Wt.%;Yes;FeO_T
+MNO;mj;Wt.%;Yes;MnO
+MGO;mj;Wt.%;Yes;MgO
+CAO;mj;Wt.%;Yes;CaO
+NA2O;mj;Wt.%;Yes;Na_2O
+K2O;mj;Wt.%;Yes;K_2O
+P2O5;mj;Wt.%;Yes;P_2O_5
+LOI;mj;Wt.%;Yes;LOI
+H;mj;Units as in the database;No;H
+H2O;mj;Units as in the database;No;H_2O
+H2OM;mj;Units as in the database;No;H_2O^-
+H2OP;mj;Units as in the database;No;H_2O^+
+H2S;mj;Units as in the database;No;H_2S
+OH;mj;Units as in the database;No;OH
+BACO3;mj;Units as in the database;No;BaCO_3
+CACO3;mj;Units as in the database;No;CaCO_3
+FECO3;mj;Units as in the database;No;FeCO_3
+K2CO3;mj;Units as in the database;No;K_2CO_3
+MGCO3;mj;Units as in the database;No;MgCO_3
+MNCO3;mj;Units as in the database;No;MnCO_3
+NA2CO3;mj;Units as in the database;No;Na_2CO_3
+SRCO3;mj;Units as in the database;No;SrCO_3
+ZNCO3;mj;Units as in the database;No;ZnCO_3
+CH4;mj;Units as in the database;No;CH_4
+CO1;mj;Units as in the database;No;CO
+CO3;mj;Units as in the database;No;CO_3
+CORG;mj;Units as in the database;No;C_{org}
+N;mj;Units as in the database;No;N
+NH4;mj;Units as in the database;No;NH_4
+O;mj;Units as in the database;No;O
+O2;mj;Units as in the database;No;O_2
+FES;mj;Units as in the database;No;FeS
+FES2;mj;Units as in the database;No;FeS_2
+NACL;mj;Units as in the database;No;NaCl
+LA;ree;ppm;Yes;La
+CE;ree;ppm;Yes;Ce
+PR;ree;ppm;Yes;Pr
+ND;ree;ppm;Yes;Nd
+SM;ree;ppm;Yes;Sm
+EU;ree;ppm;Yes;Eu
+GD;ree;ppm;Yes;Gd
+TB;ree;ppm;Yes;Tb
+DY;ree;ppm;Yes;Dy
+HO;ree;ppm;Yes;Ho
+ER;ree;ppm;Yes;Er
+TM;ree;ppm;Yes;Tm
+YB;ree;ppm;Yes;Yb
+LU;ree;ppm;Yes;Lu
+LI;te;ppm;Yes;Li
+BE;te;ppm;Yes;Be
+B;te;ppm;Yes;B
+F;te;ppm;Yes;F
+S;te;ppm;Yes;S
+CL;te;ppm;Yes;Cl
+SC;te;ppm;Yes;Sc
+V;te;ppm;Yes;V
+CR;te;ppm;Yes;Cr
+CO;te;ppm;Yes;Co
+NI;te;ppm;Yes;Ni
+CU;te;ppm;Yes;Cu
+ZN;te;ppm;Yes;Zn
+GA;te;ppm;Yes;Ga
+GE;te;ppm;Yes;Ge
+AS;te;ppm;Yes;As
+SE;te;ppm;Yes;Se
+BR;te;ppm;Yes;Br
+RB;te;ppm;Yes;Rb
+SR;te;ppm;Yes;Sr
+Y;te;ppm;Yes;Y
+ZR;te;ppm;Yes;Zr
+NB;te;ppm;Yes;Nb
+MO;te;ppm;Yes;Mo
+RU;te;ppb;Yes;Ru
+RH;te;ppb;Yes;Rh
+PD;te;ppb;Yes;Pd
+AG;te;ppm;Yes;Ag
+CD;te;ppm;Yes;Cd
+IN;te;ppm;Yes;In
+SN;te;ppm;Yes;Sn
+SB;te;ppm;Yes;Sb
+TE;te;ppm;Yes;Te
+I;te;ppm;Yes;I
+CS;te;ppm;Yes;Cs
+BA;te;ppm;Yes;Ba
+HF;te;ppm;Yes;Hf
+TA;te;ppm;Yes;Ta
+W;te;ppm;Yes;W
+RE;te;ppm;Yes;Re
+OS;te;ppb;Yes;Os
+IR;te;ppb;Yes;Ir
+PT;te;ppb;Yes;Pt
+AU;te;ppm;Yes;Au
+HG;te;ppm;Yes;Hg
+TL;te;ppm;Yes;Tl
+PB;te;ppm;Yes;Pb
+BI;te;ppm;Yes;Bi
+TH;te;ppm;Yes;Th
+U;te;ppm;Yes;U
+H;te;Units as in the database;No;H
+H2O;te;Units as in the database;No;H_2O
+OH;te;Units as in the database;No;OH
+BE10;te;Units as in the database;No;^{10}Be
+C;te;Units as in the database;No;C
+CORG;te;Units as in the database;No;C_{org}
+CO2;te;Units as in the database;No;CO_2
+N;te;Units as in the database;No;N
+AL26;te;Units as in the database;No;^{26}Al
+CL36;te;Units as in the database;No;^{36}Cl
+RA;te;Units as in the database;No;Ra
+RA226;te;Units as in the database;No;^{226}Ra
+AC;te;Units as in the database;No;Ac
+AC227;te;Units as in the database;No;^{227}Ac
+TH230;te;Units as in the database;No;^{230}Th
+PA;te;Units as in the database;No;Pa
+PA231;te;Units as in the database;No;^{231}Pa
+U235;te;Units as in the database;No;^{235}U
+U238;te;Units as in the database;No;^{238}U
+H2O;rg;Units as in the database;Yes;H_2O
+HE;rg;Units as in the database;Yes;He
+HE3;rg;Units as in the database;Yes;^{3}He
+HE4;rg;Units as in the database;Yes;^{4}He
+CO2;rg;Units as in the database;Yes;CO_2
+N2;rg;Units as in the database;Yes;N_2
+NE;rg;Units as in the database;Yes;Ne
+NE20;rg;Units as in the database;Yes;^{20}Ne
+NE21;rg;Units as in the database;Yes;^{21}Ne
+NE22;rg;Units as in the database;Yes;^{22}Ne
+AR;rg;Units as in the database;Yes;Ar
+AR36;rg;Units as in the database;Yes;^{36}Ar
+AR37;rg;Units as in the database;Yes;^{37}Ar
+AR38;rg;Units as in the database;Yes;^{38}Ar
+AR39;rg;Units as in the database;Yes;^{39}Ar
+AR40;rg;Units as in the database;Yes;^{40}Ar
+K40;rg;Units as in the database;Yes;^{40}K
+KR84;rg;Units as in the database;Yes;^{84}Kr
+KR86;rg;Units as in the database;Yes;^{86}Kr
+XE128;rg;Units as in the database;Yes;^{128}Xe
+XE129;rg;Units as in the database;Yes;^{129}Xe
+XE130;rg;Units as in the database;Yes;^{130}Xe
+XE131;rg;Units as in the database;Yes;^{131}Xe
+XE132;rg;Units as in the database;Yes;^{132}Xe
+XE134;rg;Units as in the database;Yes;^{134}Xe
+XE136;rg;Units as in the database;Yes;^{136}Xe
+SR87_SR86;ir;;Yes;^{87}Sr/^{86}Sr
+SR87_SR86_INI;ir;;Yes;^{87}Sr/^{86}Sr_{ini}
+EPSILON_SR_INI;ir;;Yes;\epsilon Sr_{ini}
+ND143_ND144;ir;;Yes;^{143}Nd/^{144}Nd
+ND143_ND144_INI;ir;;Yes;^{143}Nd/^{144}Nd_{ini}
+EPSILON_ND;ir;;Yes;\epsilon Nd
+EPSILON_ND_INI;ir;;Yes;\epsilon Nd_{ini}
+HF176_HF177;ir;;Yes;^{176}Hf/^{177}Hf
+EPSILON_HF;ir;;Yes;\epsilon Hf
+PB206_PB204;ir;;Yes;^{206}Pb/^{204}Pb
+PB207_PB204;ir;;Yes;^{207}Pb/^{204}Pb
+PB208_PB204;ir;;Yes;^{208}Pb/^{204}Pb
+HE4_HE3;ir;Units as in the database;No;^{4}He/^{3}He
+NE21_HE3;ir;Units as in the database;No;^{21}Ne/^{3}He
+HE3_HE4;ir;Units as in the database;No;^{3}He/^{4}He
+AR40_HE4;ir;Units as in the database;No;^{40}Ar/^{4}He
+BE10_BE9;ir;Units as in the database;No;^{10}Be/^{9}Be
+HE4_NE20;ir;Units as in the database;No;^{4}He/^{20}Ne
+NE21_NE20;ir;Units as in the database;No;^{21}Ne/^{20}Ne
+NE22_NE20;ir;Units as in the database;No;^{22}Ne/^{20}Ne
+HE4_NE22;ir;Units as in the database;No;^{4}He/^{22}Ne
+NE20_NE22;ir;Units as in the database;No;^{20}Ne/^{22}Ne
+NE21_NE22;ir;Units as in the database;No;^{21}Ne/^{22}Ne
+AR36_NE22;ir;Units as in the database;No;^{36}Ar/^{22}Ne
+XE132_NE22;ir;Units as in the database;No;^{132}Xe/^{22}Ne
+CL36_CL;ir;Units as in the database;No;^{36}Cl/Cl
+CL36_CL35;ir;Units as in the database;No;^{36}Cl/^{35}Cl
+N2_AR36;ir;Units as in the database;No;N_2/^{36}Ar
+HE3_AR36;ir;Units as in the database;No;^{3}He/^{36}Ar
+AR35_AR36;ir;Units as in the database;No;^{35}Ar/^{36}Ar
+AR37_AR36;ir;Units as in the database;No;^{37}Ar/^{36}Ar
+AR38_AR36;ir;Units as in the database;No;^{38}Ar/^{36}Ar
+AR39_AR36;ir;Units as in the database;No;^{39}Ar/^{36}Ar
+AR40_AR36;ir;Units as in the database;No;^{40}Ar/^{36}Ar
+AR40_AR36_INI;ir;Units as in the database;No;^{40}Ar/^{36}Ar_{ini}
+K40_AR36;ir;Units as in the database;No;^{40}K/^{36}Ar
+KR84_AR36;ir;Units as in the database;No;^{84}Kr/^{36}Ar
+XE130_AR36;ir;Units as in the database;No;^{130}Xe/^{36}Ar
+XE132_AR36;ir;Units as in the database;No;^{132}Xe/^{36}Ar
+AR36_AR37;ir;Units as in the database;No;^{36}Ar/^{37}Ar
+AR36_AR38;ir;Units as in the database;No;^{36}Ar/^{38}Ar
+AR40_AR38;ir;Units as in the database;No;^{40}Ar/^{38}Ar
+AR34_AR39;ir;Units as in the database;No;^{34}Ar/^{39}Ar
+AR36_AR39;ir;Units as in the database;No;^{36}Ar/^{39}Ar
+AR37_AR39;ir;Units as in the database;No;^{37}Ar/^{39}Ar
+AR38_AR39;ir;Units as in the database;No;^{38}Ar/^{39}Ar
+AR40_AR39;ir;Units as in the database;No;^{40}Ar/^{39}Ar
+HE3_AR40;ir;Units as in the database;No;^{3}He/^{40}Ar
+HE4_AR40;ir;Units as in the database;No;^{4}He/^{40}Ar
+AR36_AR40;ir;Units as in the database;No;^{36}Ar/^{40}Ar
+AR37_AR40;ir;Units as in the database;No;^{37}Ar/^{40}Ar
+AR38_AR40;ir;Units as in the database;No;^{38}Ar/^{40}Ar
+AR39_AR40;ir;Units as in the database;No;^{39}Ar/^{40}Ar
+AR40_K40;ir;Units as in the database;No;^{40}Ar/^{40}K
+K40_ACT;ir;Units as in the database;No;(^{40}K)
+K40_CA44;ir;Units as in the database;No;^{40}K/^{44}Ca
+EPSILON_CA40;ir;Units as in the database;No;\epsilon ^{40}Ca
+KR78_KR84;ir;Units as in the database;No;^{78}Kr/^{84}Kr
+KR80_KR84;ir;Units as in the database;No;^{80}Kr/^{84}Kr
+KR82_KR84;ir;Units as in the database;No;^{82}Kr/^{84}Kr
+KR83_KR84;ir;Units as in the database;No;^{83}Kr/^{84}Kr
+KR86_KR84;ir;Units as in the database;No;^{86}Kr/^{84}Kr
+KR90_KR84;ir;Units as in the database;No;^{90}Kr/^{84}Kr
+SR84_SR86;ir;Units as in the database;No;^{84}Sr/^{86}Sr
+SR88_SR86;ir;Units as in the database;No;^{88}Sr/^{86}Sr
+RB85_SR86;ir;Units as in the database;No;^{85}Rb/^{86}Sr
+RB87_SR86;ir;Units as in the database;No;^{87}Rb/^{86}Sr
+SR84_SR88;ir;Units as in the database;No;^{84}Sr/^{88}Sr
+SR86_SR88;ir;Units as in the database;No;^{86}Sr/^{88}Sr
+SR87_SR88;ir;Units as in the database;No;^{87}Sr/^{88}Sr
+RB85_SR88;ir;Units as in the database;No;^{85}Rb/^{88}Sr
+EPSILON_SR;ir;Units as in the database;No;\epsilon Sr
+XE124_XE130;ir;Units as in the database;No;^{124}Xe/^{130}Xe
+XE126_XE130;ir;Units as in the database;No;^{126}Xe/^{130}Xe
+XE128_XE130;ir;Units as in the database;No;^{128}Xe/^{130}Xe
+XE129_XE130;ir;Units as in the database;No;^{129}Xe/^{130}Xe
+XE131_XE130;ir;Units as in the database;No;^{131}Xe/^{130}Xe
+XE132_XE130;ir;Units as in the database;No;^{132}Xe/^{130}Xe
+XE134_XE130;ir;Units as in the database;No;^{134}Xe/^{130}Xe
+XE136_XE130;ir;Units as in the database;No;^{136}Xe/^{130}Xe
+XE124_XE132;ir;Units as in the database;No;^{124}Xe/^{132}Xe
+XE126_XE132;ir;Units as in the database;No;^{126}Xe/^{132}Xe
+XE128_XE132;ir;Units as in the database;No;^{128}Xe/^{132}Xe
+XE129_XE132;ir;Units as in the database;No;^{129}Xe/^{132}Xe
+XE130_XE132;ir;Units as in the database;No;^{130}Xe/^{132}Xe
+XE131_XE132;ir;Units as in the database;No;^{131}Xe/^{132}Xe
+XE134_XE132;ir;Units as in the database;No;^{134}Xe/^{132}Xe
+XE136_XE132;ir;Units as in the database;No;^{136}Xe/^{132}Xe
+LA138_CE136;ir;Units as in the database;No;^{138}La/^{136}Ce
+CE138_CE136;ir;Units as in the database;No;^{138}Ce/^{136}Ce
+LA138_CE142;ir;Units as in the database;No;^{138}La/^{142}Ce
+CE138_CE142;ir;Units as in the database;No;^{138}Ce/^{142}Ce
+EPSILON_CE138_INI;ir;Units as in the database;No;\epsilon ^{138}Ce_{ini}
+ND142_ND144;ir;Units as in the database;No;^{142}Nd/^{144}Nd
+ND145_ND144;ir;Units as in the database;No;^{145}Nd/^{144}Nd
+ND146_ND144;ir;Units as in the database;No;^{146}Nd/^{144}Nd
+ND148_ND144;ir;Units as in the database;No;^{148}Nd/^{144}Nd
+ND150_ND144;ir;Units as in the database;No;^{150}Nd/^{144}Nd
+SM147_ND144;ir;Units as in the database;No;^{147}Sm/^{144}Nd
+EPSILON_ND143;ir;Units as in the database;No;\epsilon ^{143}Nd
+MY_ND142;ir;Units as in the database;No;\mu^{142}Nd
+MY_ND143;ir;Units as in the database;No;\mu^{143}Nd
+MY_ND145;ir;Units as in the database;No;\mu^{145}Nd
+MY_ND146;ir;Units as in the database;No;\mu^{146}Nd
+MY_ND150;ir;Units as in the database;No;\mu^{150}Nd
+YB173_YB171;ir;Units as in the database;No;^{173}Yb/^{171}Yb
+YB174_YB171;ir;Units as in the database;No;^{174}Yb/^{171}Yb
+YB176_HF177;ir;Units as in the database;No;^{176}Yb/^{177}Hf
+LU175_HF177;ir;Units as in the database;No;^{175}Lu/^{177}Hf
+LU176_HF177;ir;Units as in the database;No;^{176}Lu/^{177}Hf
+HF174_HF177;ir;Units as in the database;No;^{174}Hf/^{177}Hf
+HF176_HF177_INI;ir;Units as in the database;No;^{176}Hf/^{177}Hf_{ini}
+HF178_HF177;ir;Units as in the database;No;^{178}Hf/^{177}Hf
+HF179_HF177;ir;Units as in the database;No;^{179}Hf/^{177}Hf
+HF180_HF177;ir;Units as in the database;No;^{180}Hf/^{177}Hf
+EPSILON_HF_INI;ir;Units as in the database;No;\epsilon Hf_{ini}
+OS187_RE187;ir;Units as in the database;No;^{187}Os/^{187}Re
+RE187_OS186;ir;Units as in the database;No;^{187}Re/^{186}Os
+OS187_OS186;ir;Units as in the database;No;^{187}Os/^{186}Os
+RE187_OS188;ir;Units as in the database;No;^{187}Re/^{188}Os
+OS184_OS188;ir;Units as in the database;No;^{184}Os/^{188}Os
+OS186_OS188;ir;Units as in the database;No;^{186}Os/^{188}Os
+OS187_OS188;ir;Units as in the database;No;^{187}Os/^{188}Os
+OS187_OS188_INI;ir;Units as in the database;No;^{187}Os/^{188}Os_{ini}
+OS189_OS188;ir;Units as in the database;No;^{189}Os/^{188}Os
+OS190_OS188;ir;Units as in the database;No;^{190}Os/^{188}Os
+OS192_OS188;ir;Units as in the database;No;^{192}Os/^{188}Os
+PT190_OS188;ir;Units as in the database;No;^{192}Pt/^{188}Os
+RE187_OS192;ir;Units as in the database;No;^{187}Re/^{192}Os
+OS187_OS192;ir;Units as in the database;No;^{187}Os/^{192}Os
+GAMMA_OS;ir;Units as in the database;No;\gamma Os
+GAMMA_OS_INI;ir;Units as in the database;No;\gamma Os_{ini}
+PB206_PB204_INI;ir;Units as in the database;No;^{206}Pb/^{204}Pb_{ini}
+PB207_PB204_INI;ir;Units as in the database;No;^{207}Pb/^{204}Pb_{ini}
+PB208_PB204_INI;ir;Units as in the database;No;^{208}Pb/^{204}Pb_{ini}
+TH232_PB204;ir;Units as in the database;No;^{232}Th/^{204}Pb
+U235_PB204;ir;Units as in the database;No;^{235}U/^{204}Pb
+U238_PB204;ir;Units as in the database;No;^{238}U/^{204}Pb
+PB204_PB206;ir;Units as in the database;No;^{204}Pb/^{206}Pb
+PB207_PB206;ir;Units as in the database;No;^{207}Pb/^{206}Pb
+PB207_PB206_INI;ir;Units as in the database;No;^{207}Pb/^{206}Pb_{ini}
+PB208_PB206;ir;Units as in the database;No;^{208}Pb/^{206}Pb
+PB208_PB206_INI;ir;Units as in the database;No;^{208}Pb/^{206}Pb_{ini}
+TH232_PB206;ir;Units as in the database;No;^{232}Th/^{206}Pb
+U238_PB206;ir;Units as in the database;No;^{238}U/^{206}Pb
+PB206_PB207;ir;Units as in the database;No;^{206}Pb/^{207}Pb
+PB208_PB207;ir;Units as in the database;No;^{208}Pb/^{207}Pb
+U235_PB207;ir;Units as in the database;No;^{235}U/^{207}Pb
+U238_PB207;ir;Units as in the database;No;^{238}U/^{207}Pb
+PB206_PB208;ir;Units as in the database;No;^{206}Pb/^{208}Pb
+PB207_PB208;ir;Units as in the database;No;^{207}Pb/^{208}Pb
+TH232_PB208;ir;Units as in the database;No;^{232}Th/^{208}Pb
+PB206_TH232;ir;Units as in the database;No;^{206}Pb/^{232}Th
+PB208_TH232;ir;Units as in the database;No;^{208}Pb/^{232}Th
+U238_TH232;ir;Units as in the database;No;^{238}U/^{232}Th
+PB206_U235;ir;Units as in the database;No;^{206}Pb/^{235}U
+PB207_U235;ir;Units as in the database;No;^{207}Pb/^{235}U
+U238_U235;ir;Units as in the database;No;^{238}U/^{235}U
+PB206_U238;ir;Units as in the database;No;^{206}Pb/^{238}U
+PB208_U238;ir;Units as in the database;No;^{208}Pb/^{238}U
+TH232_U238;ir;Units as in the database;No;^{232}Th/^{238}U
+DD;is;per mil;Yes;\delta D
+D13C;is;per mil;Yes;\delta ^{13}C
+D18O;is;per mil;Yes;\delta ^{18}O
+D34S;is;per mil;Yes;\delta ^{34}S
+LI7_LI6;is;Units as in the database;No;^{7}Li/^{6}Li
+D6LI;is;Units as in the database;No;\delta ^{6}Li
+D7LI;is;Units as in the database;No;\delta ^{7}Li
+B11_B10;is;Units as in the database;No;^{11}B/^{10}B
+D11B;is;Units as in the database;No;\delta ^{11}B
+D14C;is;Units as in the database;No;\delta ^{14}C
+D15N;is;Units as in the database;No;\delta ^{15}N
+D17O;is;Units as in the database;No;\delta ^{17}O
+O17_O16;is;Units as in the database;No;^{17}O/^{16}O
+O18_O16;is;Units as in the database;No;^{18}O/^{16}O
+D25MG;is;Units as in the database;No;\delta ^{25}Mg
+D26MG;is;Units as in the database;No;\delta ^{26}Mg
+D29SI;is;Units as in the database;No;\delta ^{29}Si
+D30SI;is;Units as in the database;No;\delta ^{30}Si
+S34_S32;is;Units as in the database;No;^{34}S/^{32}S
+D33S;is;Units as in the database;No;\delta ^{33}S
+D36S;is;Units as in the database;No;\delta ^{36}S
+CL35_CL37;is;Units as in the database;No;^{35}Cl/^{37}Cl
+D37CL;is;Units as in the database;No;\delta ^{37}Cl
+D41K;is;Units as in the database;No;\delta ^{41}K
+CA40_CA44;is;Units as in the database;No;^{40}Ca/^{44}Ca
+D42_40CA;is;Units as in the database;No;\delta ^{42/40}Ca
+D43_40CA;is;Units as in the database;No;\delta ^{43/40}Ca
+D44_40CA;is;Units as in the database;No;\delta ^{44/40}Ca
+D43_42CA;is;Units as in the database;No;\delta ^{43/42}Ca
+D44_42CA;is;Units as in the database;No;\delta ^{44/42}Ca
+D44_43CA;is;Units as in the database;No;\delta ^{44/43}Ca
+EPSILON_CA40;is;Units as in the database;No;\epsilon ^{40}Ca
+D49TI;is;Units as in the database;No;\delta ^{49}Ti
+D51V;is;Units as in the database;No;\delta ^{51}V
+D53CR;is;Units as in the database;No;\delta ^{53}Cr
+D56FE;is;Units as in the database;No;\delta ^{56}Fe
+D57FE;is;Units as in the database;No;\delta ^{57}Fe
+D60NI;is;Units as in the database;No;\delta ^{60}Ni
+D65CU;is;Units as in the database;No;\delta ^{65}Cu
+D66ZN;is;Units as in the database;No;\delta ^{66}Zn
+D67ZN;is;Units as in the database;No;\delta ^{67}Zn
+D68ZN;is;Units as in the database;No;\delta ^{68}Zn
+D71GA;is;Units as in the database;No;\delta ^{71}Ga
+D82_76SE;is;Units as in the database;No;\delta ^{82/76}Se
+D88_86SR;is;Units as in the database;No;\delta ^{88/86}Sr
+D94ZR;is;Units as in the database;No;\delta ^{94}Zr
+D94_ZR90;is;Units as in the database;No;\delta ^{94/90}Zr
+D96_ZR90;is;Units as in the database;No;\delta ^{96/90}Zr
+D94_ZR91;is;Units as in the database;No;\delta ^{94/91}Zr
+D98MO;is;Units as in the database;No;\delta ^{98}Mo
+D98_95MO;is;Units as in the database;No;\delta ^{98/95}Mo
+RU96_RU101;is;Units as in the database;No;^{96}Ru/^{101}Ru
+RU98_RU101;is;Units as in the database;No;^{98}Ru/^{101}Ru
+RU100_RU101;is;Units as in the database;No;^{100}Ru/^{101}Ru
+RU102_RU101;is;Units as in the database;No;^{102}Ru/^{101}Ru
+RU104_RU101;is;Units as in the database;No;^{104}Ru/^{101}Ru
+EPSILON_RU96;is;Units as in the database;No;\epsilon ^{96}Ru
+EPSILON_RU98;is;Units as in the database;No;\epsilon ^{98}Ru
+EPSILON_RU100;is;Units as in the database;No;\epsilon ^{100}Ru
+EPSILON_RU102;is;Units as in the database;No;\epsilon ^{102}Ru
+EPSILON_RU104;is;Units as in the database;No;\epsilon ^{104}Ru
+MY_RU96;is;Units as in the database;No;\mu ^{96}Ru
+MY_RU98;is;Units as in the database;No;\mu ^{98}Ru
+MY_RU100;is;Units as in the database;No;\mu ^{100}Ru
+MY_RU102;is;Units as in the database;No;\mu ^{102}Ru
+MY_RU104;is;Units as in the database;No;\mu ^{104}Ru
+D102_99RU;is;Units as in the database;No;\delta ^{102/99}Ru
+D114_110CD;is;Units as in the database;No;\delta ^{114/110}Cd
+D122_118SN;is;Units as in the database;No;\delta ^{122/118}Sn
+D124SN;is;Units as in the database;No;\delta ^{124}Sn
+D137_134BA;is;Units as in the database;No;\delta ^{137/134}Ba
+D138_134BA;is;Units as in the database;No;\delta ^{138/134}Ba
+D137_135BA;is;Units as in the database;No;\delta ^{137/135}Ba
+W182_W184;is;Units as in the database;No;^{182}W/^{184}W
+D186_184W;is;Units as in the database;No;\delta ^{186/184}W
+EPSILON_W182;is;Units as in the database;No;\epsilon ^{182}W
+EPSILON_W183;is;Units as in the database;No;\epsilon ^{183}W
+MY_W182;is;Units as in the database;No;\mu ^{182}W
+MY_W183;is;Units as in the database;No;\mu ^{183}W
+MY_W184;is;Units as in the database;No;\mu ^{184}W
+D199HG;is;Units as in the database;No;\delta ^{199}Hg
+D200HG;is;Units as in the database;No;\delta ^{200}Hg
+D201HG;is;Units as in the database;No;\delta ^{201}Hg
+D202HG;is;Units as in the database;No;\delta ^{202}Hg
+EPSILON_TL205;is;Units as in the database;No;\epsilon ^{205}Tl
+D234U;is;Units as in the database;No;\delta ^{234}U
+D238U;is;Units as in the database;No;\delta ^{238}U
+U238_ACT;us;Units as in the database;Yes;(^{238}U)
+U238_U234_ACT;us;Units as in the database;Yes;(^{238}U/^{234}U)
+U238_TH232;us;Units as in the database;Yes;^{238}U/^{232}Th
+U238_TH232_ACT;us;Units as in the database;Yes;(^{238}U/^{232}Th)
+U238_TH230_ACT;us;Units as in the database;Yes;(^{238}U/^{230}Th)
+U238_PB204;us;Units as in the database;Yes;^{238}U/^{204}Pb
+U234_ACT;us;Units as in the database;Yes;(^{234}U)
+U234_U238_ACT;us;Units as in the database;Yes;(^{234}U/^{238}U)
+U234_TH232_ACT;us;Units as in the database;Yes;(^{234}U/^{232}Th)
+TH232_ACT;us;Units as in the database;Yes;(^{232}Th)
+TH232_U238_ACT;us;Units as in the database;Yes;(^{232}Th/^{238}U)
+TH232_TH230;us;Units as in the database;Yes;^{232}Th/^{230}Th
+TH232_TH230_ACT;us;Units as in the database;Yes;(^{232}Th/^{230}Th)
+TH232_PB207;us;Units as in the database;Yes;^{232}Th/^{207}Pb
+TH232_PB204;us;Units as in the database;Yes;^{232}Th/^{204}Pb
+PA231_U235;us;Units as in the database;Yes;^{231}Pa/^{235}U
+PA231_U235_ACT;us;Units as in the database;Yes;(^{231}Pa/^{235}U)
+PA231_PA233;us;Units as in the database;Yes;^{231}Pa/^{233}Pa
+TH230_ACT;us;Units as in the database;Yes;(^{230}Th)
+TH230_U238_ACT;us;Units as in the database;Yes;(^{230}Th/^{238}U)
+TH230_U234_ACT;us;Units as in the database;Yes;(^{230}Th/^{234}U)
+TH230_TH232;us;Units as in the database;Yes;^{230}Th/^{232}Th
+TH230_TH232_ACT;us;Units as in the database;Yes;(^{230}Th/^{232}Th)
+TH230_RA226_ACT;us;Units as in the database;Yes;(^{230}Th/^{226}Ra)
+TH228_ACT;us;Units as in the database;Yes;(^{228}Th)
+TH228_TH232;us;Units as in the database;Yes;^{228}Th/^{232}Th
+TH228_TH232_ACT;us;Units as in the database;Yes;(^{228}Th/^{232}Th)
+TH228_RA228;us;Units as in the database;Yes;^{228}Th/^{228}Ra
+TH228_RA228_ACT;us;Units as in the database;Yes;(^{228}Th/^{228}Ra)
+RA228_ACT;us;Units as in the database;Yes;(^{228}Ra)
+RA228_TH232;us;Units as in the database;Yes;^{228}Ra/^{232}Th
+RA228_TH232_ACT;us;Units as in the database;Yes;(^{228}Ra/^{232}Th)
+RA228_RA226;us;Units as in the database;Yes;^{228}Ra/^{226}Ra
+RA228_RA226_ACT;us;Units as in the database;Yes;(^{228}Ra/^{226}Ra)
+AC228_ACT;us;Units as in the database;Yes;(^{228}Ac)
+AC228_TH232_ACT;us;Units as in the database;Yes;(^{228}Ac/^{232}Th)
+AC227_ACT;us;Units as in the database;Yes;(^{227}Ac)
+AC227_PA231_ACT;us;Units as in the database;Yes;(^{227}Ac/^{231}Pa)
+RA226_ACT;us;Units as in the database;Yes;(^{226}Ra)
+RA226_U238;us;Units as in the database;Yes;^{226}Ra/^{238}U
+RA226_U238_ACT;us;Units as in the database;Yes;(^{226}Ra/^{238}U)
+RA226_TH230;us;Units as in the database;Yes;^{226}Ra/^{230}Th
+RA226_TH230_ACT;us;Units as in the database;Yes;(^{226}Ra/^{230}Th)
+RA226_TH230_ACT_INI;us;Units as in the database;Yes;(^{226}Ra/^{230}Th)_{ini}
+RA226_TH228;us;Units as in the database;Yes;^{226}Ra/^{228}Th
+RA226_RA228_ACT;us;Units as in the database;Yes;(^{226}Ra/^{228}Ra)
+RA226_PO210_ACT;us;Units as in the database;Yes;(^{226}Ra/^{210}Po)
+RN222_TH230;us;Units as in the database;Yes;^{222}Rn/^{230}Th
+BI214_ACT;us;Units as in the database;Yes;(^{214}Bi)
+BI214_RA226_ACT;us;Units as in the database;Yes;(^{214}Bi/^{226}Ra)
+PB214_ACT;us;Units as in the database;Yes;(^{214}Pb)
+PB214_RA226_ACT;us;Units as in the database;Yes;(^{214}Pb/^{226}Ra)
+PB212_ACT;us;Units as in the database;Yes;(^{212}Pb)
+PB210_ACT;us;Units as in the database;Yes;(^{210}Pb)
+PB210_U238;us;Units as in the database;Yes;^{210}Pb/^{238}U
+PB210_U238_ACT;us;Units as in the database;Yes;(^{210}Pb/^{238}U)
+PB210_TH230_ACT;us;Units as in the database;Yes;(^{210}Pb/^{230}Th)
+PB210_RA226;us;Units as in the database;Yes;^{210}Pb/^{226}Ra
+PB210_RA226_ACT;us;Units as in the database;Yes;(^{210}Pb/^{226}Ra)
+PB210_RA226_ACT_INI;us;Units as in the database;Yes;(^{210}Pb/^{226}Ra)_{ini}
+PO210_ACT;us;Units as in the database;Yes;(^{210}Po)
+PO210_TH230;us;Units as in the database;Yes;^{210}Po/^{230}Th
+PO210_TH230_ACT;us;Units as in the database;Yes;(^{210}Po/^{230}Th)
+PO210_RA226_ACT;us;Units as in the database;Yes;(^{210}Po/^{226}Ra)
+PO210_RA226_ACT_INI;us;Units as in the database;Yes;(^{210}Po/^{226}Ra)_{ini}
+PO210_RN222;us;Units as in the database;Yes;^{210}Po/^{222}Rn
+PO210_PB210_ACT;us;Units as in the database;Yes;(^{210}Po/^{210}Pb)
+TL208_ACT;us;Units as in the database;Yes;(^{208}Tl)
+TL208_TH232_ACT;us;Units as in the database;Yes;(^{208}Tl/^{232}Th)
+AGE;age;Units as in the database;Yes;Age
+AGE_PB206_U238;age;Units as in the database;Yes;^{206}Pb/^{238}U \space Age
+AGE_PB207_U235;age;Units as in the database;Yes;^{207}Pb/^{235}U \space Age
+AGE_PB207_PB206;age;Units as in the database;Yes;^{207}Pb/^{206}Pb \space Age
+AGE_PB208_TH232;age;Units as in the database;Yes;^{208}Pb/^{232}Th \space Age
