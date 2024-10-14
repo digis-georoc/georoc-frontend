@@ -4,9 +4,9 @@
     class="bg-white dark:bg-gray-800 border-t dark:border-gray-700"
   >
     <BaseContainer
-      class="flex flex-col sm:flex-row justify-center items-center py-4 text-sm"
+      class="flex flex-col sm:flex-row justify-center items-center py-3 text-sm"
     >
-      <div class="flex flex-row justify-center items-center">
+      <div class="flex flex-row justify-center items-center text-sm">
         <p><BaseNuxtLink to="/terms-of-use">Terms of Use</BaseNuxtLink></p>
         <p class="px-2">-</p>
         <p><BaseNuxtLink to="/legal-notice">Legal Notice</BaseNuxtLink></p>
@@ -16,12 +16,13 @@
             href="https://www.uni-goettingen.de/en/439479.html"
             target="_blank"
             class="hover:border-b-primary border-transparent border-b-2"
-            >Privacy Statement</a
           >
+            Privacy Statement
+          </a>
         </p>
       </div>
       <ClientOnly>
-        <p class="flex sm:flex-row justify center items-center">
+        <p class="flex sm:flex-row mt-2 sm:mt-0 justify center items-center">
           <LastDatabaseUpdate>
             <template #before>
               <span class="px-2 hidden sm:inline">-</span>

@@ -179,13 +179,14 @@ function createMultiPointMarker(feature: Feature, latlng: LatLng) {
 }
 
 function onEachPointFeature(feature, layer) {
-  layer.on('click', () => {
+  layer.on('click', (e) => {
 
     if (selectedMarker.value) {
       updateMarkerIcon(false, selectedMarker.value, selectedLocation.value)
     }
 
     updateMarkerIcon(true, layer, feature.properties)
+    map.setView(e.latlng, map.getZoom())
 
     selectedLocation.value = feature.properties
     selectedMarker.value = layer
@@ -424,7 +425,7 @@ function hideCoverage() {
     <div v-if="!isTouchDevice && selectedMaterialId" class="absolute top-[80px] xl:top-[78px] 2xl:top-[26px] z-[1001] left-[20px]" data-obstacle>
       <QueryFilterPolygon />
     </div>
-    <QueryMapLocationPopup v-model="showLocationPopup"  :samples="selectedLocation?.samples ?? []" class="absolute z-[1000] bottom-[32px] left-1/2 -translate-x-1/2" data-obstacle />
+    <QueryMapLocationPopup v-model="showLocationPopup"  :samples="selectedLocation?.samples ?? []" class="absolute z-[1000] bottom-[38px] md:bottom-[32px] left-1/2 -translate-x-1/2" data-obstacle />
 </template>
 <style>
 .mode-create {
@@ -440,9 +441,19 @@ function hideCoverage() {
   top: 16px;
 }
 .leaflet-control-container {
+  font-size: 10px;
+
   .leaflet-control-layers {
-    margin-bottom: 32px;
+    margin-bottom: 38px;
   }
+
+  @screen md {
+    font-size: 12px;
+    .leaflet-control-layers {
+      margin-bottom: 32px;
+    }
+  }
+
 
   .leaflet-right {
     .leaflet-control-zoom {
