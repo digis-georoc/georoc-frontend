@@ -21,7 +21,7 @@ const emit = defineEmits<{
   'update:modelValue': [value: TreeSelectionKeys]
 }>()
 
-let typingTimer
+let typingTimer: NodeJS.Timeout
 const typingDelay = 500
 
 const _nodes = ref<TreeNode[]>([])
@@ -42,32 +42,43 @@ function doneTyping(filterText: string) {
     return
   }
 
-  const copyNodes = JSON.parse(JSON.stringify(props.nodes))
-
+  const regex = new RegExp(filterText.toLowerCase(), 'gi')
+  const copyNodes: TreeNode[] = JSON.parse(JSON.stringify(props.nodes))
   const resultNodes: TreeNode[] = []
 
   copyNodes.forEach((node) => {
-    let childNodes = [...node.children]
-    node.children = []
-
-    for (let childNode of childNodes) {
-      let copyChildNode = { ...childNode };
-
-      const regex = new RegExp(filterText.toLowerCase(), 'gi')
-
-      let cleanNodeValue = ''
+    if (!node.children || node.children.length === 0) {
+      let nodeValue
       if (props.filterKey) {
-        cleanNodeValue = copyChildNode[props.filterKey].toLowerCase()
+        nodeValue = node[props.filterKey].toLowerCase()
       } else {
-        cleanNodeValue = copyChildNode.key.toLowerCase().split('_/_')[1]
+        nodeValue = node.key.toLowerCase()
       }
 
-      if (regex.test(cleanNodeValue)) {
-        node.children.push(copyChildNode);
+      if (regex.test(nodeValue)) {
+        resultNodes.push(node)
       }
-    }
-    if (node.children.length > 0) {
-      resultNodes.push(node)
+    } else {
+      let childNodes = [...node.children]
+      node.children = []
+
+      for (let childNode of childNodes) {
+        let copyChildNode = { ...childNode }
+        let cleanNodeValue = ''
+
+        if (props.filterKey) {
+          cleanNodeValue = copyChildNode[props.filterKey].toLowerCase()
+        } else {
+          cleanNodeValue = copyChildNode.key.toLowerCase().split('_/_')[1]
+        }
+
+        if (regex.test(cleanNodeValue)) {
+          node.children.push(copyChildNode)
+        }
+      }
+      if (node.children.length > 0) {
+        resultNodes.push(node)
+      }
     }
   })
 
@@ -75,10 +86,11 @@ function doneTyping(filterText: string) {
 
   _nodes.value.forEach(node => {
     expandedKeys.value[node.key] = true
-    node.children.forEach(node => {
-      if (node.data && node.data.hasOwnProperty('visible') && !node.data.visible) {
-        node.data.visible = true
-        visibleNodesAfterFiltering.value.push(node)
+    if (!node.children || node.children.length === 0) return
+    node.children.forEach(childNode => {
+      if (childNode.data && childNode.data.hasOwnProperty('visible') && !childNode.data.visible) {
+        childNode.data.visible = true
+        visibleNodesAfterFiltering.value.push(childNode)
       }
     })
   })

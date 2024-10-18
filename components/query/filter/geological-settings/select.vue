@@ -54,6 +54,7 @@ function mapNodesToSelectionKeys(selectedNodes: TreeNode[]): TreeSelectionKeys {
     v-else
     v-model="selectedKeys"
     :nodes="nodes"
+    filter-key="label"
     filter-placeholder="Type to filter by a chemical name"
   />
 </template>
