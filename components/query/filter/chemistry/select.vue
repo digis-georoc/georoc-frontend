@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import TreeNode, { type TreeSelectionKeys } from 'primevue/tree'
 import {storeToRefs} from "pinia";
-import {getChemistryFilterOptions} from "~/utils/api";
 import katex from 'katex';
 import 'katex/dist/katex.css';
 import { chemistryTypesLabels } from "~/utils/chemistry-types";
+import {csvToJSON} from "~/utils/csv-to-json";
 
 withDefaults(defineProps<{
   modelValue: TreeNode[]
@@ -26,9 +26,14 @@ const emit = defineEmits<{
   'update:modelValue': [keys: TreeSelectionKeys]
 }>()
 
+async function getChemistryFilterOptions() {
+  const result = await fetch('csv/chemistry-filter-options.csv')
+  const csv = await result.text()
+  return csvToJSON<ChemistryFilterOption>(csv, ';')
+}
+
 onMounted(async () => {
   const options = await getChemistryFilterOptions()
-
   if (!options) return
 
   const optionsGrouped: {[key: string]: TreeNode[]} = options.reduce((acc, cur) => {

@@ -1,11 +1,6 @@
-import {createError, H3Error, H3Event} from "h3";
-import { readFileSync } from 'fs';
-import { join } from "pathe";
-
-
 function csvToJSON<T>(csvData: string, separator: string) {
   // Split the CSV data by newlines to get rows
-  const rows = csvData.trim().split('\r\n')
+  const rows = csvData.trim().split('\n')
 
   // Extract the headers (first row) and split by comma
   const headers = rows[0].split(separator)
@@ -26,16 +21,6 @@ function csvToJSON<T>(csvData: string, separator: string) {
   return jsonData;
 }
 
-export default defineEventHandler<ChemistryFilterOption[] | H3Error | undefined>(({ node }: H3Event) => {
-
-  try {
-    const filePath = join(process.cwd(), 'public/chemistry-filter-options.csv')
-    return csvToJSON<ChemistryFilterOption>(readFileSync(filePath, 'utf-8'), ';')
-  } catch (error: any) {
-    return createError({
-      statusCode: error.response.status,
-      statusMessage: error.message,
-      data: error.data,
-    });
-  }
-})
+export {
+  csvToJSON
+}
