@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  label?: string,
+  label: string,
   value: string | number | string[] | number[] | null
 }>()
 
@@ -11,9 +11,9 @@ function valueIsArray() {
 </script>
 
 <template>
-  <div class="flex flex-col mb-4">
-    <h3 v-if="label" class="font-semibold">{{ label }}</h3>
-    <div class="flex">
+  <tr>
+    <td class="font-semibold pr-2 pb-1">{{ label }}:</td>
+    <td>
       <template v-if="valueIsArray()">
         <template v-if="value.length > 0">
           <template v-for="(item, i) in value">
@@ -30,6 +30,6 @@ function valueIsArray() {
       <template v-else>
         {{ $t('no_value_given') }}
       </template>
-    </div>
-  </div>
+    </td>
+  </tr>
 </template>

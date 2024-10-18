@@ -151,7 +151,7 @@ onMounted(() => {
   <p class="text-gray-500 dark:text-gray-500 italic mb-4">
     Caution, the elements are not normalized to 100% water-free, but are presented as reported in the original publication.
   </p>
-  <div id="tas"></div>
+  <div id="tas" class="w-full overflow-auto"></div>
 </template>
 
 <style scoped>
