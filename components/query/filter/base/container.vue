@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   title: string,
   dialogTitle?: string,
   loading?: boolean,
@@ -28,8 +28,6 @@ function openDialog() {
   emit('open')
   isOpen.value = true
 }
-
-const collapsed = ref(false)
 
 </script>
 <template>

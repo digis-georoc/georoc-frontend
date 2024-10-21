@@ -139,7 +139,7 @@ function remove(index: number) {
   if (optionIndex === -1) return
   options[optionIndex].active = false
 
-  selected.value.splice(index, 1)
+  selected.value = selected.value.filter((item, i) => i !== index)
 
   queryStore.setPanelFilter({
     name: QueryKey.GeologicalSettings,

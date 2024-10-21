@@ -76,7 +76,7 @@
 
   classes['bg-none text-primary hover:underline '] = props.display === 'link'
 
-  classes['bg-white text-dark border border-gray-400 focus:ring-gray-300 hover:bg-gray-100 dark:bg-gray-800'] = props.display === 'mono'
+  classes['bg-white text-dark border border-gray-400 dark:border-gray-600 focus:ring-gray-300 hover:bg-gray-100 dark:bg-gray-800'] = props.display === 'mono'
 
   classes['bg-none text-primary border border-primary-300 hover:bg-primary-50 dark:hover:bg-gray-800'] = (props.display === 'outline'  || props.display === 'outline-dashed') && props.color === 'primary'
 

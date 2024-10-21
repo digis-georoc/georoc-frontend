@@ -417,7 +417,7 @@ function hideCoverage() {
       <div>Out of bounds SW: {{ outOfBoundsSW }}</div>
       <div>Out of bounds NE: {{ outOfBoundsNE }}</div>
     </div>
-    <div v-if="!isMobile" class="absolute z-[1000] bottom-0 left-0 bg-white p-1 text-xs" data-obstacle>
+    <div v-if="!isMobile" class="absolute z-[1000] bottom-0 left-0 bg-white dark:bg-gray-800 p-1 text-xs" data-obstacle>
       <span>Latitude: </span><span>{{ mouseLat }}</span>&nbsp;
       <span>Longitude: </span><span>{{ mouseLng }}</span>
     </div>

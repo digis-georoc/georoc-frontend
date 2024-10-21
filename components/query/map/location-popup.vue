@@ -5,8 +5,6 @@ const props = defineProps<{
   modelValue: boolean
 }>()
 
-console.log(props.samples)
-
 const emit = defineEmits(['update:modelValue'])
 
 </script>

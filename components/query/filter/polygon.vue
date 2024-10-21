@@ -74,6 +74,5 @@ function stop() {
 <template>
   <div class="flex flex-col items-start flex-wrap">
     <BaseButton @click="handleButton" :rounded="false" :text="buttonText" display="mono" icon="ph:polygon-bold" class="shadow-lg"/>
-    <!--    <div class="text-gray-400 text-sm flex-1 mt-2">{{ message }}</div>-->
   </div>
 </template>
