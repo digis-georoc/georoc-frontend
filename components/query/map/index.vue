@@ -11,11 +11,11 @@ import { getPointMarkerOptions } from "~/utils/marker"
 import * as d3 from "d3"
 
 const singleMarkerBgColor = theme.colors.white
-const singleMarkerStrokeColor = theme.colors.gray['400']
+const singleMarkerStrokeColor = theme.colors.gray['300']
 const singleMarkerTextColor = theme.colors.gray['700']
 
 const clusterMarkerBgColor = theme.colors.white
-const clusterMarkerBorderColor = theme.colors.stone['400']
+const clusterMarkerBorderColor = theme.colors.stone['300']
 const clusterMarkerTextColor = theme.colors.stone['800']
 
 const queryStore = useQueryStore()
@@ -105,7 +105,7 @@ function getClusterRadius(amount: number) {
 }
 
 function createClusterMarker(feature: Feature, latlng: LatLng) {
-  const iconWidth = 48
+  const iconWidth = 52
   const text = feature.properties?.clusterSize
   const radius = getClusterRadius(text)
 
@@ -118,6 +118,13 @@ function createClusterMarker(feature: Feature, latlng: LatLng) {
         viewBox="0 0 ${iconWidth} ${iconWidth}"
       >
         <g>
+          <circle
+            cx="${iconWidth/2}"
+            cy="${iconWidth/2}"
+            r="${radius * 1.25}"
+            fill="${clusterMarkerBgColor}"
+            fill-opacity="0.3"
+          />
           <circle
             cx="${iconWidth/2}"
             cy="${iconWidth/2}"
