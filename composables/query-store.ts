@@ -49,6 +49,7 @@ export const useQueryStore = defineStore('query', {
     },
     async setBboxFilter(filter: QueryFilter) {
       this.filters.bbox = filter
+      this.hasChanges = true
       // debounceMap(() => this.executeMapQuery())
     },
     async setMaterialFilter(filter: QueryFilter, withCache = true) {

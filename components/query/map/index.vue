@@ -325,15 +325,7 @@ onMounted(() => {
 
   map.on('moveend', () => {
     currentMapBounds.value = map.getBounds()
-    const currentZoomLevel = map.getZoom()
-    const isPan = cachedZoomLevel === currentZoomLevel
-
-    if (isPan && !isOutOfBounds(currentMapBounds.value, cachedClustersBounds.value)) return
-
     setBboxFilter()
-    queryStore.execute()
-
-    cachedZoomLevel = currentZoomLevel
   });
 
   map.addEventListener('mousemove', (event) => {
