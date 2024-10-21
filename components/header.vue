@@ -8,6 +8,10 @@ const externalIcon = 'prime:external-link'
 const showSidebar = ref(false)
 const items = ref([
   {
+    label: 'Get Started',
+    route: '/get-started'
+  },
+  {
     label: 'Access Data',
     items: [
       {
@@ -104,41 +108,28 @@ const toggleSidebar = () => {
                 class: 'flex py-2 rounded-md space-x-4',
               },
               menuItem: {
-                class: 'cursor-pointer',
+                class: 'cursor-pointer flex items-center relative',
               },
               content: ({ context }) => ({
                 class: [
-                  context.active
-                    ? 'underline underline-offset-8 decoration-primary decoration-4'
-                    : context.focused
-                      ? 'text-gray-800 dark:text-gray-300 bg-gray-300 dark:bg-gray-400 dark:bg-opacity-[0.2] bg-opacity-[0.4]'
-                      : undefined,
                   {
                     'bg-primary-50 dark:bg-gray-700 text-primary dark:text-primary-50':
-                      context.item.item.route &&
-                      context.item.item.route?.length > 1 &&
-                      route.path.startsWith(context.item.item.route),
-                  },
-                  {
-                    'underline underline-offset-8 decoration-primary decoration-4':
-                      !context.active &&
-                      !context.focused &&
-                      context.item.items &&
-                      context.item.items.some(
+                      (route.path.startsWith(context.item.item.route) || context.item.items && context.item.items.some(
                         (item: any) =>
                           item.item.route?.length > 1 &&
                           route.path.startsWith(item.item.route),
-                      ),
+                      )),
                   },
                   'rounded-md p-2 text-sm font-medium',
+                  !context.active ? 'hover:text-gray-800 hover:dark:text-gray-300 hover:bg-gray-100 hover:dark:bg-gray-400' : ''
                 ],
               }),
-              label: {
-                class: '',
+              action: {
+                class: 'whitespace-nowrap',
               },
               submenu: {
                 class:
-                  'bg-white dark:bg-gray-800 p-2 max-w-full rounded-md absolute border dark:border-gray-600',
+                  'bg-white dark:bg-gray-800 p-2 rounded-md absolute top-[108%] border dark:border-gray-600',
               },
               button: {
                 class: 'hidden',
@@ -146,7 +137,7 @@ const toggleSidebar = () => {
             }"
           >
             <template #item="{ item, props, hasSubmenu }">
-              <div>
+
                 <NuxtLink
                   v-if="item.route"
                   :to="item.route"
@@ -178,7 +169,6 @@ const toggleSidebar = () => {
                     />
                   </span>
                 </NuxtLink>
-              </div>
             </template>
           </Menubar>
 

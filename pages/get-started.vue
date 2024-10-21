@@ -1,6 +1,7 @@
 <template>
   <PageContainer>
     <PageHead headline="Get Started"/>
+    <p class="p-4 bg-amber-100 text-amber-600 font-semibold mb-6 rounded-md">The information on this page will be extended in time.</p>
     <p class="mb-6">GEOROC data are accessible in different ways:</p>
     <ol class="list-decimal pl-6 space-y-2">
       <li>
