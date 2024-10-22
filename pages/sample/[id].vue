@@ -219,9 +219,9 @@ function getAuthors(authors: Author[]) {
             v-for="item in data.batchData"
           >
             <div class="flex flex-wrap mb-5">
+              <SampleField :label="$t('material')" :value="item.material" class="mr-7" />
               <SampleField :label="$t('inclusion_type')" :value="item.inclusionTypes" class="mr-7"/>
               <SampleField :label="$t('batch_name')" :value="item.batchName" class="mr-7" />
-              <SampleField :label="$t('material')" :value="item.material" class="mr-7" />
               <SampleField v-if="item.material === MaterialKeys.INC" :label="$t('host_mineral')" :value="mapArrayToLabels(item.hostMinerals)" class="mr-7" />
               <SampleField
                 v-if="item.material === MaterialKeys.MIN || (item.material === MaterialKeys.INC && item.inclusionTypes.includes('IMIN'))"
