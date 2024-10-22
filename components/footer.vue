@@ -61,8 +61,8 @@
           <li>
             <BaseNuxtLink to="/expert-datasets">Expert Datasets</BaseNuxtLink>
           </li>
-          <li><BaseNuxtLink to="/disclaimer">Disclaimer</BaseNuxtLink></li>
-          <li><BaseNuxtLink to="/how-to-cite">How to cite</BaseNuxtLink></li>
+          <li><BaseNuxtLink to="/terms-of-use#disclaimer">Disclaimer</BaseNuxtLink></li>
+          <li><BaseNuxtLink to="/terms-of-use#how-to-cite">How to cite</BaseNuxtLink></li>
           <li>
             <BaseNuxtLink to="/how-to-contribute"
               >How to contribute</BaseNuxtLink

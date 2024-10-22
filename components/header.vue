@@ -29,17 +29,8 @@ const items = ref([
     ],
   },
   {
-    label: 'Using GEOROC',
-    items: [
-      {
-        label: 'Disclaimer',
-        route: '/disclaimer',
-      },
-      {
-        label: 'How to cite',
-        route: '/how-to-cite',
-      },
-    ],
+    label: 'Terms of Use',
+    route: '/terms-of-use',
   },
   {
     label: 'Submit Data',

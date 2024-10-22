@@ -37,7 +37,7 @@
         </ul>
       </li>
     </ol>
-    <p class="mt-6">See here: <BaseNuxtLink to="/how-to-filter" class="text-primary">How to filter</BaseNuxtLink></p>
+    <p class="mt-6">See here: <BaseNuxtLink to="/terms-of-use#how-to-filter" class="text-primary">Terms of Use</BaseNuxtLink></p>
   </PageContainer>
 </template>
 <script setup lang="ts">
