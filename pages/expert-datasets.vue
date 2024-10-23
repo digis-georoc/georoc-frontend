@@ -41,12 +41,12 @@ const columns = [
       v-if="expertDataSetError"
       :error="expertDataSetError"
     ></BaseError>
-    <BaseFluidContainer v-else>
+    <template v-else>
       <BaseDataTable
         :rows="expertDataSets?.datasets"
         :columns="columns"
         :link-to-dataset-text="t('show_expert_dataset')"
       ></BaseDataTable>
-    </BaseFluidContainer>
+    </template>
   </PageContainer>
 </template>

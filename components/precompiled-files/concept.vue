@@ -1,5 +1,5 @@
 <template>
-  <BaseFluidContainer class="pt-4 pb-6 space-y-4 snap-y">
+  <div class="pt-4 pb-6 space-y-4 snap-y">
     <h2 id="concept" class="text-xl py-4 font-bold snap-end scroll-m-20">
       {{ $t('precompiledFilePage.headline_1') }}
     </h2>
@@ -75,7 +75,7 @@
       <li>{{ $t('precompiledFilePage.wet') }}</li>
       <li>{{ $t('precompiledFilePage.others') }}</li>
     </ul>
-  </BaseFluidContainer>
+  </div>
 </template>
 <script setup lang="ts">
 const { t } = useI18n()

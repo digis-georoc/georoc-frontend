@@ -27,21 +27,17 @@ if (precompiledFilePreviewArr) {
 </script>
 <template>
   <PageContainer>
-    <BaseFluidContainer>
-      <PageHead headline="Precompiled Files"></PageHead>
-    </BaseFluidContainer>
+    <PageHead headline="Precompiled Files"></PageHead>
     <div v-if="precompiledPreviewError">
       <BaseError :error="precompiledPreviewError"></BaseError>
     </div>
-    <div v-else>
-      <BaseContainer class="pt-6 pb-12">
-        <BaseDropdown
-          :links="links"
-          :buttontext="t('precompiledFilePage.select_button')"
-          size="large"
-        ></BaseDropdown>
-      </BaseContainer>
-      <PrecompiledFilesConcept />
+    <div v-else class="pt-6 pb-12">
+      <BaseDropdown
+        :links="links"
+        :buttontext="t('precompiledFilePage.select_button')"
+        size="large"
+      ></BaseDropdown>
+    <PrecompiledFilesConcept />
     </div>
   </PageContainer>
 </template>
