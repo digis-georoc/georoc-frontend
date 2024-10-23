@@ -93,7 +93,7 @@ const toggleSidebar = () => {
             :pt="{
               root: {
                 class:
-                  'lg:flex lg:flex-wrap hidden ml-auto lg:mr-2 items-center',
+                  'lg:flex lg:flex-wrap hidden ml-auto lg:mr-2 items-center mt-1',
               },
               menu: {
                 class: 'flex py-2 rounded-md space-x-4',
@@ -112,6 +112,7 @@ const toggleSidebar = () => {
                       )),
                   },
                   'rounded-md p-2 text-sm font-medium',
+                  { 'mb-1': !context.item.items || context.item.items.length === 0 },
                   !context.active ? 'hover:text-gray-800 hover:dark:text-gray-300 hover:bg-gray-100 hover:dark:bg-gray-400' : ''
                 ],
               }),
@@ -128,7 +129,6 @@ const toggleSidebar = () => {
             }"
           >
             <template #item="{ item, props, hasSubmenu }">
-
                 <NuxtLink
                   v-if="item.route"
                   :to="item.route"
@@ -281,7 +281,6 @@ const toggleSidebar = () => {
             </aside>
 
             <div
-              name="overlay"
               aria-hidden="true"
               :class="[
                 'fixed top-16 right-0 bg-black opacity-0',
