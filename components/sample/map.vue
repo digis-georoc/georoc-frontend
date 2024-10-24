@@ -2,7 +2,6 @@
 import 'leaflet/dist/leaflet.css'
 import L, { LatLng, type LatLngExpression } from 'leaflet'
 import {theme} from "#tailwind-config";
-import type { Feature } from 'geojson'
 import { getPointMarkerOptions } from '~/utils/marker'
 
 const props = defineProps<{

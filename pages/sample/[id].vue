@@ -29,7 +29,7 @@ const tasData = computed<DiagramData | null>(() => {
 })
 
 async function getChemistryFilterOptions() {
-  const result = await fetch('csv/chemistry-filter-options.csv')
+  const result = await fetch('/csv/chemistry-filter-options.csv')
   const csv = await result.text()
   return csvToJSON<ChemistryFilterOption>(csv, ';')
 }
