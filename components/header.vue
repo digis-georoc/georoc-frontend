@@ -113,7 +113,7 @@ const toggleSidebar = () => {
                   },
                   'rounded-md p-2 text-sm font-medium',
                   { 'mb-1': !context.item.items || context.item.items.length === 0 },
-                  !context.active ? 'hover:text-gray-800 hover:dark:text-gray-300 hover:bg-gray-100 hover:dark:bg-gray-400' : ''
+                  !context.active ? 'hover:text-gray-800 hover:dark:text-gray-300 hover:bg-gray-100 hover:dark:bg-gray-700' : ''
                 ],
               }),
               action: {

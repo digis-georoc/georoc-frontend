@@ -3,7 +3,7 @@
     text?: string,
     display?: 'filled' | 'link' | 'mono' | 'flat' | 'outline' | 'outline-dashed',
     color: 'primary' | 'neutral',
-    size?: 'tiny' | 'small' | 'normal',
+    size?: 'large' | 'tiny' | 'small' | 'normal',
     icon?: string | null,
     iconPosition?: 'left' | 'right' | null,
     rounded?: boolean | null,
@@ -46,6 +46,12 @@
 
   classes['rounded-md'] = !_rounded
   classes['rounded-full'] = _rounded
+
+  classes['lg:text-lg lg:font-semibold leading-5'] = props.size === 'large'
+  classes['py-3 ps-3 pe-5'] = props.size === 'large' && !!(_icon) && _iconPosition === 'left'
+  classes['py-3 ps-5 pe-3'] = props.size === 'large' && !!(_icon) && _iconPosition === 'right'
+  classes['p-2'] = props.size === 'large' && isIconOnly
+  classes['py-3 px-5 lg:py-4 lg:px-6 '] = props.size === 'large' && !_icon
 
   classes['text-md leading-5'] = props.size === 'normal'
   classes['py-3 ps-3 pe-5'] = props.size === 'normal' && !!(_icon) && _iconPosition === 'left'

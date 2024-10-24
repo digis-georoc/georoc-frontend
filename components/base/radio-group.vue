@@ -50,7 +50,7 @@ const verticalPT = {
     class: [
       'flex w-full',
       'dark:border-gray-700 rounded-md border',
-      context.active ? 'border border-primary bg-primary-50 text-primary font-bold z-10' : 'bg-white dark:bg-gray-800',
+      context.active ? 'border border-primary bg-primary-50 dark:bg-gray-600 text-primary dark:text-primary-50 font-bold z-10' : 'bg-white dark:bg-gray-800',
       { 'hover:bg-gray-50 dark:hover:bg-gray-700': !context.active },
       { 'text-sm': props.size === 'sm'},
       'relative py-3 px-4 whitespace-nowrap flex-1 flex items-center font-semibold border-t border-b cursor-pointer transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-300'
@@ -71,7 +71,7 @@ const verticalPT = {
       <span>{{ option.label }}</span>
       <Icon
         :class="{
-          'text-primary': selectedOptionValue === option.value,
+          'text-primary dark:text-primary-50': selectedOptionValue === option.value,
           'text-gray-300': selectedOptionValue !== option.value,
         }"
         :name="selectedOptionValue === option.value ? 'ic:baseline-check-circle' : 'ic:outline-circle'"
