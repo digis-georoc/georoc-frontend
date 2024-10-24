@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import 'leaflet/dist/leaflet.css'
-import L, { LatLng } from "leaflet"
+import L, { LatLng, type LatLngExpression } from 'leaflet'
 import {theme} from "#tailwind-config";
 import type { Feature } from 'geojson'
 import { getPointMarkerOptions } from '~/utils/marker'
@@ -28,6 +28,10 @@ const layers = [
   }),
 ]
 
+const singleMarkerBgColor = theme.colors.white
+const singleMarkerStrokeColor = theme.colors.gray['300']
+const singleMarkerTextColor = theme.colors.gray['700']
+
 onMounted(() => {
 
   if (!props.lat || !props.lng) return
@@ -42,9 +46,12 @@ onMounted(() => {
   createPointMarker([parseFloat(props.lat), parseFloat(props.lng)]).addTo(map)
 })
 
-function createPointMarker(latlng: LatLng | number[]) {
+function createPointMarker(latlng: LatLng | LatLngExpression) {
   const icon = L.divIcon(getPointMarkerOptions({
-    fillColor: theme.colors['primary-400'],
+    fillColor: singleMarkerBgColor,
+    textColor: singleMarkerTextColor,
+    strokeColor: singleMarkerStrokeColor,
+    text: '1'
   }))
   return  L.marker(latlng, { icon })
 }
