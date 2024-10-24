@@ -8,6 +8,17 @@ export default defineNuxtConfig({
      '@pinia/nuxt',
      '@nuxtjs/i18n'
  ],
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', href: '/favicon-48x48.png', type: 'image/png', sizes: '48x48' },
+        { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+        { rel: 'shortcut icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
+        { rel: 'manifest', href: '/site.webmanifest' },
+      ],
+    }
+  },
 
  i18n: {
      locales: ['en-GB'],
