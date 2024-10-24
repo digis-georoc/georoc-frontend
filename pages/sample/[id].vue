@@ -76,6 +76,7 @@ const disableNext = ref(!isNextEnabled())
 const disablePrevious = ref(!isPreviousEnabled())
 
 function isNextEnabled() {
+  console.log(list.value, totalCount.value, curIndex.value, curIndex.value + queryStore.listOffset, totalCount.value - 1)
   if (!list.value || !totalCount.value) return false
   if (curIndex.value === -1) return false
   return !(curIndex.value === totalCount.value - 1 || curIndex.value + queryStore.listOffset === totalCount.value - 1)
