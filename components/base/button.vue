@@ -47,11 +47,11 @@
   classes['rounded-md'] = !_rounded
   classes['rounded-full'] = _rounded
 
-  classes['lg:text-lg lg:font-semibold leading-5'] = props.size === 'large'
+  classes['lg:text-lg leading-5'] = props.size === 'large'
   classes['py-3 ps-3 pe-5'] = props.size === 'large' && !!(_icon) && _iconPosition === 'left'
   classes['py-3 ps-5 pe-3'] = props.size === 'large' && !!(_icon) && _iconPosition === 'right'
   classes['p-2'] = props.size === 'large' && isIconOnly
-  classes['py-3 px-5 lg:py-4 lg:px-6 '] = props.size === 'large' && !_icon
+  classes['py-3 px-5 lg:py-3.5 lg:px-10'] = props.size === 'large' && !_icon
 
   classes['text-md leading-5'] = props.size === 'normal'
   classes['py-3 ps-3 pe-5'] = props.size === 'normal' && !!(_icon) && _iconPosition === 'left'

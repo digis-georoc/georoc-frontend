@@ -20,11 +20,12 @@
           {{ $t('indexPage.paragraph_below_title') }}
         </p>
         <div class="mt-10 flex items-center gap-x-6">
-          <BaseButton :text="$t('indexPage.button_1')" size="large" display="filled" @click="router.push('/query')" />
+          <BaseButton :text="$t('indexPage.button_1')" size="large" display="filled" @click="router.push('/query')" class="shadow-md" />
           <NuxtLink
             to="/get-started"
-            class="font-semibold leading-6 text-gray-300"
-          >{{ $t('indexPage.button_2') }}
+            class="font-semibold leading-6 text-gray-300 hover:text-gray-200 drop-shadow-sm"
+          >
+            <span>{{ $t('indexPage.button_2') }}</span>
             <span aria-hidden="true">→</span>
           </NuxtLink>
         </div>
