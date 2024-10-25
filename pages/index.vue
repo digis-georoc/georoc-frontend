@@ -105,13 +105,13 @@ const features = [
     name: t('indexPage.feature_4_headline'),
     description: t('indexPage.feature_4_text'),
     icon: 'carbon:warning',
-    to: '/disclaimer'
+    to: '/terms-of-use#disclaimer'
   },
   {
     name: t('indexPage.feature_5_headline'),
     description: t('indexPage.feature_5_text'),
     icon: 'fluent:tooltip-quote-24-regular',
-    to: '/how-to-cite'
+    to: '/terms-of-use#how-to-cite'
   },
   {
     name: t('indexPage.feature_6_headline'),
