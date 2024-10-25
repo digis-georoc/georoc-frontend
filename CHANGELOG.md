@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.21](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.20...v0.0.21) (2024-10-25)
+
+
+### Features
+
+* add "get started" page to main menu, update navigation bar active states ([0cb10ee](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/0cb10ee57ef6c584f29e462c1dd9afbb4ff4070e))
+* add favicon images ([ea7647e](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ea7647e3901b2ef81efe1c29e906dc340bb9c09e))
+* add geological settings filter ([5bf66b0](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/5bf66b0501b9a25008adbd12d4fe25f702675242))
+* add Inter font ([c5a0f03](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c5a0f038ccdf1aa247b456a1effd30a4896d5645))
+* add new color theme (blue primary color, new neutral colors, new marker colors) ([e35cf36](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/e35cf363e40638d301dbd18e1c8e12b46b6c8985))
+* center map onto a selected markers location, fix location popup mobile display ([06099cd](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/06099cd6d6abba93423e7b0de596c68ae09dafea))
+* display sample infos in map location popup ([2c07e1f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/2c07e1f73755597b3013a902f69229c14796b010))
+* remove UI elements from map screenshot, fix Firefox usage ([d845468](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/d845468dc32698f1eb9e14e405e95b8def286daa))
+* set less blueish dark mode colors ([f41607a](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/f41607a62638ffd4bf5a574a50a56575fa0e9692))
+* update cluster marker style ([8392972](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/8392972d2e2aebd3ca26428736d5791606ee7c72))
+* update filter container button styles ([f65d42c](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/f65d42c3bae0a538d912c08abd58891d727ba5b2))
+* update Get Started and Terms of Use pages ([cbb20cf](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/cbb20cfefcf3469b5a276a66403f3322c830ee89))
+* update index page design ([00a1ee2](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/00a1ee2e70aef08330a3af5991f64e849de94257))
+* update index page design ([20b3908](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/20b39081ae76a32808fdce3dd53788d7cd93a646))
+* update map only on button click ([7469d2d](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/7469d2da24cace19d2fee061e9efefd89aee3b8c))
+* update sample detail page design to be more compact ([ddf716d](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ddf716d1e3e520040bede9f958ec2d78fbcff777))
+* use CSV file for chemistry filter options, add new CSV file ([a3e528b](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/a3e528babeafabb41d8382d997d96380674e22c2))
+* use uniform map markers ([c15fc52](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c15fc529cfb388a2f0a769a61b7d2122fb7aa2ae))
+
+
+### Bug Fixes
+
+* add geo settings also in inclusion and mineral filters ([d9d45a1](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/d9d45a1ed3d57a3379bd671ef0da097716eb236d))
+* align navigation menu vertically ([ad45655](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ad45655822dc49b43bb473db94b9e3555135185e))
+* align page containers ([1a06fa1](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/1a06fa145a6acf474d8ac7b0cd9e229c0c4d5b0f))
+* do not autofocus close button in dialogs on Firefox ([d0ce0ff](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/d0ce0ff2f26c9847de87a0627cd4f05ad073d7c6))
+* make search in tree selects filterable also on parent nodes ([0ca9166](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/0ca9166ac922847933a9aa7bfc6405e8e27a32c5))
+* move chemistry filter options loading to client ([961a8ae](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/961a8ae41fd8a8ad2286a4ceb7a8463cbd405d1e))
+* place dialogs on top of any other elements ([afe12b3](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/afe12b3d7c7765c67dbd24a349da4df9d724e685))
+* query list item display ([ea24a2f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/ea24a2f5eb0ebfa5a873d7d7d221e0000058ba99))
+* remove from hidden items list in base filter selected component ([b77132f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/b77132f1ba57c598364c7ed50c9e43671fa7f131))
+* update links in index page ([738d60d](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/738d60d6a47d9c6b92a14a6fd645fb96f1209e01))
+* update map marker in detail page ([24a8f6f](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/24a8f6f69590a40f84159da5e3518784f504d733))
+* update theme to "Mittelblau", use round markers for clusters again ([1030c52](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/1030c52d256a4401ba1719487a259d00752ef19d))
+* use absolute path for chemistry filter options in detail page ([c9b121e](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/c9b121e19930cc38be6d7c76cf7aea579304e4f1))
+* use satellite layer only at map load ([8cd26e7](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/8cd26e7ef14f9a5806a09c7ad5c8721c4a59ee17))
+
 ### [0.0.20](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.19...v0.0.20) (2024-09-17)
 
 
