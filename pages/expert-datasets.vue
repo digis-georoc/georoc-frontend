@@ -3,10 +3,13 @@ import { FetchError } from 'ofetch'
 
 const { t } = useI18n()
 
-let expertDataSets: ExpertDatasetResponse | undefined
 let expertDataSetError: FetchError | undefined
+const rows: ExpertDatasetRow[] = []
 try {
-  expertDataSets = <ExpertDatasetResponse>await getExpertDatasets()
+  const expertDataSets = <ExpertDatasetResponse>await getExpertDatasets()  
+  expertDataSets?.datasets.forEach(dataset => {
+    rows.push({...dataset, authors: formatAuthors(dataset.authors)})
+  })
 } catch (error: any) {
   expertDataSetError = error
 }
@@ -21,18 +24,34 @@ const columns = [
     header: t('title'),
   },
   {
-    field: 'versionNr',
-    header: t('ver'),
-  },
-  {
     field: 'productionDate',
-    header: t('prod_date'),
+    header: t('year'),
   },
   {
     field: 'persistentUrl',
     header: t('link_to_dataset'),
   },
 ]
+
+function formatAuthors(authorList: string[]): string {
+  function getLastName(fullname: string): string {
+    return fullname.split(',')[0]
+  }
+  if (authorList.length <= 0) {
+    return ''
+  }
+  if (authorList.length == 1) {
+    return getLastName(authorList[0])
+  }
+  if (authorList.length == 2) {
+    return (
+      getLastName(authorList[0]) +
+      ' & ' +
+      getLastName(authorList[1])
+    )
+  }
+  return getLastName(authorList[0]) + ' et al.'
+}
 </script>
 <template>
   <PageContainer>
@@ -43,7 +62,7 @@ const columns = [
     ></BaseError>
     <template v-else>
       <BaseDataTable
-        :rows="expertDataSets?.datasets"
+        :rows="rows"
         :columns="columns"
         :link-to-dataset-text="t('show_expert_dataset')"
       ></BaseDataTable>

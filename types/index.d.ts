@@ -236,9 +236,8 @@ declare global {
   type InclusionMaterialsResponse = BaseResponse<InclusionMaterial>
 
   interface ExpertDatasetRow {
-    authors: string
+    authors: string[]
     title: string
-    versionNr: string
     productionDate: number
     persistentUrl: string
   }

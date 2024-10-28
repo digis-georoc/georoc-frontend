@@ -61,8 +61,7 @@ export default {
   select: 'Select',
   authors: 'Authors',
   title: 'Title',
-  ver: 'Ver.',
-  prod_date: 'Prod. Date',
+  year: 'Year',
   link_to_dataset: 'Link to Dataset',
   search: 'Search',
   showing_first_to_last_of_total_entries:

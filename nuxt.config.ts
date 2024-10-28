@@ -34,8 +34,8 @@ export default defineNuxtConfig({
  runtimeConfig: {
      apiToken: process.env.API_TOKEN,
      apiBaseUrl: process.env.API_BASE_URL,
-     apiExpertToken: process.env.API_EXPERT_TOKEN,
-     apiExpertUrl: process.env.API_EXPERT_URL
+     apiGroDataUrl: process.env.API_GRO_DATA_URL,
+     apiGFZURL: process.env.API_GFZ_URL,
  },
 
  routeRules: {

@@ -1,5 +1,6 @@
 import { H3Event } from 'h3'
-import { fetchData } from '../expertdatasets'
+import { fetchData } from '~/server/utils/fetchGroData'
+
 
 export default defineEventHandler<string | undefined>(
   async ({ node }: H3Event) => {
