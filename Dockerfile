@@ -3,8 +3,8 @@ FROM node:18-alpine
 
 ARG API_TOKEN
 ARG API_BASE_URL
-ARG API_EXPERT_TOKEN
-ARG API_EXPERT_URL
+ARG API_GRO_DATA_URL
+ARG API_GFZ_URL
 
 # update and install dependency
 RUN apk update && apk upgrade
