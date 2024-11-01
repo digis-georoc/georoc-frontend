@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.22](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.21...v0.0.22) (2024-11-01)
+
+
+### Features
+
+* add old geological settings list ([49f9ed1](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/49f9ed1f94c2730390da524903bdf21be7f3bcac))
+
+
+### Bug Fixes
+
+* update expert datasets to new api ([a99ecc5](https://gitlab.gwdg.de/subugoe/georoc-frontend/commit/a99ecc508260b98b989c6a3aab27157c975047e1))
+
 ### [0.0.21](https://gitlab.gwdg.de/subugoe/georoc-frontend/compare/v0.0.20...v0.0.21) (2024-10-25)
 
 
